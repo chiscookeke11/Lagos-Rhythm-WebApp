@@ -1,0 +1,31 @@
+interface ButtonProps {
+  label: string;
+  onClick?: () => void;
+  type: "submit" | "reset" | "button";
+  className?: string;
+  variant?: "outline" | "primary" | "ghost";
+}
+
+const variants = {
+  outline: "bg-transparent border-[2px] border-[#ffffff] rounded-[200px]",
+  primary: "bg-blue-600 hover:bg-blue-700 text-white rounded-[200px]",
+  ghost: "bg-[#FFFFFF26]  rounded-[200px] "
+};
+
+export default function Button({
+  label,
+  onClick,
+  type,
+  className = "",
+  variant = "outline",
+}: ButtonProps) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={`text-white font-medium text-sm font-inter py-2 px-3 md:px-5 md:py-3 cursor-pointer hover:scale-90 transition-transform transform ease-in-out duration-150 ${variants[variant]} ${className}`}
+    >
+      {label}
+    </button>
+  );
+}
