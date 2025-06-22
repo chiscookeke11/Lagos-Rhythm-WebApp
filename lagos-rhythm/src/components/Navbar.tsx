@@ -11,28 +11,28 @@ import Image from "next/image"
 
 
 
-   const navLinks = [
-        {
-            label: "HOME",
-            path: "/",
-        },
-        {
-            label: "VIRTUAL TOUR",
-            path: "/",
-        },
-        {
-            label: "IN-PERSON TOUR",
-            path: "/",
-        },
-        {
-            label: "FLIGHTS",
-            path: "/",
-        },
-        {
-            label: "STORE",
-            path: "/",
-        },
-    ]
+const navLinks = [
+    {
+        label: "HOME",
+        path: "/",
+    },
+    {
+        label: "VIRTUAL TOUR",
+        path: "/",
+    },
+    {
+        label: "IN-PERSON TOUR",
+        path: "/",
+    },
+    {
+        label: "FLIGHTS",
+        path: "/",
+    },
+    {
+        label: "STORE",
+        path: "/",
+    },
+]
 
 
 
@@ -44,7 +44,7 @@ export default function Navbar() {
 
 
     useEffect(() => {
-        const handleScroll =  () => {
+        const handleScroll = () => {
             const offset = window.scrollY;
             setScrolled(offset > 50);
         }
@@ -57,6 +57,10 @@ export default function Navbar() {
         }
     }, [])
 
+
+    useEffect(() => {
+        document.body.style.overflow = openMobileNav ? "hidden" : "auto";
+    }, [openMobileNav]);
 
 
 
@@ -73,7 +77,7 @@ export default function Navbar() {
                 <ul className=" hidden w-fit lg:flex items-center justify-evenly gap-10" >
                     {
                         navLinks.map((navLink, index) => (
-                            <Link href={navLink.path} key={index} ><li className={`font-normal text-sm text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]" }  `} > {navLink.label} </li></Link>
+                            <Link href={navLink.path} key={index} ><li className={`font-normal text-sm text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"}  `} > {navLink.label} </li></Link>
                         ))
                     }
                 </ul>
@@ -100,11 +104,11 @@ export default function Navbar() {
 
 
 
-                      <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-10 px-10 "   >
-                    {navLinks.map((navLink, index) => (
-                         <Link href={navLink.path} key={index} ><li className=" font-normal text-lg text-black  transition-colors duration-150 ease-in-out cursor-pointer " > {navLink.label} </li></Link>
-                    ))}
-                </ul>
+                    <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-10 px-10 "   >
+                        {navLinks.map((navLink, index) => (
+                            <Link href={navLink.path} key={index} ><li className=" font-normal text-lg text-black  transition-colors duration-150 ease-in-out cursor-pointer " > {navLink.label} </li></Link>
+                        ))}
+                    </ul>
                 </div>
 
 
