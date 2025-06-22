@@ -6,6 +6,7 @@ import Link from "next/link"
 import Button from "./common/Button"
 import { Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 
 
@@ -65,8 +66,8 @@ export default function Navbar() {
 
 
             <div className=" w-fit flex items-center justify-center gap-20" >
-                {/* <Image src={"logos/logo-light.svg"} height={0} width={0} alt="logo" className=" w-[167px] h-8 " /> */}
-                Logo
+                <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[80px] " />
+
 
 
                 <ul className=" hidden w-fit lg:flex items-center justify-evenly gap-10" >
