@@ -6,19 +6,19 @@ import { BestLocationDataType } from "@/Types/BestLocationDataType";
 
 export const BestLocationData: BestLocationDataType[] = [
     {
-        label: "Lagos living",
-        image: "/BestLocationsImages/location-1.jpg",
+        label: "Foods & Flavors",
+        image: "/BestLocationsImages/LagosFood.jpg",
     },
     {
-        label: "Lagos living",
-        image: "/BestLocationsImages/location-2.jpg",
+        label: "Nightlife & Vibes",
+        image: "/BestLocationsImages/LagosNightlife.jpg",
     },
     {
-        label: "Lagos living",
-        image: "/BestLocationsImages/location-3.jpg",
+        label: "Art & Culture",
+        image: "/BestLocationsImages/ArtsAndCulture.jpg",
     },
     {
-        label: "Lagos living",
-        image: "/BestLocationsImages/location-4.jpg",
+        label: "Nature & Escapes",
+        image: "/BestLocationsImages/NatureAndLandscape.jpg",
     },
 ]

@@ -12,27 +12,23 @@ import { useEffect, useState } from "react"
 
    const navLinks = [
         {
-            label: "Home",
+            label: "HOME",
             path: "/",
         },
         {
-            label: "Tour",
+            label: "VIRTUAL TOUR",
             path: "/",
         },
         {
-            label: "Destination",
+            label: "IN-PERSON TOUR",
             path: "/",
         },
         {
-            label: "Activities",
+            label: "FLIGHTS",
             path: "/",
         },
         {
-            label: "Pages",
-            path: "/",
-        },
-        {
-            label: "Contact",
+            label: "STORE",
             path: "/",
         },
     ]
