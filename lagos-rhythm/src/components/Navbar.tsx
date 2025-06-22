@@ -1,21 +1,16 @@
 "use client"
 
 
-import Image from "next/image"
+
 import Link from "next/link"
 import Button from "./common/Button"
 import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
 
 
-export default function Navbar() {
-    const [openMobileNav, setOpenMobileNav] = useState(false)
-
-
-
-    const navLinks = [
+   const navLinks = [
         {
             label: "Home",
             path: "/",
@@ -44,8 +39,32 @@ export default function Navbar() {
 
 
 
+
+export default function Navbar() {
+    const [openMobileNav, setOpenMobileNav] = useState(false)
+    const [scrolled, setScrolled] = useState(false);
+
+
+
+    useEffect(() => {
+        const handleScroll =  () => {
+            const offset = window.scrollY;
+            setScrolled(offset > 50);
+        }
+
+        window.addEventListener("scroll", handleScroll)
+
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
+
+
+
+
     return (
-        <nav className=" fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-8 px-[4%] bg-transparent font-inter z-50 "  >
+        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-4 px-[4%] transition-colors duration-150 ease-in-out font-inter z-50 ${scrolled ? "bg-[#EB662B] " : "bg-transparent"} `}  >
 
 
 
@@ -57,7 +76,7 @@ export default function Navbar() {
                 <ul className=" hidden w-fit lg:flex items-center justify-evenly gap-10" >
                     {
                         navLinks.map((navLink, index) => (
-                            <Link href={navLink.path} key={index} ><li className=" font-normal text-sm text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer " > {navLink.label} </li></Link>
+                            <Link href={navLink.path} key={index} ><li className={`font-normal text-sm text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]" }  `} > {navLink.label} </li></Link>
                         ))
                     }
                 </ul>

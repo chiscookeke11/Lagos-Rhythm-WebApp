@@ -3,13 +3,13 @@ interface ButtonProps {
   onClick?: () => void;
   type: "submit" | "reset" | "button";
   className?: string;
-  variant?: "outline" | "primary" | "ghost";
+  variant?: "outline" | "ghost" | "primary";
 }
 
 const variants = {
   outline: "bg-transparent border-[2px] border-[#ffffff] rounded-[200px]",
-  primary: "bg-blue-600 hover:bg-blue-700 text-white rounded-[200px]",
-  ghost: "bg-[#FFFFFF26]  rounded-[200px] "
+  ghost: "bg-[#FFFFFF26]  rounded-[200px] ",
+  primary: "bg-[#ffffff]   rounded-lg  "
 };
 
 export default function Button({
