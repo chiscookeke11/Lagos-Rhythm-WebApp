@@ -1,5 +1,6 @@
 import BestOfLagos from "@/components/BestOfLagos";
 import HeroSection from "@/components/HeroSection";
+import PopularThings from "@/components/PopulaThings";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
 <HeroSection/>
 <BestOfLagos/>
+<PopularThings/>
     </div>
      );
 }

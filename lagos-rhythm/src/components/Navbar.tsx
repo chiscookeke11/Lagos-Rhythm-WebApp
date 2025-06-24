@@ -70,7 +70,7 @@ export default function Navbar() {
 
 
             <div className=" w-fit flex items-center justify-center gap-20" >
-                <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[80px] " />
+                <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[60px] " />
 
 
 
