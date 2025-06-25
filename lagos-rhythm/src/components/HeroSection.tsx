@@ -1,29 +1,11 @@
-import { MapPin, Search } from 'lucide-react';
-import Button from "./common/Button";
+
 
 
 
 export default function HeroSection() {
 
 
-    const tripTypesSuggestion = [
-        {
-            label: "Culture",
-            path: ""
-        },
-        {
-            label: "Food",
-            path: ""
-        },
-        {
-            label: "Nature",
-            path: ""
-        },
-        {
-            label: "Adventure",
-            path: ""
-        },
-    ]
+
 
 
 

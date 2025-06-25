@@ -1,6 +1,5 @@
 import { PopularThingsData } from "@/data/data";
 import Button from "./common/Button";
-import Image from "next/image";
 
 
 
@@ -25,8 +24,8 @@ export default function PopularThings() {
                     <div key={index} className="bg-[#FFFFFF] rounded-xl p-4 flex items-center justify-center flex-col gap-3 " >
 
 
-                        <div className=" w-20 h-20 rounded-full bg-[#FEF7F4] flex items-center justify-center " >
-                            <Image src={item.image} alt={item.title} width={100} height={100} className=" w-10 h-10  " />
+                        <div className=" w-20 h-20 rounded-full bg-[#FEF7F4] flex items-center justify-center text-[#EB662B] " >
+                       {item.image}
                         </div>
 
 

@@ -1,5 +1,6 @@
 import { BestLocationDataType } from "@/Types/BestLocationDataType";
 import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
+import { Landmark, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
 
 
 
@@ -28,32 +29,32 @@ export const BestLocationData: BestLocationDataType[] = [
 
 export const PopularThingsData: PopularThingsDataType[] = [
     {
-        image: "/PopularThingsIcons/cityTours.svg",
+        image: <Trees/>,
         title: "Canopy walk",
         desc: "100+ Tours"
     },
     {
-        image: "/PopularThingsIcons/culturalTours.svg",
+        image: <Sailboat />,
         title: "Water taxi ride",
-        desc: "100+ Tours"
+        desc: "300+ Tours"
     },
     {
-        image: "/PopularThingsIcons/dayCruises.svg",
+        image: <TrainTrack />,
         title: "Railway museum visit",
-        desc: "100+ Tours"
+        desc: "50+ Tours"
     },
     {
-        image: "/PopularThingsIcons/BusTours.svg",
+        image: <Landmark />,
         title: "Historic site walk",
-        desc: "100+ Tours"
+        desc: "80+ Tours"
     },
     {
-        image: "/PopularThingsIcons/BeachTours.svg",
+        image: <Volleyball />,
         title: "Beach market stroll",
-        desc: "100+ Tours"
+        desc: "200+ Tours"
     },
     {
-        image: "/PopularThingsIcons/foodTours.svg",
+        image: <Sunset />,
         title: "Sunset bridge walk",
         desc: "100+ Tours"
     },

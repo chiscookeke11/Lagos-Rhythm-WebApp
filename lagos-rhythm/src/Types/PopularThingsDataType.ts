@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 
 
 export interface PopularThingsDataType {
-    image: string;
+    image: ReactNode;
     title: string;
     desc: string;
 }

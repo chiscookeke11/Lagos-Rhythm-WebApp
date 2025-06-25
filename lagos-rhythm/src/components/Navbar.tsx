@@ -65,12 +65,12 @@ export default function Navbar() {
 
 
     return (
-        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-4 px-[4%] transition-colors duration-150 ease-in-out font-inter z-50 ${scrolled ? "bg-[#EB662B] " : "bg-transparent"} `}  >
+        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-3 px-[4%] transition-colors duration-150 ease-in-out font-inter z-50 ${scrolled ? "bg-[#EB662B] " : "bg-transparent"} `}  >
 
 
 
             <div className=" w-fit flex items-center justify-center gap-20" >
-                <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[60px] " />
+                <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " />
 
 
 
