@@ -1,6 +1,7 @@
 import { BestLocationDataType } from "@/Types/BestLocationDataType";
 import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
-import { Landmark, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
+import { WhyLagos } from "@/Types/WhyLagosType";
+import {  Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
 
 
 
@@ -29,7 +30,7 @@ export const BestLocationData: BestLocationDataType[] = [
 
 export const PopularThingsData: PopularThingsDataType[] = [
     {
-        image: <Trees/>,
+        image: <Trees />,
         title: "Canopy walk",
         desc: "100+ Tours"
     },
@@ -60,3 +61,40 @@ export const PopularThingsData: PopularThingsDataType[] = [
     },
 ]
 
+
+
+
+export const WhyLagosData: WhyLagos[] = [
+    {
+        title: "Free Virtual Tours",
+        desc: "Experience Lagos in real time from anywhere in the world, no cost attached. Our free virtual tours open up the city’s culture, landmarks, and people - live.",
+        icon: <MonitorPlay size={30} />
+    },
+    {
+        title: "Themed Packages ",
+        desc: "Looking for adventure, relaxation, or inspiration? Our affordable themed packages let you explore Lagos your way - from one theme to another. ",
+        icon: <Combine size={30} />
+    },
+    {
+        title: "Corporate & Group Services",
+        desc: "We create tailored experiences for corporate team bonding, educational groups, cultural institutions, and digital communities - all rooted in the rich, dynamic vibe of Lagos.",
+        icon: <IdCard size={30} />
+    },
+    {
+        title: "Easy Global Payments",
+        desc: "Book with ease using multiple currencies or crypto. Pay in NGN, USD, GBP, EUR or crypto (Bitcoin, USDT and more). Fast, secure, and global.",
+        icon: <CreditCard size={30}/>
+    },
+    {
+        title: "Dedicated Customer Support",
+        desc: "From planning to post-tour, our support team is ready to help - wherever you are, whenever you need it.",
+        icon: <Headset size={30}/>
+    },
+    {
+        title: "Built for the Culture",
+        desc: "We’re community-driven and proudly local, with a global vision. ",
+        icon: <Heart size={30}/>
+    },
+
+
+]

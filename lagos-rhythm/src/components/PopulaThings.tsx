@@ -11,7 +11,7 @@ export default function PopularThings() {
 
 
             <div className="w-full max-w-[440px] flex flex-col items-start gap-7 ">
-                <h2 className="font-bold text-[#05073C] text-3xl mb-1 " >Popular things to do</h2>
+                <h2 className="font-bold text-[#05073C] text-3xl mb-1 " >Interesting things to do</h2>
                 <p className=" text-sm font-normal text-[#05073C] "  >There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
                 <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EB662B] text-white !py-4 " />
             </div>
