@@ -1,75 +1,150 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import Button from "./common/Button";
-import HTMLFlipBook from "react-pageflip";
+"use client"
 
-const PageCover = React.forwardRef((props: any, ref: any) => {
+import React, { useEffect, useRef, useState } from "react"
+import Button from "./common/Button"
+import HTMLFlipBook from "react-pageflip"
+import Image from "next/image"
+
+// Define proper types for the component props
+interface PageCoverProps {
+  children?: React.ReactNode
+}
+
+// Define types for flip book events
+interface FlipEvent {
+  data: number
+}
+
+interface OrientationEvent {
+  data: string
+}
+
+interface StateEvent {
+  data: string
+}
+
+// Define the page data structure
+interface PageData {
+  image: string
+  text: string
+}
+
+const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) => {
   return (
-    <div className="page page-cover" ref={ref} data-density="hard">
-      <div className="page-content">
-        <h2>{props.children}</h2>
+    <div
+      className="page page-cover relative w-full max-w-md mx-auto aspect-[3/4] flex flex-col shadow-2xl overflow-hidden border-4 border-gray-800"
+      style={{
+        backgroundColor: "#05073C",
+      }}
+      ref={ref}
+      data-density="hard"
+    >
+      <div className="absolute inset-0 bg-[#05073C]/80 flex items-center justify-center flex-col gap-1">
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 25% 25%, #EB662B 2px, transparent 2px),
+                           radial-gradient(circle at 75% 75%, #EB662B 1px, transparent 1px)`,
+              backgroundSize: "50px 50px",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 flex-1 flex flex-col justify-center px-8 text-center">
+          <h1 className="space-y-2 mb-6">
+            <div className="text-2xl font-light text-white tracking-wide">INTERESTING</div>
+            <div className="text-4xl font-black text-[#EB662B] tracking-tight">THINGS</div>
+            <div className="text-2xl font-light text-white tracking-wide">TO DO IN</div>
+            <div className="text-5xl font-black text-white tracking-tight">LAGOS</div>
+          </h1>
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#EB662B] to-transparent"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="relative z-10 p-6 text-center">
+          <div className="text-white/90 text-base font-semibold mb-1">LAGOS EXPLORER</div>
+          <div className="text-[#EB662B] text-xs tracking-widest">TRAVEL SERIES</div>
+        </div>
+
+        <div className="absolute top-0 left-0 w-16 h-16 border-l-4 border-t-4 border-[#EB662B]"></div>
+        <div className="absolute bottom-0 right-0 w-16 h-16 border-r-4 border-b-4 border-[#EB662B]"></div>
       </div>
     </div>
-  );
-});
-PageCover.displayName = "PageCover"; // For React forwardRef
+  )
+})
+
+PageCover.displayName = "PageCover"
 
 export default function PopularThings() {
-  const flipBookRef = useRef<any>(null);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [orientation, setOrientation] = useState("");
-  const [state, setState] = useState("");
+  // Use proper type for the ref - HTMLFlipBook doesn't export its type, so we use React.ElementRef
+  const flipBookRef = useRef<React.ElementRef<typeof HTMLFlipBook>>(null)
+  const [, setCurrentPage] = useState(0)
 
- useEffect(() => {
-  if (flipBookRef.current && flipBookRef.current.pageFlip) {
-    const pageFlip = flipBookRef.current.pageFlip();
-    if (pageFlip) {
-      setTotalPages(pageFlip.getPageCount());
+  useEffect(() => {
+    if (flipBookRef.current && flipBookRef.current.pageFlip) {
+      const pageFlip = flipBookRef.current.pageFlip()
+      if (pageFlip) {
+        // We can access totalPages if needed, but since it's not used, we don't store it
+        pageFlip.getPageCount()
+      }
     }
+  }, [])
+
+  const onFlip = (e: FlipEvent) => {
+    setCurrentPage(e.data)
   }
-}, []);
 
+  const onChangeOrientation = (e: OrientationEvent) => {
+    // Handle orientation change if needed
+    console.log("Orientation changed:", e.data)
+  }
 
-  const nextPage = () => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flipNext();
-    }
-  };
+  const onChangeState = (e: StateEvent) => {
+    // Handle state change if needed
+    console.log("State changed:", e.data)
+  }
 
-  const prevPage = () => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flipPrev();
-    }
-  };
-
-  const onFlip = (e: any) => {
-    setPage(e.data);
-  };
-
-  const onChangeOrientation = (e: any) => {
-    setOrientation(e.data);
-  };
-
-  const onChangeState = (e: any) => {
-    setState(e.data);
-  };
+  const pagesData: PageData[] = [
+    {
+      image: "/interestigThingsImg/historic site .jpg",
+      text: "Historic Site",
+    },
+    {
+      image: "/interestigThingsImg/Beach market stroll.jpg",
+      text: "Beach Market Stroll",
+    },
+    {
+      image: "/interestigThingsImg/bridge walk.jpg",
+      text: "Bridge Walk",
+    },
+    {
+      image: "/interestigThingsImg/canopy walk.jpg",
+      text: "Canopy Walk",
+    },
+    {
+      image: "/interestigThingsImg/water taxi.jpg",
+      text: "Water Taxi",
+    },
+    {
+      image: "/interestigThingsImg/railway museum.jpg",
+      text: "Railway Museum",
+    },
+  ]
 
   return (
     <section className="w-full bg-[#EB662B0D] py-[8%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 font-inter">
       <div className="w-full max-w-[440px] flex flex-col items-start gap-7">
-        <h2 className="font-bold text-[#05073C] text-3xl mb-1">
-          Interesting things to do
-        </h2>
+        <h2 className="font-bold text-[#05073C] text-3xl mb-1">Interesting things to do</h2>
         <p className="text-sm font-normal text-[#05073C]">
-          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
+          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
+          some form.
         </p>
-        <Button
-          label="See All"
-          type="button"
-          variant="primary"
-          className="w-full !bg-[#EB662B] text-white !py-4"
-        />
+        <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EB662B] text-white !py-4" />
       </div>
 
       <div className="w-full max-w-2xl h-full gap-4 py-2">
@@ -86,7 +161,7 @@ export default function PopularThings() {
           mobileScrollSupport={true}
           className="image-slider"
           startPage={0}
-          style={{ backgroundColor: "wheat" }}
+          style={{ overflow: "hidden" }}
           drawShadow={true}
           flippingTime={1000}
           usePortrait={true}
@@ -102,30 +177,36 @@ export default function PopularThings() {
           onChangeState={onChangeState}
           ref={flipBookRef}
         >
-          <PageCover>START</PageCover>
-          <div className="page">Page 1</div>
-          <div className="page">Page 2</div>
-          <div className="page">Page 3</div>
-          <div className="page">Page 4</div>
-          <PageCover>THE END</PageCover>
+          {/* Front page cover */}
+          <PageCover />
+
+          {/* Book content */}
+          {pagesData.map((pageData, index) => (
+            <div key={index} className="page bg-white relative shadow-xl">
+              <div className="absolute top-0 left-0 h-full w-full flex flex-col gap-7 items-center justify-center p-3 pl-4">
+                <div className="h-4/6 w-full relative">
+                  <Image
+                    src={pageData.image || "/placeholder.svg"}
+                    alt={`${pageData.text} Image`}
+                    fill
+                    className="object-cover object-center"
+                  />
+                </div>
+                <h3 className="text-base font-inter text-[#05073C]">{pageData.text}</h3>
+              </div>
+            </div>
+          ))}
+
+          {/* Back cover page */}
+          <div className="page bg-[#05073C] relative">
+            <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-xs text-gray-300">
+              Thanks for exploring Lagos with us!
+            </div>
+            <div className="absolute top-[2px] left-[2px] w-16 h-16 border-l-4 border-t-4 border-[#EB662B]"></div>
+            <div className="absolute bottom-[2px] right-[2px] w-16 h-16 border-r-4 border-b-4 border-[#EB662B]"></div>
+          </div>
         </HTMLFlipBook>
-
-        <div className="mt-4 flex items-center gap-4 justify-between">
-          <button onClick={prevPage} className="px-4 py-2 bg-[#EB662B] text-white rounded">
-            Previous Page
-          </button>
-          <span>
-            Page {page + 1} of {totalPages}
-          </span>
-          <button onClick={nextPage} className="px-4 py-2 bg-[#EB662B] text-white rounded">
-            Next Page
-          </button>
-        </div>
-
-        <div className="text-sm text-gray-500 mt-2">
-          State: <i>{state}</i>, Orientation: <i>{orientation}</i>
-        </div>
       </div>
     </section>
-  );
+  )
 }
