@@ -89,7 +89,7 @@ export default function PopularThings() {
     if (flipBookRef.current && flipBookRef.current.pageFlip) {
       const pageFlip = flipBookRef.current.pageFlip()
       if (pageFlip) {
-        // We can access totalPages if needed, but since it's not used, we don't store it
+
         pageFlip.getPageCount()
       }
     }

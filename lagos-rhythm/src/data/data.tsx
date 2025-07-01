@@ -1,5 +1,6 @@
 import { BestLocationDataType } from "@/Types/BestLocationDataType";
 import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
+import { StatsDataType } from "@/Types/StatsDataType";
 import { WhyLagos } from "@/Types/WhyLagosType";
 import {  Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
 
@@ -97,4 +98,51 @@ export const WhyLagosData: WhyLagos[] = [
     },
 
 
+]
+
+
+export const testimonialsData = [
+    {
+        caption: "Good tour",
+        content: "djhfdjf",
+        name: "fdffd",
+        job: "dfdffd",
+        image: "",
+    },
+    {
+        caption: "greta ",
+        content: "fdfdfdf",
+        name: "fdfdf",
+        job: "fdfdf",
+        image: "",
+    },
+    {
+        caption: "hohoho",
+        content: "fdfdfd",
+        name: "fdfdf",
+        job: "fdggg",
+        image: "",
+    },
+    {
+        caption: "hohoho",
+        content: "dffdf",
+        name: "gfdffg",
+        job: "gfgfgfg",
+        image: "",
+    },
+]
+
+export const statsData: StatsDataType[] = [
+    {
+        value: "4.9",
+        content: "1000+ reviews on TripAdvisor. Certificate of Excellence",
+    },
+    {
+        value: "16M",
+        content: "Happy Customers",
+    },
+    {
+        value: "Award winner",
+        content: "G2’s 2021 Best Software Awards",
+    },
 ]
