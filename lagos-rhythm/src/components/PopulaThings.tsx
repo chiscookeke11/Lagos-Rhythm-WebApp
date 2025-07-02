@@ -67,7 +67,7 @@ const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) 
 
         {/* Footer */}
         <div className="relative z-10 p-6 text-center">
-          <div className="text-white/90 text-base font-semibold mb-1">LAGOS EXPLORER</div>
+          <div className="text-white/90 text-base font-semibold mb-1">LAGOS RHYTHM EXPLORER</div>
           <div className="text-[#EB662B] text-xs tracking-widest">TRAVEL SERIES</div>
         </div>
 
@@ -112,7 +112,7 @@ export default function PopularThings() {
   const pagesData: PageData[] = [
     {
       image: "/interestigThingsImg/historic site .jpg",
-      text: "Historic Site",
+      text: "Historic Site Walk",
     },
     {
       image: "/interestigThingsImg/Beach market stroll.jpg",
@@ -120,7 +120,7 @@ export default function PopularThings() {
     },
     {
       image: "/interestigThingsImg/bridge walk.jpg",
-      text: "Bridge Walk",
+      text: "Sunset Bridge Walk",
     },
     {
       image: "/interestigThingsImg/canopy walk.jpg",
@@ -128,11 +128,11 @@ export default function PopularThings() {
     },
     {
       image: "/interestigThingsImg/water taxi.jpg",
-      text: "Water Taxi",
+      text: "Water Taxi Ride",
     },
     {
       image: "/interestigThingsImg/railway museum.jpg",
-      text: "Railway Museum",
+      text: "Railway Museum Visit",
     },
   ]
 

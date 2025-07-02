@@ -1,8 +1,9 @@
 import { BestLocationDataType } from "@/Types/BestLocationDataType";
 import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { StatsDataType } from "@/Types/StatsDataType";
+import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import {  Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
+import { Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
 
 
 
@@ -84,51 +85,58 @@ export const WhyLagosData: WhyLagos[] = [
     {
         title: "Easy Global Payments",
         desc: "Book with ease using multiple currencies or crypto. Pay in NGN, USD, GBP, EUR or crypto (Bitcoin, USDT and more). Fast, secure, and global.",
-        icon: <CreditCard size={30}/>
+        icon: <CreditCard size={30} />
     },
     {
         title: "Dedicated Customer Support",
         desc: "From planning to post-tour, our support team is ready to help - wherever you are, whenever you need it.",
-        icon: <Headset size={30}/>
+        icon: <Headset size={30} />
     },
     {
         title: "Built for the Culture",
         desc: "We’re community-driven and proudly local, with a global vision. ",
-        icon: <Heart size={30}/>
+        icon: <Heart size={30} />
     },
 
 
 ]
 
 
-export const testimonialsData = [
+export const testimonialsData: TestimonialDataType[] = [
     {
-        caption: "Good tour",
-        content: "djhfdjf",
-        name: "fdffd",
-        job: "dfdffd",
-        image: "",
+        caption: "",
+        content: "I had a great experience in Nigeria. I enjoyed the night life, especially the street food, I tasted nwkobi for the first time and I've loved it ever since. The traffic in Lagos was crazy but hey that's usual in most west Africa countries. My stay was short but hopefully I'm planning to visit again this October and this time with the anticipation to do more sightseeing.",
+        name: "Henrietta Jomo ",
+        job: "Sales Executive ",
+        image: "/TestimonialsImages/HenriettaJomo.jpg",
+        country: "Sierra Leone"
     },
     {
-        caption: "greta ",
-        content: "fdfdfdf",
-        name: "fdfdf",
-        job: "fdfdf",
-        image: "",
+        caption: "",
+        content: "My experience with Lagosians has been absolutely remarkable. Through Lagos Rhythm's platform, I've gotten a fascinating glimpse into the vibrant culture and energy of this incredible city. I'm genuinely looking forward to visiting Lagos and experiencing the authentic rhythm of the city live.",
+        name: "Conrad Pramboeck",
+        job: "Managing Director",
+        image: "/TestimonialsImages/conrad.jpg",
+        country: "Austria"
+
     },
     {
-        caption: "hohoho",
-        content: "fdfdfd",
-        name: "fdfdf",
-        job: "fdggg",
-        image: "",
+        caption: "",
+        content: "My first encounter with Lagosians was online, and I could already feel the energy. From the music to the street food, and from the chaotic traffic to the unexpected kindness in strangers, there’s something real and raw about Lagos that makes you want to experience it for yourself. I’m looking forward to soaking in the culture, walking the streets, and witnessing firsthand the fire that fuels Africa’s most iconic city.",
+        name: "Jonathan Kamwana",
+        job: "Entrepreneur ",
+        image: "/TestimonialsImages/jonathan.HEIC",
+        country: "Malawi"
+
     },
     {
-        caption: "hohoho",
-        content: "dffdf",
-        name: "gfdffg",
-        job: "gfgfgfg",
-        image: "",
+        caption: "",
+        content: "Visiting Lagos was like stepping into a pulse—the energy is magnetic, the creativity boundless, and the people? Truly the soul of the city. Lagosians are some of the most resilient, ambitious, and hospitable individuals I’ve ever met.  Lagos isn’t just a city—it’s a story still being written by the fearless and the bold. And I’m grateful to have witnessed a chapter.",
+        name: "Laurel Grant",
+        job: " Travel Advisor ",
+        image: "/TestimonialsImages/grant.jpg",
+        country: "Canada"
+
     },
 ]
 

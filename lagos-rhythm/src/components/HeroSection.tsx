@@ -23,7 +23,7 @@ export default function HeroSection() {
 
                 <div className=" max-w-sm md:max-w-5xl w-full h-full flex items-center justify-center flex-col gap-4 lg:gap-5 text-center " >
                     <h1 className="font-semibold text-[#ffffff] text-3xl md:text-4xl lg:text-[70px] leading-[100%] font-inter ">Experience Lagos in its natural form</h1>
-                    <p className=" font-normal text-sm text-[#ffffff] ">Live the vibe, please the mind</p>
+                    <p className=" font-normal text-sm text-[#ffffff] ">Live the vibe, please the mind!</p>
 
 
 
