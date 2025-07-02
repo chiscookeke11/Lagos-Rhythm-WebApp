@@ -15,7 +15,8 @@
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-pageflip": "^2.0.3"
+    "react-pageflip": "^2.0.3",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

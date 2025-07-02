@@ -7,4 +7,5 @@ export interface TestimonialDataType {
         name: string,
         job: string,
         image: string,
+        country: string,
 }
