@@ -52,7 +52,7 @@ const supportOptions = [
 
 export default function Footer() {
     return (
-        <footer className="w-full bg-[#05073C] pt-[7%] pb-[1%] px-[5%]  text-[#FFFFFF] flex flex-col items-start justify-between gap-10 " >
+        <footer className="w-full bg-[#05073C] pt-[7%] pb-[1%] px-[5%]  text-[#FFFFFF] flex flex-col items-start justify-between gap-10 font-inter" >
 
 
 
@@ -71,7 +71,7 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl " >Company</h3>
                         <ul className="flex flex-col items-start gap-2" >
                             {footerLinks.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm" > {link.label} </li></Link>
+                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > {link.label} </li></Link>
                             ))}
                         </ul>
 
@@ -82,7 +82,7 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl " >Support</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {supportOptions.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm"> {link.label} </li></Link>
+                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></Link>
                             ))}
                         </ul>
 
