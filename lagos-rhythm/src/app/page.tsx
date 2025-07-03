@@ -1,5 +1,6 @@
 import BestOfLagos from "@/components/BestOfLagos";
 import HeroSection from "@/components/HeroSection";
+import NewsLetter from "@/components/NewsLetter";
 import PopularThings from "@/components/PopulaThings";
 import Testimonials from "@/components/Testimonials";
 import WhyLagos from "@/components/WhyLagos";
@@ -13,6 +14,7 @@ export default function Home() {
 <PopularThings/>
 <WhyLagos/>
 <Testimonials/>
+<NewsLetter/>
     </div>
      );
 }
