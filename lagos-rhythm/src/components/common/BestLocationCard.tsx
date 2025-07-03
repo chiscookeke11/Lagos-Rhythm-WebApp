@@ -16,7 +16,7 @@ export default function BestLocationCard({ image, label }: BestLocationCardProps
 
 
 
-            <div className="w-full h-[75%] flex items-center justify-center overflow-hidden bg-red-200 relative rounded-sm " >
+            <div className="w-full h-[75%] flex items-center justify-center overflow-hidden  relative rounded-sm " >
                 <Image src={image} alt="image" fill className=" object-cover object-center" />
                 <div className="w-8 h-8 rounded-full bg-white absolute bottom-[-20px] right-4" ></div>
             </div>

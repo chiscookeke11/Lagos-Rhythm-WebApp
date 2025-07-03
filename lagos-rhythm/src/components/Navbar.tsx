@@ -65,7 +65,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-3 px-[4%] transition-colors duration-150 ease-in-out font-merriweather z-50 ${scrolled ? "bg-[#EB662B] " : "bg-transparent"} `}  >
+        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-3 px-[4%] transition-colors duration-150 ease-in-out font-merriweather z-50 ${scrolled ? "bg-[#EF8F57] " : "bg-transparent"} `}  >
 
 
 
