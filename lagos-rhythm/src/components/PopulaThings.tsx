@@ -52,7 +52,7 @@ const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) 
         </div>
 
         <div className="relative z-10 flex-1 flex flex-col justify-center px-8 text-center">
-          <h1 className="space-y-2 mb-6">
+          <h1 className="space-y-2 mb-6 font-merriweather ">
             <div className="text-2xl font-light text-white tracking-wide">INTERESTING</div>
             <div className="text-4xl font-black text-[#EB662B] tracking-tight">THINGS</div>
             <div className="text-2xl font-light text-white tracking-wide">TO DO IN</div>
@@ -66,7 +66,7 @@ const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) 
         </div>
 
         {/* Footer */}
-        <div className="relative z-10 p-6 text-center">
+        <div className="relative z-10 p-6 text-center font-lato ">
           <div className="text-white/90 text-base font-semibold mb-1">LAGOS RHYTHM EXPLORER</div>
           <div className="text-[#EB662B] text-xs tracking-widest">TRAVEL SERIES</div>
         </div>
@@ -137,14 +137,14 @@ export default function PopularThings() {
   ]
 
   return (
-    <section className="w-full bg-[#EB662B0D] py-[8%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 font-inter">
+    <section className="w-full bg-[#EB662B0D] py-[8%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
       <div className="w-full max-w-[440px] flex flex-col items-start gap-3 md:gap-7">
-        <h2 className="font-bold text-[#05073C] text-2xl md:text-3xl mb-1">Interesting things to do</h2>
-        <p className="text-sm font-normal text-[#05073C]">
+        <h2 className="font-bold text-[#05073C] text-2xl md:text-3xl mb-1 font-playfair ">Interesting things to do</h2>
+        <p className="text-base font-normal text-[#05073C] font-lato ">
           There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
           some form.
         </p>
-        <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EB662B] text-white !py-4" />
+        <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EB662B] text-white !py-4 shadow-xl " />
       </div>
 
       <div className="w-full max-w-2xl h-full gap-4 py-2">
@@ -192,14 +192,14 @@ export default function PopularThings() {
                     className="object-cover object-center"
                   />
                 </div>
-                <h3 className="text-base font-inter text-[#05073C]">{pageData.text}</h3>
+                <h3 className="text-base  text-[#05073C] font-playfair">{pageData.text}</h3>
               </div>
             </div>
           ))}
 
           {/* Back cover page */}
           <div className="page bg-[#05073C] relative">
-            <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-xs text-gray-300">
+            <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-xs text-gray-300 font-merriweather">
               Thanks for exploring Lagos with us!
             </div>
             <div className="absolute top-[2px] left-[2px] w-16 h-16 border-l-4 border-t-4 border-[#EB662B]"></div>

@@ -52,7 +52,7 @@ const supportOptions = [
 
 export default function Footer() {
     return (
-        <footer className="w-full bg-[#05073C] pt-[7%] pb-[1%] px-[5%]  text-[#FFFFFF] flex flex-col items-start justify-between gap-10 font-inter" >
+        <footer className="w-full bg-[#05073C] pt-[7%] pb-[1%] px-[5%]  text-[#FFFFFF] flex flex-col items-start justify-between gap-10 font-lato" >
 
 
 
@@ -60,7 +60,7 @@ export default function Footer() {
 
 
                 <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6">
-                    <h3 className="font-medium text-lg md:text-xl " >Contact</h3>
+                    <h3 className="font-medium text-lg md:text-xl font-playfair " >Contact</h3>
                     <h4 className="text-sm font-medium w-full max-w-[330px] ">328 Queensberry Street, North Melbourne VIC3051, Australia.</h4>
                     <h4 className="text-sm font-medium ">hi@viatours.com</h4>
                 </div>
@@ -68,7 +68,7 @@ export default function Footer() {
 
                 <div className="w-full max-w-[500px]  items-start gap-10 md:gap-20  grid grid-rows-[auto_auto] md:grid-rows-none md:grid-cols-[auto_auto]" >
                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
-                        <h3 className="font-medium text-lg md:text-xl " >Company</h3>
+                        <h3 className="font-medium text-lg md:text-xl font-playfair" >Company</h3>
                         <ul className="flex flex-col items-start gap-2" >
                             {footerLinks.map((link, index) => (
                                 <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > {link.label} </li></Link>
@@ -79,7 +79,7 @@ export default function Footer() {
 
 
                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
-                        <h3 className="font-medium text-lg md:text-xl " >Support</h3>
+                        <h3 className="font-medium text-lg md:text-xl font-playfair" >Support</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {supportOptions.map((link, index) => (
                                 <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></Link>
