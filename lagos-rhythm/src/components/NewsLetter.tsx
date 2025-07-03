@@ -5,9 +5,9 @@ import Button from "./common/Button";
 
 export default function NewsLetter() {
     return (
-        <section className="w-full bg-[url('/newsletter.svg')] bg-no-repeat bg-center bg-cover flex flex-col items-start justify-center py-[10%] md:py-[7%] px-[10%] font-inter" >
+        <section className="w-full bg-[url('/newsletter.svg')] bg-no-repeat  bg-cover flex flex-col items-start justify-center py-[10%] md:py-[7%] px-[10%] font-lato " >
             <div className=" flex flex-col items-start gap-3 md:gap-5  max-w-[550px] " >
-                <h2 className="text-white font-bold text-xl md:text-3xl max-w-[450px] " >Subscribe To Our Mailing List
+                <h2 className="text-white font-bold text-xl md:text-3xl max-w-[450px]  " >Subscribe To Our Mailing List
                     And Stay Up To Date</h2>
                 <h4 className="text-white font-normal text-sm " >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
 

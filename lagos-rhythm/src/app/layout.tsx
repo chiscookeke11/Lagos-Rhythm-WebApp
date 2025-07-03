@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Lato, Merriweather, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
@@ -18,6 +18,30 @@ const inter = Inter({
   subsets: ["latin"]
 })
 
+
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+})
+
+
+const lato = Lato({
+  variable: '--font-lato',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+})
+
+
+const merriWeather = Merriweather({
+  variable: '--font-merriweather',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
+
+
 export const metadata: Metadata = {
   title: "Lagos Rhythm",
   description: "Tour guide in Lagos",
@@ -31,9 +55,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} antialiased`}
       >
-        <Navbar/>
+        <Navbar />
         {children}
       </body>
     </html>

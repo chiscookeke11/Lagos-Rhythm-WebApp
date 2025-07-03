@@ -11,6 +11,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-inter: var(--font-inter);
+  --font-playfair: var(--font-playfair);
+  --font-lato: var(--font-lato);
+  --font-merriweather: var(--font-merriweather)
 }
 
 @media (prefers-color-scheme: dark) {
