@@ -137,7 +137,7 @@ export default function PopularThings() {
   ]
 
   return (
-    <section className="w-full bg-[#EB662B0D] py-[8%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
+    <section className="w-full bg-[#EB662B0D] py-[5%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
       <div className="w-full max-w-[440px] flex flex-col items-start gap-3 md:gap-7">
         <h2 className="font-bold text-[#05073C] text-2xl md:text-3xl mb-1 font-playfair ">Interesting things to do</h2>
         <p className="text-base font-normal text-[#05073C] font-lato ">
@@ -192,7 +192,7 @@ export default function PopularThings() {
                     className="object-cover object-center"
                   />
                 </div>
-                <h3 className="text-base  text-[#05073C] font-playfair">{pageData.text}</h3>
+                <h3 className="text-base  text-[#05073C] font-playfair font-medium">{pageData.text}</h3>
               </div>
             </div>
           ))}
