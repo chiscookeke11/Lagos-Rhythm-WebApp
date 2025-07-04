@@ -23,7 +23,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`text-white font-medium text-base font-lato py-2 px-3 md:px-5 md:py-3 cursor-pointer hover:scale-90 transition-transform transform ease-in-out duration-150 ${variants[variant]} ${className}`}
+      className={`text-white font-medium text-base font-lato py-2 px-3 md:px-5 md:py-3 cursor-pointer  transition-transform transform ease-in-out duration-150 ${variants[variant]} ${className}`}
     >
       {label}
     </button>
