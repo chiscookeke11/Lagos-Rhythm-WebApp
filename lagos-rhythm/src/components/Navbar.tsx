@@ -65,7 +65,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-3 px-[4%] transition-colors duration-150 ease-in-out font-merriweather z-50 ${scrolled ? "bg-[#EF8F57] " : "bg-transparent"} `}  >
+        <nav className={`fixed top-0 left-0 w-full flex items-center justify-between gap-10 py-3 px-[4%] transition-colors duration-150 ease-in-out font-signika z-50 ${scrolled ? "bg-[#EF8F57] " : "bg-transparent"} `}  >
 
 
 
@@ -77,7 +77,7 @@ export default function Navbar() {
                 <ul className=" hidden w-fit lg:flex items-center justify-evenly gap-10" >
                     {
                         navLinks.map((navLink, index) => (
-                            <Link href={navLink.path} key={index} ><li className={`font-normal text-sm text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"}  `} > {navLink.label} </li></Link>
+                            <Link href={navLink.path} key={index} ><li className={`font-normal text-base text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"}  `} > {navLink.label} </li></Link>
                         ))
                     }
                 </ul>
@@ -88,9 +88,9 @@ export default function Navbar() {
             <div className=" flex items-center justify-center gap-7 w-fit" >
 
 
-                <Link href={"/"} ><button className=" font-normal text-sm text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-merriweather ">Sign up</button></Link>
+                <Link href={"/"} ><button className=" font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ">Sign up</button></Link>
 
-                <Button label="Log in" type="button" variant="outline" className="font-merriweather !py-2" />
+                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2" />
 
                 <button className=" cursor-pointer flex lg:hidden " onClick={() => setOpenMobileNav(true)}  ><Menu size={30} color="#ffffff" /> </button>
 

@@ -30,10 +30,10 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
 
       <div className="w-full h-full absolute bg-black/50 z-10 flex items-center justify-center px-4 py-3">
         <div className="max-w-sm md:max-w-5xl w-full h-full flex items-center justify-center flex-col gap-4 lg:gap-5 text-center">
-          <h1 className="font-semibold text-white text-4xl lg:text-[70px] lg:leading-[100%] font-playfair">
+          <h1 className="font-semibold text-white text-4xl lg:text-[70px] lg:leading-[140%] font-merienda">
             Experience Lagos in its natural form
           </h1>
-          <p className="font-normal text-base text-white font-lato">
+          <p className="font-normal text-base text-white font-merienda">
             Live the vibe, please the mind!
           </p>
           <MotionButton
@@ -42,7 +42,7 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
           whileHover={{scale: 1.1}}
           whileTap={{scale: 1.1}}
           transition={{type: "spring", stiffness: 600, damping: 12}}
-          type="button" label="Join the waitlist" > Join the Waitlist</MotionButton>
+          type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
         </div>
       </div>
     </section>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Lato, Merriweather, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Lato, Merienda, Merriweather, Playfair_Display, Satisfy, Signika } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,17 @@ const merriWeather = Merriweather({
   weight: ['400', '700'],
 })
 
+const merienda = Merienda({
+  variable: "--font-merienda",
+  subsets: ["latin"],
+  weight: ['400', '700']
+})
+
+const signika = Signika({
+  variable: "--font-signika",
+  weight: ['400', '700'],
+})
+
 
 export const metadata: Metadata = {
   title: "Lagos Rhythm",
@@ -55,10 +67,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} ${merienda.variable} ${signika.variable} antialiased`}
       >
         <Navbar />
         {children}
+          <Toaster position="bottom-right" />
       </body>
     </html>
   );
