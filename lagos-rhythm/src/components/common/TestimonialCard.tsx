@@ -25,7 +25,7 @@ export default function TestimonialCard({data}: TestimonialCardProps) {
 
 
                     <div className="w-fit flex flex-col items-start justify-between gap-1" >
-                        <h5 className="text-sm font-semibold text-[#EB662B] font-playfair " > {data.name} </h5>
+                        <h5 className="text-sm font-semibold text-[#EF8F57] font-playfair " > {data.name} </h5>
                         <h6 className="font-medium text-[#05073C] text-xs font-lato " >{data.job} </h6>
                         <h6 className="font-medium text-[#05073C] text-xs font-lato" >{data.country} </h6>
 
