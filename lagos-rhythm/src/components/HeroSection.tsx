@@ -1,13 +1,21 @@
 
 "use client";
+import { useMemo } from "react";
 import Button from "./common/Button";
+import { motion } from "framer-motion";
 
 
-interface HeroSectionProps{
-    setVideoLoaded: (videoLoaded: boolean) => void
+interface HeroSectionProps {
+  setVideoLoaded: (videoLoaded: boolean) => void
 }
 
+
+
 export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
+
+  const MotionButton = useMemo(() => motion(Button), [])
+
+
   return (
     <section className="w-full h-screen relative">
       <video
@@ -28,7 +36,13 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
           <p className="font-normal text-base text-white font-lato">
             Live the vibe, please the mind!
           </p>
-          <Button type="button" label="Join the waitlist" />
+          <MotionButton
+          initial={{scale: 0}}
+          animate={{scale: 1}}
+          whileHover={{scale: 1.1}}
+          whileTap={{scale: 1.1}}
+          transition={{type: "spring", stiffness: 400, damping: 17}}
+          type="button" label="Join the waitlist" > Join the Waitlist</MotionButton>
         </div>
       </div>
     </section>
