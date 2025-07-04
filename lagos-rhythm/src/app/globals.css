@@ -13,7 +13,9 @@
   --font-inter: var(--font-inter);
   --font-playfair: var(--font-playfair);
   --font-lato: var(--font-lato);
-  --font-merriweather: var(--font-merriweather)
+  --font-merriweather: var(--font-merriweather);
+  --font-merienda: var(--font-merienda);
+  --font-signika: var(--font-signika)
 }
 
 @media (prefers-color-scheme: dark) {
