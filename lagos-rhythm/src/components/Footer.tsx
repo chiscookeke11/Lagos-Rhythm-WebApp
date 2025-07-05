@@ -1,4 +1,4 @@
-import { CalendarCheck2, Facebook, Handshake, Instagram, Mail, Phone, Youtube } from "lucide-react"
+import {  Facebook, Instagram, Youtube } from "lucide-react"
 import Link from "next/link"
 import { FaWhatsapp } from "react-icons/fa"
 
