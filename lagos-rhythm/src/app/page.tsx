@@ -26,7 +26,7 @@ useEffect(() => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   };
 
-  setVh(); // set on mount
+  setVh();
   window.addEventListener("resize", setVh); // update on resize
 
   return () => {

@@ -1,16 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Button from "./common/Button";
 import toast from "react-hot-toast";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { fireDB } from "@/app/config/firebaseClient";
+import { motion } from "framer-motion";
 
 
 
 export default function NewsLetter() {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const Motionbutton = useMemo(() => motion(Button), [])
 
 
 
@@ -85,44 +87,56 @@ export default function NewsLetter() {
           Join our community and step into the rhythm - virtually and beyond.
         </h4>
 
-        <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col">
-        <label htmlFor="name" className="text-base font-semibold text-[#ffffff] " >
-          Name <span className="text-red-600 text-base font-medium" >*</span>
+        <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col overflow-hidden ">
+          <motion.label
+            initial={{ x: -400 }}
+            whileInView={{ x: 0 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 100, damping: 15, }}
+            htmlFor="name" className="text-base font-semibold text-[#ffffff] " >
+            Name <span className="text-red-600 text-base font-medium" >*</span>
             <input
-            onChange={handleChange}
-            name="name"
-            id="name"
-            value={formData.name}
-            type="text"
-            placeholder="Mike"
-            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
-          />
-        </label>
+              onChange={handleChange}
+              name="name"
+              id="name"
+              value={formData.name}
+              type="text"
+              placeholder="Mike"
+              className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
+            />
+          </motion.label>
 
-        <label htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
-          Email <span className="text-red-600 text-base font-medium" >*</span>
+          <motion.label
+            initial={{ x: -400 }}
+            whileInView={{ x: 0 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 100, damping: 15, }}
+            htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
+            Email <span className="text-red-600 text-base font-medium" >*</span>
             <input
-            onChange={handleChange}
-            name="email"
-            id="email"
-            value={formData.email}
-            type="text"
-            placeholder="JohnDoe@gmail.com"
-            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
-          />
-        </label>
+              onChange={handleChange}
+              name="email"
+              id="email"
+              value={formData.email}
+              type="text"
+              placeholder="JohnDoe@gmail.com"
+              className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
+            />
+          </motion.label>
 
-          <Button type="submit" label={isSubmitting ? (
-            <>
-              <span className="inline-flex space-x-1 ml-1">
-                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce"></span>
-              </span>
+          <Motionbutton
+            initial={{ x: -400 }}
+            whileInView={{ x: 0 }}
+            transition={{ delay: 0.5, type: "spring", stiffness: 100, damping: 15, }}
+            type="submit" label={isSubmitting ? (
+              <>
+                <span className="inline-flex space-x-1 ml-1">
+                  <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                  <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                  <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce"></span>
+                </span>
 
-            </>
-          ) :
-            "Subscribe"} variant="primary" className="!text-[#EF8F57] !font-bold  " />
+              </>
+            ) :
+              "Subscribe"} variant="primary" className="!text-[#EF8F57] !font-bold  " />
         </form>
       </div>
     </section>
