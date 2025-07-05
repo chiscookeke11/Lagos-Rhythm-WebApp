@@ -1,3 +1,4 @@
+import { CalendarCheck2, Handshake, Mail, Phone } from "lucide-react"
 import Link from "next/link"
 
 
@@ -25,26 +26,38 @@ const footerLinks = [
         label: "Store",
         path: "/",
     },
+    {
+        label: "About Lagos Rhythm",
+        path: "/",
+    },
 ]
 
 
 
 const supportOptions = [
     {
-        label: "Get in Touch",
-        path: "",
-    },
-    {
-        label: "Help center",
-        path: "",
-    },
-    {
         label: "Live chat",
-        path: "",
+        path: "/",
+    },
+    {
+        label: "FAQ",
+        path: "/",
     },
     {
         label: "How it works",
-        path: "",
+        path: "/",
+    },
+    {
+        label: "Feedback",
+        path: "/",
+    },
+    {
+        label: "Terms and conditions",
+        path: "/",
+    },
+    {
+        label: "Privacy policy",
+        path: "/",
     },
 
 ]
@@ -62,7 +75,24 @@ export default function Footer() {
                 <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6">
                     <h3 className="font-medium text-lg md:text-xl font-playfair " >Contact</h3>
                     <h4 className="text-sm font-medium w-full max-w-[330px] ">328 Queensberry Street, North Melbourne VIC3051, Australia.</h4>
-                    <h4 className="text-sm font-medium ">hi@viatours.com</h4>
+                    <div className="w-full flex items-center gap-5" >
+
+                        <a href="mailto:info@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] " >
+                            <Mail />
+                        </a>
+                        <a href="mailto:bookings@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
+                            <CalendarCheck2 />
+                        </a>
+                        <a href="mailto:partners@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
+                            <Handshake />
+                        </a>
+                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
+                            <Phone />
+                        </a>
+
+
+                    </div>
+                    <h4 className="text-sm font-medium ">info@lagosrhythm.com</h4>
                 </div>
 
 
