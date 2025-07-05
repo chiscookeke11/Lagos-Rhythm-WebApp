@@ -24,7 +24,7 @@ export default function ScrollingText() {
 {
     lagosFacts.map((text, index) => (
        <span key={index} className=" block ">
-      <h3 className="font-lato text-xl font-semibold text-[#ffffff] mx-10 flex items-center gap-2 "><Sparkle color="#FFD700" size={15}/>  {text}  <Sparkle color="#FFD700" size={15}/></h3>
+      <h3 className="font-lato text-base md:text-xl font-semibold text-[#ffffff] mx-10 flex items-center gap-2 "><Sparkle color="#FFD700" size={15}/>  {text}  <Sparkle color="#FFD700" size={15}/></h3>
     </span>
 
     ))
