@@ -89,7 +89,7 @@ export default function NewsLetter() {
 
         <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col overflow-hidden ">
           <motion.label
-            initial={{ x: -400 }}
+            initial={{ x: -200 }}
             whileInView={{ x: 0 }}
             transition={{ delay: 0.1, type: "spring", stiffness: 100, damping: 15, }}
             htmlFor="name" className="text-base font-semibold text-[#ffffff] " >
@@ -106,7 +106,7 @@ export default function NewsLetter() {
           </motion.label>
 
           <motion.label
-            initial={{ x: -400 }}
+            initial={{ x: -200 }}
             whileInView={{ x: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 15, }}
             htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
@@ -123,7 +123,7 @@ export default function NewsLetter() {
           </motion.label>
 
           <Motionbutton
-            initial={{ x: -400 }}
+            initial={{ x: -200 }}
             whileInView={{ x: 0 }}
             transition={{ delay: 0.3, type: "spring", stiffness: 50, damping: 15, }}
             type="submit" label={isSubmitting ? (
