@@ -108,7 +108,7 @@ export default function NewsLetter() {
           <motion.label
             initial={{ x: -400 }}
             whileInView={{ x: 0 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 100, damping: 15, }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 15, }}
             htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
             Email <span className="text-red-600 text-base font-medium" >*</span>
             <input
@@ -125,7 +125,7 @@ export default function NewsLetter() {
           <Motionbutton
             initial={{ x: -400 }}
             whileInView={{ x: 0 }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 100, damping: 15, }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 50, damping: 15, }}
             type="submit" label={isSubmitting ? (
               <>
                 <span className="inline-flex space-x-1 ml-1">
