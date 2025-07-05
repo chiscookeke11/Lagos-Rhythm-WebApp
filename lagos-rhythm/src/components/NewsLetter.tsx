@@ -77,34 +77,40 @@ export default function NewsLetter() {
 
   return (
     <section className="w-full bg-[url('/newsletter.svg')] bg-no-repeat bg-center bg-cover flex flex-col items-start justify-center py-[10%] md:py-[7%] px-[5%] md:px-[10%] font-lato">
-      <div className="flex flex-col items-start gap-3 md:gap-5 max-w-[550px]">
+      <div className="flex flex-col items-start gap-3  max-w-[550px]">
         <h2 className="text-white font-bold text-xl md:text-3xl max-w-[450px]">
-          Subscribe To Our Community And Stay Up To Date
+          Subscribe To Our Community
         </h2>
         <h4 className="text-white font-normal text-sm">
           Join our community and step into the rhythm - virtually and beyond.
         </h4>
 
         <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col">
-          <input
+        <label htmlFor="name" className="text-base font-semibold text-[#ffffff] " >
+          Name <span className="text-red-600 text-base font-medium" >*</span>
+            <input
             onChange={handleChange}
             name="name"
             id="name"
             value={formData.name}
             type="text"
-            placeholder="Name"
-            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
+            placeholder="Mike"
+            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
           />
+        </label>
 
-          <input
+        <label htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
+          Email <span className="text-red-600 text-base font-medium" >*</span>
+            <input
             onChange={handleChange}
             name="email"
             id="email"
             value={formData.email}
-            type="email"
-            placeholder="Your email"
-            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
+            type="text"
+            placeholder="JohnDoe@gmail.com"
+            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF]/80 text-sm md:text-base"
           />
+        </label>
 
           <Button type="submit" label={isSubmitting ? (
             <>

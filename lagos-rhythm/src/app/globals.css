@@ -30,3 +30,14 @@ body {
   color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* This will update the --vh variable to be 1% of the actual viewport height */
+:root {
+  --vh: 100%;
+}
+
+@media (max-width: 768px) {
+  .mobile-vh {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+}
