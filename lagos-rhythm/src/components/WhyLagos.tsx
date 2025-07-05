@@ -1,5 +1,5 @@
 import { WhyLagosData } from "@/data/data";
-
+import { motion } from "framer-motion";
 
 
 
@@ -17,14 +17,19 @@ export default function WhyLagos() {
 
         {
           WhyLagosData.map((item, index) => (
-            <div key={index} className=" wfull flex items-start justify-center  max-w-sm flex-col py-3 px-4 gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-sm " >
+            <motion.div
+            initial={{scale: 0.2, opacity: 0}}
+            whileInView={{scale: 1, opacity: 1}}
+            transition={{type: "spring", stiffness: 100, damping: 15, delay: index * 0.15}}
+            viewport={{ once: true, amount: 0.3 }}
+            key={index} className=" wfull flex items-start justify-center  max-w-sm flex-col py-3 px-4 gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-sm " >
               <div className="text-[#EF8F57]  " >
                 {item.icon}
               </div>
               <h3 className="font-bold text-xl text-[#05073C] font-playfair " >{item.title} </h3>
               <p className="font-normal text-[#05073C] text-base font-lato "> {item.desc} </p>
 
-            </div>
+            </motion.div>
           ))
         }
 
