@@ -78,16 +78,16 @@ export default function Footer() {
                     <div className="w-full flex items-center gap-5" >
 
                         <a href="mailto:info@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] " >
-                            <Mail />
+                            <Mail size={20} />
                         </a>
                         <a href="mailto:bookings@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <CalendarCheck2 />
+                            <CalendarCheck2 size={20}/>
                         </a>
                         <a href="mailto:partners@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <Handshake />
+                            <Handshake size={20}/>
                         </a>
                         <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <Phone />
+                            <Phone size={20}/>
                         </a>
 
 

@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import Button from "./common/Button";
 import { motion } from "framer-motion";
+import ScrollingText from "./ScrollingText";
 
 
 interface HeroSectionProps {
@@ -55,6 +56,7 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
             type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
         </div>
       </div>
+      <ScrollingText/>
     </section>
   );
 }

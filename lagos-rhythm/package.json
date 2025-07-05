@@ -17,6 +17,7 @@
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-fast-marquee": "^1.6.5",
     "react-hot-toast": "^2.5.2",
     "react-pageflip": "^2.0.3",
     "swiper": "^11.2.10"
