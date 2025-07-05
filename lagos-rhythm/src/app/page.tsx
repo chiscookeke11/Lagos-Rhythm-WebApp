@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import BestOfLagos from "@/components/BestOfLagos";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -8,10 +8,10 @@ import NewsLetter from "@/components/NewsLetter";
 import PopularThings from "@/components/PopulaThings";
 import Testimonials from "@/components/Testimonials";
 import WhyLagos from "@/components/WhyLagos";
-import Image from "next/image";
+
 
 export default function Home() {
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [, setVideoLoaded] = useState(false);
 
   // useEffect(() => {
   // document.body.style.overflow = videoLoaded ? "auto" : "hidden";

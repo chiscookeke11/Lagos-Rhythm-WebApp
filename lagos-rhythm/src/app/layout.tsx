@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Lato, Merienda, Merriweather, Playfair_Display, Satisfy, Signika } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Lato, Merienda, Merriweather, Playfair_Display, Signika } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
@@ -51,6 +51,7 @@ const merienda = Merienda({
 const signika = Signika({
   variable: "--font-signika",
   weight: ['400', '700'],
+  subsets: ['latin']
 })
 
 
