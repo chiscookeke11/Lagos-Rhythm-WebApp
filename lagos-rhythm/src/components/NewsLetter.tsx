@@ -3,12 +3,14 @@
 import React, { useState } from "react";
 import Button from "./common/Button";
 import toast from "react-hot-toast";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { fireDB } from "@/app/config/firebaseClient";
+
+
 
 export default function NewsLetter() {
   const [formData, setFormData] = useState({ name: "", email: "" });
-const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
 
 
@@ -20,24 +22,56 @@ const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const toastId = toast.loading("Submitting...");
-    setIsSubmitting(true)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isvalid = formData.name.trim().length > 0 && formData.email.trim().length > 0;
 
+
+    if (!isvalid) {
+      toast.error("Please fill in the required fields")
+      console.log(isvalid)
+      return;
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid Email address");
+      return;
+    }
+
+
+
+
+
+
+
+    setIsSubmitting(true)
     try {
-      const docRef = await addDoc(collection(fireDB, "subscribers"), {
+
+      const subscribersRef = collection(fireDB, "subscribers");
+      const q = query(subscribersRef, where("email", "==", formData.email));
+      const querySnapshot = await getDocs(q);
+
+
+      if (!querySnapshot.empty) {
+        toast.error("You are already subscribed with this email");
+        setIsSubmitting(false);
+        return;
+      }
+
+
+      await addDoc(collection(fireDB, "subscribers"), {
         name: formData.name,
         email: formData.email,
         subscribedAt: new Date(),
       });
 
       setFormData({ name: "", email: "" });
-      toast.success("Subscribed successfully ", { id: toastId });
-      console.log("Subscribed with ID:", docRef.id);
+
+      toast.success("Subscribed successfully ");
       setIsSubmitting(false)
     } catch (error) {
-      console.error("Error adding document", error);
-      toast.error("Subscription failed ", { id: toastId });
-            setIsSubmitting(false)
+
+      toast.error("Subscription failed ");
+      setIsSubmitting(false)
     }
   };
 
@@ -48,7 +82,7 @@ const [isSubmitting, setIsSubmitting] = useState(false)
           Subscribe To Our Community And Stay Up To Date
         </h2>
         <h4 className="text-white font-normal text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Get exclusive insights, latest news, and special offers delivered straight to your inbox. Join thousands of subscribers who stay ahead of the curve.
         </h4>
 
         <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col">
@@ -59,7 +93,7 @@ const [isSubmitting, setIsSubmitting] = useState(false)
             value={formData.name}
             type="text"
             placeholder="Name"
-            className="w-full bg-[#FFFFFF1A] border-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
+            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
           />
 
           <input
@@ -69,10 +103,20 @@ const [isSubmitting, setIsSubmitting] = useState(false)
             value={formData.email}
             type="email"
             placeholder="Your email"
-            className="w-full bg-[#FFFFFF1A] border-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
+            className="w-full bg-[#FFFFFF1A] border-0 outline-0 py-3 px-4 rounded-lg text-[#FFFFFF] text-sm md:text-base"
           />
 
-          <Button type="submit" label={isSubmitting ? " ..." : "Subscribe"} variant="primary" className="!text-[#000000]" />
+          <Button type="submit" label={isSubmitting ? (
+            <>
+              <span className="inline-flex space-x-1 ml-1">
+                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                <span className="w-2 h-2 bg-[#EF8F57] rounded-full animate-bounce"></span>
+              </span>
+
+            </>
+          ) :
+            "Subscribe"} variant="primary" className="!text-[#EF8F57] !font-bold  " />
         </form>
       </div>
     </section>
