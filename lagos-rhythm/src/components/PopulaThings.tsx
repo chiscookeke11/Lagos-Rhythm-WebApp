@@ -141,7 +141,7 @@ export default function PopularThings() {
       <div className="w-full max-w-[440px] flex flex-col items-start gap-3 md:gap-5">
         <h2 className="font-bold text-[#05073C] text-2xl md:text-3xl  font-playfair ">Interesting things to do</h2>
         <p className="text-lg font-normal text-[#05073C] font-lato ">
-        Lagos is more than a city - it's a living experience.
+        Lagos is more than a city - it&apos;s a living experience.
         </p>
         <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
       </div>
