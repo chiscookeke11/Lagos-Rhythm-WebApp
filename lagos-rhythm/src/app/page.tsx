@@ -1,6 +1,6 @@
 "use client";
 
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import BestOfLagos from "@/components/BestOfLagos";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -17,6 +17,23 @@ export default function Home() {
   // document.body.style.overflow = videoLoaded ? "auto" : "hidden";
 
   // }, [videoLoaded])
+
+
+
+useEffect(() => {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  setVh(); // set on mount
+  window.addEventListener("resize", setVh); // update on resize
+
+  return () => {
+    window.removeEventListener("resize", setVh);
+  };
+}, []);
+
 
   return (
     <div>

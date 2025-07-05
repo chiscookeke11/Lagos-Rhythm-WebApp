@@ -1,5 +1,6 @@
-import { CalendarCheck2, Handshake, Mail, Phone } from "lucide-react"
+import { CalendarCheck2, Facebook, Handshake, Instagram, Mail, Phone, Youtube } from "lucide-react"
 import Link from "next/link"
+import { FaWhatsapp } from "react-icons/fa"
 
 
 
@@ -63,6 +64,21 @@ const supportOptions = [
 ]
 
 
+const emailOptions = [
+    {
+        label: "General inquiries",
+        url: "info@lagosrhythm.com"
+    },
+    {
+        label: "Bookings",
+        url: "bookings@lagosrhythm.com"
+    },
+    {
+        label: "partnership",
+        url: "partners@lagosrhythm.com"
+    },
+]
+
 export default function Footer() {
     return (
         <footer className="w-full bg-[#05073C] pt-[7%] pb-[1%] px-[5%]  text-[#FFFFFF] flex flex-col items-start justify-between gap-10 font-lato" >
@@ -74,29 +90,28 @@ export default function Footer() {
 
                 <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6">
                     <h3 className="font-medium text-lg md:text-xl font-playfair " >Contact</h3>
-                    <h4 className="text-sm font-medium w-full max-w-[330px] ">328 Queensberry Street, North Melbourne VIC3051, Australia.</h4>
                     <div className="w-full flex items-center gap-5" >
 
-                        <a href="mailto:info@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] " >
-                            <Mail size={20} />
+                        <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
+                        <Facebook size={20} />
                         </a>
-                        <a href="mailto:bookings@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <CalendarCheck2 size={20}/>
+                        <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                            <Youtube size={20}/>
                         </a>
-                        <a href="mailto:partners@lagosrhythm.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <Handshake size={20}/>
+                        <a href="https://www.instagram.com/lagos_rhythm/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                            <Instagram size={20}/>
                         </a>
-                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] ">
-                            <Phone size={20}/>
+                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                            <FaWhatsapp size={20}/>
                         </a>
 
 
                     </div>
-                    <h4 className="text-sm font-medium ">info@lagosrhythm.com</h4>
+                    <a href="mailto:info@lagosrhythm.com" target="_blank" className="text-sm font-medium text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">info@lagosrhythm.com</a>
                 </div>
 
 
-                <div className="w-full max-w-[500px]  items-start gap-10 md:gap-20  grid grid-rows-[auto_auto] md:grid-rows-none md:grid-cols-[auto_auto]" >
+                <div className="w-full max-w-[1000px]  items-start gap-10 md:gap-20  grid grid-rows-[auto_auto] md:grid-rows-none md:grid-cols-[auto_auto_auto]" >
                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Company</h3>
                         <ul className="flex flex-col items-start gap-2" >
@@ -117,6 +132,19 @@ export default function Footer() {
                         </ul>
 
                     </div>
+
+                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
+                              <h3 className="font-medium text-lg md:text-xl font-playfair" >Email Contacts</h3>
+                        <ul className="flex flex-col items-start gap-2">
+                            {emailOptions.map((link, index) => (
+                                <a key={index} href={`mailto:${link.url}`} target="_blank" > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></a>
+                            ))}
+                        </ul>
+
+                    </div>
+
+
+
                 </div>
 
 
