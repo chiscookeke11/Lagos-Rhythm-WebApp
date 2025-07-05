@@ -56,7 +56,7 @@ const TestimonialSlider = () => {
 
 export default function Testimonials() {
     return (
-        <section className="w-full !bg-[#EB662B0D] py-[7%] px-[10%] flex flex-col items-start justify-center gap-10  " >
+        <section className="w-full bg-[#FDF4F1] py-[7%] px-[10%] flex flex-col items-start justify-center gap-10  " >
             <h2 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair  " >What our <span className="text-[#EF8F57] ">Travelers</span> are saying</h2>
             <TestimonialSlider />
 

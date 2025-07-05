@@ -18,7 +18,7 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
 
 
   return (
-    <section className="w-full h-screen relative">
+    <section className="w-full h-screen md:h-screen mobile-vh relative">
       <video
         onLoadedData={() => setVideoLoaded(true)}
         className="absolute top-0 left-0 h-full w-full object-cover z-0"

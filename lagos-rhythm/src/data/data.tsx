@@ -69,32 +69,32 @@ export const WhyLagosData: WhyLagos[] = [
     {
         title: "Free Virtual Tours",
         desc: "Experience Lagos in real time from anywhere in the world, no cost attached. Our free virtual tours open up the city’s culture, landmarks, and people - live.",
-        icon: <MonitorPlay size={50} />
+        icon: <MonitorPlay size={40} />
     },
     {
         title: "Themed Packages ",
         desc: "Looking for adventure, relaxation, or inspiration? Our affordable themed packages let you explore Lagos your way - from one theme to another. ",
-        icon: <Combine size={50} />
+        icon: <Combine size={40} />
     },
     {
         title: "Corporate & Group Services",
         desc: "We create tailored experiences for corporate team bonding, educational groups, cultural institutions, and digital communities - all rooted in the rich, dynamic vibe of Lagos.",
-        icon: <IdCard size={50} />
+        icon: <IdCard size={40} />
     },
     {
         title: "Easy Global Payments",
         desc: "Book with ease using multiple currencies or crypto. Pay in NGN, USD, GBP, EUR or crypto (Bitcoin, USDT and more). Fast, secure, and global.",
-        icon: <CreditCard size={50} />
+        icon: <CreditCard size={40} />
     },
     {
         title: "Dedicated Customer Support",
         desc: "From planning to post-tour, our support team is ready to help - wherever you are, whenever you need it.",
-        icon: <Headset size={50} />
+        icon: <Headset size={40} />
     },
     {
         title: "Built for the Culture",
         desc: "We’re community-driven and proudly local, with a global vision. ",
-        icon: <Heart size={50} />
+        icon: <Heart size={40} />
     },
 
 
