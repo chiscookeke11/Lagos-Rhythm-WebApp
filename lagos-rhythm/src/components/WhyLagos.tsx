@@ -6,7 +6,7 @@ import { WhyLagosData } from "@/data/data";
 
 export default function WhyLagos() {
   return (
-    <div className=" flex flex-col items-start gap-3 py-[7%] px-[5%] lg:px-[10%]  ">
+    <div className=" flex flex-col items-start gap-3 md:gap-6 py-[7%] px-[5%] lg:px-[10%]  ">
       <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " > Why <span className="text-[#EF8F57] "> Lagos Rhythm? </span> </h1>
 
       <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-5 md:gap-6  " >

@@ -30,19 +30,29 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
 
       <div className="w-full h-full absolute bg-black/50 z-10 flex items-center justify-center px-4 py-3">
         <div className="max-w-sm md:max-w-5xl w-full h-full flex items-center justify-center flex-col gap-4 lg:gap-5 text-center">
-          <h1 className="font-semibold text-white text-4xl lg:text-[70px] lg:leading-[140%] font-merienda">
-            Experience Lagos in its natural form
-          </h1>
-          <p className="font-normal text-base text-white font-merienda">
-            Live the vibe, please the mind!
-          </p>
+          <div className="overflow-hidden text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-semibold text-white text-4xl lg:text-[70px] lg:leading-[140%] font-merienda">
+              Experience Lagos in its natural form
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="font-normal text-base text-white font-merienda">
+              Live the vibe, please the mind!
+            </motion.p>
+          </div>
           <MotionButton
-          initial={{scale: 0}}
-          animate={{scale: 1}}
-          whileHover={{scale: 1.1}}
-          whileTap={{scale: 1.1}}
-          transition={{type: "spring", stiffness: 600, damping: 12}}
-          type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 1.1 }}
+            transition={{ duration:0.5, type: "spring", stiffness: 200, damping: 7 }}
+            type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
         </div>
       </div>
     </section>
