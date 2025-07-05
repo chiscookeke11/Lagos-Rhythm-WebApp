@@ -1,6 +1,6 @@
 import { BestLocationData } from "@/data/data";
 import BestLocationCard from "./common/BestLocationCard";
-import { easeInOut, easeOut, motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 
 
 
