@@ -130,7 +130,7 @@ export const testimonialsData: TestimonialDataType[] = [
     },
     {
         caption: "",
-        content: "Visiting Lagos was like stepping into a pulse—the energy is magnetic, the creativity boundless, and the people? Truly the soul of the city. Lagosians are some of the most resilient, ambitious, and hospitable individuals I’ve ever met.  Lagos isn’t just a city—it’s a story still being written by the fearless and the bold. And I’m grateful to have witnessed a chapter.",
+        content: "Visiting Lagos was like stepping into a pulse - the energy is magnetic, the creativity boundless, and the people? Truly the soul of the city. Lagosians are some of the most resilient, ambitious, and hospitable individuals I’ve ever met.  Lagos isn’t just a city—it’s a story still being written by the fearless and the bold. And I’m grateful to have witnessed a chapter.",
         name: "Laurel Grant",
         job: " Travel Advisor ",
         image: "/TestimonialsImages/grant.jpg",

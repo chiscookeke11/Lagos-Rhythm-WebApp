@@ -82,7 +82,7 @@ export default function NewsLetter() {
           Subscribe To Our Community And Stay Up To Date
         </h2>
         <h4 className="text-white font-normal text-sm">
-          Get exclusive insights, latest news, and special offers delivered straight to your inbox. Join thousands of subscribers who stay ahead of the curve.
+          Join our community and step into the rhythm - virtually and beyond.
         </h4>
 
         <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col">
