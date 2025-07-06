@@ -91,7 +91,7 @@ export default function NewsLetter() {
           <motion.label
             initial={{ x: -300 }}
             whileInView={{ x: 0 }}
-            transition={{ delay: 0.1, type: "spring", stiffness: 100, damping: 5, }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 100, damping: 10, }}
             viewport={{ once: true, amount: 0.1 }}
             htmlFor="name" className="text-base font-semibold text-[#ffffff] " >
             Name <span className="text-red-600 text-base font-medium" >*</span>
@@ -109,7 +109,7 @@ export default function NewsLetter() {
           <motion.label
             initial={{ x: -300 }}
             whileInView={{ x: 0 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 5, }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 10, }}
             viewport={{ once: true, amount: 0.1 }}
             htmlFor="email" className="text-base font-semibold text-[#ffffff] ">
             Email <span className="text-red-600 text-base font-medium" >*</span>
