@@ -1,5 +1,6 @@
 import {  Facebook, Instagram, Youtube } from "lucide-react"
 import Link from "next/link"
+import { BsTiktok } from "react-icons/bs"
 import { FaWhatsapp } from "react-icons/fa"
 
 
@@ -95,6 +96,9 @@ export default function Footer() {
                         <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
                         <Facebook size={20} />
                         </a>
+                           <a href="https://vm.tiktok.com/ZMSVpqPpC/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
+                        <BsTiktok size={20} />
+                        </a>
                         <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
                             <Youtube size={20}/>
                         </a>
@@ -116,7 +120,7 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Company</h3>
                         <ul className="flex flex-col items-start gap-2" >
                             {footerLinks.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > {link.label} </li></Link>
+                                <Link key={index} href={link.path} > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > {link.label} </li></Link>
                             ))}
                         </ul>
 
@@ -127,7 +131,7 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Support</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {supportOptions.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></Link>
+                                <Link key={index} href={link.path} > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></Link>
                             ))}
                         </ul>
 
@@ -137,7 +141,7 @@ export default function Footer() {
                               <h3 className="font-medium text-lg md:text-xl font-playfair" >Email Contacts</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {emailOptions.map((link, index) => (
-                                <a key={index} href={`mailto:${link.url}`} target="_blank" > <li className="font-normal text-xs md:text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></a>
+                                <a key={index} href={`mailto:${link.url}`} target="_blank" > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></a>
                             ))}
                         </ul>
 

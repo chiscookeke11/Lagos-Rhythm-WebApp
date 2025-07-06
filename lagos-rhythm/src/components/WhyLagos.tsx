@@ -18,17 +18,18 @@ export default function WhyLagos() {
         {
           WhyLagosData.map((item, index) => (
             <motion.div
-            initial={{scale: 0.2, opacity: 0}}
-            whileInView={{scale: 1, opacity: 1}}
-            transition={{type: "spring", stiffness: 100, damping: 15, delay: index * 0.15}}
-            viewport={{ once: true, amount: 0.3 }}
-            key={index} className=" wfull flex items-start justify-center  max-w-sm flex-col py-3 px-4 gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-sm " >
+              initial={{ scale: 0.2, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 15, delay: index * 0.15 }}
+              viewport={{ once: true, amount: 0.3 }}
+              key={index} className=" wfull flex items-start justify-center  max-w-sm flex-col py-3 pl-5 px-4 gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-sm relative overflow-hidden "  >
               <div className="text-[#EF8F57]  " >
                 {item.icon}
               </div>
               <h3 className="font-bold text-xl text-[#05073C] font-playfair " >{item.title} </h3>
               <p className="font-normal text-[#05073C] text-base font-lato "> {item.desc} </p>
-
+              <div className="absolute w-5 h-5 bg-[#EF8F57] top-0 right-0  triangle  "  ></div>
+              <div className="absolute w-5 h-5 bg-[#EF8F57] bottom-0 left-0  left-triangle  "  ></div>
             </motion.div>
           ))
         }
