@@ -87,7 +87,7 @@ export default function NewsLetter() {
           Join our community and step into the rhythm - virtually and beyond.
         </h4>
 
-        <form onSubmit={onSubmit} className="w-full rounded-xl p-2 gap-4 flex flex-col overflow-hidden ">
+        <form onSubmit={onSubmit} className="w-full max-w-md rounded-xl p-2 gap-4 flex flex-col overflow-hidden ">
           <motion.label
             initial={{ x: -300 }}
             whileInView={{ x: 0 }}

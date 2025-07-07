@@ -25,7 +25,7 @@ export default function BestOfLagos() {
             opacity: 1,
             x: 0,
             transition: {
-                duration: 0.5,
+                duration: 0.3,
                 ease: easeInOut,
             },
         },

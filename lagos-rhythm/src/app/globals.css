@@ -31,11 +31,11 @@ body {
   color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
-.triangle{
+.triangle {
   clip-path: polygon(100% 0, 14% 0, 100% 100%);
 }
-.left-triangle{
-clip-path: polygon(0 0, 0 100%, 100% 100%);
+.left-triangle {
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
 }
 
 @media (max-width: 768px) {

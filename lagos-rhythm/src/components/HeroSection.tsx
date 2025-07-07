@@ -52,11 +52,11 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
             animate={{ scale: 1 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 1.1 }}
-            transition={{ duration:0.5, type: "spring", stiffness: 200, damping: 7 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 7 }}
             type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
         </div>
       </div>
-      <ScrollingText/>
+      <ScrollingText />
     </section>
   );
 }

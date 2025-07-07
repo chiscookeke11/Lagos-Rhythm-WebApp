@@ -1,4 +1,4 @@
-import {  Facebook, Instagram, Youtube } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react"
 import Link from "next/link"
 import { BsTiktok } from "react-icons/bs"
 import { FaWhatsapp } from "react-icons/fa"
@@ -91,36 +91,66 @@ export default function Footer() {
 
                 <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6">
                     <h3 className="font-medium text-lg md:text-xl font-playfair " >Contact</h3>
-                    <div className="w-full flex items-center gap-5" >
+                    <ul className="w-full flex items-center gap-5" >
 
-                        <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
-                        <Facebook size={20} />
-                        </a>
-                           <a href="https://vm.tiktok.com/ZMSVpqPpC/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
-                        <BsTiktok size={20} />
-                        </a>
-                        <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
-                            <Youtube size={20}/>
-                        </a>
-                        <a href="https://www.instagram.com/lagos_rhythm/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
-                            <Instagram size={20}/>
-                        </a>
-                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
-                            <FaWhatsapp size={20}/>
-                        </a>
+                        <li> <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
+                            <Facebook size={20} />
+                        </a></li>
+
+                        <li>
+                            <a href="https://vm.tiktok.com/ZMSVpqPpC/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out " >
+                                <BsTiktok size={20} />
+                            </a>
+                        </li>
+
+                        <li>
+
+                            <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                                <Youtube size={20} />
+                            </a>
+                        </li>
+
+                        <li>
+
+                            <a href="https://www.instagram.com/lagos_rhythm/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                                <Instagram size={20} />
+                            </a>
+                        </li>
 
 
+                        <li>
+                            <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                                <FaWhatsapp size={20} />
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="https://www.linkedin.com/company/lagos-rhythm/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                                <Linkedin size={20} />
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <div className="flex flex-col gap-1" >
+                        <a href="mailto:info@lagosrhythm.com" target="_blank" className="text-sm font-medium text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">info@lagosrhythm.com</a>
+                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">+2348086695291</a>
                     </div>
-                    <a href="mailto:info@lagosrhythm.com" target="_blank" className="text-sm font-medium text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">info@lagosrhythm.com</a>
+                    <ul className="flex flex-col items-start gap-2">
+                        {emailOptions.map((link, index) => (
+                            <a key={index} href={`mailto:${link.url}`} target="_blank" > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></a>
+                        ))}
+                    </ul>
                 </div>
 
 
-                <div className="w-full max-w-[1000px]  items-start gap-10 md:gap-20  grid grid-rows-[auto_auto] md:grid-rows-none md:grid-cols-[auto_auto_auto]" >
+                <div className="w-full max-w-[600px]  items-start gap-10 md:gap-20  grid grid-rows-[auto_auto] md:grid-rows-none md:grid-cols-[auto_auto]" >
                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Company</h3>
                         <ul className="flex flex-col items-start gap-2" >
                             {footerLinks.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > {link.label} </li></Link>
+                                <li key={index} className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out " > <Link href={link.path} > {link.label}</Link> </li>
                             ))}
                         </ul>
 
@@ -131,21 +161,13 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Support</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {supportOptions.map((link, index) => (
-                                <Link key={index} href={link.path} > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></Link>
+                                <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out">   <Link key={index} href={link.path} > {link.label}</Link> </li>
                             ))}
                         </ul>
 
                     </div>
 
-                     <div className="w-full max-w-md flex flex-col items-start gap-3  md:gap-6" >
-                              <h3 className="font-medium text-lg md:text-xl font-playfair" >Email Contacts</h3>
-                        <ul className="flex flex-col items-start gap-2">
-                            {emailOptions.map((link, index) => (
-                                <a key={index} href={`mailto:${link.url}`} target="_blank" > <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out"> {link.label} </li></a>
-                            ))}
-                        </ul>
 
-                    </div>
 
 
 

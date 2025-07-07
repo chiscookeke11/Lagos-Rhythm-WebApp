@@ -2,6 +2,7 @@ import { forwardRef, ReactNode } from "react";
 
 interface ButtonProps {
   label: string | ReactNode;
+  ariaLabel?: string
   onClick?: () => void;
   type: "submit" | "reset" | "button";
   className?: string;
@@ -16,7 +17,7 @@ const variants = {
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ label, onClick, type, className = "", variant = "outline" }, ref) => {
+  ({ label, onClick, type, className = "", variant = "outline", ariaLabel }, ref) => {
     return (
       <button
         ref={ref}
