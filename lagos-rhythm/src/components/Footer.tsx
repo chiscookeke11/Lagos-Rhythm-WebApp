@@ -161,7 +161,7 @@ export default function Footer() {
                         <h3 className="font-medium text-lg md:text-xl font-playfair" >Support</h3>
                         <ul className="flex flex-col items-start gap-2">
                             {supportOptions.map((link, index) => (
-                                <li className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out">   <Link key={index} href={link.path} > {link.label}</Link> </li>
+                                <li key={index} className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out">   <Link  href={link.path} > {link.label}</Link> </li>
                             ))}
                         </ul>
 
