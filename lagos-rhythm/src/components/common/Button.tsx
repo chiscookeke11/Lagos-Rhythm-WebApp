@@ -23,6 +23,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         onClick={onClick}
+        aria-label={ariaLabel}
         className={`text-white font-medium text-base font-lato py-2 px-3 md:px-5 md:py-3 cursor-pointer transition-transform transform ease-in-out duration-150 ${variants[variant]} ${className}`}
       >
         {label}
