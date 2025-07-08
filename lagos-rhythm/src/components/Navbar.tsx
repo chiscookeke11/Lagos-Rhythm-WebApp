@@ -90,7 +90,7 @@ export default function Navbar() {
 
                 <Link href={"/"} ><button aria-label="Sign Up" className=" font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ">Sign up</button></Link>
 
-                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2" ariaLabel="Log In" />
+                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2 hover:scale-105 transform transition-transform duration-150 ease-in-out " ariaLabel="Log In"   />
 
                 <button aria-label="Open Menu" className=" cursor-pointer flex lg:hidden " onClick={() => setOpenMobileNav(true)}  ><Menu size={30} color="#ffffff" /> </button>
 

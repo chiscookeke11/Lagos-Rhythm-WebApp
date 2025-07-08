@@ -95,6 +95,8 @@ export default function PopularThings() {
     }
   }, [])
 
+
+
   const onFlip = (e: FlipEvent) => {
     setCurrentPage(e.data)
   }
@@ -136,12 +138,14 @@ export default function PopularThings() {
     },
   ]
 
+
+
   return (
-    <section className="w-full bg-[#FDF4F1] py-[5%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
+    <section className="w-full bg-[#FDF4F1] py-14 md:py-[5%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
       <div className="w-full max-w-[440px] flex flex-col items-start gap-3 md:gap-5">
         <h2 className="font-bold text-[#05073C] text-2xl md:text-3xl  font-playfair ">Interesting things to do</h2>
         <p className="text-lg font-normal text-[#05073C] font-lato ">
-        Lagos is more than a city - it&apos;s a living experience.
+          Lagos is more than a city - it&apos;s a living experience.
         </p>
         <Button label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
       </div>
