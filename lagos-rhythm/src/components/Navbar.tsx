@@ -7,6 +7,7 @@ import Button from "./common/Button"
 import { Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { motion } from "framer-motion";
 
 
 
@@ -90,23 +91,28 @@ export default function Navbar() {
 
                 <Link href={"/"} ><button aria-label="Sign Up" className=" font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ">Sign up</button></Link>
 
-                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2 hover:scale-105 transform transition-transform duration-150 ease-in-out " ariaLabel="Log In"   />
+                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2 hover:scale-105 transform transition-transform duration-150 ease-in-out " ariaLabel="Log In" />
 
                 <button aria-label="Open Menu" className=" cursor-pointer flex lg:hidden " onClick={() => setOpenMobileNav(true)}  ><Menu size={30} color="#ffffff" /> </button>
 
             </div>
 
 
-            <div className={`w-full h-full bg-[#ffffff] fixed top-0 left-0 transform transition-transform duration-150 ease-in-out  ${openMobileNav ? "translate-x-0" : "translate-x-[100%]"}   `} >
+            <div className={`w-full h-fit bg-[#ffffff] fixed top-0 left-0 transform transition-transform duration-150 ease-in-out  ${openMobileNav ? "translate-y-0" : "translate-y-[-100%]"}   `} >
                 <div className="w-full h-full  relative flex items-center justify-center " >
-                    <button aria-label="Close Menu" onClick={() => setOpenMobileNav(false)} className="absolute top-[5%] right-[5%] cursor-pointer  rounded-full p-1 flex items-center justify-center border-[2px] border-[#EB662B]  " > <X size={30} color="#EB662B" /> </button>
+                    <button aria-label="Close Menu" onClick={() => setOpenMobileNav(false)} className="absolute top-[5%] right-[5%] cursor-pointer   p-1 flex items-center justify-center   " > <X size={30} color="#EF8F57" /> </button>
 
 
 
 
-                    <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-10 px-10 "   >
+                    <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-12 px-6 "   >
                         {navLinks.map((navLink, index) => (
-                            <li key={index} className=" font-normal text-lg text-black  transition-colors duration-150 ease-in-out cursor-pointer " > <Link href={navLink.path}  > {navLink.label}</Link> </li>
+                            <motion.li
+                                initial={{scale: 0.5, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: index * 0.1, type: "spring", stiffness: 100, damping: 15, }}
+                                viewport={{ amount: 0.1 }}
+                                key={index} className={` font-normal text-lg text-black  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
                         ))}
                     </ul>
                 </div>
