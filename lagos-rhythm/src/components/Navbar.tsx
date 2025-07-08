@@ -18,7 +18,7 @@ const navLinks = [
     },
     {
         label: "VIRTUAL TOUR",
-        path: "/",
+        path: "/VirtualTour",
     },
     {
         label: "IN-PERSON TOUR",
