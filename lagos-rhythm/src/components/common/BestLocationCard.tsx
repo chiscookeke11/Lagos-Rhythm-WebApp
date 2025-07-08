@@ -12,7 +12,7 @@ interface BestLocationCardProps {
 
 export default function BestLocationCard({ image, label }: BestLocationCardProps) {
     return (
-        <div className="w-[300px] h-[280px] rounded-xl border-[1px] border-[#E7E6E6] bg-[#ffffff] flex flex-col items-start overflow-hidden hover:scale-105 transition-transform duration-150 ease-in-out  p-2   shadow-sm font-lato " >
+        <div className="w-[280px] h-[280px] rounded-xl border-[1px] border-[#E7E6E6] bg-[#ffffff] flex flex-col items-start overflow-hidden hover:scale-105 transition-transform duration-150 ease-in-out  p-2   shadow-sm font-lato " >
 
 
 

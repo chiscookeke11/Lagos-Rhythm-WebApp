@@ -78,7 +78,7 @@ export default function NewsLetter() {
   };
 
   return (
-    <section className="w-full bg-[url('/newsletter.svg')] bg-no-repeat bg-center bg-cover flex flex-col items-start justify-center py-[10%] md:py-[7%] px-[5%] md:px-[10%] font-lato">
+    <section className="w-full bg-[url('/newsletter.svg')] bg-no-repeat bg-center bg-cover flex flex-col items-start justify-center py-14 md:py-[7%] px-[5%] md:px-[10%] font-lato">
       <div className="flex flex-col items-start gap-3  max-w-[550px]">
         <h2 className="text-white font-bold text-xl md:text-3xl max-w-[450px]">
           Subscribe To Our Community
