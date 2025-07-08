@@ -5,7 +5,7 @@
 import Link from "next/link"
 import Button from "./common/Button"
 import { Menu, X } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion";
 
@@ -41,6 +41,7 @@ const navLinks = [
 export default function Navbar() {
     const [openMobileNav, setOpenMobileNav] = useState(false)
     const [scrolled, setScrolled] = useState(false);
+    const mobileNavRef = useRef<HTMLDivElement>(null)
 
 
 
@@ -61,6 +62,26 @@ export default function Navbar() {
 
     useEffect(() => {
         document.body.style.overflow = openMobileNav ? "hidden" : "auto";
+
+
+        const handleClickOutside  = (e: MouseEvent) => {
+            if (
+                mobileNavRef.current && !mobileNavRef.current.contains(e.target as Node)
+            ) {
+                setOpenMobileNav(false)
+            }
+        }
+        if (openMobileNav) {
+            document.addEventListener("mousedown", handleClickOutside)
+        }
+        else {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+            document.body.style.overflow = "auto"
+        }
     }, [openMobileNav]);
 
 
@@ -98,7 +119,10 @@ export default function Navbar() {
             </div>
 
 
-            <div className={`w-full h-fit bg-[#ffffff] fixed top-0 left-0 transform transition-transform duration-150 ease-in-out  ${openMobileNav ? "translate-y-0" : "translate-y-[-100%]"}   `} >
+
+
+{/* mobile nav  */}
+            <div ref={mobileNavRef} className={`w-full h-fit bg-[#ffffff] fixed top-0 left-0 transform transition-transform duration-150 ease-in-out  ${openMobileNav ? "translate-y-0" : "translate-y-[-100%]"}   `} >
                 <div className="w-full h-full  relative flex items-center justify-center " >
                     <button aria-label="Close Menu" onClick={() => setOpenMobileNav(false)} className="absolute top-[5%] right-[5%] cursor-pointer   p-1 flex items-center justify-center   " > <X size={30} color="#EF8F57" /> </button>
 
