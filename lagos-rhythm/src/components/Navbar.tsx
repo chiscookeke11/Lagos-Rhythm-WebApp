@@ -23,15 +23,15 @@ const navLinks = [
     },
     {
         label: "IN-PERSON TOUR",
-        path: "/",
+        path: "/InPersonTour",
     },
     {
         label: "FLIGHTS",
-        path: "/",
+        path: "/Flights",
     },
     {
         label: "STORE",
-        path: "/",
+        path: "/store",
     },
 ]
 
