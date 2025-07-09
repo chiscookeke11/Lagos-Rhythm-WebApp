@@ -136,7 +136,8 @@ export default function Navbar() {
                                 whileInView={{ scale: 1, opacity: 1 }}
                                 transition={{ delay: index * 0.05, type: "spring", stiffness: 100, damping: 15, }}
                                 viewport={{ amount: 0.1 }}
-                                key={index} className={` font-normal text-lg text-black  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
+                                onClick={() => setOpenMobileNav(false)}
+                                key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
                         ))}
                     </ul>
                 </div>
