@@ -2,7 +2,6 @@
 
 import {  useEffect, useState } from "react";
 import BestOfLagos from "@/components/BestOfLagos";
-import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import NewsLetter from "@/components/NewsLetter";
 import PopularThings from "@/components/PopulaThings";
@@ -50,7 +49,6 @@ useEffect(() => {
       <WhyLagos />
       <Testimonials />
       <NewsLetter />
-      <Footer />
     </div>
   );
 }
