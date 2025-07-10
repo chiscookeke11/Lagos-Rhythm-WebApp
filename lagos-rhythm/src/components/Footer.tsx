@@ -26,7 +26,7 @@ const footerLinks = [
     },
     {
         label: "Store",
-        path: "/",
+        path: "/book_form",
     },
     {
         label: "About Lagos Rhythm",
