@@ -17,7 +17,7 @@ export default function ComingSoonHero({ title }: ComingSoonHeroProps) {
                     initial={{ opacity: 0, y: 100 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }} className="font-semibold text-white text-3xl lg:text-[50px] lg:leading-[140%] font-merienda"  >
-                    {title} Coming Soon
+                    {title} launching Soon
                     <span className="inline-flex space-x-1 ml-1">
                         <span className="w-2 h-2 bg-[#ffffff] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                         <span className="w-2 h-2 bg-[#ffffff]  rounded-full animate-bounce [animation-delay:-0.15s]"></span>
