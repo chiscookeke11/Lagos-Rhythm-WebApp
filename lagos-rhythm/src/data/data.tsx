@@ -1,5 +1,6 @@
 import { BestLocationDataType } from "@/Types/BestLocationDataType";
 import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
+import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
 import { Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
@@ -137,5 +138,77 @@ export const testimonialsData: TestimonialDataType[] = [
         country: "Canada"
 
     },
+
+    ]
+
+
+    export const raceData: customSelectTypes[] = [
+        {
+            label: "Black or African American",
+            value: "Black or African American"
+        },
+
+        {
+            label: "Asian",
+            value: "Asian"
+        },
+
+        {
+            label: "Hispanic or Latino",
+            value: "Hispanic or Latino"
+        },
+
+        {
+            label: "Native American or Alaska Native",
+            value: "Native American or Alaska Native"
+        },
 ]
 
+
+export const joinAsData: customSelectTypes[] = [
+    {
+        label: "Student",
+        value: "Student",
+    },
+    {
+        label: "Professional",
+        value: "Professional",
+    },
+    {
+        label: "Traveler",
+        value: "Traveler",
+    },
+    {
+        label: "Other",
+        value: "Other",
+    },
+]
+
+
+
+export const referralSourceData: customSelectTypes[] = [
+    {
+        label: "Instagram",
+        value: "Instagram"
+    },
+    {
+        label: "WhatsApp",
+        value: "WhatsApp"
+    },
+    {
+        label: "Friend / Word of Mouth",
+        value: "Friend / Word of Mouth"
+    },
+    {
+        label: "Email",
+        value: "Email"
+    },
+    {
+        label: "School or Organization",
+        value: "School or Organization"
+    },
+    {
+        label: "Other",
+        value: "Other"
+    },
+]
