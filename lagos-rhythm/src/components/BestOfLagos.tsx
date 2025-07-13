@@ -44,7 +44,7 @@ export default function BestOfLagos() {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true, amount: 0.3 }}
-                    className="w-full flex flex-col md:flex-row items-center justify-center gap-6  " >
+                    className="w-full  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  place-items-center justify-items-center gap-6  " >
                     {BestLocationData.map((card, index) => (
                         <motion.div key={index} variants={cardVariants}>
                             <BestLocationCard key={index}

@@ -20,8 +20,8 @@ export default function WhyLagos() {
             <motion.div
               initial={{ scale: 0.2, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 50, damping: 10, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.1 }}
               key={index} className=" wfull flex items-start justify-center  max-w-sm flex-col py-3 pl-5 px-4 gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-sm relative overflow-hidden "  >
               <div className="text-[#EF8F57]  " >
                 {item.icon}

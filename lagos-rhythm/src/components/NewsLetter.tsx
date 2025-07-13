@@ -127,7 +127,7 @@ export default function NewsLetter() {
           <Motionbutton
             initial={{ x: -300 }}
             whileInView={{ x: 0 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 50, damping: 2, }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 50, damping: 10, }}
             viewport={{ once: true, amount: 0.1 }}
             type="submit" label={isSubmitting ? (
               <>
