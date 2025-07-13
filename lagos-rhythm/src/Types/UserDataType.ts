@@ -8,6 +8,6 @@ export interface userDataType{
         joiningAs: string,
         tourDate: string[],
         referralSource: string,
-        communicationConsent: boolean | null,
-        termsAgreement: boolean | null
+        communicationConsent?: boolean,
+        termsAgreement?: boolean
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/components/common/Button";
+import { CustomCheckBox } from "@/components/common/CustomCheckbox";
 import { CustomSelect } from "@/components/common/CustomSelect";
 import Input from "@/components/common/Input";
 import { countryOptions } from "@/data/countryList";
@@ -16,9 +17,6 @@ export default function Page() {
     const [selectedDates, setSelectedDates] = useState<Date[]>([]);
     const minDate = new Date("2025-08-01");
     const maxDate = new Date("2025-08-31");
-    // const formatted = useMemo(() => {
-    //     return selectedDates.map((d) => d.toISOString());
-    // }, [selectedDates])
 
     const [userData, setUserData] = useState<userDataType>({
         fullName: "",
@@ -28,8 +26,8 @@ export default function Page() {
         joiningAs: "",
         tourDate: [],
         referralSource: "",
-        communicationConsent: null,
-        termsAgreement: null,
+        communicationConsent: undefined,
+        termsAgreement: undefined,
     })
 
 
@@ -83,6 +81,13 @@ export default function Page() {
         }));
     };
 
+    const handleCheckboxChange = (name: string, checked: boolean) => {
+        setUserData((prev) => ({
+            ...prev,
+            [name]: checked,
+        }));
+    }
+
 
 
 
@@ -109,7 +114,7 @@ export default function Page() {
 
                     </div>
 
-                    <form action="" className=" w-full max-w-5xl  py-3.5 lg:py-7 px-5 rounded-[20px] flex flex-col items-center gap-7 ">
+                    <form action="" className=" w-full max-w-5xl  py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato  ">
                         <Input value={userData.fullName} type="string" label="Full name" name="fullName" onChange={handleChange} isRequired placeholder="John Ade" />
                         <Input value={userData.email} type="email" label="Email" name="email" onChange={handleChange} isRequired placeholder="JohnAde@gmail.com" />
 
@@ -184,16 +189,18 @@ export default function Page() {
 
 
                         <div className="w-full flex items-start flex-col gap-3" >
-                            <label htmlFor="recieveEmails" className="w-full flex items-center justify-start gap-2  ">
-                                <input type="checkbox" id="recieveEmails" />
-                                <span>I agree to receive emails about my free E-Rhythm booking</span>
-                            </label>
 
+                            <CustomCheckBox
+                                onCheckedChange={(checked) => handleCheckboxChange("communicationConsent", checked)}
+                                checked={userData.communicationConsent}
+                                label="I agree to receive emails about my free E-Rhythm booking"
+                                id="communicationConsent" />
 
-                            <label htmlFor="privacyPolicy" className="w-full flex items-center justify-start gap-2  ">
-                                <input type="checkbox" id="privacyPolicy" />
-                                <span>I agree with Lagos Rhythm&apos;s Privacy Policy and Terms and conditions</span>
-                            </label>
+                            <CustomCheckBox
+                                checked={userData.termsAgreement}
+                                onCheckedChange={(checked) => handleCheckboxChange("termsAgreement", checked)}
+                                label="I agree with Lagos Rhythm&apos;s Privacy Policy and Terms and conditions"
+                                id="termsAgreement" />
                         </div>
 
 
