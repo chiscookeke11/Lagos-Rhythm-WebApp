@@ -19,10 +19,11 @@ interface CustomSelectProps {
     options: customSelectTypes[]
     placeholder?: string
     name: string
-  onChange: (name: string, value: string) => void;
+    onChange: (name: string, value: string) => void;
+    error?: string
 }
 
-export function CustomSelect({ label, isRequired, options, placeholder, onChange, name }: CustomSelectProps) {
+export function CustomSelect({ label, isRequired, options, placeholder, onChange, name, error }: CustomSelectProps) {
     return (
         <div className="w-full flex  flex-col items-start gap-1  " >
             <span className="text-[#000000] font-medium text-base font-lato flex items-start gap-1" > {label}
@@ -43,6 +44,7 @@ export function CustomSelect({ label, isRequired, options, placeholder, onChange
                     </SelectGroup>
                 </SelectContent>
             </Select>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
     )
 }

@@ -9,10 +9,11 @@ interface InputProps {
     value: string
     name: string
     onChange: React.ChangeEventHandler<HTMLInputElement>;
+    error?: string
 }
 
 
-export default function Input({ type, placeholder, label, isRequired, value, name, onChange }: InputProps) {
+export default function Input({ type, placeholder, label, isRequired, value, name, onChange, error }: InputProps) {
     return (
         <label htmlFor={label} className="w-full flex flex-col items-start gap-1 " >
             <span className="text-[#000000] font-medium text-base font-lato flex items-start gap-1" > {label}
@@ -21,6 +22,7 @@ export default function Input({ type, placeholder, label, isRequired, value, nam
                 )}
             </span>
             <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} className="w-full outline-0 border-0 bg-[#ffffff] rounded-lg px-5 py-3 " />
+            {error && <p className="text-red-500 text-sm">{error}</p>}
         </label>
     )
 }
