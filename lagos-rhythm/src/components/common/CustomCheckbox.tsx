@@ -9,11 +9,12 @@ interface CustomCheckBoxProps {
     id: string;
     checked?: boolean
     onCheckedChange: (checked: boolean) => void
+    error?: string
 }
 
-export function CustomCheckBox({ label, id, checked, onCheckedChange }: CustomCheckBoxProps) {
+export function CustomCheckBox({ label, id, checked, onCheckedChange, error }: CustomCheckBoxProps) {
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-1">
 
             <div className="flex items-start gap-3">
                 <Checkbox
@@ -21,11 +22,12 @@ export function CustomCheckBox({ label, id, checked, onCheckedChange }: CustomCh
                     checked={checked}
                     id={id}
                     onCheckedChange={onCheckedChange}
-                    className="border-[#EF8F57] data-[state=checked]:bg-[#EF8F57] data-[state=checked]:border-[#EF8F57] text-white" />
+                    className="border-[#EF8F57] data-[state=checked]:bg-[#EF8F57] data-[state=checked]:border-[#EF8F57] text-white cursor-pointer" />
                 <div className="grid gap-2">
                     <Label htmlFor={id} className="cursor-pointer text-sm text-[#000000] " > {label} </Label>
                 </div>
             </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
     )
 }
