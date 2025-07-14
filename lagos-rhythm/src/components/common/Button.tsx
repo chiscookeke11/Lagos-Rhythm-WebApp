@@ -2,7 +2,7 @@ import { forwardRef, ReactNode } from "react";
 
 interface ButtonProps {
   label: string | ReactNode;
-  ariaLabel?: string
+  ariaLabel: string
   onClick?: () => void;
   type: "submit" | "reset" | "button";
   className?: string;
