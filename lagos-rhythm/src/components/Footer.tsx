@@ -119,7 +119,7 @@ export default function Footer() {
 
 
                         <li>
-                            <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                            <a href="https://wa.me/2348086695291?text=Hello%20there!%20I%27m%20interested%20in%20learning%20more%20about%20your%20tour%20packages%20and%20destinations.%20Can%20you%20help%20me%20plan%20my%20next%20adventure?" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
                                 <FaWhatsapp size={20} />
                             </a>
                         </li>
@@ -134,8 +134,8 @@ export default function Footer() {
 
                     </ul>
                     <div className="flex flex-col gap-1" >
-                        <a href="mailto:info@lagosrhythm.com" target="_blank" className="text-sm font-medium text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">info@lagosrhythm.com</a>
-                        <a href="https://wa.me/2348086695291?text=Hello" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">+2348086695291</a>
+                        <a href="mailto:info@lagosrhythm.com?subject=Tourism%20Inquiry&body=Hello%2C%20I%27d%20love%20to%20learn%20more%20about%20your%20tour%20services%20and%20offerings.%20Please%20let%20me%20know%20how%20to%20get%20started." target="_blank" className="text-sm font-medium text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">info@lagosrhythm.com</a>
+                        <a href="https://wa.me/2348086695291?text=Hello%20there!%20I%27m%20interested%20in%20learning%20more%20about%20your%20tour%20packages%20and%20destinations.%20Can%20you%20help%20me%20plan%20my%20next%20adventure?" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">+2348086695291</a>
                     </div>
                     <ul className="flex flex-col items-start gap-2">
                         {emailOptions.map((link, index) => (

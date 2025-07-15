@@ -41,21 +41,26 @@ export default function Page() {
         if (!date) return;
 
         const newDates = selectedDates.some(
-            (d) => d.toDateString() === date.toDateString()
+            d => d.toDateString() === date.toDateString()
         )
-            ? selectedDates.filter((d) => d.toDateString() !== date.toDateString()) :
-            [...selectedDates, date];
+            ? selectedDates.filter(d => d.toDateString() !== date.toDateString())
+            : [...selectedDates, date];
 
-        setSelectedDates(newDates)
+        setSelectedDates(newDates);
+        const formatted = newDates.map(d => d.toISOString());
 
-        const formatted = newDates.map((d) => d.toISOString());
-        const updatedUserData = { ...userData, tourDate: formatted };
-        setUserData(updatedUserData)
+        const updated = { ...userData, tourDate: formatted };
+        setUserData(updated);
 
+        const fieldError = validateUserData(updated, "tourDate");
 
-        const errors = validateUserData(updatedUserData);
-        setFormErrors(errors);
+        setFormErrors(prev => {
+            const { tourDate, ...rest } = prev;
+            return fieldError.tourDate ? { ...rest, tourDate: fieldError.tourDate } : rest;
+        });
     };
+
+
 
     // clear all dates function
     const clearAllDates = () => {
@@ -72,41 +77,58 @@ export default function Page() {
 
     // input change function
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget
+        const { name, value } = e.target;
+        const updated = { ...userData, [name]: value };
+        setUserData(updated);
 
-        setUserData((prev) => ({
-            ...prev,
-            [name]: value
-        }));
+        const fieldName = name as keyof userDataType;
+        const fieldError = validateUserData(updated, fieldName);
 
-        const updatedUserData = { ...userData, [name]: value };
-        const errors = validateUserData(updatedUserData);
-        setFormErrors(errors)
-    }
+        setFormErrors(prev => {
+            const { [fieldName]: removed, ...rest } = prev; // Remove old error
+            return fieldError[fieldName]
+                ? { ...rest, [fieldName]: fieldError[fieldName] } // Add new error
+                : rest; // No error → keep rest only
+        });
+    };
+
+
 
     console.log(userData)
 
     // select change function
     const handleSelectChange = (name: string, value: string) => {
-        const updatedUserData = { ...userData, [name]: value };
+        const updated = { ...userData, [name]: value };
+        setUserData(updated);
 
-        setUserData(updatedUserData);
+        const field = name as keyof userDataType;
+        const fieldError = validateUserData(updated, field);
 
-        const errors = validateUserData(updatedUserData);
-        setFormErrors(errors);
+        setFormErrors(prev => {
+            const { [field]: removed, ...rest } = prev;
+            return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
+        });
     };
+
+
 
 
 
     // checkbox function
     const handleCheckboxChange = (name: string, checked: boolean) => {
-        const updatedUserData = { ...userData, [name]: checked };
+        const updated = { ...userData, [name]: checked };
+        setUserData(updated);
 
-        setUserData(updatedUserData);
+        const field = name as keyof userDataType;
+        const fieldError = validateUserData(updated, field);
 
-        const errors = validateUserData(updatedUserData);
-        setFormErrors(errors);
+        setFormErrors(prev => {
+            const { [field]: removed, ...rest } = prev;
+            return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
+        });
     };
+
+
 
 
 
@@ -155,7 +177,7 @@ export default function Page() {
                         {
                             BestLocationData.slice(0, 3).map((data, index) => (
                                 <div key={index} title={data.label} className="bg-[#ffffff] rounded-[20px] flex items-center justify-center w-[100px] h-[100px] md:h-[200px] md:w-[200px] lg:w-[294px] lg:h-[263px] overflow-hidden p-2 md:p-3 " >
-                                    <Image src={data.image} alt="image" height={100} width={100} className="w-full h-full object-cover rounded-[10px] " priority />
+                                    <Image src={data.image} alt="image" height={100} width={100} className="w-full h-full object-cover rounded-[10px] "  />
                                 </div>
                             ))
                         }
