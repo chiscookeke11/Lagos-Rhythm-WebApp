@@ -11,7 +11,7 @@ export default function Page() {
         const router = useRouter()
     return (
         <div className=" w-full bg-[#ffffff] " >
-            <ReusableHero/>
+            <ReusableHero pageTitle="Free rehy" />
 
 
             <section className="text-[#05073C] " >

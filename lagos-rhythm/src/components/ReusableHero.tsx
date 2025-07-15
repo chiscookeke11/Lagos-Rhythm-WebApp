@@ -1,8 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useMemo } from "react"
-import Button from "./common/Button"
+
 
 
 
@@ -15,7 +14,7 @@ interface ReusableHeroProps{
 
 export default function ReusableHero({pageTitle, subtitle, description }: ReusableHeroProps) {
 
-    const MotionButton = useMemo(() => motion(Button), [])
+
 
 
     return (
