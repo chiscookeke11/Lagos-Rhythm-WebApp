@@ -31,7 +31,7 @@ export default function ConfirmationModal({ showConfirmationModal, setShowConfir
                 <div className={`w-full max-w-sm bg-white px-5 py-6 rounded-lg flex flex-col items-center justify-center gap-3 text-center absolute top-[50%] left-[50%] translate-x-[-50%] transition-transform duration-200 ease-in-out ${showConfirmationModal ? "translate-y-[-50%]" : "translate-y-[500%]"}  `} >
                     <button onClick={() => setShowConfirmationModal(false)} className="ml-auto cursor-pointer bg-[#EF8F57] text-white rounded-sm p-[2px] mb-3 hover:scale-105 transform duration-150 ease-in-out transition-transform " ><X size={23} /></button>
                     <h1 className="text-[#05073C] text-xl font-medium ">You’re Booked for Free E-Rhythm!</h1>
-                    <p className="text-[#05073C] text-base font-normal  " >We’ll send you a quick reminder with the joining information before the tour begins. Can’t wait to take you through Lagos - live!</p>
+                    <p className="text-[#05073C] text-base font-normal  " >We’ll send you a quick reminder with the joining information before the tour begins.<br/> Can’t wait to take you through Lagos - live!</p>
 
 
                     <div className=" mt-3 flex flex-col gap-2  " >

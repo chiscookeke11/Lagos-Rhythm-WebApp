@@ -1,13 +1,21 @@
-// components/3d-model.tsx
 "use client"
 
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, useGLTF, Environment, Html } from "@react-three/drei"
-import { Suspense } from "react"
+import { Suspense, useRef } from "react"
+import type { Group } from "three"
 
 function Model({ url }: { url: string }) {
     const { scene } = useGLTF(url)
-    return <primitive object={scene} scale={2.5} position={[0, -1.5, 0]} /> // Move down more
+    const modelRef = useRef<Group>(null)
+
+    useFrame(() => {
+        if (modelRef.current) {
+            modelRef.current.rotation.y += 0.005 // Adjust speed as needed
+        }
+    })
+
+    return <primitive object={scene} scale={2.5} position={[0, -1.5, 0]} ref={modelRef} />
 }
 
 function Loader() {
@@ -23,8 +31,8 @@ function Loader() {
 export default function AvatarModel({ modelUrl }: { modelUrl: string }) {
     return (
         <div className="w-full h-full min-h-[300px]">
-            <div className="overflow-hidden h-[500px] rounded-lg"> {/* Increase height and add rounded corners */}
-                <Canvas camera={{ position: [0, 1.5, 7], fov: 45 }}> {/* Move camera back and reduce FOV */}
+            <div className="overflow-hidden h-[500px] rounded-lg">
+                <Canvas camera={{ position: [0, 1.5, 7], fov: 45 }}>
                     <Suspense fallback={<Loader />}>
                         <ambientLight intensity={0.5} />
                         <directionalLight position={[10, 10, 5]} intensity={1} />
@@ -33,9 +41,10 @@ export default function AvatarModel({ modelUrl }: { modelUrl: string }) {
                         <OrbitControls
                             enablePan={false}
                             enableZoom={false}
-                            target={[0, 0.5, 0]} // Adjust target lower
-                            maxPolarAngle={Math.PI / 2}
-                            minPolarAngle={0}
+                            enableRotate={false}
+                            target={[0, 0.5, 0]}
+                            maxPolarAngle={Math.PI / 2 - 0.1}
+                            minPolarAngle={Math.PI / 3}
                         />
                     </Suspense>
                 </Canvas>

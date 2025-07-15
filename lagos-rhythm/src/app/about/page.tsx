@@ -162,8 +162,8 @@ export default function Page() {
                             <li className="font-semibold">Local guides, artists, and cultural curators in Lagos</li>
                             <li className="font-semibold">Diaspora networks, schools, and DEI programs across continents</li>
                         </ul>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] " >Together, we’re building a bridge between Lagos and the world - one story, one stream, one experience at a time.</p>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] " >Interested in partnering with us?  <a href="mailto:partners@lagosrhythm.com" target="_blank" className="text-[#F59E0B] font-semibold " >partners@lagosrhythm.com</a> </p>
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] " >Together, we’re building a bridge between Lagos and the world - one story, one stream, one experience at a time.</p>
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] " >Interested in partnering with us?  <a href="mailto:partners@lagosrhythm.com" target="_blank" className="text-[#F59E0B] font-semibold " >partners@lagosrhythm.com</a> </p>
                     </div>
 
                     <div className=" basis-1/2  flex items-center justify-center  " >
