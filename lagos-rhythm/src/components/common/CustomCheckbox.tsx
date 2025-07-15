@@ -24,10 +24,10 @@ export function CustomCheckBox({ label, id, checked, onCheckedChange, error }: C
                     onCheckedChange={onCheckedChange}
                     className="border-[#EF8F57] data-[state=checked]:bg-[#EF8F57] data-[state=checked]:border-[#EF8F57] text-white cursor-pointer" />
                 <div className="grid gap-2">
-                    <Label htmlFor={id} className="cursor-pointer text-sm text-[#000000] " > {label} </Label>
+                    <Label htmlFor={id} className="cursor-pointer text-sm md:text-base text-[#000000] " > {label} </Label>
                 </div>
             </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-xs md:text-sm  ">{error}</p>}
         </div>
     )
 }
