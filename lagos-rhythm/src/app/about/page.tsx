@@ -27,7 +27,7 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="w-full flex items-center flex-col md:flex-row justify-between gap-10 my-4 " >
                     <p className="basis-1/2 text-base md:text-xl font-normal font-lato text-[#05073C] " >Lagos Rhythm is a tourism-tech startup redefining how global audiences engage with culture and place in real time.<br />
                         We begin in Lagos, Nigeria, Africa’s most vibrant megacity, offering immersive virtual and onsite tours that serve as both entertainment and cultural education.
@@ -53,7 +53,7 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="w-full flex items-center flex-col  justify-between gap-10  md:flex-row-reverse my-4 " >
                     <div className="w-full basis-1/2 " >
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Vision</h3>
@@ -83,7 +83,7 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row  my-4" >
                     <div className="w-full basis-1/2 ">
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Mission</h3>
@@ -112,8 +112,8 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row md:flex-row-reverse my-4 " >
+                    viewport={{ once: true, amount: 0.3 }}
+                    className="w-full flex items-center flex-col  justify-between gap-10  md:flex-row-reverse my-4 " >
                     <div className="w-full basis-1/2 " >
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Story</h3>
                         <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] "  >Lagos Rhythm was born from a simple truth: you can’t know a city by standing outside its gates.
@@ -152,7 +152,7 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row my-4  " >
                     <div className="w-full basis-1/2 ">
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Partners & Collaborators</h3>
