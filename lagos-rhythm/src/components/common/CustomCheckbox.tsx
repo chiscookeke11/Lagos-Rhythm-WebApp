@@ -16,7 +16,7 @@ export function CustomCheckBox({ label, id, checked, onCheckedChange, error }: C
     return (
         <div className="flex flex-col gap-1">
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-center  gap-3">
                 <Checkbox
                     name={id}
                     checked={checked}
