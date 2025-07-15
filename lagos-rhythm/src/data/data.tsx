@@ -7,6 +7,11 @@ import { Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sai
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
+import destinations from "../app/animated-icons/destinations.json";
+import Traveler from "../app/animated-icons/Traveler.json";
+import lagos from "../app/animated-icons/lagos.json";
+import african from "../app/animated-icons/african.json";
+import students from "../app/animated-icons/students.json";
 
 
 
@@ -219,15 +224,15 @@ export const referralSourceData: customSelectTypes[] = [
 export const whatToExpectData = [
     {
         text: "30-minute livestreams ",
-        icon:   <Lottie animationData={live} loop={true} className="w-16 h-16"  />,
+        icon:   <Lottie animationData={live} loop={true} className="w-20 h-20"  />,
     },
     {
         text: "Interactive sessions with local hosts ",
-        icon: <Lottie animationData={interaction} loop={true} className="w-16 h-16"  />,
+        icon: <Lottie animationData={interaction} loop={true} className="w-20 h-20"  />,
     },
     {
         text: "Different destinations and stories every month ",
-        icon: "",
+        icon: <Lottie animationData={destinations} loop={true} className="w-20 h-20"  />,
     },
 ]
 
@@ -235,18 +240,18 @@ export const whatToExpectData = [
 export const whoCanJoinData = [
     {
         text: "Curious travelers",
-        icon: "",
+        icon: <Lottie animationData={Traveler} loop={true} className="w-20 h-20"  />,
     },
     {
         text: "Students and educators",
-        icon: "",
+        icon: <Lottie animationData={students} loop={true} className="w-20 h-20"  />,
     },
     {
         text: "African diaspora reconnecting with culture",
-        icon: "",
+        icon: <Lottie animationData={african} loop={true} className="w-20 h-20"  />,
     },
     {
         text: "Anyone who wants to see Lagos through real eyes",
-        icon: "",
+        icon: <Lottie animationData={lagos} loop={true} className="w-20 h-20"  />,
     },
 ]
