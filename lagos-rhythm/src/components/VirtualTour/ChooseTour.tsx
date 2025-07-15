@@ -32,7 +32,7 @@ export default function ChooseTour() {
                 {tourPackagesData.map((tourPackage, index) => (
                     <div key={index} className="flex flex-col items-center w-full h-full max-w-sm py-6 px-4 gap-6 text-center shadow-lg rounded-xl bg-[#ffffff] cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl" >
                         <h1 className="font-playfair font-bold text-[#05073C] text-xl md:text-2xl " >{tourPackage.title} </h1>
-                        <p className="text-sm font-normal text-[#05073C] font-merriweather " >{tourPackage.content} </p>
+                        <p className="md:text-sm text-base font-normal text-[#05073C] font-merriweather " >{tourPackage.content} </p>
                         <Link href={tourPackage.path} className="w-full" >  <Button ariaLabel="Get Started" label="Get Started" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl hover:scale-90 transition-transform duration-150 ease-in-out " /></Link>
                     </div>
                 ))}

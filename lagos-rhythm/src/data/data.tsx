@@ -4,7 +4,9 @@ import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
 import { Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
-
+import Lottie from "lottie-react";
+import live from "../app/animated-icons/live.json";
+import interaction from "../app/animated-icons/interaction.json";
 
 
 
@@ -210,5 +212,41 @@ export const referralSourceData: customSelectTypes[] = [
     {
         label: "Other",
         value: "Other"
+    },
+]
+
+
+export const whatToExpectData = [
+    {
+        text: "30-minute livestreams ",
+        icon:   <Lottie animationData={live} loop={true} className="w-16 h-16"  />,
+    },
+    {
+        text: "Interactive sessions with local hosts ",
+        icon: <Lottie animationData={interaction} loop={true} className="w-16 h-16"  />,
+    },
+    {
+        text: "Different destinations and stories every month ",
+        icon: "",
+    },
+]
+
+
+export const whoCanJoinData = [
+    {
+        text: "Curious travelers",
+        icon: "",
+    },
+    {
+        text: "Students and educators",
+        icon: "",
+    },
+    {
+        text: "African diaspora reconnecting with culture",
+        icon: "",
+    },
+    {
+        text: "Anyone who wants to see Lagos through real eyes",
+        icon: "",
     },
 ]
