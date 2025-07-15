@@ -27,9 +27,9 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.9 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     className="w-full flex items-center flex-col md:flex-row justify-between gap-10 my-4 " >
-                    <p className="basis-1/2 text-xl font-normal font-lato text-[#05073C] " >Lagos Rhythm is a tourism-tech startup redefining how global audiences engage with culture and place in real time.<br />
+                    <p className="basis-1/2 text-base md:text-xl font-normal font-lato text-[#05073C] " >Lagos Rhythm is a tourism-tech startup redefining how global audiences engage with culture and place in real time.<br />
                         We begin in Lagos, Nigeria, Africa’s most vibrant megacity, offering immersive virtual and onsite tours that serve as both entertainment and cultural education.
                     </p>
 
@@ -53,11 +53,11 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.9 }}
-                    className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row md:flex-row-reverse my-4 " >
+                    viewport={{ once: true, amount: 0.5 }}
+                    className="w-full flex items-center flex-col  justify-between gap-10  md:flex-row-reverse my-4 " >
                     <div className="w-full basis-1/2 " >
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Vision</h3>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] " >To show the world the 3Ws of Lagos: What it is, ways it prospers, and where it inspires.</p>
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] " >To show the world the 3Ws of Lagos: What it is, ways it prospers, and where it inspires.</p>
                     </div>
 
                     <div className=" basis-1/2  flex items-center justify-center  " >
@@ -83,11 +83,11 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.9 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row  my-4" >
                     <div className="w-full basis-1/2 ">
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Mission</h3>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] "  >Our mission is to redefine how Lagos is seen and experienced by bringing its culture, people, and energy to the world in their truest form.</p>
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] "  >Our mission is to redefine how Lagos is seen and experienced by bringing its culture, people, and energy to the world in their truest form.</p>
                     </div>
 
                     <div className=" basis-1/2  flex items-center justify-center  " >
@@ -112,11 +112,11 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.9 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row md:flex-row-reverse my-4 " >
                     <div className="w-full basis-1/2 " >
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Story</h3>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] "  >Lagos Rhythm was born from a simple truth: you can’t know a city by standing outside its gates.
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] "  >Lagos Rhythm was born from a simple truth: you can’t know a city by standing outside its gates.
                             Lagos is loud. Lagos is layered. Lagos is legendary.
                             And yet still misunderstood and underrepresented in the global travel space.<br />
                             The world sees the traffic but not the tempo. The noise but not the nuance.<br />
@@ -152,12 +152,12 @@ export default function Page() {
                     initial={{ scale: 0.2, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    viewport={{ once: true, amount: 0.9 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     className="w-full flex items-center flex-col  justify-between gap-10 md:flex-row my-4  " >
                     <div className="w-full basis-1/2 ">
                         <h3 className=" font-merienda font-semibold text-2xl text-[#EF8F57]  ">Our Partners & Collaborators</h3>
-                        <p className=" text-xl font-normal font-lato text-[#05073C] "  >Lagos Rhythm is powered by a growing network of collaborators and allies—people and platforms who believe in the power of cultural storytelling and global connection.</p>
-                        <ul className=" text-xl  font-lato text-[#05073C] flex flex-col gap-1 list-disc my-4 marker:text-[#F59E0B] pl-5 " >
+                        <p className=" text-base md:text-xl font-normal font-lato text-[#05073C] "  >Lagos Rhythm is powered by a growing network of collaborators and allies—people and platforms who believe in the power of cultural storytelling and global connection.</p>
+                        <ul className=" text-base md:text-xl  font-lato text-[#05073C] flex flex-col gap-1 list-disc my-4 marker:text-[#F59E0B] pl-5 " >
                             <li className="font-semibold" >Upstyle Travels </li>
                             <li className="font-semibold">Local guides, artists, and cultural curators in Lagos</li>
                             <li className="font-semibold">Diaspora networks, schools, and DEI programs across continents</li>
