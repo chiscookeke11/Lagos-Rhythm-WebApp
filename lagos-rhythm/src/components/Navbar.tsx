@@ -18,6 +18,10 @@ const navLinks = [
         path: "/",
     },
     {
+        label: "ABOUT",
+        path: "/about",
+    },
+     {
         label: "VIRTUAL TOUR",
         path: "/VirtualTour",
     },

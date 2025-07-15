@@ -22,7 +22,7 @@ export default function Input({ type, placeholder, label, isRequired, value, nam
                 )}
             </span>
             <input type={type} name={name} placeholder={placeholder} value={value} onChange={onChange} className="w-full outline-0 border-0 bg-[#ffffff] rounded-lg px-5 py-3 " />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-xs ">{error}</p>}
         </label>
     )
 }

@@ -88,6 +88,7 @@
 body {
   background: var(--foreground);
   color: var(--background);
+  scroll-behavior: smooth;
 }
 .triangle {
   clip-path: polygon(100% 0, 14% 0, 100% 100%);
@@ -95,6 +96,13 @@ body {
 .left-triangle {
   clip-path: polygon(0 0, 0 100%, 100% 100%);
 }
+.pentagon{
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+
+
+
 
 @media (max-width: 768px) {
   .mobile-vh {
