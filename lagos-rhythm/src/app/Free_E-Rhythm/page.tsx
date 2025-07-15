@@ -2,48 +2,61 @@
 
 import Button from "@/components/common/Button";
 import ReusableHero from "@/components/ReusableHero";
-import { useRouter } from "next/navigation";
+import { whatToExpectData, whoCanJoinData } from "@/data/data";
+
+
 
 
 
 
 export default function Page() {
-    const router = useRouter()
+
     return (
-        <div className=" w-full bg-[#ffffff] " >
-            <ReusableHero pageTitle="Free rehy" />
+        <div className=" w-full bg-[#FDF4F1] " >
+            <ReusableHero
+                pageTitle="Welcome to E-Rhythm"
+                subtitle="Free. Live. Raw. Lagos right from your screen."
+                description=" Join our free live-streamed tours and experience the rhythm of Lagos in real time, guided by locals and powered by culture."
+            />
 
 
-            <section className="text-[#05073C] " >
-                <div>
-                    <h2>What is Free E-Rhythm</h2>
-                    <p>Free E-Rhythm is your open-access window into the energy, beauty, and people of Lagos, live and direct.</p>
-                    <Button onClick={() => router.push("/book_form")} ariaLabel="Book a tour" label="Book a tour" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
-                </div>
-
-                <div>
-                    <h3>What you can expect</h3>
-                    <ul>
-                        <li>30-minute livestreams</li>
-                        <li>Interactive sessions with local hosts</li>
-                        <li>Different destinations and stories every month</li>
-                    </ul>
+            <section className="text-[#05073C] flex flex-col items-center gap-26 px-4 py-16  relative " >
+                <div className="text-center flex items-center justify-center gap-4 flex-col " >
+                    <h2 className="font-bold text-2xl  md:text-3xl font-merienda" >What is <span className=" text-[#EF8F57] " >Free E-Rhythm</span> ? </h2>
+                    <p className=" text-base md:text-lg font-normal text-[#05073C] font-merriweather max-w-3xl " >Free E-Rhythm is your open-access window into the energy, beauty, and people of Lagos, live and direct.</p>
+                    <Button ariaLabel="Book a tour" label="Book a tour" type="button" variant="primary" className="w-fit !bg-[#EF8F57] text-white !py-4 shadow-xl mt-5 mb-10 hover:scale-90 transition-transform duration-150 ease-in-out " />
                 </div>
 
 
-                <div>
-                    <h4>Who can join ?</h4>
-                    <ul>
-                        Free E-Rhythm is open to:
-                        <li>Curious travelers</li>
-                        <li>Students and educators</li>
-                        <li>African diaspora reconnecting with culture</li>
-                        <li>Anyone who wants to see Lagos through real eyes</li>
 
-                        <p>We believe culture should be shared, not gated.</p>
-                    </ul>
+                <div className=" w-full max-w-5xl flex flex-col items-start gap-4 bg-[#ffffff] rounded-lg overflow-hidden shadow-xl "  >
+                    <div className="w-full flex items-center justify-center text-center px-4 py-7 bg-[#05073C] text-[#ffffff] " >
+                         <h3 className="font-merriweather text-3xl font-semibold " >What you can expect</h3></div>
+                    <div className="w-full flex flex-col md:flex-row items-center justify-between gap-5 py-10 px-5 md:px-6 font-lato " >
+                        {whatToExpectData.map((point, index) => (
+                            <div key={index} className=" text-base md:text-lg  font-semibold  text-center flex flex-col gap-1 items-center " > {point.icon} {point.text} </div>
+                        ))}
+                    </div>
+                </div>
 
-                    <Button onClick={() => router.push("/book_form")} ariaLabel="Book a tour" label="Book a tour" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
+
+                <div className=" w-full max-w-5xl flex flex-col items-start gap-4 bg-[#ffffff] rounded-lg overflow-hidden shadow-xl">
+                  <div className="w-full flex items-center justify-center text-center px-4 py-7 bg-[#05073C] text-[#ffffff] " >
+                      <h4 className="font-merriweather text-3xl font-semibold ">Who can join ?</h4></div>
+                           <h5 className="mx-auto  text-[#05073C] font-semibold text-lg md:text-xl font-merriweather mt-3 " > Free E-Rhythm is open to:</h5>
+                         <div className="w-full grid grid-cols-2  place-items-center justify-items-center gap-5 pt-10 pb-5 px-5 md:px-6 font-lato " >
+
+                        {whoCanJoinData.map((point, index) => (
+                            <div key={index} className=" text-base md:text-lg  font-semibold  text-center " > {point.text} </div>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-col gap-5 items-center justify-center  mx-auto my-5 px-5 text-center " >
+                         <h5 className="mx-auto  text-[#05073C] font-semibold text-lg md:text-xl font-merriweather mt-3 " >We believe culture should be shared, not gated.</h5>
+
+                    <Button  ariaLabel="Book a tour" label="Book a tour" type="button" variant="primary" className="w-fit !bg-[#EF8F57] text-white !py-4 shadow-xl hover:scale-90 transition-transform duration-150 ease-in-out " />
+                    </div>
+
                 </div>
             </section>
         </div>
