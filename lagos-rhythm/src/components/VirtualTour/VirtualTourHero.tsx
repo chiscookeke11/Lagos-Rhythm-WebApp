@@ -14,7 +14,7 @@ export default function VirtualTourHero() {
             </div>
 
 
-            <div className="w-full basis-1/3 flex items-center justify-center h-full relative "  >
+            <div className="w-full basis-1/3 flex flex-col  items-center justify-center h-full relative "  >
                 {/* 3d image here  */}
                 <AvatarModel modelUrl="/virtual-tour/virtual-tour-3d-image/virtual-tour-avatar.glb" />
                 <div className="w-full h-full  absolute top-0 left-0 z-20 "/>
