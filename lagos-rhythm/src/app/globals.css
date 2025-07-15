@@ -86,7 +86,7 @@
 }
 
 body {
-  background: var(--foreground);
+  background: var(--background);
   color: var(--background);
   scroll-behavior: smooth;
 }

@@ -261,7 +261,7 @@ export default function Page() {
                                     </div>
                                 </div>
                             )}
-                            {formErrors.tourDate && <p className="text-red-500 text-sm">{formErrors.tourDate}</p>}
+                            {formErrors.tourDate && <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.tourDate}</p>}
                         </div>
 
                         <CustomSelect

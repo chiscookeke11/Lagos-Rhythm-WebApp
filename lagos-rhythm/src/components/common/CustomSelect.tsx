@@ -44,7 +44,7 @@ export function CustomSelect({ label, isRequired, options, placeholder, onChange
                     </SelectGroup>
                 </SelectContent>
             </Select>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-xs md:text-sm ml-auto ">{error}</p>}
         </div>
     )
 }
