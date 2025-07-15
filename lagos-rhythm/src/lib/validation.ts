@@ -4,48 +4,80 @@ export type ValidationErrors = {
   [key in keyof userDataType]?: string;
 };
 
-export function validateUserData(data: userDataType): ValidationErrors {
+export function validateUserData(
+  data: userDataType,
+  fieldName?: keyof userDataType
+): ValidationErrors {
   const errors: ValidationErrors = {};
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!data.fullName.trim()) {
-    errors.fullName = "Full name is required";
-  } else if (data.fullName.trim().length < 3) {
-    errors.fullName = "Full name must be at least 3 characters";
-  }
+  const checkField = (field: keyof userDataType) => {
+    switch (field) {
+      case "fullName":
+        if (!data.fullName.trim()) {
+          errors.fullName = "Full name is required";
+        } else if (data.fullName.trim().length < 3) {
+          errors.fullName = "Full name must be at least 3 characters";
+        }
+        break;
 
-  if (!data.email.trim()) {
-    errors.email = "Email is required";
-  } else if (!emailRegex.test(data.email)) {
-    errors.email = "Please enter a valid email address";
-  }
+      case "email":
+        if (!data.email.trim()) {
+          errors.email = "Email is required";
+        } else if (!emailRegex.test(data.email)) {
+          errors.email = "Please enter a valid email address";
+        }
+        break;
 
-  if (!data.race) {
-    errors.race = "Race is required";
-  }
+      case "race":
+        if (!data.race) {
+          errors.race = "Race is required";
+        }
+        break;
 
-  if (!data.country) {
-    errors.country = "Country is required";
-  }
+      case "country":
+        if (!data.country) {
+          errors.country = "Country is required";
+        }
+        break;
 
-  if (!data.joiningAs) {
-    errors.joiningAs = "Please select a role";
-  }
+      case "joiningAs":
+        if (!data.joiningAs) {
+          errors.joiningAs = "Please select a role";
+        }
+        break;
 
-  if (data.tourDate.length === 0) {
-    errors.tourDate = "At least one tour date must be selected";
-  }
+      case "tourDate":
+        if (!data.tourDate || data.tourDate.length === 0) {
+          errors.tourDate = "At least one tour date must be selected";
+        }
+        break;
 
-  if (!data.referralSource) {
-    errors.referralSource = "Referral source is required";
-  }
+      case "referralSource":
+        if (!data.referralSource) {
+          errors.referralSource = "Referral source is required";
+        }
+        break;
 
-  if (!data.communicationConsent) {
-    errors.communicationConsent = "You must agree to receive emails";
-  }
+      case "communicationConsent":
+        if (!data.communicationConsent) {
+          errors.communicationConsent = "You must agree to receive emails";
+        }
+        break;
 
-  if (!data.termsAgreement) {
-    errors.termsAgreement = "You must accept the privacy policy and terms";
+      case "termsAgreement":
+        if (!data.termsAgreement) {
+          errors.termsAgreement = "You must accept the privacy policy and terms";
+        }
+        break;
+    }
+  };
+
+  if (fieldName) {
+    checkField(fieldName);
+  } else {
+    // Validate the entire form
+    (Object.keys(data) as (keyof userDataType)[]).forEach(checkField);
   }
 
   return errors;
