@@ -4,15 +4,16 @@ import Button from "@/components/common/Button";
 import { CustomCheckBox } from "@/components/common/CustomCheckbox";
 import { CustomSelect } from "@/components/common/CustomSelect";
 import Input from "@/components/common/Input";
+import ConfirmationModal from "@/components/ConfirmationModal";
 import { countryOptions } from "@/data/countryList";
 import { BestLocationData, joinAsData, raceData, referralSourceData } from "@/data/data";
 import { validateUserData } from "@/lib/validation";
 import { userDataType } from "@/Types/UserDataType";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import toast from "react-hot-toast";
+
 
 
 export default function Page() {
@@ -21,6 +22,7 @@ export default function Page() {
     const maxDate = new Date("2025-08-31");
     const [loading, setLoading] = useState(false)
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({})
+    const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false)
 
     const [userData, setUserData] = useState<userDataType>({
         fullName: "",
@@ -162,13 +164,18 @@ export default function Page() {
             termsAgreement: undefined
         })
         setLoading(false)
-        toast.success("Form submitted successfully")
+        setShowConfirmationModal(true)
     }
+
+
+    useEffect (() => {
+        document.body.style.overflowY = showConfirmationModal ? "hidden" : "auto"
+    }, [showConfirmationModal])
 
 
 
     return (
-        <div className="w-full  flex  flex-col h-full bg-[#EF8F57] text-[#05073C] " >
+        <div className="w-full  flex  flex-col h-full bg-[#EF8F57] text-[#05073C] relative " >
             <div className="w-full h-[300px] bg-[url('/booking-form/coming-soon-bg.jpg')] bg-no-repeat bg-center bg-cover  " />
             <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1]  " >
                 <div className=" flex items-center w-fit flex-col gap-5 lg:gap-10 pb-10 px-4 mt-[-7%]  " >
@@ -339,7 +346,11 @@ export default function Page() {
                 </div>
             </div>
 
-
+{showConfirmationModal &&
+<ConfirmationModal
+showConfirmationModal={showConfirmationModal}
+setShowConfirmationModal={setShowConfirmationModal}
+/>}
         </div>
     )
 }

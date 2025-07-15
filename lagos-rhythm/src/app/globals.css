@@ -88,6 +88,7 @@
 body {
   background: var(--foreground);
   color: var(--background);
+  scroll-behavior: smooth;
 }
 .triangle {
   clip-path: polygon(100% 0, 14% 0, 100% 100%);
