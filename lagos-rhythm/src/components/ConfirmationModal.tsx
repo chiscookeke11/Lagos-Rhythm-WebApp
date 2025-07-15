@@ -35,36 +35,36 @@ export default function ConfirmationModal({ showConfirmationModal, setShowConfir
 
 
                     <div className=" mt-3 flex flex-col gap-2  " >
-                        <p className="text-[15px] font-semibold text-[#EF8F57]  " >Follow Lagos Rhythm on our social media pages for real-time updates.</p>
-                        <ul className="w-full flex items-center gap-2 justify-center " >
+                        <p className="text-base font-semibold text-[#EF8F57]/80  " >Follow Lagos Rhythm on our social media pages for real-time updates.</p>
+                        <ul className="w-full flex items-center gap-4 justify-center " >
 
-                            <li> <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#05073C] transition-colors duration-150 ease-in-out " >
-                                <Facebook size={17} />
+                            <li> <a href="https://www.facebook.com/profile.php?id=61576980652512" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#EF8F57]/50 transition-colors duration-150 ease-in-out " >
+                                <Facebook size={23} />
                             </a></li>
 
                             <li>
-                                <a href="https://vm.tiktok.com/ZMSVpqPpC/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#05073C] transition-colors duration-150 ease-in-out " >
-                                    <BsTiktok size={17} />
+                                <a href="https://vm.tiktok.com/ZMSVpqPpC/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#EF8F57]/50 transition-colors duration-150 ease-in-out " >
+                                    <BsTiktok size={23} />
                                 </a>
                             </li>
 
                             <li>
 
-                                <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#05073C] transition-colors duration-150 ease-in-out ">
-                                    <Youtube size={17} />
+                                <a href="https://youtube.com/@lagosrhythm?si=6Uyn540adjOMeWmW" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#EF8F57]/50 transition-colors duration-150 ease-in-out ">
+                                    <Youtube size={23} />
                                 </a>
                             </li>
 
                             <li>
 
-                                <a href="https://www.instagram.com/lagos_rhythm/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#05073C] transition-colors duration-150 ease-in-out ">
-                                    <Instagram size={17} />
+                                <a href="https://www.instagram.com/lagos_rhythm/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#EF8F57]/50 transition-colors duration-150 ease-in-out ">
+                                    <Instagram size={23} />
                                 </a>
                             </li>
 
                             <li>
-                                <a href="https://www.linkedin.com/company/lagos-rhythm/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#05073C] transition-colors duration-150 ease-in-out ">
-                                    <Linkedin size={17} />
+                                <a href="https://www.linkedin.com/company/lagos-rhythm/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#EF8F57] hover:text-[#EF8F57]/50 transition-colors duration-150 ease-in-out ">
+                                    <Linkedin size={23} />
                                 </a>
                             </li>
 

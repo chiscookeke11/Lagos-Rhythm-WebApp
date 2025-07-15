@@ -51,15 +51,15 @@ const supportOptions = [
     },
     {
         label: "Feedback",
-        path: "/",
+        path: "/feedback",
     },
     {
         label: "Terms and conditions",
-        path: "/",
+        path: "/terms_and_conditions",
     },
     {
         label: "Privacy policy",
-        path: "/",
+        path: "/Privacy_Policy",
     },
 
 ]
