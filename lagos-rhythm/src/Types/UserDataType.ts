@@ -6,6 +6,7 @@ export interface userDataType{
         race: string,
         country: string,
         joiningAs: string,
+        otherJoin?: string,
         tourDate: string[],
         referralSource: string,
         communicationConsent?: boolean,

@@ -14,7 +14,7 @@ const footerLinks = [
     },
     {
         label: "Virtual Tour",
-        path: "/",
+        path: "/VirtualTour",
     },
     {
         label: "In-person Tour",
@@ -30,7 +30,7 @@ const footerLinks = [
     },
     {
         label: "About Lagos Rhythm",
-        path: "/",
+        path: "/about",
     },
 ]
 

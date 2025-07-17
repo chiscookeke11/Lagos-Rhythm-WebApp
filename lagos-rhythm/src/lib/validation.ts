@@ -46,6 +46,10 @@ export function validateUserData(
           errors.joiningAs = "Please select a role";
         }
         break;
+      case "otherJoin":
+        if (data.joiningAs === "Other" && (data.otherJoin?.trim().length ?? 0) < 3) {
+          errors.otherJoin = "A minimum of 3 characters is required"
+        }
 
       case "tourDate":
         if (!data.tourDate || data.tourDate.length === 0) {

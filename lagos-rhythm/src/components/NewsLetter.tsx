@@ -139,7 +139,7 @@ export default function NewsLetter() {
 
               </>
             ) :
-              "Subscribe"} variant="primary" className="!text-[#EF8F57] !font-bold  " />
+              "Subscribe"} variant="primary" className="!text-[#EF8F57] !font-bold   " />
         </form>
       </div>
     </section>
