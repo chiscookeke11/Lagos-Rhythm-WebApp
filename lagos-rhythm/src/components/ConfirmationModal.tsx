@@ -25,7 +25,7 @@ export default function ConfirmationModal({ showConfirmationModal, setShowConfir
 
     return (
         <div className=" h-screen w-full fixed bg-black/50 backdrop-blur-md flex items-center justify-center font-lato px-3 " >
-            {showConfetti && <Confetti width={width} height={height} />}
+            {showConfetti && <Confetti width={width} height={height}  />}
 
             <div className="w-full h-full relative overflow-hidden " >
                 <div className={`w-full max-w-sm bg-white px-5 py-6 rounded-lg flex flex-col items-center justify-center gap-3 text-center absolute top-[50%] left-[50%] translate-x-[-50%] transition-transform duration-200 ease-in-out ${showConfirmationModal ? "translate-y-[-50%]" : "translate-y-[500%]"}  `} >
