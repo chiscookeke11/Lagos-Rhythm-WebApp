@@ -29,7 +29,6 @@ export default function WhyLagos() {
               <h3 className="font-bold text-xl text-[#05073C] font-playfair " >{item.title} </h3>
               <p className="font-normal text-[#05073C] text-base font-lato "> {item.desc} </p>
               <div className="absolute w-5 h-5 bg-[#EF8F57] top-0 right-0  triangle  "  ></div>
-              <div className="absolute w-5 h-5 bg-[#EF8F57] bottom-0 left-0  left-triangle  "  ></div>
             </motion.div>
           ))
         }

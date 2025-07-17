@@ -12,8 +12,7 @@ export default function Page() {
         <>
             <ReusableHero
                 pageTitle="About Lagos Rhythm"
-            //  subtitle="Lagos"
-            //  description="Live the vibe, please the mind."
+                image="/about/about-hero.jpg"
             />
 
 
@@ -38,8 +37,8 @@ export default function Page() {
                             <Image src={"/about/abstract-star.svg"} alt="shape" height={65} width={65} className="absolute top-3 left-3 z-20 h-[40px] w-[40px] md:h-[65px] md:w-[65px]  " />
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
-                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] pentagon transform rotate-[-90deg] " >
-                                <Image src={"/BestLocationsImages/LagosFood.jpg"} alt="image" width={300} height={300} className=" w-full h-full object-cover object-center " />
+                            <div className="z-10 h-[250px] w-[253px] lg:h-[350px] lg:w-[353px] oval-2 transform  " >
+                                <Image src={"/about/intro-text.jpg"} alt="image" width={500} height={500} className=" w-full h-full object-cover object-center " />
                             </div>
                         </div>
 
@@ -65,8 +64,8 @@ export default function Page() {
                             <Image src={"/about/abstract-star.svg"} alt="shape" height={65} width={65} className="absolute top-3 left-3 z-20 h-[40px] w-[40px] md:h-[65px] md:w-[65px]  " />
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
-                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] pentagon transform rotate-[-90deg] " >
-                                <Image src={"/BestLocationsImages/LagosFood.jpg"} alt="image" width={300} height={300} className=" w-full h-full object-cover object-center " />
+                            <div className="z-10 h-[250px] w-[253px] lg:h-[350px] lg:w-[353px] pentagon transform  " >
+                                <Image src={"/about/our-vision.jpg"} alt="image" width={400} height={400} className=" w-full h-full object-cover object-center mt-[-12px] " />
                             </div>
                         </div>
 
@@ -95,8 +94,8 @@ export default function Page() {
                             <Image src={"/about/abstract-star.svg"} alt="shape" height={65} width={65} className="absolute top-3 left-3 z-20 h-[40px] w-[40px] md:h-[65px] md:w-[65px]  " />
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
-                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] pentagon transform rotate-[-90deg] " >
-                                <Image src={"/BestLocationsImages/LagosFood.jpg"} alt="image" width={300} height={300} className=" w-full h-full object-cover object-center " />
+                            <div className="z-10 h-[220px] w-[223px] md:h-[250px] md:w-[253px] lg:h-[300px] lg:w-[303px] bevel transform  " >
+                                <Image src={"/about/our-mission.jpg"} alt="image" width={400} height={400} className=" w-full h-full object-cover object-center " />
                             </div>
                         </div>
 
@@ -134,8 +133,8 @@ export default function Page() {
                             <Image src={"/about/abstract-star.svg"} alt="shape" height={65} width={65} className="absolute top-3 left-3 z-20 h-[40px] w-[40px] md:h-[65px] md:w-[65px]  " />
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
-                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] pentagon transform rotate-[-90deg] " >
-                                <Image src={"/BestLocationsImages/LagosFood.jpg"} alt="image" width={300} height={300} className=" w-full h-full object-cover object-center " />
+                            <div className="z-10 h-[250px] w-[253px] lg:h-[350px] lg:w-[353px] circle transform  " >
+                                <Image src={"/about/our-story.jpg"} alt="image" width={500} height={500} className=" w-full h-full object-cover object-center " />
                             </div>
                         </div>
 
@@ -171,8 +170,8 @@ export default function Page() {
                             <Image src={"/about/abstract-star.svg"} alt="shape" height={65} width={65} className="absolute top-3 left-3 z-20 h-[40px] w-[40px] md:h-[65px] md:w-[65px]  " />
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
-                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] pentagon transform rotate-[-90deg] " >
-                                <Image src={"/BestLocationsImages/LagosFood.jpg"} alt="image" width={300} height={300} className=" w-full h-full object-cover object-center " />
+                            <div className="z-10 h-[280px] w-[283px] lg:h-[350px] lg:w-[353px] oval transform  " >
+                                <Image src={"/about/partners.jpg"} alt="image" width={400} height={400} className=" w-full h-full object-cover object-center " />
                             </div>
                         </div>
 

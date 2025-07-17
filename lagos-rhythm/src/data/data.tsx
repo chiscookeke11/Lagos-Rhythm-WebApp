@@ -255,3 +255,20 @@ export const whoCanJoinData = [
         icon: <Lottie animationData={lagos} loop={true} className="w-20 h-20"  />,
     },
 ]
+
+
+
+export const bookFormImages = [
+    {
+        label: "image one",
+        img: "/booking-form/image-1.jpg"
+    },
+    {
+        label: "image two",
+        img: "/booking-form/image-3.jpg"
+    },
+    {
+        label: "image three",
+        img: "/booking-form/image-2.jpg"
+    },
+]
