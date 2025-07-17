@@ -6,7 +6,7 @@ import { CustomSelect } from "@/components/common/CustomSelect";
 import Input from "@/components/common/Input";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { countryOptions } from "@/data/countryList";
-import { BestLocationData, joinAsData, raceData, referralSourceData } from "@/data/data";
+import { bookFormImages, joinAsData, raceData, referralSourceData } from "@/data/data";
 import { validateUserData } from "@/lib/validation";
 import { userDataType } from "@/Types/UserDataType";
 import Image from "next/image";
@@ -148,9 +148,11 @@ export default function Page() {
             <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1]">
                 <div className="flex items-center w-fit flex-col gap-5 lg:gap-10 pb-10 px-4 mt-[-7%]">
                     <div className="w-full flex items-center justify-center gap-4 px-[3%]">
-                        {BestLocationData.slice(0, 3).map((data, index) => (
-                            <div key={index} title={data.label} className="bg-[#ffffff] rounded-[20px] flex items-center justify-center w-[100px] h-[100px] md:h-[200px] md:w-[200px] lg:w-[294px] lg:h-[263px] overflow-hidden p-2 md:p-3">
-                                <Image src={data.image} alt="image" height={100} width={100} className="w-full h-full object-cover rounded-[10px]" />
+                        {bookFormImages.slice(0, 3).map((data, index) => (
+                            <div key={index} title={data.label} className="bg-[#ffffff]   rounded-[20px] flex items-center justify-center w-[100px] h-[100px] md:h-[200px] md:w-[200px] lg:w-[294px] lg:h-[263px] overflow-hidden p-2 md:p-3">
+                                <div className="relative h-full w-full">
+                                    <Image src={data.img} title={data.label} alt="image" fill className="rounded-[10px]" priority />
+                                </div>
                             </div>
                         ))}
                     </div>
