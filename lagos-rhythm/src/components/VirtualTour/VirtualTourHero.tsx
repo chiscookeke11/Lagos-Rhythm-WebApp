@@ -27,7 +27,7 @@ export default function VirtualTourHero() {
                 xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none"
             >
-                <path fill="#FDF4F1" d="M0,80 C360,180 1080,0 1440,80 L1440,150 L0,150 Z"></path>
+                <path fill="#FDF4F1" d="M0,80 C360,180 1080,0 1440,80 L1440,150 L0,150 Z"  ></path>
             </svg>
         </section>
     )
