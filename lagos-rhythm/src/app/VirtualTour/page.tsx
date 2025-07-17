@@ -2,7 +2,7 @@
 
 import ChooseTour from "@/components/VirtualTour/ChooseTour";
 import VirtualTourHero from "@/components/VirtualTour/VirtualTourHero";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 
@@ -24,7 +24,7 @@ export default function Page() {
 
 
             <ChooseTour />
-            <motion.div
+            {/* <motion.div
                 initial={{ x: -1000 }}
                 animate={{ x: inView ? 0 : -1000 }}
                 viewport={{ once: true }}
@@ -33,7 +33,7 @@ export default function Page() {
                 <p>No simulations, just the real thing</p>
 
                 <div className="h-full w-1.5 bg-white absolute top-0 right-0" ></div>
-            </motion.div>
+            </motion.div> */}
 
 
             <div ref={ref} className=" absolute h-2 w-2 bg-transparent bottom-0 right-0   "></div>
