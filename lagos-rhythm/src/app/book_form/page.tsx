@@ -13,6 +13,9 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { fireDB } from "../config/firebaseClient";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 
 export default function Page() {
@@ -29,6 +32,7 @@ export default function Page() {
         race: "",
         country: "",
         joiningAs: "",
+        otherJoin: "",
         tourDate: [],
         referralSource: "",
         communicationConsent: undefined,
@@ -111,7 +115,7 @@ export default function Page() {
     };
 
     // submit function
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const errors = validateUserData(userData);
@@ -123,25 +127,81 @@ export default function Page() {
         }
 
         setLoading(true);
-        setUserData({
-            email: "",
-            fullName: "",
-            country: "",
-            joiningAs: "",
-            race: "",
-            referralSource: "",
-            tourDate: [],
-            communicationConsent: undefined,
-            termsAgreement: undefined
-        });
-        setLoading(false);
-        setShowConfirmationModal(true);
+
+
+
+        try {
+
+            const usersRef = collection(fireDB, "booked_Free_Rhythm");
+            const q = query(usersRef, where("email", "==", userData.email));
+            const existingDocs = await getDocs(q);
+
+            if (!existingDocs.empty) {
+                toast.error("You have already booked a Free E-Rhythm tour.");
+                setLoading(false);
+                return;
+            }
+
+
+            await addDoc(collection(fireDB, "booked_Free_Rhythm"), {
+                fullName: userData.fullName,
+                email: userData.email,
+                country: userData.country,
+                ethnicity: userData.race,
+                joiningAs: userData.joiningAs,
+                otherJoin: userData.otherJoin,
+                tour_date: userData.tourDate,
+                agree_to_email: userData.communicationConsent,
+                agree_to_TC: userData.termsAgreement,
+                referral: userData.referralSource,
+                subscribedAt: new Date(),
+            });
+            clearAllDates()
+            setUserData({
+                email: "",
+                fullName: "",
+                country: "",
+                joiningAs: "",
+                race: "",
+                referralSource: "",
+                tourDate: [],
+                communicationConsent: false,
+                termsAgreement: false,
+                otherJoin: ""
+            });
+            setShowConfirmationModal(true);
+        }
+        catch (error) {
+            toast.error("Failed to book Free E-Rhythm")
+            console.error("Failed to book:", error)
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
         document.body.style.overflowY = showConfirmationModal ? "hidden" : "auto";
     }, [showConfirmationModal]);
 
+
+
+    useEffect(() => {
+        if (userData.joiningAs !== "Other") {
+            setUserData((prev) => ({
+                ...prev,
+
+                otherJoin: ""
+            })
+            )
+            setFormErrors((prevErrors) => ({
+                ...prevErrors,
+                otherJoin: ""
+            }))
+        }
+    }, [userData.joiningAs])
+
+
+    console.log(userData)
     return (
         <div className="w-full flex flex-col h-full bg-[#EF8F57] text-[#05073C] relative">
             <div className="w-full h-[300px] bg-[url('/booking-form/coming-soon-bg.jpg')] bg-no-repeat bg-center bg-cover" />
@@ -157,7 +217,7 @@ export default function Page() {
                         ))}
                     </div>
 
-                    <div className="w-full flex flex-col items-center gap-2 justify-center my-5 lg:my-10 text-center">
+                    <div className="w-full flex flex-col items-center gap-2 justify-center my-5 lg:my-5 text-center">
                         <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-merienda">BOOK YOUR PACKAGE</h1>
                         <p className="font-medium text-base md:text-lg font-lato">Experience Something New Every Moment</p>
                     </div>
@@ -194,6 +254,7 @@ export default function Page() {
                                 label="Race/Ethnic identity"
                                 error={formErrors.race}
                                 isRequired
+                                value={userData.race}
                             />
 
                             <CustomSelect
@@ -204,6 +265,7 @@ export default function Page() {
                                 placeholder="Please select an option"
                                 error={formErrors.country}
                                 isRequired
+                                value={userData.country}
                             />
                         </div>
 
@@ -215,7 +277,22 @@ export default function Page() {
                             isRequired
                             options={joinAsData}
                             error={formErrors.joiningAs}
+                            value={userData.joiningAs}
                         />
+
+
+                        {userData.joiningAs === "Other" ? (
+                            <Input
+                                name="otherJoin"
+                                onChange={handleChange}
+                                type="text"
+                                value={userData.otherJoin ?? ""}
+                                label="Please specify your category"
+                                error={formErrors.otherJoin}
+                                placeholder="Researcher"
+                                isRequired={false}
+                            />
+                        ) : null}
 
                         <div className="w-full">
                             <label className="text-[#000000] font-medium text-base font-lato flex items-start gap-1">
@@ -274,6 +351,7 @@ export default function Page() {
                             options={referralSourceData}
                             placeholder="Please select an option"
                             error={formErrors.referralSource}
+                            value={userData.referralSource}
                         />
 
                         <div className="w-full flex items-start flex-col gap-3">
@@ -295,7 +373,16 @@ export default function Page() {
                         </div>
 
                         <Button
-                            label={loading ? "Submitting" : "Submit"}
+                            label={loading ?
+                                <>
+                                    <span className="inline-flex space-x-1 ml-1">
+                                        <span className="w-2 h-2 bg-[#ffffff] rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                        <span className="w-2 h-2 bg-[#ffffff] rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                        <span className="w-2 h-2 bg-[#ffffff] rounded-full animate-bounce"></span>
+                                    </span>
+
+                                </>
+                                : "Submit"}
                             type="submit"
                             ariaLabel="Submit"
                             variant="ghost"

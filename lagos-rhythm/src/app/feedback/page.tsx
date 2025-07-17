@@ -331,7 +331,7 @@ export default function FeedbackPage() {
                             </div>
                         </div>
 
-                        <Button ariaLabel="Submit" type="submit" variant="primary" label="Submit" className="w-full text-center  !bg-[#EF8F57] " />
+                        <Button ariaLabel="Submit" type="submit" variant="primary" label="Submit" className="w-fit text-center  !bg-[#EF8F57] " />
                     </form>
                 </CardContent>
             </Card>

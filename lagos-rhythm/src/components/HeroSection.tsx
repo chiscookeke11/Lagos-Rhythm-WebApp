@@ -1,9 +1,11 @@
 
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Button from "./common/Button";
 import { motion } from "framer-motion";
 import ScrollingText from "./ScrollingText";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 
 interface HeroSectionProps {
@@ -15,6 +17,19 @@ interface HeroSectionProps {
 export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
 
   const MotionButton = useMemo(() => motion(Button), [])
+  const router = useRouter()
+  const loggedIn = useState(false)
+
+
+  const selectFreeTour = () => {
+    if (loggedIn) {
+      router.push("/Free_E-Rhythm")
+    }
+    else {
+      toast.error("Please log in to experience Free E-Rhythm")
+      return
+    }
+  }
 
 
   return (
@@ -48,12 +63,13 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
             </motion.p>
           </div>
           <MotionButton
+            onClick={selectFreeTour}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 1.1 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 7 }}
-            type="button" label="Free Virtual Tour" > Join the Waitlist</MotionButton>
+            type="button" label="Free Virtual Tour" > </MotionButton>
         </div>
       </div>
       <ScrollingText />
