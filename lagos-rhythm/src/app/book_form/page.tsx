@@ -134,7 +134,7 @@ export default function Page() {
         const data = await validationRes.json();
 
         if (!(data.smtp_check && data.format_valid && data.mx_found)) {
-            toast.error("Email may be invalid or undeliverable.");
+            toast.error("Email address does not exist");
             setLoading(false);
             return;
         }
@@ -233,9 +233,14 @@ export default function Page() {
 
     console.log(userData)
     return (
-        <div className="w-full flex flex-col h-full bg-[#EF8F57] text-[#05073C] relative">
-            <div className="w-full h-[300px] bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
-            <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1]">
+        <div className="w-full flex flex-col h-full text-[#05073C] relative">
+
+            <div className="h-[300px] w-full relative " >
+                <div className="w-full h-full absolute top-0 left-0  bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover  " />
+                <div className="w-full h-full absolute top-0 left-0 bg-black/30 " />
+            </div>
+
+            <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1] z-10 ">
                 <div className="flex items-center w-fit flex-col gap-5 lg:gap-10 pb-10 px-4 mt-[-7%]">
                     <div className="w-full flex items-center justify-center gap-4 px-[3%]">
                         {bookFormImages.slice(0, 3).map((data, index) => (
@@ -417,7 +422,7 @@ export default function Page() {
                             ariaLabel="Submit"
                             variant="ghost"
                             disabled={loading}
-                            className="!bg-[#EF8F57] w-full max-w-sm"
+                            className="!bg-[#EF8F57] w-full max-w-sm  "
                         />
                     </form>
                 </div>
