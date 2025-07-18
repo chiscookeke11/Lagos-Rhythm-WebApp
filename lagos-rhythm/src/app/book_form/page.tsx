@@ -26,6 +26,7 @@ export default function Page() {
     const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
     const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
+    const apiKey = process.env.NEXT_PUBLIC_MAILBOX_API_KEY
 
     const [userData, setUserData] = useState<userDataType>({
         fullName: "",
@@ -129,6 +130,14 @@ export default function Page() {
 
         setLoading(true);
 
+        const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${userData.email}&smtp=1&format=1`);
+        const data = await validationRes.json();
+
+        if (!(data.smtp_check && data.format_valid && data.mx_found)) {
+            toast.error("Email may be invalid or undeliverable.");
+            setLoading(false);
+            return;
+        }
 
 
         try {
@@ -157,6 +166,21 @@ export default function Page() {
                 referral: userData.referralSource,
                 subscribedAt: new Date(),
             });
+
+            try {
+                await sendConfirmationEmail({
+                    name: userData.fullName,
+                    email: userData.email,
+                    service: "Free E-Rhythm",
+                    date: "21st August 2021",
+                    tour_link: "www.unn.edu.ng"
+                });
+                console.log("Email sent Successfully")
+            }
+            catch (err) {
+                console.error("Failed to send confirmation email", err)
+            }
+
             clearAllDates()
             setUserData({
                 email: "",
@@ -172,19 +196,7 @@ export default function Page() {
             });
             setShowConfirmationModal(true);
 
-            try {
-                await sendConfirmationEmail({
-                    name: userData.fullName,
-                    email: userData.email,
-                    service: "Free E-Rhythm",
-                    date: "21st August 2021",
-                    tour_link: "www.unn.edu.ng"
-                });
-                console.log("Email sent Successfully")
-            }
-            catch (err) {
-                console.error("Failed to send confirmation email", err)
-            }
+
         }
         catch (error) {
             toast.error("Failed to book Free E-Rhythm")
@@ -404,6 +416,7 @@ export default function Page() {
                             type="submit"
                             ariaLabel="Submit"
                             variant="ghost"
+                            disabled={loading}
                             className="!bg-[#EF8F57] w-full max-w-sm"
                         />
                     </form>
