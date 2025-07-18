@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { fireDB } from "@/app/config/firebaseClient";
 import { motion } from "framer-motion";
+import { newsletterConfirmationMail } from "@/lib/utils";
 
 
 
@@ -13,6 +14,7 @@ export default function NewsLetter() {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false)
   const Motionbutton = useMemo(() => motion(Button), [])
+  const apiKey = process.env.NEXT_PUBLIC_MAILBOX_API_KEY
 
 
 
@@ -39,13 +41,19 @@ export default function NewsLetter() {
       return;
     }
 
-
-
-
-
-
-
     setIsSubmitting(true)
+
+
+    const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${formData.email}&smtp=1&format=1`)
+    const data = await validationRes.json();
+
+    if (!(data.smtp_check && data.format_valid && data.mx_found)) {
+      toast.error("Email address does not exist")
+      setIsSubmitting(false)
+      return
+    }
+
+
     try {
 
       const subscribersRef = collection(fireDB, "subscribers");
@@ -65,6 +73,17 @@ export default function NewsLetter() {
         email: formData.email,
         subscribedAt: new Date(),
       });
+
+      try {
+        await newsletterConfirmationMail({
+          name: formData.name,
+          email: formData.email
+        });
+        console.log("Email sent successfully")
+      }
+      catch (err) {
+        console.error("Failed to send confirmation email", err)
+      }
 
       setFormData({ name: "", email: "" });
 
