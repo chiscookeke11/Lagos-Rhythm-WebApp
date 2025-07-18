@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { fireDB } from "../config/firebaseClient";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { sendConfirmationEmail } from "@/lib/utils";
 
 
 export default function Page() {
@@ -122,7 +123,7 @@ export default function Page() {
         setFormErrors(errors);
 
         if (Object.keys(errors).length > 0) {
-            console.log("Validation errors:", errors);
+            toast.error("Please fill in the required fields")
             return;
         }
 
@@ -170,6 +171,20 @@ export default function Page() {
                 otherJoin: ""
             });
             setShowConfirmationModal(true);
+
+            try {
+                await sendConfirmationEmail({
+                    name: userData.fullName,
+                    email: userData.email,
+                    service: "Free E-Rhythm",
+                    date: "21st August 2021",
+                    tour_link: "www.unn.edu.ng"
+                });
+                console.log("Email sent Successfully")
+            }
+            catch (err) {
+                console.error("Failed to send confirmation email", err)
+            }
         }
         catch (error) {
             toast.error("Failed to book Free E-Rhythm")
@@ -185,6 +200,9 @@ export default function Page() {
 
 
 
+
+
+    // bg overlay effect
     useEffect(() => {
         if (userData.joiningAs !== "Other") {
             setUserData((prev) => ({
@@ -204,7 +222,7 @@ export default function Page() {
     console.log(userData)
     return (
         <div className="w-full flex flex-col h-full bg-[#EF8F57] text-[#05073C] relative">
-            <div className="w-full h-[300px] bg-[url('/booking-form/coming-soon-bg.jpg')] bg-no-repeat bg-center bg-cover" />
+            <div className="w-full h-[300px] bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
             <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1]">
                 <div className="flex items-center w-fit flex-col gap-5 lg:gap-10 pb-10 px-4 mt-[-7%]">
                     <div className="w-full flex items-center justify-center gap-4 px-[3%]">
@@ -241,7 +259,7 @@ export default function Page() {
                             name="email"
                             onChange={handleChange}
                             isRequired
-                            placeholder="JohnAde@gmail.com"
+                            placeholder="JohnAde11@gmail.com"
                             error={formErrors.email}
                         />
 

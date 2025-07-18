@@ -1,13 +1,14 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ReactNode } from "react";
 
 
 
 
 interface ReusableHeroProps {
     pageTitle: string;
-    subtitle?: string;
+    subtitle?: string | ReactNode;
     description?: string
     image?: string
 }

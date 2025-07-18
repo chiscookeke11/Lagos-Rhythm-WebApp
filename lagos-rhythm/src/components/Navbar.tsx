@@ -21,7 +21,7 @@ const navLinks = [
         label: "ABOUT",
         path: "/about",
     },
-     {
+    {
         label: "VIRTUAL TOUR",
         path: "/VirtualTour",
     },
@@ -68,7 +68,7 @@ export default function Navbar() {
         document.body.style.overflow = openMobileNav ? "hidden" : "auto";
 
 
-        const handleClickOutside  = (e: MouseEvent) => {
+        const handleClickOutside = (e: MouseEvent) => {
             if (
                 mobileNavRef.current && !mobileNavRef.current.contains(e.target as Node)
             ) {
@@ -114,7 +114,7 @@ export default function Navbar() {
             <div className=" flex items-center justify-center gap-7 w-fit" >
 
 
-                <Link href={"/"} ><button aria-label="Sign Up" className=" font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ">Sign up</button></Link>
+                <Link href={"/"} ><button aria-label="Sign Up" className={` font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `}>Sign up</button></Link>
 
                 <Button label="Log in" type="button" variant="outline" className="font-signika !py-2 hover:scale-105 transform transition-transform duration-150 ease-in-out " ariaLabel="Log In" />
 
@@ -125,7 +125,7 @@ export default function Navbar() {
 
 
 
-{/* mobile nav  */}
+            {/* mobile nav  */}
             <div ref={mobileNavRef} className={`w-full h-fit bg-[#ffffff] fixed top-0 left-0 transform transition-transform duration-150 ease-in-out  ${openMobileNav ? "translate-y-0" : "translate-y-[-100%]"}   `} >
                 <div className="w-full h-full  relative flex items-center justify-center " >
                     <button aria-label="Close Menu" onClick={() => setOpenMobileNav(false)} className="absolute top-[5%] right-[5%] cursor-pointer   p-1 flex items-center justify-center   " > <X size={30} color="#EF8F57" /> </button>
@@ -136,20 +136,20 @@ export default function Navbar() {
                     <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-12 px-6 "   >
                         {navLinks.map((navLink, index) => (
                             <motion.li
-                                initial={{scale: 0, opacity: 0 }}
+                                initial={{ scale: 0, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
                                 transition={{ delay: index * 0.05, type: "spring", stiffness: 100, damping: 15, }}
                                 viewport={{ amount: 0.1 }}
                                 onClick={() => setOpenMobileNav(false)}
-                                key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
+                                key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B] `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
                         ))}
-                         <Link href={"/"} >
-                         <motion.button
-                           initial={{scale: 0, opacity: 0 }}
+                        <Link href={"/"} >
+                            <motion.button
+                                initial={{ scale: 0, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
                                 transition={{ delay: 0.25, type: "spring", stiffness: 100, damping: 15, }}
                                 viewport={{ amount: 0.1 }}
-                          aria-label="Sign Up" className=" font-normal text-base !text-[#000000] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer  font-signika ">SIGN UP</motion.button></Link>
+                                aria-label="Sign Up" className=" font-normal text-base text-[#000000]  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B]  font-signika ">SIGN UP</motion.button></Link>
                     </ul>
                 </div>
 

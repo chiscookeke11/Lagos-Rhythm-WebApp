@@ -16,7 +16,7 @@ export default function Page() {
         <div className=" w-full bg-[#FDF4F1] " >
             <ReusableHero
                 pageTitle="Welcome to E-Rhythm"
-                subtitle="Free. Live. Raw. Lagos right from your screen."
+                subtitle={<>Free. Live. Raw. <br/> Lagos right from your screen.</>}
                 description=" Join our free live-streamed tours and experience the rhythm of Lagos in real time, guided by locals and powered by culture."
             />
 
