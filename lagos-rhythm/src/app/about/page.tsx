@@ -38,7 +38,7 @@ export default function Page() {
                             <Image src={"/about/spring.svg"} alt="shape" height={100} width={200} className="absolute bottom-1 right-3 z-20 w-[100px] md:w-[200px] " />
                             <Image src={"/about/abstract-shape.svg"} alt="shape" fill />
                             <div className="z-10 h-[250px] w-[253px] lg:h-[350px] lg:w-[353px] oval-2 transform  " >
-                                <Image src={"/about/intro-text.jpg"} alt="image" width={500} height={500} className=" w-full h-full object-cover object-center " />
+                                <Image src={"/about/lagos-rhythm-text.jpg"} alt="image" width={500} height={500} className=" w-full h-full object-cover object-center " />
                             </div>
                         </div>
 

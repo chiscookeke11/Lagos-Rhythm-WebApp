@@ -264,11 +264,11 @@ export const bookFormImages = [
         img: "/booking-form/image-1.jpg"
     },
     {
-        label: "image two",
-        img: "/booking-form/image-3.jpg"
-    },
-    {
         label: "image three",
         img: "/booking-form/image-2.jpg"
+    },
+        {
+        label: "image two",
+        img: "/booking-form/image-3.jpg"
     },
 ]
