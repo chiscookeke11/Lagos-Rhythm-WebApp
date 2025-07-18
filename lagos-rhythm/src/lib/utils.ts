@@ -32,3 +32,20 @@ export const sendConfirmationEmail = (data: {
     process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
   );
 };
+
+
+
+
+export const newsletterConfirmationMail = (data: { name: string, email: string }) => {
+  return emailjs.send(
+    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+    process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!,
+    {
+      name: data.name,
+      email: data.email
+    },
+    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+  )
+}
+
+
