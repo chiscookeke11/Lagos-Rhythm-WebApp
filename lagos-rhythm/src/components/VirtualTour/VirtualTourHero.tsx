@@ -1,3 +1,4 @@
+import ErrorBoundary from "../ErrorBoundary";
 import AvatarModel from "./AvatarModel";
 
 
@@ -16,7 +17,11 @@ export default function VirtualTourHero() {
 
             <div className="w-full basis-1/3 flex flex-col  items-center justify-center h-full relative "  >
                 {/* 3d image here  */}
+
+                <ErrorBoundary fallback={<div>Failed to load 3D avatar</div>} >
                 <AvatarModel modelUrl="/virtual-tour/virtual-tour-3d-image/virtual-tour-avatar.glb" />
+                </ErrorBoundary>
+
                 <div className="w-full h-full  absolute top-0 left-0 z-20 "/>
             </div>
 
