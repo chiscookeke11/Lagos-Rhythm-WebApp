@@ -11,7 +11,7 @@ const tourPackagesData = [
     {
         title: "Exclusive E-Rhythm",
         content: "Go deeper with Lagos-curated, private virtual tours designed for schools, corporate teams, cultural groups, and special events",
-        path: "/",
+        path: "/Exclusive_E-Rhythm",
     },
     {
         title: "Free E-Rhythm",
