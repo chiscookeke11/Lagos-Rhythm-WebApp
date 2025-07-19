@@ -6,13 +6,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Button from "@/components/common/Button" // IMPORTANT: Using your original Button import
+import Button from "@/components/common/Button"
 import { addDoc, collection } from "firebase/firestore"
 import { fireDB } from "../config/firebaseClient"
 import toast from "react-hot-toast"
 import { useForm, Controller } from "react-hook-form"
 
-// Define the type for form data
+
 interface FormData {
     name: string
     email: string
@@ -20,9 +20,9 @@ interface FormData {
     experienceDescription: string
     experienceRating: string
     publicTestimonial: string
-    testimonialText?: string // Optional based on publicTestimonial
+    testimonialText?: string
     consentStoreFeedback: boolean
-    consentPublishTestimonial?: boolean // Optional based on publicTestimonial
+    consentPublishTestimonial?: boolean
     suggestions?: string
 }
 
@@ -32,9 +32,7 @@ export default function FeedbackPage() {
         handleSubmit,
         control,
         watch,
-        setError,
-        clearErrors,
-        formState: { errors, isSubmitting }, // isSubmitting replaces isLoading
+        formState: { errors, isSubmitting },
         reset,
     } = useForm<FormData>({
         defaultValues: {
@@ -52,18 +50,13 @@ export default function FeedbackPage() {
     })
 
     const [submitted, setSubmitted] = useState(false)
-    // Removed isLoading as isSubmitting from react-hook-form will be used
+
 
     const publicTestimonialValue = watch("publicTestimonial")
     const apiKey = process.env.NEXT_PUBLIC_MAILBOX_API_KEY
 
-    // The onSubmit function will now receive validated data from react-hook-form
-    const onSubmit = async (data: FormData) => {
-        if (!apiKey) {
-            toast.error("Mailbox API key is not configured.")
-            return
-        }
 
+    const onSubmit = async (data: FormData) => {
         // Manual email validation using external API
         try {
             const validationRes = await fetch(
@@ -72,15 +65,11 @@ export default function FeedbackPage() {
             const emailValidationData = await validationRes.json()
 
             if (!(emailValidationData.smtp_check && emailValidationData.format_valid && emailValidationData.mx_found)) {
-                setError("email", { type: "manual", message: "Email address does not exist or is invalid." })
                 toast.error("Email address does not exist or is invalid.")
                 return
-            } else {
-                clearErrors("email") // Clear error if validation passes
             }
         } catch (error) {
             console.error("Email validation API error:", error)
-            setError("email", { type: "manual", message: "Failed to validate email. Please try again." })
             toast.error("Failed to validate email. Please try again.")
             return
         }
@@ -96,12 +85,12 @@ export default function FeedbackPage() {
                 store_data: data.consentStoreFeedback,
                 suggestions: data.suggestions,
                 testimonial_Text: data.testimonialText,
-                timestamp: new Date(), // Added timestamp for better data management
+                timestamp: new Date(),
             })
             setSubmitted(true)
             console.log("Feedback submitted:", data)
             toast.success("Feedback submitted successfully!")
-            reset() // Reset form fields after successful submission
+            reset()
         } catch (err) {
             console.error("failed", err)
             toast.error("Failed to submit feedback. Please try again.")
@@ -432,7 +421,7 @@ export default function FeedbackPage() {
                         </div>
 
                         <Button
-                            disabled={isSubmitting} // Using isSubmitting from react-hook-form
+                            disabled={isSubmitting}
                             ariaLabel="Submit"
                             type="submit"
                             variant="primary"
