@@ -6,7 +6,7 @@ import { CustomSelect } from "@/components/common/CustomSelect";
 import Input from "@/components/common/Input";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { countryOptions } from "@/data/countryList";
-import { bookFormImages, joinAsData, raceData, referralSourceData } from "@/data/data";
+import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } from "@/data/data";
 import { validateUserData } from "@/lib/validation";
 import { userDataType } from "@/Types/UserDataType";
 import Image from "next/image";
@@ -31,14 +31,14 @@ export default function Page() {
     const [userData, setUserData] = useState<userDataType>({
         fullName: "",
         email: "",
-        race: "",
         country: "",
         joiningAs: "",
         otherJoin: "",
         tourDate: [],
+        reasonForJoin: [],
         referralSource: "",
-        communicationConsent: undefined,
         termsAgreement: undefined,
+        OtherReason: ""
     });
 
     // date selection function
@@ -102,19 +102,37 @@ export default function Page() {
     };
 
     // checkbox function
-    const handleCheckboxChange = (name: string, checked: boolean) => {
-        const updated = { ...userData, [name]: checked };
-        setUserData(updated);
+    const handleCheckboxChange = (name: string, checked: boolean, value?: string) => {
 
-        const field = name as keyof userDataType;
-        const fieldError = validateUserData(updated, field);
+        let updatedUserData: userDataType
 
-        setFormErrors(prev => {
-            const rest = { ...prev };
-            delete rest[field];
-            return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
-        });
+        if (name === 'reasonForJoin' && value !== undefined) {
+            const currentReasons = userData.reasonForJoin
+            if (checked) {
+                updatedUserData = { ...userData, reasonForJoin: [...currentReasons, value] }
+            }
+            else {
+                updatedUserData = { ...userData, reasonForJoin: currentReasons.filter((item) => item !== value) }
+            }
+        }
+
+        // handle single option modal
+        else {
+            updatedUserData = { ...userData, [name]: checked }
+        }
+        setUserData(updatedUserData)
+
+        const field = name as keyof userDataType
+        const fieldError = validateUserData(updatedUserData, field)
+        setFormErrors((prev) => {
+            const rest = { ...prev }
+            delete rest[field]
+            return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest
+        })
     };
+
+
+
 
     // submit function
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -157,11 +175,10 @@ export default function Page() {
                 fullName: userData.fullName,
                 email: userData.email,
                 country: userData.country,
-                ethnicity: userData.race,
+                reasonForJoin: userData.reasonForJoin,
                 joiningAs: userData.joiningAs,
                 otherJoin: userData.otherJoin,
                 tour_date: userData.tourDate,
-                agree_to_email: userData.communicationConsent,
                 agree_to_TC: userData.termsAgreement,
                 referral: userData.referralSource,
                 subscribedAt: new Date(),
@@ -187,12 +204,13 @@ export default function Page() {
                 fullName: "",
                 country: "",
                 joiningAs: "",
-                race: "",
                 referralSource: "",
                 tourDate: [],
+                reasonForJoin: [],
                 communicationConsent: false,
                 termsAgreement: false,
-                otherJoin: ""
+                otherJoin: "",
+                OtherReason: ""
             });
             setShowConfirmationModal(true);
 
@@ -229,6 +247,9 @@ export default function Page() {
             }))
         }
     }, [userData.joiningAs])
+
+
+
 
 
     console.log(userData)
@@ -280,29 +301,59 @@ export default function Page() {
                             error={formErrors.email}
                         />
 
-                        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6">
-                            <CustomSelect
-                                name="race"
-                                onChange={handleSelectChange}
-                                placeholder="Please select an option"
-                                options={raceData}
-                                label="Race/Ethnic identity"
-                                error={formErrors.race}
-                                isRequired
-                                value={userData.race}
-                            />
 
-                            <CustomSelect
-                                name="country"
-                                onChange={handleSelectChange}
-                                options={countryOptions}
-                                label="Country"
-                                placeholder="Please select an option"
-                                error={formErrors.country}
-                                isRequired
-                                value={userData.country}
-                            />
+
+
+                        <CustomSelect
+                            name="country"
+                            onChange={handleSelectChange}
+                            options={countryOptions}
+                            label="Country"
+                            placeholder="Please select an option"
+                            error={formErrors.country}
+                            isRequired
+                            value={userData.country}
+                        />
+
+
+                        <div className="w-full flex flex-col items-start gap-5 " >
+                            <h1 className="text-[#000000] font-medium text-base font-lato flex items-start gap-1" >What brings you to this tour  <div className=" text-red-600" >*</div></h1>
+
+
+                            <div className=" grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-stretch  "  >
+                                {reasonForJoinOptions.map((option, index) => {
+                                    const isChecked = userData.reasonForJoin.includes(option.value)
+                                    return (
+                                        <CustomCheckBox
+                                            key={index}
+                                            checked={isChecked}
+                                            onCheckedChange={(checked) => handleCheckboxChange("reasonForJoin", checked, option.value)}
+                                            label={option.label}
+                                            id={option.value}
+
+                                        />
+                                    )
+                                })}
+                            </div>
+                            {formErrors.reasonForJoin && (
+                                <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.reasonForJoin}</p>
+                            )}
                         </div>
+
+
+                        {
+                            userData.reasonForJoin.includes("others") &&
+                            (<Input
+                                value={userData.OtherReason}
+                                type="text"
+                                onChange={handleChange}
+                                name="OtherReason"
+                                label="Please specify type"
+                                isRequired={false}
+                                error={formErrors.OtherReason}
+                            />)
+                        }
+
 
                         <CustomSelect
                             name="joiningAs"
@@ -390,13 +441,7 @@ export default function Page() {
                         />
 
                         <div className="w-full flex items-start flex-col gap-3">
-                            <CustomCheckBox
-                                onCheckedChange={(checked) => handleCheckboxChange("communicationConsent", checked)}
-                                checked={userData.communicationConsent}
-                                label="I agree to receive emails about my free E-Rhythm booking"
-                                id="communicationConsent"
-                                error={formErrors.communicationConsent}
-                            />
+
 
                             <CustomCheckBox
                                 checked={userData.termsAgreement}
