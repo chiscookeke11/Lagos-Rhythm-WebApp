@@ -29,9 +29,15 @@ export function validateUserData(
         }
         break;
 
-      case "race":
-        if (!data.race) {
-          errors.race = "Race is required";
+      case "reasonForJoin":
+        if (data.reasonForJoin.length < 1) {
+          errors.reasonForJoin = "Please select at least one reason";
+        }
+        break;
+
+      case "OtherReason":
+        if (data.reasonForJoin.includes("others") && data.OtherReason.length < 3) {
+          errors.OtherReason = "Response must be at least 3 characters"
         }
         break;
 
@@ -62,13 +68,6 @@ export function validateUserData(
           errors.referralSource = "Referral source is required";
         }
         break;
-
-      case "communicationConsent":
-        if (!data.communicationConsent) {
-          errors.communicationConsent = "You must agree to receive emails";
-        }
-        break;
-
       case "termsAgreement":
         if (!data.termsAgreement) {
           errors.termsAgreement = "You must accept the privacy policy and terms";

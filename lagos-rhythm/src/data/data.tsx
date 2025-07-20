@@ -148,30 +148,6 @@ export const testimonialsData: TestimonialDataType[] = [
 
     ]
 
-
-    export const raceData: customSelectTypes[] = [
-        {
-            label: "Black or African American",
-            value: "Black or African American"
-        },
-
-        {
-            label: "Asian",
-            value: "Asian"
-        },
-
-        {
-            label: "Hispanic or Latino",
-            value: "Hispanic or Latino"
-        },
-
-        {
-            label: "Native American or Alaska Native",
-            value: "Native American or Alaska Native"
-        },
-]
-
-
 export const joinAsData: customSelectTypes[] = [
     {
         label: "Student",
@@ -189,6 +165,46 @@ export const joinAsData: customSelectTypes[] = [
         label: "Other",
         value: "Other",
     },
+]
+
+export const reasonForJoinOptions: customSelectTypes[] = [
+      {
+        label: "I’m reconnecting with African heritage or roots",
+        value: "I’m reconnecting with African heritage or roots",
+    },
+    {
+        label: "I’m exploring Nigerian or African culture for the first time",
+        value: "I’m exploring Nigerian or African culture for the first time",
+    },
+       {
+        label: "I’m preparing for travel to Lagos",
+        value: "I’m preparing for travel to Lagos",
+    },
+       {
+        label: "I’m participating as part of a school or academic program",
+        value: "I’m participating as part of a school or academic program",
+    },
+       {
+        label: "I’m joining as part of a DEI or cultural learning initiative",
+        value: "I’m joining as part of a DEI or cultural learning initiative",
+    },
+       {
+        label: "I’m joining for professional or research reasons",
+        value: "I’m joining for professional or research reasons",
+    },
+       {
+        label: "I’m curious about Lagos",
+        value: "I’m curious about Lagos",
+    },
+       {
+        label: "I just love cultural experiences and storytelling",
+        value: "I just love cultural experiences and storytelling",
+    },
+       {
+        label: "Others (Specify)",
+        value: "others",
+    },
+
 ]
 
 
