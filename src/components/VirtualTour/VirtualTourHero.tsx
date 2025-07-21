@@ -1,5 +1,7 @@
+import { easeInOut, motion } from "framer-motion";
 import ErrorBoundary from "../ErrorBoundary";
 import AvatarModel from "./AvatarModel";
+
 
 
 
@@ -7,11 +9,23 @@ import AvatarModel from "./AvatarModel";
 export default function VirtualTourHero() {
     return (
         <section className="min-h-[80vh] flex items-center justify-between flex-col md:flex-row gap-10  py-28 px-[5%] relative bg-[#05073C] " >
-            <div className="w-full basis-2/3 flex flex-col items-start gap-3" >
-                <h1 className="font-semibold text-white text-3xl  lg:text-[50px] leading-[140%] font-merienda"  >Step Into Lagos - Live and Online</h1>
-                <p className="font-normal text-base text-white font-merriweather max-w-2xl  "  >Experience Lagos like never before - real streets, real stories, real people.
-                    Our live virtual tours connect you to the rhythm of Lagos, Nigeria’s significant city in real time. No filters. No stock footage. Just Lagos, as it lives and breathes.</p>
-                <p className="font-normal text-base text-white font-merriweather max-w-2xl">For students, travelers, heritage seekers, or curious souls - Lagos Rhythm brings the city to you.</p>
+            <div className="w-full basis-2/3 flex flex-col items-start gap-3 overflow-hidden " >
+                <motion.h1
+                    initial={{ x: "-100%", opacity: 0 }}
+                    animate={{ x: "0", opacity: 1 }}
+                    transition={{ duration: 0.5, ease: easeInOut, delay: 0.2 }}
+
+                    className="font-semibold text-white text-3xl  lg:text-[50px] leading-[140%] font-merienda"  >Step Into Lagos - Live and Online</motion.h1>
+                <motion.p
+                    initial={{ x: "-100%", opacity: 0 }}
+                    animate={{ x: "0", opacity: 1 }}
+                    transition={{ duration: 0.5, ease: easeInOut, delay: 0.4 }}
+                    className="font-normal text-base text-white font-merriweather max-w-2xl  "  >Experience Lagos like never before - real streets, real stories, real people.
+                    Our live virtual tours connect you to the rhythm of Lagos, Nigeria’s significant city in real time. No filters. No stock footage. Just Lagos, as it lives and breathes.</motion.p>
+                <motion.p
+                    initial={{ x: "-100%", opacity: 0 }}
+                    animate={{ x: "0", opacity: 1 }}
+                    transition={{ duration: 0.5, ease: easeInOut, delay: 0.7 }} className="font-normal text-base text-white font-merriweather max-w-2xl">For students, travelers, heritage seekers, or curious souls - Lagos Rhythm brings the city to you.</motion.p>
             </div>
 
 
@@ -19,10 +33,10 @@ export default function VirtualTourHero() {
                 {/* 3d image here  */}
 
                 <ErrorBoundary fallback={<div>Failed to load 3D avatar</div>} >
-                <AvatarModel modelUrl="/virtual-tour/virtual-tour-3d-image/virtual-tour-avatar.glb" />
+                    <AvatarModel modelUrl="/virtual-tour/virtual-tour-3d-image/virtual-tour-avatar.glb" />
                 </ErrorBoundary>
 
-                <div className="w-full h-full  absolute top-0 left-0 z-20 block md:hidden "/>
+                <div className="w-full h-full  absolute top-0 left-0 z-20 block md:hidden " />
             </div>
 
 

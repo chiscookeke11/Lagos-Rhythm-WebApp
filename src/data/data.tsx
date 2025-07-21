@@ -322,3 +322,23 @@ export const themesData = [
         path: ""
     },
 ]
+
+
+export const whatYouGetData = [
+    {
+        label: "30–60 min private HD livestream",
+        image: "/"
+    },
+    {
+        label: "Real-time local guide",
+        image: "/"
+    },
+    {
+        label: "Option to co-brand for your organization",
+        image: "/"
+    },
+    {
+        label: "Post-tour Q&A",
+        image: "/"
+    },
+]
