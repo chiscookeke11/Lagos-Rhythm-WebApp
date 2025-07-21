@@ -1,7 +1,9 @@
+"use client"
+
 import { themesData } from "@/data/data";
 import Image from "next/image";
 import Button from "./common/Button";
-
+import { motion } from "framer-motion"
 
 
 export default function ThemesSection() {
@@ -16,7 +18,12 @@ export default function ThemesSection() {
 
 
                 {themesData.map((item, index) => (
-                    <div key={index} className="h-full w-full min-h-[250px]  rounded-xl flex items-center justify-center cursor-pointer  py-3 px-5  bg-no-repeat bg-cover bg-center relative overflow-hidden group shadow-xl "  >
+                    <motion.div
+                        initial={{ scale: 0.2, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        key={index} className="h-full w-full min-h-[250px]  rounded-xl flex items-center justify-center cursor-pointer  py-3 px-5  bg-no-repeat bg-cover bg-center relative overflow-hidden group shadow-xl "  >
 
                         <div className=" w-full absolute h-full top-0 left-0  backdrop-blur-3xl  ">
                             <Image src={"/coming-soon/coming-soon-bg.jpg"} alt="image" height={300} width={300} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out group-hover:blur-xs " />
@@ -29,7 +36,7 @@ export default function ThemesSection() {
                             <Button type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
                         </div>
 
-                    </div>
+                    </motion.div>
                 ))
 
                 }
