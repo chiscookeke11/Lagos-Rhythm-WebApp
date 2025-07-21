@@ -1,0 +1,42 @@
+import { themesData } from "@/data/data";
+import Image from "next/image";
+import Button from "./common/Button";
+
+
+
+export default function ThemesSection() {
+    return (
+        <section className=" w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1] " >
+
+
+            <h1 className="text-[#05073C] font-bold text-2xl  md:text-3xl font-merienda ">E-Rhythm <span className="text-[#EF8F57] ">Themes</span>   </h1>
+
+
+            <div className=" w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-6 "  >
+
+
+                {themesData.map((item, index) => (
+                    <div key={index} className="h-full w-full min-h-[250px]  rounded-xl flex items-center justify-center cursor-pointer  py-3 px-5  bg-no-repeat bg-cover bg-center relative overflow-hidden group shadow-xl "  >
+
+                        <div className=" w-full absolute h-full top-0 left-0  backdrop-blur-3xl  ">
+                            <Image src={"/coming-soon/coming-soon-bg.jpg"} alt="image" height={300} width={300} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out group-hover:blur-xs " />
+                        </div>
+
+
+                        <div className=" h-12 px-3 py-3  w-full absolute bg-white/5 group-hover:bg-black/10 backdrop-blur-md bottom-0 left-0 overflow-hidden group-hover:h-[68%] md:group-hover:h-[70%] lg:group-hover:h-[65%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
+                            <h1 className="font-merienda font-bold text-lg lg:text-xl text-white " >{item.title} </h1>
+                            <p className="font-lato font-medium text-sm lg:text-base text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out " > {item.description} </p>
+                            <Button type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
+                        </div>
+
+                    </div>
+                ))
+
+                }
+
+
+
+            </div>
+        </section>
+    )
+}
