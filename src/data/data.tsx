@@ -346,19 +346,21 @@ export const whatYouGetData = [
 
 export const crewAmountData = [
     {
-        label: "3 people",
-        value: "3_persoms"
+        label: "1-3 (circle)",
+        value: "circle",
+        perTourFee: 400,
+        monthlySub: 50000,
     },
     {
-        label: "3 people",
-        value: "3_persoms"
+        label: "4-10 (crew)",
+        value: "crew",
+        perTourFee: 400,
+        monthlySub: 50000,
     },
     {
-        label: "3 people",
-        value: "3_persoms"
-    },
-    {
-        label: "3 people",
-        value: "3_persoms"
+        label: "11+ (community)",
+        value: "community",
+        perTourFee: 400,
+        monthlySub: 50000,
     },
 ]
