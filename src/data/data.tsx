@@ -342,3 +342,23 @@ export const whatYouGetData = [
         image: "/"
     },
 ]
+
+
+export const crewAmountData = [
+    {
+        label: "3 people",
+        value: "3_persoms"
+    },
+    {
+        label: "3 people",
+        value: "3_persoms"
+    },
+    {
+        label: "3 people",
+        value: "3_persoms"
+    },
+    {
+        label: "3 people",
+        value: "3_persoms"
+    },
+]
