@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 
 export default function ThemesSection() {
     return (
-        <section className=" w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1] " >
+        <section id="themeSection"  className=" w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1] " >
 
 
             <h1 className="text-[#05073C] font-bold text-2xl  md:text-3xl font-merienda ">E-Rhythm <span className="text-[#EF8F57] ">Themes</span>   </h1>
