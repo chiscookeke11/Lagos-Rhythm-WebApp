@@ -28,7 +28,7 @@ export default function Page() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="font-semibold text-white text-3xl md:text-4xl lg:text-[70px] lg:leading-[140%] font-merienda">
-                        Exclusive E-Rhythm
+                        Exclusive E-ythm
                     </motion.h1>
                     <motion.h3
                         initial={{ opacity: 0, y: 50 }}
