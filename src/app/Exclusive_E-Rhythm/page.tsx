@@ -47,12 +47,11 @@ export default function Page() {
 
 
                     <div className=" w-fit flex items-center gap-6  mx-auto mt-12"  >
-                        <a href="#themeSection">
                         <Button
                             label="Book a Tour"
                             ariaLabel="Book a Tour"
                             type="button"
-                        /></a>
+                        />
 
                         <Button
                             label="Request a Demo"
