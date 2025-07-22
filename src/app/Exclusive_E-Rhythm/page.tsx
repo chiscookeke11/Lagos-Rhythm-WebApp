@@ -104,7 +104,7 @@ export default function Page() {
                 </div>
 
 
-                <h1 className="font-lato text-center text-sm md:text-base  " >Have questions? Email <a href={`mailto:${bookingLink}`} className="text-[#EF8F57] cursor-pointer" >bookings@lagosrhythm.com</a> or <a href={whatsAppLink} className="text-[#EF8F57] cursor-pointer " >chat</a> with us live.</h1>
+                <h1 className="font-lato text-center text-sm md:text-base  " >Have questions?<br /> Email <a href={`mailto:${bookingLink}`} className="text-[#EF8F57] cursor-pointer" >bookings@lagosrhythm.com</a> or <a href={whatsAppLink} className="text-[#EF8F57] cursor-pointer " >chat</a> with us live.</h1>
             </div>
 
 
