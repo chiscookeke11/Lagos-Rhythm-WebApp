@@ -5,16 +5,20 @@ import Image from "next/image";
 import Button from "./common/Button";
 import { motion } from "framer-motion"
 import SelectNumber from "./SelectNumber";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function ThemesSection() {
     const [showSelectModal, setShowSelectModal] = useState(false)
 
+    useEffect(() => {
+        document.body.style.overflowY = showSelectModal ? "hidden" : "auto"
+    }, [showSelectModal])
+
 
 
     return (
-        <section className=" w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1] " >
+        <section id="themeSection" className=" w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1] " >
 
 
             <h1 className="text-[#05073C] font-bold text-2xl  md:text-3xl font-merienda ">E-Rhythm <span className="text-[#EF8F57] ">Themes</span>   </h1>

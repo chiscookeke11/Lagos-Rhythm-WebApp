@@ -85,10 +85,13 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--background);
-  scroll-behavior: smooth;
 }
 .triangle {
   clip-path: polygon(100% 0, 14% 0, 100% 100%);
