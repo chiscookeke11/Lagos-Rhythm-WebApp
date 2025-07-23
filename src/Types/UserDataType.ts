@@ -27,11 +27,12 @@ export interface exclusiveBookingDataType {
     OtherReason: string
 }
 
-export type PopulationTypeInterface = "1-3 (circle)" | "4-10 (crew)" | "11+ (community)"
+export type PopulationTypeInterface = string
 
 export interface CrewAmountItem {
-    label: PopulationTypeInterface;
+    label: string;
     value: string;
     perTourFee: number;
     monthlySub: number;
+    maxAmount: number
 }
