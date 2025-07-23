@@ -7,16 +7,17 @@ import Input from "@/components/common/Input";
 import { countryOptions } from "@/data/countryList";
 import { bookFormImages, reasonForJoinOptions } from "@/data/data";
 import { exclusiveBookingDataType } from "@/Types/UserDataType";
+import { Minus, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 
 
 export default function Page() {
-    const [nameFieldCount, setNameFieldCount] = useState<number>(3)
-    const [emailFieldCount, setEmailFieldCount] = useState(3)
+    const [partcipantsCount, setParticipantsCount] = useState<number>(1)
     const [touristNames, setTouristNames] = useState<string[]>([])
     const [touristEmails, setTouristEmails] = useState<string[]>([])
+    const maxParticipantCount = 3
 
 
     const [bookingData, setBookingData] = useState<exclusiveBookingDataType>({
@@ -32,41 +33,6 @@ export default function Page() {
     })
 
 
-
-    const handleTouristCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const count = parseInt(e.target.value) || 0
-
-        if (count > 11) return;
-
-        setNameFieldCount(count)
-        setEmailFieldCount(count)
-    }
-
-    const handleNameChange = (index: number, value: string) => {
-        const updated = [...touristNames]
-        updated[index] = value
-        setTouristNames(updated)
-    }
-
-    const handleEmailChange = (index: number, value: string) => {
-        const updated = [...touristEmails]
-        updated[index] = value
-        setTouristEmails(updated)
-    }
-
-    useEffect(() => {
-        const updatedNames = Array.from({ length: nameFieldCount }, (_, i) => touristNames[i] || "");
-        setTouristNames(updatedNames);
-    }, [nameFieldCount]);
-
-
-    useEffect(() => {
-        const updatedEmails = Array.from({ length: emailFieldCount }, (_, i) => touristEmails[i] || "")
-        setTouristEmails(updatedEmails)
-    }, [emailFieldCount])
-
-
-
     const handleSelectChange = (name: string, value: string) => {
         const updated = { ...bookingData, [name]: value };
         setBookingData(updated)
@@ -77,52 +43,99 @@ export default function Page() {
 
 
     // checkbox function
-        const handleCheckboxChange = (name: string, checked: boolean, value?: string) => {
-            let updatedUserData: exclusiveBookingDataType = { ...bookingData }
+    const handleCheckboxChange = (name: string, checked: boolean, value?: string) => {
+        let updatedUserData: exclusiveBookingDataType = { ...bookingData }
 
 
-            if (name === "reasonForJoin" && value !== undefined) {
-                const currentReasons = updatedUserData.reasonForJoin
+        if (name === "reasonForJoin" && value !== undefined) {
+            const currentReasons = updatedUserData.reasonForJoin
 
-                if (value === "others") {
-                    if (checked) {
-                        updatedUserData.reasonForJoin = ["others"]
-                    }
-                    else {
-                        updatedUserData.reasonForJoin = currentReasons.filter((item) => item !== "others")
-                    }
+            if (value === "others") {
+                if (checked) {
+                    updatedUserData.reasonForJoin = ["others"]
                 }
                 else {
-                    if (checked) {
-                        const filteredReasons = currentReasons.filter((item) => item !== "others")
-                        updatedUserData.reasonForJoin = [...filteredReasons, value]
-                    }
-                    else {
-                        updatedUserData.reasonForJoin = currentReasons.filter((item) => item !== value)
-                    }
+                    updatedUserData.reasonForJoin = currentReasons.filter((item) => item !== "others")
                 }
             }
             else {
-                updatedUserData = { ...bookingData, [name]: checked }
+                if (checked) {
+                    const filteredReasons = currentReasons.filter((item) => item !== "others")
+                    updatedUserData.reasonForJoin = [...filteredReasons, value]
+                }
+                else {
+                    updatedUserData.reasonForJoin = currentReasons.filter((item) => item !== value)
+                }
             }
+        }
+        else {
+            updatedUserData = { ...bookingData, [name]: checked }
+        }
 
-            setBookingData(updatedUserData)
+        setBookingData(updatedUserData)
 
-            // const fieldToValidate = name as keyof exclusiveBookingDataType
-            // const fieldError = validateUserData(updatedUserData, fieldToValidate)
+        // const fieldToValidate = name as keyof exclusiveBookingDataType
+        // const fieldError = validateUserData(updatedUserData, fieldToValidate)
 
-            // setFormErrors((prev) => {
-            //     const rest = { ...prev }
-            //     delete rest[fieldToValidate]
-            //     // Special handling for OtherReason error if 'others' is deselected
-            //     if (fieldToValidate === "reasonForJoin" && !updatedUserData.reasonForJoin.includes("others")) {
-            //         delete rest.OtherReason
-            //     }
-            //     return fieldError[fieldToValidate] ? { ...rest, [fieldToValidate]: fieldError[fieldToValidate] } : rest
-            // })
+        // setFormErrors((prev) => {
+        //     const rest = { ...prev }
+        //     delete rest[fieldToValidate]
+        //     // Special handling for OtherReason error if 'others' is deselected
+        //     if (fieldToValidate === "reasonForJoin" && !updatedUserData.reasonForJoin.includes("others")) {
+        //         delete rest.OtherReason
+        //     }
+        //     return fieldError[fieldToValidate] ? { ...rest, [fieldToValidate]: fieldError[fieldToValidate] } : rest
+        // })
 
 
-        };
+    };
+
+    console.log(partcipantsCount)
+
+    const increaseParticipantsCount = () => {
+        if (partcipantsCount >= maxParticipantCount) return;
+
+        else {
+            setParticipantsCount((prev) => prev + 1)
+        }
+    }
+
+    const decreaseParticipantsCount = () => {
+        if (partcipantsCount < 2) return;
+
+        else {
+            setParticipantsCount((prev) => prev - 1)
+        }
+    }
+
+
+    useEffect(() => {
+        setTouristNames((prev) =>
+            Array.from({ length: partcipantsCount }, (_, i) => prev[i] || "")
+        )
+
+        setTouristEmails((prev) =>
+            Array.from({ length: partcipantsCount }, (_, i) => prev[i] || "")
+        );
+    }, [partcipantsCount])
+
+    const handleNameChange = (index: number, value: string) => {
+        const updated = [...touristNames];
+        updated[index] = value;
+        setTouristNames(updated);
+    };
+
+    const handleEmailChange = (index: number, value: string) => {
+        const updated = [...touristEmails];
+        updated[index] = value;
+        setTouristEmails(updated);
+    };
+
+
+    console.log(touristEmails)
+    console.log(touristNames)
+
+
 
 
 
@@ -150,17 +163,43 @@ export default function Page() {
                         <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-merienda">BOOK YOUR PACKAGE</h1>
                         <p className="font-medium text-base md:text-lg font-lato">Experience Something New Every Moment</p>
                     </div>
-                    <input type="number" min={0} max={10} value={nameFieldCount} onChange={handleTouristCountChange} />
+
 
                     <form className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato">
 
-                        <div className=" w-full flex flex-col  gap-3 " >
-                            <h3>Enter Full name</h3>
-                            <div className="w-full grid grid-cols-2 gap-5 place-items-center justify-items-center " >
 
-                                {touristNames.map((name, index) => (
-                                    <Input key={index} name="name" type="text" onChange={(e) => handleNameChange(index, e.target.value)} value={name} label={`Name ${index + 1}`} isRequired placeholder={`Please enter user ${index + 1} fullname`} />
-                                ))}
+                        <div className="w-full flex flex-col items-start gap-7  " >
+
+                            {Array.from({ length: partcipantsCount }).map((_, index) => (
+                                <div key={index} className="w-full flex items-center gap-6 justify-between">
+                                    <Input
+                                        name={`fullName_${index}`}
+                                        type="text"
+                                        value={touristNames[index] || ""}
+                                        placeholder={`User ${index + 1}`}
+                                        label={`User ${index + 1} Full Name`}
+                                        onChange={(e) => handleNameChange(index, e.target.value)}
+                                        isRequired
+                                    />
+                                    <Input
+                                        name={`email_${index}`}
+                                        type="email"
+                                        value={touristEmails[index] || ""}
+                                        placeholder={`User ${index + 1} Email`}
+                                        label={`User ${index + 1} Email`}
+                                        onChange={(e) => handleEmailChange(index, e.target.value)}
+                                        isRequired
+                                    />
+                                </div>
+                            ))}
+
+
+
+
+                            <div className="w-fit flex items-center justify-center gap-3 ml-auto" >
+                                <button onClick={decreaseParticipantsCount} type="button" className=" cursor-pointer border-2 border-[#EF8F57] rounded-full h-5 w-5 flex items-center justify-center " > <Minus size={25} color="#EF8F57" /> </button>
+                                <button onClick={increaseParticipantsCount} type="button" className=" cursor-pointer border-2 border-[#EF8F57] rounded-full h-5 w-5 flex items-center justify-center " > <PlusIcon size={25} color="#EF8F57" /> </button>
+
                             </div>
 
                         </div>
@@ -168,14 +207,8 @@ export default function Page() {
 
 
 
-                        <div className=" w-full flex flex-col  gap-3 " >
-                            <h3>Enter Emails</h3>
-                            <div className="w-full grid grid-cols-2 gap-5 place-items-center justify-items-center " >
-                                {touristEmails.map((name, index) => (
-                                    <Input key={index} name="email" type="email" onChange={(e) => handleEmailChange(index, e.target.value)} value={name} label={`Email ${index + 1}`} isRequired />
-                                ))}
-                            </div>
-                        </div>
+
+
 
 
                         <CustomSelect
