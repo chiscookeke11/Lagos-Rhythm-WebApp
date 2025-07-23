@@ -20,7 +20,7 @@ export default function Page() {
         <>
 
             {/* hero section  */}
-            <section className={`w-full h-screen   bg-no-repeat bg-cover bg-center flex flex-col gap-4 items-center justify-center px-4 py-5 relative `}   >
+            <section className={`w-full h-screen bg-[url('/exclusive_Rhythm/exclusive-page-hero.jpg')]  bg-no-repeat bg-cover bg-center flex flex-col gap-4 items-center justify-center px-4 py-5 relative `}   >
                 <div className="inset-0 bg-black/55 absolute h-full w-full " />
                 <div className="overflow-hidden text-center z-10 space-y-1 ">
                     <motion.h1
@@ -71,13 +71,13 @@ export default function Page() {
 
 
             <div className="w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1]">
-                <h2 className="text-[#05073C] font-bold text-xl  md:text-2xl font-merienda" >What You Get</h2>
+
 
 
 
 
                 <ul className=" w-full max-w-xl bg-[#ffffff] flex flex-col  items-center justify-between gap-3 md:gap-5 pl-4 px-3 py-7 shadow-lg rounded-sm " >
-
+                <h2 className="text-[#05073C] font-bold text-xl  md:text-2xl font-merienda mx-auto " >What You Get</h2>
                     {
                         whatYouGetData.map((item, index) => (
                             <li key={index} className="h-fit w-full  p-3 rounded-sm relative flex items-center gap-3 text-[#05073C] font-lato text-sm md:text-base font-medium " >

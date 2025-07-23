@@ -25,7 +25,7 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 // 3. Create the Provider with the full value passed to the context.
 export const LagosRhythmProvider = ({ children }: { children: React.ReactNode }) => {
   const [populationType, setPopulationType] = useState<PopulationTypeInterface>("1-3 (circle)");
-  const [populationAmount, setPopulationAmount] = useState(1);
+  const [populationAmount, setPopulationAmount] = useState(0);
   const [partcipantsCount, setParticipantsCount] = useState(1);
 
   return (

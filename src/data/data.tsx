@@ -12,6 +12,7 @@ import Traveler from "../app/animated-icons/Traveler.json";
 import lagos from "../app/animated-icons/lagos.json";
 import african from "../app/animated-icons/african.json";
 import students from "../app/animated-icons/students.json";
+import { CrewAmountItem } from "@/Types/UserDataType";
 
 
 
@@ -294,32 +295,38 @@ export const themesData = [
     {
         title: "Art",
         description: "Where expression becomes memory. Discover how Lagos art makes statements, starts conversations, and preserves truth.",
-        path: ""
+        path: "",
+        image: ""
     },
     {
         title: "Culture",
         description: "The heartbeat of a people. Experience how values, language, food, and faith shape identity and belonging in Lagos.",
-        path: ""
+        path: "",
+        image: "/exclusive_Rhythm/culture-image.jpg"
     },
     {
         title: "History",
         description: "Not just dates—decisions. Trace the moments that built a city known for resistance, reinvention, and pride.",
-        path: ""
+        path: "",
+        image: "/exclusive_Rhythm/history-image.jpg"
     },
     {
         title: "Entertainment",
         description: "Where energy becomes influence. Step into the world of music, film, and creativity that powers a continent.",
-        path: ""
+        path: "",
+        image: ""
     },
     {
         title: "Vibe",
         description: "Because the soul of a city lives in its people. Join real-time hangouts with Lagosians sharing their world, unfiltered.",
-        path: ""
+        path: "",
+        image: ""
     },
     {
         title: "Custom Tour",
         description: "Every audience is different. We’ll build something that speaks directly to yours - no template required",
-        path: ""
+        path: "",
+        image: ""
     },
 ]
 
@@ -344,23 +351,26 @@ export const whatYouGetData = [
 ]
 
 
-export const crewAmountData = [
+export const crewAmountData: CrewAmountItem[] = [
     {
         label: "1-3 (circle)",
         value: "circle",
         perTourFee: 400,
         monthlySub: 50000,
+        maxAmount: 3
     },
     {
         label: "4-10 (crew)",
         value: "crew",
         perTourFee: 400,
         monthlySub: 50000,
+        maxAmount: 10
     },
     {
         label: "11+ (community)",
         value: "community",
         perTourFee: 400,
         monthlySub: 50000,
+        maxAmount: 100
     },
 ]

@@ -18,8 +18,13 @@ export default function Page() {
     const [touristNames, setTouristNames] = useState<string[]>([])
     const [touristEmails, setTouristEmails] = useState<string[]>([])
     const maxParticipantCount = 3
-    const {partcipantsCount, setParticipantsCount} = useAppContext()
+    const {partcipantsCount, setParticipantsCount, populationType, populationAmount} = useAppContext()
 
+
+
+
+
+    console.log(populationType)
 
     const [bookingData, setBookingData] = useState<exclusiveBookingDataType>({
         country: "",
@@ -167,6 +172,11 @@ export default function Page() {
 
 
                     <form className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato">
+
+
+                        <h2 className="mr-auto " >{populationType} </h2>
+                        <h2 className="mr-auto " >{partcipantsCount} </h2>
+                        <h2 className="mr-auto " >Max: {populationAmount} </h2>
 
 
                         <div className="w-full flex flex-col items-start gap-7  " >

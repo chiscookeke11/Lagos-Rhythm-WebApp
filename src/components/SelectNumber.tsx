@@ -15,7 +15,9 @@ interface SelectNumberprops {
 
 
 export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) {
-    const { setPopulationType } = useAppContext()
+    const { setPopulationType, populationType, setPopulationAmount } = useAppContext()
+
+    console.log(populationType)
 
 
     return (
@@ -49,6 +51,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                                 <button onClick={() => {
                                     setShowSelectModal(false)
                                     setPopulationType(item.label)
+                                    setPopulationAmount(item.maxAmount)
                                 }}
                                     className="w-full h-full p-3 bg-[#ffffff]  text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all transform duration-150 ease-in-out font-lato  " >
                                     <Users color="#EF8F57" />
