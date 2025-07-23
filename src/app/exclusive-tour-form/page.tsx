@@ -10,14 +10,15 @@ import { exclusiveBookingDataType } from "@/Types/UserDataType";
 import { Minus, PlusIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
 
 
 export default function Page() {
-    const [partcipantsCount, setParticipantsCount] = useState<number>(1)
     const [touristNames, setTouristNames] = useState<string[]>([])
     const [touristEmails, setTouristEmails] = useState<string[]>([])
     const maxParticipantCount = 3
+    const {partcipantsCount, setParticipantsCount} = useAppContext()
 
 
     const [bookingData, setBookingData] = useState<exclusiveBookingDataType>({
