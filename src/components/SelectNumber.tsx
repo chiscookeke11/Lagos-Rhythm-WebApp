@@ -27,7 +27,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                 className="fixed top-0 left-0 h-screen w-full bg-black/2 backdrop-blur-sm z-30 flex items-center justify-center px-3 py-6 " >
 
 
-                <Link href={"/exclusive-tour-form"} >
+                <Link href={"/exclusive-tour-form"} className="w-full " >
                     <motion.div
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}

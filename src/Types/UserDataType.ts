@@ -13,3 +13,16 @@ export interface userDataType{
         termsAgreement?: boolean
         OtherReason: string
 }
+
+
+export interface exclusiveBookingDataType{
+    country: string;
+          reasonForJoin: string[],
+        joiningAs: string,
+        otherJoin?: string,
+        tourDate: string[],
+        referralSource: string,
+        communicationConsent?: boolean,
+        termsAgreement?: boolean
+        OtherReason: string
+}
