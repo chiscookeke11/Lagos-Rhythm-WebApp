@@ -1,13 +1,9 @@
 "use client";
 
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
-import React, { createContext, useContext, useState } from "react";
 
 
-
-
-
-// 1. Define the full shape of the context, including the state setters if needed.
 interface AppContextProps {
   populationType: PopulationTypeInterface;
   setPopulationType: React.Dispatch<React.SetStateAction<PopulationTypeInterface>>;
@@ -15,18 +11,58 @@ interface AppContextProps {
   populationAmount: number;
   setPopulationAmount: React.Dispatch<React.SetStateAction<number>>;
 
-  partcipantsCount: number;
+  participantsCount: number;
   setParticipantsCount: React.Dispatch<React.SetStateAction<number>>;
+
+  selectedTheme: string;
+  setSelectedTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// 2. Create the context with correct initial undefined type.
+
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-// 3. Create the Provider with the full value passed to the context.
+
+const getFromLocalStorage = <T,>(key: string, defaultValue: T): T => {
+  if (typeof window === "undefined") return defaultValue;
+  try {
+    const stored = localStorage.getItem(key);
+    return stored ? (JSON.parse(stored) as T) : defaultValue;
+  } catch {
+    return defaultValue;
+  }
+};
+
+
 export const LagosRhythmProvider = ({ children }: { children: React.ReactNode }) => {
-  const [populationType, setPopulationType] = useState<PopulationTypeInterface>("1-3 (circle)");
-  const [populationAmount, setPopulationAmount] = useState(0);
-  const [partcipantsCount, setParticipantsCount] = useState(1);
+  const [populationType, setPopulationType] = useState<PopulationTypeInterface>(
+    getFromLocalStorage("populationType", "1-3 (circle)")
+  );
+  const [populationAmount, setPopulationAmount] = useState<number>(
+    getFromLocalStorage("populationAmount", 0)
+  );
+  const [participantsCount, setParticipantsCount] = useState<number>(
+    getFromLocalStorage("participantsCount", 1)
+  );
+  const [selectedTheme, setSelectedTheme] = useState<string>(
+    getFromLocalStorage("selectedTheme", "")
+  );
+
+
+  useEffect(() => {
+    localStorage.setItem("populationType", JSON.stringify(populationType));
+  }, [populationType]);
+
+  useEffect(() => {
+    localStorage.setItem("populationAmount", JSON.stringify(populationAmount));
+  }, [populationAmount]);
+
+  useEffect(() => {
+    localStorage.setItem("participantsCount", JSON.stringify(participantsCount));
+  }, [participantsCount]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme));
+  }, [selectedTheme]);
 
   return (
     <AppContext.Provider
@@ -35,8 +71,10 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         setPopulationType,
         populationAmount,
         setPopulationAmount,
-        partcipantsCount,
+        participantsCount,
         setParticipantsCount,
+        selectedTheme,
+        setSelectedTheme,
       }}
     >
       {children}
@@ -44,7 +82,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   );
 };
 
-// 4. Fix the conditional check: you're checking `AppContext` instead of `context`
+
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {

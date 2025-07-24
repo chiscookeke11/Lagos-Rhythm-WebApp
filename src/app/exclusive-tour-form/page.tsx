@@ -17,8 +17,8 @@ import { useAppContext } from "../context/AppContext";
 export default function Page() {
     const [touristNames, setTouristNames] = useState<string[]>([])
     const [touristEmails, setTouristEmails] = useState<string[]>([])
-    const maxParticipantCount = 3
-    const {partcipantsCount, setParticipantsCount, populationType, populationAmount} = useAppContext()
+    const { participantsCount, setParticipantsCount, populationType, populationAmount, selectedTheme } = useAppContext()
+    const maxParticipantCount = populationAmount
 
 
 
@@ -96,10 +96,10 @@ export default function Page() {
 
     };
 
-    console.log(partcipantsCount)
+    console.log(participantsCount)
 
     const increaseParticipantsCount = () => {
-        if (partcipantsCount >= maxParticipantCount) return;
+        if (participantsCount >= maxParticipantCount) return;
 
         else {
             setParticipantsCount((prev) => prev + 1)
@@ -107,7 +107,7 @@ export default function Page() {
     }
 
     const decreaseParticipantsCount = () => {
-        if (partcipantsCount < 2) return;
+        if (participantsCount < 2) return;
 
         else {
             setParticipantsCount((prev) => prev - 1)
@@ -117,13 +117,13 @@ export default function Page() {
 
     useEffect(() => {
         setTouristNames((prev) =>
-            Array.from({ length: partcipantsCount }, (_, i) => prev[i] || "")
+            Array.from({ length: participantsCount }, (_, i) => prev[i] || "")
         )
 
         setTouristEmails((prev) =>
-            Array.from({ length: partcipantsCount }, (_, i) => prev[i] || "")
+            Array.from({ length: participantsCount }, (_, i) => prev[i] || "")
         );
-    }, [partcipantsCount])
+    }, [participantsCount])
 
     const handleNameChange = (index: number, value: string) => {
         const updated = [...touristNames];
@@ -175,13 +175,14 @@ export default function Page() {
 
 
                         <h2 className="mr-auto " >{populationType} </h2>
-                        <h2 className="mr-auto " >{partcipantsCount} </h2>
+                        <h2 className="mr-auto " >{participantsCount} </h2>
                         <h2 className="mr-auto " >Max: {populationAmount} </h2>
+                        <h2 className="mr-auto " >Selected Theme: {selectedTheme} </h2>
 
 
                         <div className="w-full flex flex-col items-start gap-7  " >
 
-                            {Array.from({ length: partcipantsCount }).map((_, index) => (
+                            {Array.from({ length: participantsCount }).map((_, index) => (
                                 <div key={index} className="w-full flex items-center gap-6 justify-between">
                                     <Input
                                         name={`fullName_${index}`}

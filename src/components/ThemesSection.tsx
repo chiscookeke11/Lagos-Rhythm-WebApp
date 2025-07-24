@@ -6,10 +6,13 @@ import Button from "./common/Button";
 import { motion } from "framer-motion"
 import SelectNumber from "./SelectNumber";
 import { useEffect, useState } from "react";
+import { useAppContext } from "@/app/context/AppContext";
 
 
 export default function ThemesSection() {
     const [showSelectModal, setShowSelectModal] = useState(false)
+
+    const { setSelectedTheme } = useAppContext()
 
     useEffect(() => {
         document.body.style.overflowY = showSelectModal ? "hidden" : "auto"
@@ -43,11 +46,16 @@ export default function ThemesSection() {
                         <div className=" h-12 px-3 py-3  w-full absolute bg-white/5 group-hover:bg-black/10 backdrop-blur-md bottom-0 left-0 overflow-hidden group-hover:h-[68%] md:group-hover:h-[70%] lg:group-hover:h-[65%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
                             <h1 className="font-merienda font-bold text-lg lg:text-xl text-white " >{item.title} </h1>
                             <p className="font-lato font-medium text-sm lg:text-base text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out " > {item.description} </p>
-                            <Button onClick={() => setShowSelectModal(true)} type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
+                            <Button onClick={() => {
+                                setShowSelectModal(true)
+                                setSelectedTheme(item.title)
+                            }} type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
                         </div>
 
 
-                        {showSelectModal && <SelectNumber setShowSelectModal={setShowSelectModal} />}
+                        {showSelectModal &&
+                            <SelectNumber
+                                setShowSelectModal={setShowSelectModal} />}
                     </motion.div>
                 ))
 

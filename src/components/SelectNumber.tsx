@@ -28,6 +28,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1, ease: "easeInOut" }}
+                onClick={() => setShowSelectModal(false)}
                 className="fixed top-0 left-0 h-screen w-full bg-black/2 backdrop-blur-sm z-30 flex items-center justify-center px-3 py-6 " >
 
 
@@ -37,6 +38,10 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
                     transition={{ duration: 0.15 }}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }}
                     className="w-full max-w-[700px] rounded-lg  bg-[#FDF4F1] h-fit py-6 px-5 flex flex-col gap-5 items-center  " >
 
                     <button onClick={() => setShowSelectModal(false)} className="ml-auto text-red-600 font-bold cursor-pointer border-2 rounded-full border-red-600 p-0.5 flex items-center justify-center  " ><X size={30} /> </button>
