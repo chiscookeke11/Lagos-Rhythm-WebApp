@@ -15,7 +15,13 @@ export interface userDataType {
 }
 
 
+export type Tourist = {
+    fullName: string
+    email: string
+}
+
 export interface exclusiveBookingDataType {
+    tourists: Tourist[];
     country: string;
     reasonForJoin: string[],
     joiningAs: string,

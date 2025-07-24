@@ -14,13 +14,13 @@ import { customSelectTypes } from "@/Types/CustomSelectTypes"
 
 
 interface CustomSelectProps {
-    label: string,
-    isRequired: boolean
-    options: customSelectTypes[]
+    label?: string,
+    isRequired?: boolean
+    options?: customSelectTypes[]
     placeholder?: string
-    name: string
-    onChange: (name: string, value: string) => void;
-    error?: string
+    name: string;
+    onChange?: (name: string, value: string) => void;
+    error?: string;
     value: string
 }
 
@@ -32,14 +32,14 @@ export function CustomSelect({ label, isRequired, options, placeholder, onChange
                     <div className=" text-red-600" >*</div>
                 )}
             </span>
-            <Select value={value} onValueChange={(value) => onChange(name, value)}  >
+            <Select value={value} onValueChange={(value) => onChange && onChange(name, value)}  >
                 <SelectTrigger className="w-full border-0 shadow-none bg-white focus:shadow-none cursor-pointer  py-6  ">
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent className="cursor-pointer">
                     <SelectGroup>
                         <SelectLabel>{ }</SelectLabel>
-                        {options.map((option, index) => (
+                        {options?.map((option, index) => (
                             <SelectItem key={index} value={option.value} className="cursor-pointer" >{option.label}</SelectItem>
                         ))}
                     </SelectGroup>
