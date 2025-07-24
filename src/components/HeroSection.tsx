@@ -5,16 +5,18 @@ import Button from "./common/Button";
 import { motion } from "framer-motion";
 import ScrollingText from "./ScrollingText";
 import Link from "next/link";
+import Image from "next/image";
 
 
 
 interface HeroSectionProps {
   setVideoLoaded: (videoLoaded: boolean) => void
+  videoLoaded: boolean
 }
 
 
 
-export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
+export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSectionProps) {
 
   const MotionButton = useMemo(() => motion(Button), [])
 
@@ -24,6 +26,7 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
 
   return (
     <section className="w-full h-[95vh] md:h-screen relative bg-white ">
+
       <video
         onLoadedData={() => setVideoLoaded(true)}
         className="absolute top-0 left-0 h-full w-full object-cover z-0"
@@ -33,6 +36,10 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
       >
         <source src="/hero-video.mp4" type="video/mp4" />
       </video>
+
+
+      {!videoLoaded && (<Image src={"/hero-image.png"} alt="hero-image" fill />)}
+
 
       <div className="w-full h-full absolute bg-black/50 z-10 flex items-center justify-center px-4 py-3">
         <div className="max-w-sm md:max-w-5xl w-full h-full flex items-center justify-center flex-col gap-4 lg:gap-5 text-center">
@@ -53,13 +60,13 @@ export default function HeroSection({ setVideoLoaded }: HeroSectionProps) {
             </motion.p>
           </div>
           <Link href={"/Free_E-Rhythm"} >
-          <MotionButton
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 1.1 }}
-            transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 7 }}
-            type="button" label="Free Virtual Tour" > </MotionButton></Link>
+            <MotionButton
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 1.1 }}
+              transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 7 }}
+              type="button" label="Free Virtual Tour" > </MotionButton></Link>
         </div>
       </div>
       <ScrollingText />

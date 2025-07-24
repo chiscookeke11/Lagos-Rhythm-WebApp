@@ -69,7 +69,6 @@ export default function Page() {
             <ThemesSection />
 
 
-
             <div className="w-full flex flex-col gap-6 items-center py-16 px-10 bg-[#FDF4F1]">
 
 
