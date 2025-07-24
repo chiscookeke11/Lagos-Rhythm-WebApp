@@ -296,7 +296,7 @@ export const themesData = [
         title: "Art",
         description: "Where expression becomes memory. Discover how Lagos art makes statements, starts conversations, and preserves truth.",
         path: "",
-        image: ""
+        image: "/exclusive_Rhythm/art-image.jpg"
     },
     {
         title: "Culture",
@@ -314,19 +314,19 @@ export const themesData = [
         title: "Entertainment",
         description: "Where energy becomes influence. Step into the world of music, film, and creativity that powers a continent.",
         path: "",
-        image: ""
+        image: "/exclusive_Rhythm/entertainment-image.jpg"
     },
     {
         title: "Vibe",
         description: "Because the soul of a city lives in its people. Join real-time hangouts with Lagosians sharing their world, unfiltered.",
         path: "",
-        image: "/excluisve_Rhythm/vibes-image.jpg"
+        image: "/exclusive_Rhythm/vibes-image.jpg"
     },
     {
         title: "Custom Tour",
         description: "Every audience is different. We’ll build something that speaks directly to yours - no template required",
         path: "",
-        image: ""
+        image: "/exclusive_Rhythm/custom-image.jpg"
     },
 ]
 
