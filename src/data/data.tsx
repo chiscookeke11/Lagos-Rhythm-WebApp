@@ -320,7 +320,7 @@ export const themesData = [
         title: "Vibe",
         description: "Because the soul of a city lives in its people. Join real-time hangouts with Lagosians sharing their world, unfiltered.",
         path: "",
-        image: ""
+        image: "/excluisve_Rhythm/vibes-image.jpg"
     },
     {
         title: "Custom Tour",
