@@ -2,13 +2,13 @@
 
 
 interface InputProps {
-    type: string;
+    type?: string;
     placeholder?: string;
     label?: string;
-    isRequired: boolean
-    value: string
-    name: string
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    isRequired?: boolean
+    value?: string
+    name?: string
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
     error?: string
 }
 

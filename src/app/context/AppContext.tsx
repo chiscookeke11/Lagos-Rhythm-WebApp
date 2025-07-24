@@ -40,9 +40,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   const [populationAmount, setPopulationAmount] = useState<number>(
     getFromLocalStorage("populationAmount", 0)
   );
-  const [participantsCount, setParticipantsCount] = useState<number>(
-    getFromLocalStorage("participantsCount", 1)
-  );
+  const [participantsCount, setParticipantsCount] = useState<number>(1)
+
+
   const [selectedTheme, setSelectedTheme] = useState<string>(
     getFromLocalStorage("selectedTheme", "")
   );
@@ -56,9 +56,6 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     localStorage.setItem("populationAmount", JSON.stringify(populationAmount));
   }, [populationAmount]);
 
-  useEffect(() => {
-    localStorage.setItem("participantsCount", JSON.stringify(participantsCount));
-  }, [participantsCount]);
 
   useEffect(() => {
     localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme));
