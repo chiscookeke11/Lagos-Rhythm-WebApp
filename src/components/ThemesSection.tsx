@@ -39,7 +39,7 @@ export default function ThemesSection() {
                         key={index} className="h-full w-full min-h-[250px]  rounded-xl flex items-center justify-center cursor-pointer  py-3 px-5  bg-no-repeat bg-cover bg-center relative overflow-hidden group shadow-xl "  >
 
                         <div className=" w-full absolute h-full top-0 left-0  backdrop-blur-3xl  ">
-                            <Image src={item.image} alt="image" height={300} width={300} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out group-hover:blur-xs " />
+                            <Image src={item.image} alt="image" height={500} width={500} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out group-hover:blur-xs " />
                         </div>
 
 
