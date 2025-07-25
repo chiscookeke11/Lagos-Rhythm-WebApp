@@ -37,6 +37,10 @@ const navLinks = [
         label: "STORE",
         path: "/store",
     },
+       {
+        label: "BLOG",
+        path: "/blogs",
+    },
 ]
 
 

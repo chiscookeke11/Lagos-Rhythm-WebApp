@@ -119,7 +119,7 @@ export default function Page() {
             <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl font-merienda">BOOK YOUR PACKAGE</h1>
             <p className="font-medium text-base md:text-lg font-lato">Experience Something New Every Moment</p>
           </div>
-          {/* FIX: Pass handleSubmit(onSubmit) directly to form's onSubmit */}
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato"
@@ -279,7 +279,7 @@ export default function Page() {
               rules={{ validate: (value) => (value && value.length > 0) || "Please select at least one tour date" }}
               render={({ field }) => {
                 const currentDates: Date[] = Array.isArray(field.value)
-                  ? field.value.map((d) => (d instanceof Date ? d : new Date(d)))
+                  ? field.value.map((d: Date | string) => (d instanceof Date ? d : new Date(d)))
                   : []
 
                 return (
@@ -337,7 +337,7 @@ export default function Page() {
               }}
             />
 
-            {/* FIX: Wrapped referralSource in Controller */}
+
             <Controller
               control={control}
               name="referralSource"
