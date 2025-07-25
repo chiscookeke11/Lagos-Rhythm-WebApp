@@ -4,17 +4,17 @@ import ReusableHero from "@/components/ReusableHero";
 
 
 
-export default function Page () {
+export default function Page() {
     return (
         <div className="w-full h-full "  >
             <ReusableHero pageTitle="Blogs" subtitle="Interesting facts and concepts" />
 
 
-           <div className="w-full flex flex-col gap-8 items-start justify-center bg-[#FDF4F1] py-[4%] px-[4%] " >
-            <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " >Blogs by <span className="text-[#EF8F57] ">Lagos Rhythm</span></h1>
-            <BlogSection/>
-            <NewsLetter/>
-           </div>
+            <div className="w-full flex flex-col gap-8 items-start justify-center bg-[#FDF4F1] py-[4%] px-[4%] " >
+                <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " >Blogs by <span className="text-[#EF8F57] ">Lagos Rhythm</span></h1>
+                <BlogSection />
+            </div>
+            <NewsLetter />
         </div>
     )
 }
