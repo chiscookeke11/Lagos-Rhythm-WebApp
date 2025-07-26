@@ -241,15 +241,15 @@ export const referralSourceData: customSelectTypes[] = [
 export const whatToExpectData = [
     {
         text: "30-minute livestreams ",
-        icon: <Lottie animationData={live} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={live} loop={true} className="w-28 h-28" />,
     },
     {
         text: "Interactive sessions with local hosts ",
-        icon: <Lottie animationData={interaction} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={interaction} loop={true} className="w-28 h-28" />,
     },
     {
         text: "Different destinations and stories every month ",
-        icon: <Lottie animationData={destinations} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={destinations} loop={true} className="w-28 h-28" />,
     },
 ]
 
@@ -257,19 +257,19 @@ export const whatToExpectData = [
 export const whoCanJoinData = [
     {
         text: "Curious travelers",
-        icon: <Lottie animationData={Traveler} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={Traveler} loop={true} className="w-28 h-28" />,
     },
     {
         text: "Students and educators",
-        icon: <Lottie animationData={students} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={students} loop={true} className="w-28 h-28" />,
     },
     {
         text: "African diaspora reconnecting with culture",
-        icon: <Lottie animationData={african} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={african} loop={true} className="w-28 h-28" />,
     },
     {
         text: "Anyone who wants to see Lagos through real eyes",
-        icon: <Lottie animationData={lagos} loop={true} className="w-20 h-20" />,
+        icon: <Lottie animationData={lagos} loop={true} className="w-28 h-28" />,
     },
 ]
 

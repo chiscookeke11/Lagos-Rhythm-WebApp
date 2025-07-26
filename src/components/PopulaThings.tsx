@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from "react"
 import Button from "./common/Button"
 import HTMLFlipBook from "react-pageflip"
 import Image from "next/image"
+import { useInView } from "react-intersection-observer"
 
-// Define proper types for the component props
+
 interface PageCoverProps {
   children?: React.ReactNode
 }
 
-// Define types for flip book events
+
 interface FlipEvent {
   data: number
 }
@@ -23,7 +24,7 @@ interface StateEvent {
   data: string
 }
 
-// Define the page data structure
+
 interface PageData {
   image: string
   text: string
@@ -81,7 +82,7 @@ const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) 
 PageCover.displayName = "PageCover"
 
 export default function PopularThings() {
-  // Use proper type for the ref - HTMLFlipBook doesn't export its type, so we use React.ElementRef
+
   const flipBookRef = useRef<React.ElementRef<typeof HTMLFlipBook>>(null)
   const [, setCurrentPage] = useState(0)
 
@@ -102,12 +103,12 @@ export default function PopularThings() {
   }
 
   const onChangeOrientation = (e: OrientationEvent) => {
-    // Handle orientation change if needed
+
     console.log("Orientation changed:", e.data)
   }
 
   const onChangeState = (e: StateEvent) => {
-    // Handle state change if needed
+
     console.log("State changed:", e.data)
   }
 
@@ -139,6 +140,27 @@ export default function PopularThings() {
   ]
 
 
+  const goToNextPage = () => {
+    if (flipBookRef.current) {
+      flipBookRef.current.pageFlip().flipNext();
+    }
+  };
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 1
+  })
+
+
+
+  useEffect(() => {
+    if (inView) {
+      goToNextPage()
+    }
+  }, [inView])
+
+
+
 
   return (
     <section className="w-full bg-[#FDF4F1] py-14 md:py-[5%] px-[5%] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 ">
@@ -147,7 +169,7 @@ export default function PopularThings() {
         <p className="text-lg font-normal text-[#05073C] font-lato ">
           Lagos is more than a city - it&apos;s a living experience.
         </p>
-        <Button ariaLabel="See All" label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
+        <Button ref={ref} ariaLabel="See All" label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
       </div>
 
       <div className="w-full max-w-2xl h-full gap-4 py-2">
@@ -210,6 +232,11 @@ export default function PopularThings() {
           </div>
         </HTMLFlipBook>
       </div>
+
+
+
+
+
     </section>
   )
 }

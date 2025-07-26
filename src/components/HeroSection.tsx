@@ -61,11 +61,11 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
           </div>
           <Link href={"/Free_E-Rhythm"} >
             <MotionButton
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 1.1 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 7 }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: 1.3 }}
+              transition={{ duration: 0.1, delay: 0.7 }}
               type="button" label="Free Virtual Tour" > </MotionButton></Link>
         </div>
       </div>

@@ -6,6 +6,9 @@ import { Toaster } from "react-hot-toast";
 import Footer from "@/components/Footer";
 import { LagosRhythmProvider } from "./context/AppContext";
 
+
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -72,12 +75,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} ${merienda.variable} ${signika.variable} antialiased`}
       >
-        <LagosRhythmProvider>
-        <Navbar />
-        {children}
-        <Toaster position="bottom-right" />
-        <Footer />
-        </LagosRhythmProvider>
+          <LagosRhythmProvider>
+            <Navbar />
+            {children}
+            <Toaster position="bottom-right" />
+            <Footer />
+          </LagosRhythmProvider>
       </body>
     </html>
   );

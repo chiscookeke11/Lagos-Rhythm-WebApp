@@ -3,7 +3,6 @@
 
 
 import Link from "next/link"
-import Button from "./common/Button"
 import { Menu, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
@@ -37,7 +36,7 @@ const navLinks = [
         label: "STORE",
         path: "/store",
     },
-       {
+    {
         label: "BLOG",
         path: "/blogs",
     },
@@ -99,7 +98,7 @@ export default function Navbar() {
 
 
 
-            <div className=" w-fit flex items-center justify-center gap-20" >
+            <div className=" w-fit flex items-center justify-center gap-28" >
                 <Link href={"/"} ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
 
 
@@ -118,9 +117,7 @@ export default function Navbar() {
             <div className=" flex items-center justify-center gap-7 w-fit" >
 
 
-                <Link href={"/"} ><button aria-label="Sign Up" className={` font-normal text-base text-[#FFFFFF] hover:text-[#EB662B] transition-colors duration-150 ease-in-out cursor-pointer hidden lg:block font-signika ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"} `}>Sign up</button></Link>
 
-                <Button label="Log in" type="button" variant="outline" className="font-signika !py-2 hover:scale-105 transform transition-transform duration-150 ease-in-out " ariaLabel="Log In" />
 
                 <button aria-label="Open Menu" className=" cursor-pointer flex lg:hidden " onClick={() => setOpenMobileNav(true)}  ><Menu size={30} color="#ffffff" /> </button>
 
@@ -147,13 +144,7 @@ export default function Navbar() {
                                 onClick={() => setOpenMobileNav(false)}
                                 key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B] `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
                         ))}
-                        <Link href={"/"} >
-                            <motion.button
-                                initial={{ scale: 0, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: 0.25, type: "spring", stiffness: 100, damping: 15, }}
-                                viewport={{ amount: 0.1 }}
-                                aria-label="Sign Up" className=" font-normal text-base text-[#000000]  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B]  font-signika ">SIGN UP</motion.button></Link>
+
                     </ul>
                 </div>
 
