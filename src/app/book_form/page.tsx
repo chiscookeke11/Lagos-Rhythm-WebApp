@@ -87,19 +87,19 @@ export default function Page() {
     };
 
     // select change function
-    const handleSelectChange = (name: string, value: string) => {
-        const updated = { ...userData, [name]: value };
-        setUserData(updated);
+    // const handleSelectChange = (name: string, value: string) => {
+    //     const updated = { ...userData, [name]: value };
+    //     setUserData(updated);
 
-        const field = name as keyof userDataType;
-        const fieldError = validateUserData(updated, field);
+    //     const field = name as keyof userDataType;
+    //     const fieldError = validateUserData(updated, field);
 
-        setFormErrors(prev => {
-            const rest = { ...prev };
-            delete rest[field];
-            return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
-        });
-    };
+    //     setFormErrors(prev => {
+    //         const rest = { ...prev };
+    //         delete rest[field];
+    //         return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
+    //     });
+    // };
 
     // checkbox function
     const handleCheckboxChange = (name: string, checked: boolean, value?: string) => {
@@ -338,7 +338,7 @@ export default function Page() {
 
                         <CustomSelect
                             name="country"
-                            onChange={handleSelectChange}
+                            // onChange={handleSelectChange}
                             options={countryOptions}
                             label="Country"
                             placeholder="Please select an option"
@@ -389,7 +389,7 @@ export default function Page() {
 
                         <CustomSelect
                             name="joiningAs"
-                            onChange={handleSelectChange}
+                            // onChange={handleSelectChange}
                             placeholder="Please select an option"
                             label="I am joining as a:"
                             isRequired
@@ -463,7 +463,7 @@ export default function Page() {
 
                         <CustomSelect
                             name="referralSource"
-                            onChange={handleSelectChange}
+
                             label="How did you hear about us?"
                             isRequired
                             options={referralSourceData}
