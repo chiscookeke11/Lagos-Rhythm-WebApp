@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -15,6 +16,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const fireDB  = getFirestore(app);
+const auth = getAuth(app)
 
 let analytics: ReturnType<typeof getAnalytics> | undefined;
 if (typeof window !== "undefined") {
@@ -23,4 +25,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, analytics, fireDB };
+export { app, analytics, fireDB, auth, isSignInWithEmailLink, signInWithEmailLink  };

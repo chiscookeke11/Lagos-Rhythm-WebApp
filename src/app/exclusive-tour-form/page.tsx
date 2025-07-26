@@ -37,8 +37,8 @@ export default function Page() {
       joiningAs: "",
       otherJoin: "",
       tourDate: [],
-      communicationConsent: false,
       termsAgreement: false,
+      referralSource: ""
     },
   })
 
@@ -90,7 +90,7 @@ export default function Page() {
   return (
     <div className="w-full flex flex-col h-full text-[#05073C] relative">
       <div className="h-[300px] w-full relative">
-        <div className="w-full h-full absolute top-0 left-0 bg-[url('/placeholder.svg?height=300&width=1200')] bg-no-repeat bg-center bg-cover" />
+        <div className="w-full h-full absolute top-0 left-0 bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
         <div className="w-full h-full absolute top-0 left-0 bg-black/30" />
       </div>
       <div className="w-full h-fit flex items-center justify-center bg-[#FDF4F1] z-10">
@@ -126,7 +126,6 @@ export default function Page() {
           >
             <div className="w-full flex flex-col gap-1 items-start py-3 px-4">
               <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme: {selectedTheme}</h2>
-              <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Max: {populationAmount}</h2>
             </div>
             <div className="w-full flex flex-col items-start gap-7">
               {fields.map((field, index) => (
@@ -153,40 +152,47 @@ export default function Page() {
                   />
                 </div>
               ))}
-              <div className="w-fit flex items-center justify-center gap-3 ml-auto">
-                <button
-                  onClick={decreaseParticipantsCount}
-                  type="button"
-                  className="cursor-pointer border-2 border-[#EF8F57] rounded-full h-8 w-8 flex items-center justify-center"
-                >
-                  <Minus size={20} color="#EF8F57" />
-                </button>
-                <button
-                  onClick={increaseParticipantsCount}
-                  type="button"
-                  className="cursor-pointer border-2 border-[#EF8F57] rounded-full h-8 w-8 flex items-center justify-center"
-                >
-                  <PlusIcon size={20} color="#EF8F57" />
-                </button>
+              <div className=" ml-auto flex flex-col gap-3 " >
+                <h2 className="ml-auto text-[#EF8F57] font-medium text-xs">Slots:  {populationAmount - participantsCount}</h2>
+                <div className="w-fit flex items-center justify-center gap-3 ml-auto">
+                  <button
+                    onClick={decreaseParticipantsCount}
+                    type="button"
+                    className="cursor-pointer border-2 border-[#EF8F57] rounded-full h-8 w-8 flex items-center justify-center"
+                  >
+                    <Minus size={20} color="#EF8F57" />
+                  </button>
+                  <button
+                    onClick={increaseParticipantsCount}
+                    type="button"
+                    className="cursor-pointer border-2 border-[#EF8F57] rounded-full h-8 w-8 flex items-center justify-center"
+                  >
+                    <PlusIcon size={20} color="#EF8F57" />
+                  </button>
+                </div>
               </div>
+
             </div>
 
             <Controller
               control={control}
               name="country"
               rules={{ required: "Country is required" }}
-              render={({ field }) => (
-                <CustomSelect
+              render={({ field }) => {
+                // console.log(field)
+                return (
+                     <CustomSelect
                   name={field.name}
                   onChange={field.onChange}
                   options={countryOptions}
                   label="Country"
                   placeholder="Please select an option"
                   isRequired
-                  value={field.value}
+                  value={formData.country}
                   error={errors.country?.message}
                 />
-              )}
+                )
+              }}
             />
 
             <Controller
@@ -356,20 +362,6 @@ export default function Page() {
             />
 
             <div className="w-full flex items-start flex-col gap-3">
-              <Controller
-                control={control}
-                name="communicationConsent"
-                rules={{ required: "Communication consent is required" }}
-                render={({ field }) => (
-                  <CustomCheckBox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    label="I agree to receive communications from Lagos Rhythm"
-                    id="communicationConsent"
-                    error={errors.communicationConsent?.message}
-                  />
-                )}
-              />
               <Controller
                 control={control}
                 name="termsAgreement"
