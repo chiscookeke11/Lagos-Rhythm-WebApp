@@ -2,6 +2,9 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
+import { BlogDataType } from "@/Types/blogTypes";
+import { collection, getDocs } from "firebase/firestore";
+import { fireDB } from "../config/firebaseClient";
 
 
 interface AppContextProps {
@@ -16,6 +19,12 @@ interface AppContextProps {
 
   selectedTheme: string;
   setSelectedTheme: React.Dispatch<React.SetStateAction<string>>;
+
+
+  blogs: BlogDataType[] | null;
+  setBlogs: React.Dispatch<React.SetStateAction<BlogDataType[] | null>>
+
+
 }
 
 
@@ -47,6 +56,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     getFromLocalStorage("selectedTheme", "")
   );
 
+  const [blogs, setBlogs] = useState<BlogDataType[] | null>(null);
+
+
 
   useEffect(() => {
     localStorage.setItem("populationType", JSON.stringify(populationType));
@@ -61,6 +73,36 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme));
   }, [selectedTheme]);
 
+
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(fireDB, "blogs"));
+        const items: BlogDataType[] = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            title: data.title,
+            text: data.text,
+            image: data.image,
+            author: data.author,
+            createdAt: data.createdAt?.toDate().toDateString() || "",
+          };
+        });
+        setBlogs(items);
+      }
+      catch (error) {
+        console.error("error fetching data:", error)
+      }
+
+    }
+    fetchBlogData()
+  }, [])
+
+
+  console.log(blogs)
+
+
   return (
     <AppContext.Provider
       value={{
@@ -72,6 +114,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         setParticipantsCount,
         selectedTheme,
         setSelectedTheme,
+        blogs,
+        setBlogs
       }}
     >
       {children}
