@@ -4,8 +4,10 @@ import Button from "@/components/common/Button";
 import AnimatedBg from "@/components/ui/AnimatedBg";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import React, { useCallback, useState } from "react";
+import { useAuth, useClerk, useSignUp } from "@clerk/nextjs";
+import Loader from "@/components/common/Loader";
+import toast from "react-hot-toast";
 
 
 
@@ -13,54 +15,78 @@ import { useSignUp } from "@clerk/nextjs";
 export default function Page() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const router = useRouter();
     const [pendingVerification, setPendingVerification] = useState(false);
-    const {  signUp, setActive } = useSignUp();
+    const { signUp, setActive } = useSignUp();
+    const [signingUp, setSigningUp] = useState(false)
+    const [verifying, setVerifying] = useState(false)
+    const [variant, setVariant] = useState("login")
     const [code, setCode] = useState("");
+    const { signOut } = useClerk()
+    const { isSignedIn } = useAuth()
 
 
 
 
+    console.log(isSignedIn)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setSigningUp(true)
         try {
-            await signUp.create({
+            await signUp?.create({
                 emailAddress: email,
                 password,
             });
-        await signUp?.prepareEmailAddressVerification({
-            strategy: "email_code"
-        });
-        setPendingVerification(true)
-        } catch (err: any) {
-            console.error("Error requesting verification code:", err.errors);
+            await signUp?.prepareEmailAddressVerification({
+                strategy: "email_code"
+            });
+            setPendingVerification(true)
+        } catch (error) {
+            console.error("Error requesting verification code:", error);
+            toast.error("sign up failed")
+        }
+        finally {
+            setSigningUp(false)
         }
     };
 
 
-    const handleVerify = async () => {
+    const handleVerify = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setVerifying(true)
+
         try {
             const completeSignUp = await signUp?.attemptEmailAddressVerification({
                 code,
             });
 
             if (completeSignUp?.status === "complete") {
-                await setActive({
+                await setActive?.({
                     session: completeSignUp.createdSessionId
                 })
                 router.push("/store")
                 console.log("Sign up successful")
             }
         }
-        catch (err) {
-            console.error("verification error", err)
+        catch (error) {
+            console.error("verification error", error)
+        }
+        finally {
+            setVerifying(false)
         }
     }
 
 
 
+    const handleLogOut = async () => {
+        await signOut({ redirectUrl: '/auth' })
+    }
+
+
+    const toggleVariant = useCallback(() => {
+        setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login')
+    }, [])
 
 
 
@@ -73,7 +99,7 @@ export default function Page() {
 
 
                 <form onSubmit={handleSubmit} className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6 " >
-                    <h1 className="font-merienda font-extrabold text-[#05073C] text-xl md:text-3xl " >Enter Your <span className=" text-[#EF8F57]">Email</span></h1>
+                    <h1 className="font-merienda font-extrabold text-[#EF8F57] text-xl md:text-3xl " >{variant === "login" ? "Sign In" : "Create an account"} </h1>
 
                     <Input
                         type="email"
@@ -83,23 +109,31 @@ export default function Page() {
                         className="py-5 px-5 text-lg font-normal outline-none border-2 border-[#EF8F57] shadow-none focus:shadow-none focus:border-none focus:outline-none text-[#131313] font-merriweather  "
                     />
 
-                        <Input
+                    <Input
                         type="text"
                         value={password}
-                        placeholder="chiNed343@32"
+                        placeholder="password"
                         onChange={(e) => setPassword(e.target.value)}
                         className="py-5 px-5 text-lg font-normal outline-none border-2 border-[#EF8F57] shadow-none focus:shadow-none focus:border-none focus:outline-none text-[#131313] font-merriweather  "
                     />
 
 
                     <Button
-                        label="Submit"
+                        label={signingUp ? <Loader /> : "Submit"}
                         ariaLabel="Submit"
                         type="submit"
                         variant="primary"
                         className="w-full !bg-[#EF8F57] text-white "
                     />
 
+
+
+                    {variant === "login" ?
+                        <p className="text-[#05073C] font-medium text-lg font-merienda" >Don&apos;t have an account? <button onClick={toggleVariant} type="button" className="text-[#EF8F57] bg-transparent cursor-pointer " >Create account </button></p>
+                        :
+                        <p className="text-[#05073C] font-medium text-lg font-merienda" >Already have an account? <button onClick={toggleVariant} type="button" className="text-[#EF8F57] bg-transparent cursor-pointer " >Sign in </button></p>}
+
+                    <button onClick={handleLogOut} type="button" className="bg-red-600" >Log out</button>
 
 
                 </form>
@@ -113,7 +147,7 @@ export default function Page() {
 
 
                         <Input
-                            type="email"
+                            type="text"
                             value={code}
                             placeholder="Enter verification code"
                             onChange={(e) => setCode(e.target.value)}
@@ -122,8 +156,8 @@ export default function Page() {
 
 
                         <Button
-                            label="Submit"
-                            ariaLabel="Submit"
+                            label={verifying ? (<Loader />) : "Submit"}
+                            ariaLabel={verifying ? "verifying" : "Submit"}
                             type="submit"
                             variant="primary"
                             className="w-full !bg-[#EF8F57] text-white "
