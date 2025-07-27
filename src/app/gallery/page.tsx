@@ -55,7 +55,7 @@ export default function Page() {
                         width={1000}
                         className="absolute top-0 left-0 h-full w-full object-cover object-center"
                     />
-                    <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-2 px-3">
+                    <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
                         <p className="text-base font-bold font-merriweather text-white">{text}</p>
                     </div>
                 </motion.div>
@@ -79,7 +79,7 @@ export default function Page() {
                             }}
                             key={index} className={`col-span-1 row-span-1 rounded-xl  overflow-hidden relative min-h-[450px]  ${size(index + 1)} `} title={card.text} >
                             <Image src={card.image} alt="gallery image" width={1000} height={1000} className="object-cover h-full w-full object-center absolute top-0 left-0 " />
-                            <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-2 px-3 " >
+                            <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3 " >
                                 <p className="text-base font-bold font-merriweather text-white" >                        {card.text}</p>
                             </div>
                         </div>
