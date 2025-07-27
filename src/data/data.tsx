@@ -13,6 +13,7 @@ import lagos from "../app/animated-icons/lagos.json";
 import african from "../app/animated-icons/african.json";
 import students from "../app/animated-icons/students.json";
 import { CrewAmountItem } from "@/Types/UserDataType";
+import { PageData } from "@/Types/pageDataType";
 
 
 
@@ -71,6 +72,34 @@ export const PopularThingsData: PopularThingsDataType[] = [
     },
 ]
 
+
+
+ export const pagesData: PageData[] = [
+    {
+      image: "/interestigThingsImg/historic site .jpg",
+      text: "Historic Site Walk",
+    },
+    {
+      image: "/interestigThingsImg/Beach market stroll.jpg",
+      text: "Beach Market Stroll",
+    },
+    {
+      image: "/interestigThingsImg/bridge walk.jpg",
+      text: "Sunset Bridge Walk",
+    },
+    {
+      image: "/interestigThingsImg/canopy walk.jpg",
+      text: "Canopy Walk",
+    },
+    {
+      image: "/interestigThingsImg/water taxi.jpg",
+      text: "Water Taxi Ride",
+    },
+    {
+      image: "/interestigThingsImg/railway museum.jpg",
+      text: "Railway Museum Visit",
+    },
+  ]
 
 
 

@@ -6,6 +6,7 @@ import HTMLFlipBook from "react-pageflip"
 import Image from "next/image"
 import { useInView } from "react-intersection-observer"
 import Link from "next/link"
+import { pagesData } from "@/data/data"
 
 
 interface PageCoverProps {
@@ -26,10 +27,6 @@ interface StateEvent {
 }
 
 
-interface PageData {
-  image: string
-  text: string
-}
 
 const PageCover = React.forwardRef<HTMLDivElement, PageCoverProps>((props, ref) => {
   return (
@@ -113,32 +110,6 @@ export default function PopularThings() {
     console.log("State changed:", e.data)
   }
 
-  const pagesData: PageData[] = [
-    {
-      image: "/interestigThingsImg/historic site .jpg",
-      text: "Historic Site Walk",
-    },
-    {
-      image: "/interestigThingsImg/Beach market stroll.jpg",
-      text: "Beach Market Stroll",
-    },
-    {
-      image: "/interestigThingsImg/bridge walk.jpg",
-      text: "Sunset Bridge Walk",
-    },
-    {
-      image: "/interestigThingsImg/canopy walk.jpg",
-      text: "Canopy Walk",
-    },
-    {
-      image: "/interestigThingsImg/water taxi.jpg",
-      text: "Water Taxi Ride",
-    },
-    {
-      image: "/interestigThingsImg/railway museum.jpg",
-      text: "Railway Museum Visit",
-    },
-  ]
 
 
   const goToNextPage = () => {
