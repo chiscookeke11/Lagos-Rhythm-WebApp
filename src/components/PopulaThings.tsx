@@ -5,6 +5,7 @@ import Button from "./common/Button"
 import HTMLFlipBook from "react-pageflip"
 import Image from "next/image"
 import { useInView } from "react-intersection-observer"
+import Link from "next/link"
 
 
 interface PageCoverProps {
@@ -169,7 +170,7 @@ export default function PopularThings() {
         <p className="text-lg font-normal text-[#05073C] font-lato ">
           Lagos is more than a city - it&apos;s a living experience.
         </p>
-        <Button ref={ref} ariaLabel="See All" label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " />
+     <Link href={"/gallery"} className="w-full" >   <Button ref={ref} ariaLabel="See All" label="See All" type="button" variant="primary" className="w-full !bg-[#EF8F57] text-white !py-4 shadow-xl " /></Link>
       </div>
 
       <div className="w-full max-w-2xl h-full gap-4 py-2">
