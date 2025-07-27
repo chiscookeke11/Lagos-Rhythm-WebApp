@@ -26,7 +26,7 @@ export default function ChooseTour() {
 
 
     return (
-        <section className=" w-full h-full py-[4%] px-[5%] flex flex-col items-center gap-10 bg-[#FDF4F1] " >
+        <section className=" w-full h-full py-[4%] px-[5%] pb-20 flex flex-col items-center gap-10 bg-[#FDF4F1] " >
             <h1 className="text-[#05073C] font-bold text-2xl  md:text-3xl font-merienda ">Choose your <span className="text-[#EF8F57] ">tour</span> below </h1>
             <div className=" w-full h-full flex flex-row items-center justify-center gap-10 flex-wrap md:flex-nowrap mx-auto" >
                 {tourPackagesData.map((tourPackage, index) => (
