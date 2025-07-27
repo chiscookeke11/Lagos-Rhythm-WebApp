@@ -7,6 +7,8 @@ import { Menu, X } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion";
+import AuthModal from "./AuthModal"
+import Button from "./common/Button"
 
 
 
@@ -49,6 +51,7 @@ export default function Navbar() {
     const [openMobileNav, setOpenMobileNav] = useState(false)
     const [scrolled, setScrolled] = useState(false);
     const mobileNavRef = useRef<HTMLDivElement>(null)
+    const [showAuthModal, setShowAuthModal] = useState(false)
 
 
 
@@ -89,8 +92,12 @@ export default function Navbar() {
             document.removeEventListener("mousedown", handleClickOutside)
             document.body.style.overflow = "auto"
         }
-    }, [openMobileNav]);
+    }, [openMobileNav,]);
 
+
+    useEffect(() => {
+        document.body.style.overflowY = showAuthModal ? "hidden" : "auto"
+    }, [showAuthModal])
 
 
     return (
@@ -111,12 +118,15 @@ export default function Navbar() {
                     }
                 </ul>
 
+
+
+
             </div>
 
 
             <div className=" flex items-center justify-center gap-7 w-fit" >
 
-
+                <Button onClick={() => setShowAuthModal(true)} label="Sign In" type="button" ariaLabel="Sign in" variant="outline" />
 
 
                 <button aria-label="Open Menu" className=" cursor-pointer flex lg:hidden " onClick={() => setOpenMobileNav(true)}  ><Menu size={30} color="#ffffff" /> </button>
@@ -156,6 +166,13 @@ export default function Navbar() {
             </div>
 
 
+
+            {
+                showAuthModal && (
+                    <AuthModal setShowAuthModal={setShowAuthModal}
+                    />
+                )
+            }
 
         </nav>
     )
