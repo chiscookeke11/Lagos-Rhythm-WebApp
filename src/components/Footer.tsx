@@ -43,7 +43,7 @@ const supportOptions = [
     },
     {
         label: "FAQ",
-        path: "/",
+        path: "/FAQ",
     },
     {
         label: "How it works",

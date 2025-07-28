@@ -47,7 +47,7 @@ export function DropdownMenuCheckboxes() {
             <DropdownMenuTrigger asChild>
                 <Button variant="default" className="bg-transparent hover:bg-transparent cursor-pointer text-sm md:text-base focus:outline-0 focus:shadow-none shadow-none border-none focus:border-none font-signika " >{user?.primaryEmailAddress?.emailAddress} </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 font-signika flex flex-col items-start justify-center gap-3 p-3 bg-[#EF8F57] border-[#EF8F57]">
+            <DropdownMenuContent className="w-56 font-signika flex flex-col items-start justify-center gap-3 p-3 py-5 bg-[#ffffff] border-[#ffffff]">
 
                 <Link href={"/"} className="w-full" > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >View Profile</Button> </Link>
                 <Button disabled={!user} onClick={handleSignOut} className={`w-full text-left  cursor-pointer flex  bg-red-600 hover:bg-red-700 text-base shadow-lg ${signingOut ? "justify-center items-center" : "justify-start items-start"} `}> {signingOut ? <Loader /> : "Log out"} </Button>
