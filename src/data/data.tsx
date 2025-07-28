@@ -403,3 +403,75 @@ export const crewAmountData: CrewAmountItem[] = [
         maxAmount: 100
     },
 ]
+
+
+export const faq = [
+    {
+        question: "Is Lagos Rhythm a travel agency?",
+        answer: "No. We are a tourism-tech platform focused on cultural experiences, combining virtual tours, in-person tours, and other travel services. ",
+    },
+       {
+        question: "Do you serve locals and Africans only?",
+        answer: "No. Lagos Rhythm serves everyone; locals, Africans, the diaspora, and international visitors. Our experiences are designed for anyone interested in exploring the culture, history, and lifestyle of Lagos.",
+    },
+       {
+        question: " Do I need to create an account to use your services?",
+        answer: "No, you can book tours or flights directly. ",
+    },
+       {
+        question: "Are virtual tours live or pre-recorded?",
+        answer: "Our virtual tours are live, with real-time interactions.",
+    },
+       {
+        question: "Are your tours kid-friendly?",
+        answer: "Yes, many of our tours are family-friendly. We also offer custom tours for school groups.",
+    },
+       {
+        question: "Do you offer multilingual tours?",
+        answer: "Our standard tours are in English, but we can arrange custom language support upon request.",
+    },
+       {
+        question: "What should I bring for an in-person tour?",
+        answer: "Bring light, breathable clothing, comfortable shoes, a hat, and sunscreen. Our team will provide a detailed packing list tailored to your specific tour ",
+    },
+       {
+        question: "Which destinations do your flights cover?",
+        answer: "We cover major routes between Nigeria and key cities in Africa, Europe, North America, the Middle East and Asia. Return trips are also available.",
+    },
+       {
+        question: "Do you help with visa processing?",
+        answer: "We don’t handle visa applications directly, but we assist our clients who require a visa to visit Lagos for our tours.",
+    },
+       {
+        question: "When will local flights be available?",
+        answer: "We plan to offer domestic Nigerian flights soon – updates will be posted on our site.",
+    },
+       {
+        question: "What products do you sell?",
+        answer: "We offer Lagos-inspired merchandise, cultural artifacts, handmade crafts, and souvenirs.",
+    },
+       {
+        question: "Do you deliver internationally?",
+        answer: "Yes, we ship to most countries. Delivery costs vary depending on your location.",
+    },
+       {
+        question: "How do I book a tour or flight?",
+        answer: "Booking is done directly on our website. Once payment is confirmed, you’ll receive a confirmation email.",
+    },
+       {
+        question: "Can I cancel or reschedule my booking?",
+        answer: "Yes, cancellations and reschedules are allowed up to 48 hours before your tour or flight.",
+    },
+       {
+        question: "Do you offer corporate packages or team-building tours?",
+        answer: "Yes, we have custom cultural and virtual experiences for corporate teams.",
+    },
+       {
+        question: "Can schools or cultural organizations partner with you?",
+        answer: "Absolutely. We welcome collaborations, cultural training sessions, and educational tours.",
+    },
+       {
+        question: "Do I need special apps for virtual tours?",
+        answer: "No. Any smartphone, tablet, or computer with internet access works.",
+    }
+]
