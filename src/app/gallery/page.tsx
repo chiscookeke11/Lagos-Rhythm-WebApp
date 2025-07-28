@@ -50,7 +50,7 @@ export default function Page() {
         return (
             <motion.div
                 onClick={() => setShowFrame(false)}
-                className="bg-transparent backdrop-blur-2xl w-full h-screen flex items-center justify-center fixed  z-10"
+                className="bg-transparent backdrop-blur-2xl w-full h-screen flex items-center justify-center fixed  z-50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
