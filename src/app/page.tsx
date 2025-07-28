@@ -7,6 +7,7 @@ import NewsLetter from "@/components/NewsLetter";
 import PopularThings from "@/components/PopulaThings";
 import Testimonials from "@/components/Testimonials";
 import WhyLagos from "@/components/WhyLagos";
+import BlogLanding from "@/components/BlogLanding";
 
 
 export default function Home() {
@@ -38,6 +39,7 @@ useEffect(() => {
       <PopularThings />
       <WhyLagos />
       <Testimonials />
+      <BlogLanding/>
       <NewsLetter />
     </div>
   );

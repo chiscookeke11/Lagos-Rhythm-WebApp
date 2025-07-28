@@ -23,8 +23,10 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
     const [signingUp, setSigningUp] = useState(false)
     const [signingIn, setSigningIn] = useState(false)
     const [verifying, setVerifying] = useState(false)
+    const [googleLoading, setGoogleLoading] = useState(false)
     const [variant, setVariant] = useState("login")
     const [code, setCode] = useState("");
+
 
     const { signIn, setActive: signInActive } = useSignIn()
 
@@ -92,7 +94,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     session: completeSignUp.createdSessionId
                 })
                 toast.success("Account verified successfully!");
-                setShowAuthModal(false); // Close modal
+                setShowAuthModal(false);
                 router.push("/store")
             } else {
                 toast.error("Verification incomplete. Please try again.");
@@ -157,6 +159,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
     // google auth function
     const handleGoogleAuth = async () => {
+        setGoogleLoading(true)
         try {
             await signIn?.authenticateWithRedirect({
                 strategy: 'oauth_google',
@@ -170,6 +173,9 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
             } else {
                 toast.error("Failed to initiate Google sign-in. Please try again.")
             }
+        }
+        finally {
+            setGoogleLoading(false)
         }
     }
 
@@ -207,7 +213,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     />
 
                     <Input
-                        type="password" // Fixed: was "text"
+                        type="password"
                         value={password}
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
@@ -217,7 +223,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
                     {variant === "register" && (
                         <Input
-                            type="password" // Fixed: was "text"
+                            type="password"
                             value={confirmPassword}
                             placeholder="Confirm password"
                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -254,9 +260,9 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     <button
                         onClick={handleGoogleAuth}
                         type="button"
-                        className="border-[#EF8F57] border-2 h-10 w-10 rounded-sm p-2 cursor-pointer flex items-center justify-center"
+                        className="border-[#EF8F57] border-2  rounded-sm p-3 cursor-pointer flex items-center justify-center"
                     >
-                        <Image src={"/logos/google-icon.svg"} alt="google" width={100} height={100} className="w-full h-full" />
+                        {googleLoading ? <Loader color="bg-[#EF8F57]" /> : <Image src={"/logos/google-icon.svg"} alt="google" width={100} height={100} className="w-full h-full" />}
                     </button>
                 </form>
             ) : (
