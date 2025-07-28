@@ -66,10 +66,10 @@ export default function Page() {
 
 
     return (
-        <div className="bg-[#05073C] w-full h-fit flex items-center justify-center text-black relative " >
+        <div className="bg-[#05073C] w-full h-full flex items-center justify-center text-black  " >
 
 
-            <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-20  m-4 lg:m-8  cursor-pointer " >
+            <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-20  m-4 lg:m-8  cursor-pointer relative " >
                 {
                     pagesData.map((card, index) => (
                         <div
@@ -86,16 +86,17 @@ export default function Page() {
                     ))
                 }
 
+                <AnimatePresence>
+                    {showFrame &&
+                        (<ImagePreview
+                            image={pagesData[selectedFrame].image}
+                            text={pagesData[selectedFrame].text}
+                        />)}
+                </AnimatePresence>
 
             </div>
 
-            <AnimatePresence>
-                {showFrame &&
-                    (<ImagePreview
-                        image={pagesData[selectedFrame].image}
-                        text={pagesData[selectedFrame].text}
-                    />)}
-            </AnimatePresence>
+
 
         </div>
     )
