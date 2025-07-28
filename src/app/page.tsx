@@ -1,6 +1,6 @@
 "use client";
 
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BestOfLagos from "@/components/BestOfLagos";
 import HeroSection from "@/components/HeroSection";
 import NewsLetter from "@/components/NewsLetter";
@@ -8,6 +8,7 @@ import PopularThings from "@/components/PopulaThings";
 import Testimonials from "@/components/Testimonials";
 import WhyLagos from "@/components/WhyLagos";
 import BlogLanding from "@/components/BlogLanding";
+import HeroFAQ from "@/components/HeroFAQ";
 
 
 export default function Home() {
@@ -17,19 +18,19 @@ export default function Home() {
 
 
 
-useEffect(() => {
-  const setVh = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
+  useEffect(() => {
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
 
-  setVh();
-  window.addEventListener("resize", setVh); // update on resize
+    setVh();
+    window.addEventListener("resize", setVh); // update on resize
 
-  return () => {
-    window.removeEventListener("resize", setVh);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("resize", setVh);
+    };
+  }, []);
 
 
   return (
@@ -39,7 +40,8 @@ useEffect(() => {
       <PopularThings />
       <WhyLagos />
       <Testimonials />
-      <BlogLanding/>
+      <BlogLanding />
+      <HeroFAQ />
       <NewsLetter />
     </div>
   );
