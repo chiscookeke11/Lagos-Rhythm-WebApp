@@ -50,6 +50,9 @@ export function DropdownMenuCheckboxes() {
             <DropdownMenuContent className="w-56 font-signika flex flex-col items-start justify-center gap-3 p-3 py-5 bg-[#ffffff] border-[#ffffff]">
 
                 <Link href={"/"} className="w-full" > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >View Profile</Button> </Link>
+
+                {user?.primaryEmailAddress?.emailAddress === "chiscookeke11@gmail.com" ? (<Link href={"/dashboard"} className="w-full" > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >Dashboard</Button> </Link>) : null}
+
                 <Button disabled={!user} onClick={handleSignOut} className={`w-full text-left  cursor-pointer flex  bg-red-600 hover:bg-red-700 text-base shadow-lg ${signingOut ? "justify-center items-center" : "justify-start items-start"} `}> {signingOut ? <Loader /> : "Log out"} </Button>
 
 
