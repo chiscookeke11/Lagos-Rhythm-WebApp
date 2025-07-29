@@ -26,7 +26,7 @@ export default function DashboardPage() {
 
 
     return (
-        <div className="h-screen w-full bg-green-400" >
+        <div className="h-[200vh] w-full bg-green-400" >
             dashboard
         </div>
     )
