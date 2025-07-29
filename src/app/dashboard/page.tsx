@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 
 
-export default function Dashboard() {
+export default function DashboardPage() {
     const { user } = useUser()
     const router = useRouter()
 
@@ -26,7 +26,7 @@ export default function Dashboard() {
 
 
     return (
-        <div>
+        <div className="h-screen w-full bg-green-400" >
             dashboard
         </div>
     )

@@ -12,7 +12,7 @@ import Input from "@/components/common/Input"
 import Button from "@/components/common/Button"
 import { countryOptions } from "@/data/countryList"
 import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } from "@/data/data"
-import { useAppContext } from "../context/AppContext"
+import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
 

@@ -17,8 +17,8 @@ export function AccordionDemo() {
             {
                 faq.map((item, index) => (
                     <AccordionItem key={index} value={`item-${index}  `} >
-                        <AccordionTrigger className=" text-xl font-semibold font-merriweather text-white  hover:no-underline cursor-pointer  " > {item.question} </AccordionTrigger>
-                        <AccordionContent className=" text-lg font-medium font-lato w-full text-gray-400 ">
+                        <AccordionTrigger className=" text-lg md:text-xl font-semibold font-merriweather text-white  hover:no-underline cursor-pointer  " > {item.question} </AccordionTrigger>
+                        <AccordionContent className=" text-base md:text-lg font-medium font-lato w-full text-gray-400 ">
                             <p >
                                 {item.answer}
                             </p>

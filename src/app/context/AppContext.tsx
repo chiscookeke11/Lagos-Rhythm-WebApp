@@ -7,6 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { fireDB } from "../config/firebaseClient";
 
 
+
 interface AppContextProps {
   populationType: PopulationTypeInterface;
   setPopulationType: React.Dispatch<React.SetStateAction<PopulationTypeInterface>>;
