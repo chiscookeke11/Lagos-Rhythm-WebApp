@@ -39,8 +39,8 @@ export default function Home() {
       <BestOfLagos />
       <PopularThings />
       <WhyLagos />
-      <Testimonials />
       <BlogLanding />
+      <Testimonials />
       <HeroFAQ />
       <NewsLetter />
     </div>
