@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Combine, CreditCard, Headset, Heart, IdCard, Landmark, MonitorPlay, Sailboat, Sunset, TrainTrack, Trees, Volleyball } from "lucide-react";
+import { Bookmark, CircleCheckBig, Combine, CreditCard, HandCoins, Headset, Heart, IdCard, Images, Landmark, MessageCircle, MonitorPlay, Newspaper, Paperclip, PenSquare, RectangleEllipsis, Sailboat, Sparkles, Sunset, TicketPercent, TicketPlus, TrainTrack, Trees, Users, UsersRound, Volleyball } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
@@ -14,6 +14,7 @@ import african from "../app/animated-icons/african.json";
 import students from "../app/animated-icons/students.json";
 import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
+import { FaBlog } from "react-icons/fa";
 
 
 
@@ -74,32 +75,32 @@ export const PopularThingsData: PopularThingsDataType[] = [
 
 
 
- export const pagesData: PageData[] = [
+export const pagesData: PageData[] = [
     {
-      image: "/interestigThingsImg/historic site .jpg",
-      text: "Historic Site Walk",
+        image: "/interestigThingsImg/historic site .jpg",
+        text: "Historic Site Walk",
     },
     {
-      image: "/interestigThingsImg/Beach market stroll.jpg",
-      text: "Beach Market Stroll",
+        image: "/interestigThingsImg/Beach market stroll.jpg",
+        text: "Beach Market Stroll",
     },
     {
-      image: "/interestigThingsImg/bridge walk.jpg",
-      text: "Sunset Bridge Walk",
+        image: "/interestigThingsImg/bridge walk.jpg",
+        text: "Sunset Bridge Walk",
     },
     {
-      image: "/interestigThingsImg/canopy walk.jpg",
-      text: "Canopy Walk",
+        image: "/interestigThingsImg/canopy walk.jpg",
+        text: "Canopy Walk",
     },
     {
-      image: "/interestigThingsImg/water taxi.jpg",
-      text: "Water Taxi Ride",
+        image: "/interestigThingsImg/water taxi.jpg",
+        text: "Water Taxi Ride",
     },
     {
-      image: "/interestigThingsImg/railway museum.jpg",
-      text: "Railway Museum Visit",
+        image: "/interestigThingsImg/railway museum.jpg",
+        text: "Railway Museum Visit",
     },
-  ]
+]
 
 
 
@@ -410,68 +411,164 @@ export const faq = [
         question: "Is Lagos Rhythm a travel agency?",
         answer: "No. We are a tourism-tech platform focused on cultural experiences, combining virtual tours, in-person tours, and other travel services. ",
     },
-       {
+    {
         question: "Do you serve locals and Africans only?",
         answer: "No. Lagos Rhythm serves everyone; locals, Africans, the diaspora, and international visitors. Our experiences are designed for anyone interested in exploring the culture, history, and lifestyle of Lagos.",
     },
-       {
+    {
         question: " Do I need to create an account to use your services?",
         answer: "No, you can book tours or flights directly. ",
     },
-       {
+    {
         question: "Are virtual tours live or pre-recorded?",
         answer: "Our virtual tours are live, with real-time interactions.",
     },
-       {
+    {
         question: "Are your tours kid-friendly?",
         answer: "Yes, many of our tours are family-friendly. We also offer custom tours for school groups.",
     },
-       {
+    {
         question: "Do you offer multilingual tours?",
         answer: "Our standard tours are in English, but we can arrange custom language support upon request.",
     },
-       {
+    {
         question: "What should I bring for an in-person tour?",
         answer: "Bring light, breathable clothing, comfortable shoes, a hat, and sunscreen. Our team will provide a detailed packing list tailored to your specific tour ",
     },
-       {
+    {
         question: "Which destinations do your flights cover?",
         answer: "We cover major routes between Nigeria and key cities in Africa, Europe, North America, the Middle East and Asia. Return trips are also available.",
     },
-       {
+    {
         question: "Do you help with visa processing?",
         answer: "We don’t handle visa applications directly, but we assist our clients who require a visa to visit Lagos for our tours.",
     },
-       {
+    {
         question: "When will local flights be available?",
         answer: "We plan to offer domestic Nigerian flights soon – updates will be posted on our site.",
     },
-       {
+    {
         question: "What products do you sell?",
         answer: "We offer Lagos-inspired merchandise, cultural artifacts, handmade crafts, and souvenirs.",
     },
-       {
+    {
         question: "Do you deliver internationally?",
         answer: "Yes, we ship to most countries. Delivery costs vary depending on your location.",
     },
-       {
+    {
         question: "How do I book a tour or flight?",
         answer: "Booking is done directly on our website. Once payment is confirmed, you’ll receive a confirmation email.",
     },
-       {
+    {
         question: "Can I cancel or reschedule my booking?",
         answer: "Yes, cancellations and reschedules are allowed up to 48 hours before your tour or flight.",
     },
-       {
+    {
         question: "Do you offer corporate packages or team-building tours?",
         answer: "Yes, we have custom cultural and virtual experiences for corporate teams.",
     },
-       {
+    {
         question: "Can schools or cultural organizations partner with you?",
         answer: "Absolutely. We welcome collaborations, cultural training sessions, and educational tours.",
     },
-       {
+    {
         question: "Do I need special apps for virtual tours?",
         answer: "No. Any smartphone, tablet, or computer with internet access works.",
     }
+]
+
+
+
+export const sideNavLinks = [
+    {
+        label: "Blogs",
+        route: "/dashboard/blog-control",
+        icons: <FaBlog size={18} />,
+    },
+    {
+        label: "Feedbacks",
+        route: "/Feedbacks",
+        icons: <PenSquare size={18} />,
+    },
+    {
+        label: "Exclusive Tour Bookings",
+        route: "/dashboard/exclusive-bookings",
+        icons: <Sparkles size={18} />,
+    },
+    {
+        label: "Free Tour Bookings",
+        route: "",
+        icons: <TicketPercent size={18} />,
+    },
+    {
+        label: "Gallery",
+        route: "",
+        icons: <Images size={18} />,
+    },
+
+    {
+        label: "Newsletters",
+        route: "",
+        icons: <Newspaper size={18} />,
+    },
+
+    {
+        label: "Users",
+        route: "",
+        icons: <UsersRound size={18} />,
+    },
+
+]
+
+
+export const summaryData = [
+    {
+        value: 100,
+        title: "Total Sales",
+        icon: <HandCoins />,
+        precentage: "6"
+    },
+    {
+        value: 100,
+        title: "Customers",
+        icon: <Users /> ,
+        precentage: "6"
+    },
+    {
+        value: 100,
+        title: "Blogs",
+        icon: <FaBlog  />,
+        precentage: "6"
+    },
+    {
+        value: 100,
+        title: "Booked Tours",
+        icon: <TicketPlus />,
+        precentage: "6"
+    },
+     {
+        value: 100,
+        title: " Subscribers",
+        icon: <Bookmark />,
+        precentage: "6"
+    },
+    {
+        value: 100,
+        title: " Feedback",
+        icon: <MessageCircle />,
+        precentage: "6"
+    },
+        {
+        value: 100,
+        title: " Pending Tours",
+        icon: <RectangleEllipsis />,
+        precentage: "6"
+    },
+        {
+        value: 100,
+        title: " Completed Tours",
+        icon: <CircleCheckBig />,
+        precentage: "6"
+    },
+
 ]
