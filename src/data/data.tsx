@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Bookmark, CircleCheckBig, Combine, CreditCard, HandCoins, Headset, Heart, IdCard, Images, Landmark, MessageCircle, MonitorPlay, Newspaper, Paperclip, PenSquare, RectangleEllipsis, Sailboat, Sparkles, Sunset, TicketPercent, TicketPlus, TrainTrack, Trees, Users, UsersRound, Volleyball } from "lucide-react";
+import { Bookmark, CircleCheckBig, Combine, CreditCard, HandCoins, Headset, Heart, IdCard, Images, Landmark, MessageCircle, MonitorPlay, Newspaper, PenSquare, RectangleEllipsis, Sailboat, Sparkles, Sunset, TicketPercent, TicketPlus, TrainTrack, Trees, Users, UsersRound, Volleyball } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";

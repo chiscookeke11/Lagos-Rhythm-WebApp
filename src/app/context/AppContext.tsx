@@ -5,6 +5,10 @@ import { PopulationTypeInterface } from "@/Types/UserDataType";
 import { BlogDataType } from "@/Types/blogTypes";
 import { collection, getDocs } from "firebase/firestore";
 import { fireDB } from "../config/firebaseClient";
+import { ClerkUser } from "@/Types/UserType";
+
+
+
 
 
 
@@ -24,6 +28,10 @@ interface AppContextProps {
 
   blogs: BlogDataType[] | null;
   setBlogs: React.Dispatch<React.SetStateAction<BlogDataType[] | null>>
+
+  users: ClerkUser[] | null;
+  setUsers: React.Dispatch<React.SetStateAction<ClerkUser[] | null>>
+
 
 
 }
@@ -58,6 +66,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   );
 
   const [blogs, setBlogs] = useState<BlogDataType[] | null>(null);
+
+  const [users, setUsers] = useState<ClerkUser[] | null>([])
 
 
 
@@ -116,7 +126,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         selectedTheme,
         setSelectedTheme,
         blogs,
-        setBlogs
+        setBlogs,
+        users,
+        setUsers
       }}
     >
       {children}

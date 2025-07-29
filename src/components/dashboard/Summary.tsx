@@ -1,11 +1,58 @@
+"use client"
 
+
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { summaryData } from "@/data/data";
+import { useAppContext } from "@/app/context/AppContext";
+import { useUser } from "@clerk/nextjs";
+
+
+
 
 
 
 
 export default function Summary() {
+
+    const { users, setUsers } = useAppContext()
+    const { user } = useUser()
+
+    useEffect(() => {
+
+        if (!user) return;
+
+        else {
+            const fetchUsers = async () => {
+                try {
+                    const res = await fetch("/api/get-users")
+
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`)
+                    }
+
+                    const data = await res.json()
+                    console.log("the users are:", data)
+
+
+                    setUsers(data.data || data)
+                } catch (err) {
+                    console.error("Error fetching users:", err)
+                }
+            }
+            fetchUsers()
+        }
+
+
+    }, [user])
+
+
+
+
+    console.log("the users number:", users?.length)
+
+
+
     return (
         <section className=" w-full max-w-4xl h-fit col-span-4  bg-white rounded-[20px] shadow-sm py-4 px-7 space-y-6 " >
 
