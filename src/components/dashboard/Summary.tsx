@@ -1,11 +1,13 @@
 "use client"
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { summaryData } from "@/data/data";
 import { useAppContext } from "@/app/context/AppContext";
 import { useUser } from "@clerk/nextjs";
+import { Bookmark, CircleCheckBig, HandCoins, MessageCircle, RectangleEllipsis, TicketPlus, Users } from "lucide-react";
+import { FaBlog } from "react-icons/fa";
+import { fetchBlogsCount, fetchBookedExclusiveRhythmCount, fetchBookedFreeRhythmCount, fetchFeedbackCount, fetchSubscribersCount } from "@/lib/utils";
 
 
 
@@ -14,9 +16,67 @@ import { useUser } from "@clerk/nextjs";
 
 
 export default function Summary() {
-
+    const [feedbackCount, setFeedbackCount] = useState(0)
     const { users, setUsers } = useAppContext()
     const { user } = useUser()
+    const [subscribersCount, setSubscribersCount] = useState(0)
+    const [blogsCount, setBlogsCount] = useState(0)
+    const [freeRhythmCount, setFreeRhythmCount] = useState(0)
+    const [exsRhythmCount, setExsRhythmCount] = useState(0)
+
+    const summaryData = [
+        {
+            value: 100,
+            title: "Total Sales",
+            icon: <HandCoins />,
+            precentage: "6"
+        },
+        {
+            value: users?.length,
+            title: "Customers",
+            icon: <Users />,
+            precentage: "6"
+        },
+        {
+            value: blogsCount,
+            title: "Blogs",
+            icon: <FaBlog />,
+            precentage: "6"
+        },
+        {
+            value: freeRhythmCount + exsRhythmCount,
+            title: "Booked Tours",
+            icon: <TicketPlus />,
+            precentage: "6"
+        },
+        {
+            value: subscribersCount,
+            title: " Subscribers",
+            icon: <Bookmark />,
+            precentage: "6"
+        },
+        {
+            value: feedbackCount,
+            title: " Feedback",
+            icon: <MessageCircle />,
+            precentage: "6"
+        },
+        {
+            value: 100,
+            title: " Pending Tours",
+            icon: <RectangleEllipsis />,
+            precentage: "6"
+        },
+        {
+            value: 100,
+            title: " Completed Tours",
+            icon: <CircleCheckBig />,
+            precentage: "6"
+        },
+
+    ]
+
+
 
     useEffect(() => {
 
@@ -49,7 +109,46 @@ export default function Summary() {
 
 
 
-    console.log("the users number:", users?.length)
+    useEffect(() => {
+        async function getCount() {
+            const count = await fetchFeedbackCount();
+            setFeedbackCount(count);
+        }
+
+        async function getSubscribers() {
+            const subCount = await fetchSubscribersCount();
+            setSubscribersCount(subCount)
+        }
+
+          async function getBlogs() {
+            const blogsCount = await fetchBlogsCount();
+            setBlogsCount(blogsCount)
+        }
+
+
+           async function getFreeRhythmBookings() {
+            const freeBookingCount = await  fetchBookedFreeRhythmCount();
+            setFreeRhythmCount(freeBookingCount)
+        }
+
+
+         async function getExclusiveBookings() {
+            const exsBookingCount = await  fetchBookedExclusiveRhythmCount();
+            setExsRhythmCount(exsBookingCount)
+        }
+
+
+
+
+        getCount();
+        getSubscribers()
+        getBlogs()
+        getFreeRhythmBookings()
+        getExclusiveBookings()
+    }, []);
+
+
+
 
 
 
@@ -76,7 +175,7 @@ export default function Summary() {
                 {summaryData.map((data, index) => (
                     <div key={index} className=" w-full h-[200px] bg-[#FDF4F1] rounded-2xl flex flex-col items-start justify-center gap-2 p-4   " >
                         <span className="w-10 h-10 rounded-full bg-[#EF8F57] flex items-center justify-center text-white" >  {data.icon} </span>
-                        <h3 className=" text-2xl text-[#151D48] font-semibold mt-4 " > {data.value}k$</h3>
+                        <h3 className=" text-2xl text-[#151D48] font-semibold mt-4 " > {data.value}</h3>
                         <h4 className="text-[#425166] font-medium text-base " >{data.title} </h4>
                         <p className="text-[#4079ED] font-medium text-xs ">+{data.precentage}% from yesterday</p>
                     </div>

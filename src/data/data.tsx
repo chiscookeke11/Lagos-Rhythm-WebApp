@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Bookmark, CircleCheckBig, Combine, CreditCard, HandCoins, Headset, Heart, IdCard, Images, Landmark, MessageCircle, MonitorPlay, Newspaper, PenSquare, RectangleEllipsis, Sailboat, Sparkles, Sunset, TicketPercent, TicketPlus, TrainTrack, Trees, Users, UsersRound, Volleyball } from "lucide-react";
+import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
@@ -15,6 +15,9 @@ import students from "../app/animated-icons/students.json";
 import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
+
+
+
 
 
 
@@ -521,54 +524,3 @@ export const sideNavLinks = [
 ]
 
 
-export const summaryData = [
-    {
-        value: 100,
-        title: "Total Sales",
-        icon: <HandCoins />,
-        precentage: "6"
-    },
-    {
-        value: 100,
-        title: "Customers",
-        icon: <Users /> ,
-        precentage: "6"
-    },
-    {
-        value: 100,
-        title: "Blogs",
-        icon: <FaBlog  />,
-        precentage: "6"
-    },
-    {
-        value: 100,
-        title: "Booked Tours",
-        icon: <TicketPlus />,
-        precentage: "6"
-    },
-     {
-        value: 100,
-        title: " Subscribers",
-        icon: <Bookmark />,
-        precentage: "6"
-    },
-    {
-        value: 100,
-        title: " Feedback",
-        icon: <MessageCircle />,
-        precentage: "6"
-    },
-        {
-        value: 100,
-        title: " Pending Tours",
-        icon: <RectangleEllipsis />,
-        precentage: "6"
-    },
-        {
-        value: 100,
-        title: " Completed Tours",
-        icon: <CircleCheckBig />,
-        precentage: "6"
-    },
-
-]
