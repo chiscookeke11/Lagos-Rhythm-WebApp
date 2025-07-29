@@ -13,7 +13,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { fireDB } from "../config/firebaseClient";
+import { fireDB } from "../../config/firebaseClient";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { sendConfirmationEmail } from "@/lib/utils";

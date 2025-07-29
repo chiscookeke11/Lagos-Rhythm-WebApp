@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Button from "@/components/common/Button"
 import { addDoc, collection } from "firebase/firestore"
-import { fireDB } from "../config/firebaseClient"
+import { fireDB } from "@/app/config/firebaseClient"
 import toast from "react-hot-toast"
 import { useForm, Controller } from "react-hook-form"
 

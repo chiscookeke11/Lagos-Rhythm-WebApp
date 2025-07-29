@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Lato, Merienda, Merriweather, Playfair_Display, Signika } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
-import Footer from "@/components/Footer";
 import { LagosRhythmProvider } from "./context/AppContext";
 import {
   ClerkProvider,
@@ -81,10 +79,8 @@ export default function RootLayout({
       >
          <ClerkProvider>
           <LagosRhythmProvider>
-            <Navbar />
             {children}
             <Toaster position="bottom-right" />
-            <Footer />
           </LagosRhythmProvider>
           </ClerkProvider>
       </body>

@@ -8,6 +8,7 @@ import Loader from "@/components/common/Loader";
 import toast from "react-hot-toast";
 import { ClerkAPIError } from '@clerk/types'
 import Image from "next/image";
+import { Eye, EyeOff } from "lucide-react";
 
 interface AuthModalProps {
     setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +27,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
     const [googleLoading, setGoogleLoading] = useState(false)
     const [variant, setVariant] = useState("login")
     const [code, setCode] = useState("");
+    const [showPassword, setShowPassword] = useState(false)
 
 
     const { signIn, setActive: signInActive } = useSignIn()
@@ -95,7 +97,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                 })
                 toast.success("Account verified successfully!");
                 setShowAuthModal(false);
-                router.push("/store")
+                router.push("/")
             } else {
                 toast.error("Verification incomplete. Please try again.");
             }
@@ -186,6 +188,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+        setShowPassword(false)
     }, [])
 
     return (
@@ -213,7 +216,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     />
 
                     <Input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
@@ -223,7 +226,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
                     {variant === "register" && (
                         <Input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={confirmPassword}
                             placeholder="Confirm password"
                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -231,6 +234,12 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                             required
                         />
                     )}
+
+
+                    <button
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        type="button"
+                        className=" ml-auto cursor-pointer text-[#EF8F57] " > {showPassword ? <EyeOff /> : <Eye />} </button>
 
                     <Button
                         label={(variant === "login" ? signingIn : signingUp) ? <Loader /> : "Submit"}
