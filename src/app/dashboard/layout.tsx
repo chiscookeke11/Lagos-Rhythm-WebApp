@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     const email = user.primaryEmailAddress?.emailAddress
 
-    if (email !== "chiscookeke11@gmail.com") {
+    if (!user || email !== "chiscookeke11@gmail.com") {
       router.push("/")
     }
   }, [user, router])
