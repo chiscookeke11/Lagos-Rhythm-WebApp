@@ -3,6 +3,7 @@
 
 import { useAppContext } from "@/app/context/AppContext";
 import BlogCard from "./common/BlogCard";
+import { useState } from "react";
 
 
 
@@ -12,15 +13,21 @@ import BlogCard from "./common/BlogCard";
 export default function BlogSection() {
 
 
-    const { blogs } = useAppContext()
+    const { blogs, setBlogs } = useAppContext()
+    const [showOptionsIndex, setShowOptionsIndex] = useState<string | null>(null);
+
+
+    const removeBlogFromUI = (id: string) => {
+        setBlogs(prev => (prev ? prev.filter(blog => blog.id !== id) : null))
+    }
 
 
 
-if (blogs && blogs?.length < 1) {
-    return <div className="w-full h-[50vh] flex items-center justify-center text-center " >
-        <p className=" text-3xl font-bold text-[#EF8F57]  " >No blogs found!</p>
-    </div>
-}
+    if (blogs && blogs?.length < 1) {
+        return <div className="w-full h-[50vh] flex items-center justify-center text-center " >
+            <p className=" text-3xl font-bold text-[#EF8F57]  " >No blogs found!</p>
+        </div>
+    }
 
 
     return (
@@ -28,7 +35,11 @@ if (blogs && blogs?.length < 1) {
             {blogs ? (
                 <section className=" w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                     {blogs?.map((blog) => (
-                        <BlogCard key={blog.id} blog={blog} />
+                        <BlogCard
+                            showOptionsIndex={showOptionsIndex}
+                            setShowOptionsIndex={setShowOptionsIndex}
+                            onDelete={removeBlogFromUI}
+                            key={blog.id} blog={blog} />
 
                     ))}
                 </section>
@@ -42,6 +53,8 @@ if (blogs && blogs?.length < 1) {
 
                 </div>
             )}
+
+
         </section>
     )
 }

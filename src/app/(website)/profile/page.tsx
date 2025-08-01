@@ -4,7 +4,7 @@
 
 export default function Page() {
     return (
-        <div>
+        <div className="h-screen flex items-center justify-center bg-black" >
             page
 
 
