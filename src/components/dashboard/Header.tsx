@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 
 export default function Header() {
     return (
-        <nav className=" bg-[#EF8F57] sticky top-0 left-0 w-full py-4 px-5 flex items-center justify-between gap-4 " >
+        <nav className=" bg-[#EF8F57] sticky top-0 left-0 w-full py-4 px-5 flex items-center justify-between gap-4 z-40 " >
             <h1 className=" font-semibold text-3xl text-[#ffffff] font-signika " >Dashboard</h1>
 
 

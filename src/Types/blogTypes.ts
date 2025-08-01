@@ -6,5 +6,6 @@ export interface BlogDataType {
     text: string;
     image: string;
     author: string;
-    createdAt: string
+    addedAt: string
+    id: string;
 }

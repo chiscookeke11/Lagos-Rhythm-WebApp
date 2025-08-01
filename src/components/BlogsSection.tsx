@@ -16,15 +16,19 @@ export default function BlogSection() {
 
 
 
-
+if (blogs && blogs?.length < 1) {
+    return <div className="w-full h-[50vh] flex items-center justify-center text-center " >
+        <p className=" text-3xl font-bold text-[#EF8F57]  " >No blogs found!</p>
+    </div>
+}
 
 
     return (
         <section className="w-full " >
             {blogs ? (
                 <section className=" w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                    {blogs?.map((blog, index) => (
-                        <BlogCard key={index} blog={blog} />
+                    {blogs?.map((blog) => (
+                        <BlogCard key={blog.id} blog={blog} />
 
                     ))}
                 </section>
