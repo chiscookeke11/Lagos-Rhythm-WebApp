@@ -20,7 +20,7 @@ export default function Page() {
 
 
 
-     {openBlogModal && (       <AddBlogModal/>)}
+     {openBlogModal && (       <AddBlogModal setOpenBlogModal={setOpenBlogModal} />)}
         </div>
     )
 }

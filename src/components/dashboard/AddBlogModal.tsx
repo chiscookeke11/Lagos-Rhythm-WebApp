@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { addDoc, collection } from "firebase/firestore"
@@ -13,7 +13,11 @@ import TiptapEditor from "../TipTapEditor"
 
 
 
-export default function AddBlogModal() {
+interface AddBlogModalProps {
+    setOpenBlogModal: React.Dispatch<SetStateAction<boolean>>
+}
+
+export default function AddBlogModal({ setOpenBlogModal }: AddBlogModalProps) {
     const [loading, setLoading] = useState(false)
     const { user } = useUser()
     const [formValues, setFormValues] = useState({
@@ -64,6 +68,7 @@ export default function AddBlogModal() {
                 author: "",
                 content: "",
             })
+            setOpenBlogModal(false)
         } catch (error) {
             console.log("failed to submit blog", error)
             toast.error("Failed to add blog")

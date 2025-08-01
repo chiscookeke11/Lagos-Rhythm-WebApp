@@ -97,7 +97,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
             text: data.text,
             image: data.image,
             author: data.author,
-            createdAt: data.createdAt?.toDate().toDateString() || "",
+            addedAt: data.addedAt?.toDate().toDateString() || "",
           };
         });
         setBlogs(items);

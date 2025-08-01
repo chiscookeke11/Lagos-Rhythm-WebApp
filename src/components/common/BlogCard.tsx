@@ -1,5 +1,6 @@
 import { BlogDataType } from "@/Types/blogTypes";
 import Image from "next/image";
+import Link from "next/link";
 
 
 interface BlogCardProp {
@@ -11,6 +12,8 @@ export default function BlogCard({ blog }: BlogCardProp) {
 
 
     return (
+
+        <Link href={`/blogs/${blog.id}`} >
         <article className=" w-full flex flex-col items-start gap-3 py-5 px-4 h-[380px] cursor-pointer  group" >
 
             <div className="w-full flex items-center justify-center h-full relative  rounded-lg overflow-hidden bg-[#EF8F57]/50 " >
@@ -23,10 +26,11 @@ export default function BlogCard({ blog }: BlogCardProp) {
                 <h3 className="text-lg font-semibold text-[#05073C] font-playfair " >{blog.title} </h3>
                 <div className="w-full flex items-center justify-start gap-6 " >
                     <h4 className="text-base font-medium text-[#5B5F8E] " >{blog.author} </h4>
-                    <h5 className="text-sm font-medium text-[#5B5F8E] flex items-center gap-5"> <span className="h-2 w-2 bg-[#5B5F8E] rounded-full block" /> {blog.createdAt} </h5>
+                    <h5 className="text-sm font-medium text-[#5B5F8E] flex items-center gap-5"> <span className="h-2 w-2 bg-[#5B5F8E] rounded-full block" /> {blog.addedAt} </h5>
                 </div>
 
             </div>
         </article>
+        </Link>
     )
 }
