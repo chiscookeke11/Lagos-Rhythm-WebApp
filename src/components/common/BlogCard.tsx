@@ -10,9 +10,9 @@ import toast from "react-hot-toast";
 
 interface BlogCardProp {
     blog: BlogDataType;
-    showOptionsIndex: string | null;
-    setShowOptionsIndex: React.Dispatch<React.SetStateAction<string | null>>;
-    onDelete: (id: string) => void;
+    showOptionsIndex?: string | null;
+    setShowOptionsIndex?: React.Dispatch<React.SetStateAction<string | null>>;
+    onDelete?: (id: string) => void;
 }
 
 export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, onDelete }: BlogCardProp) {
@@ -27,8 +27,7 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
             await deleteItem(id, "blogs")
             toast.dismiss(toastId)
             toast.success("Blog deleted successfully")
-            onDelete(id)
-
+            onDelete?.(id)
         }
         catch (err) {
             console.error(err)
@@ -50,7 +49,7 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                         onClick={(e) => {
                             e.stopPropagation()
                             e.preventDefault()
-                            setShowOptionsIndex((prev: string | null) => (prev === blog.id ? null : blog.id))
+                            setShowOptionsIndex?.((prev: string | null) => (prev === blog.id ? null : blog.id))
                         }}
                         className="absolute top-2 right-2 cursor-pointer bg-white rounded-md p-4  " ><EllipsisVertical size={28} color="#EF8F57" /> </button>
 
@@ -63,7 +62,7 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                         className={`bg-blue-600 h-28 w-28 rounded-full  top-[-10px] overflow-hidden  absolute  transition-all duration-200 ease-in-out ${showOptionsIndex === blog.id ? "right-[-6%]" : "right-[-50%] "}`} >
                         <div className="w-full h-full bg-white flex items-center justify-center  " >
                             <button onClick={(e) => {
-                                setShowOptionsIndex(null)
+                                setShowOptionsIndex?.(null)
                                 e.stopPropagation()
                                 e.preventDefault()
                             }}
