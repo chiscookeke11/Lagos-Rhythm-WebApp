@@ -15,7 +15,7 @@ interface TestimonialCardProps{
 
 export default function TestimonialCard({data}: TestimonialCardProps) {
     return (
-        <div className="bg-[#FFFFFF] rounded-xl py-4 px-6 flex flex-col items-start gap-5  w-full max-w-[330px] md:max-w-[409px] shadow-lg " >
+        <div className="bg-[#FFFFFF] rounded-xl py-4 px-6 flex flex-col items-start gap-5  w-full max-w-[330px] md:max-w-[409px] shadow-lg cursor-grab " >
             <h5 className=" text-base font-medium text-[#EB662B] " >{data.caption}</h5>
             <p className=" text-[#05073C] font-medium text-base font-lato " >{data.content} </p>
                 <hr className="bg-[#E7E6E6] w-full border-[#E7E6E6] "  />

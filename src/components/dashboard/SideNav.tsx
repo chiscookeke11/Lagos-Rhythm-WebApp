@@ -12,7 +12,7 @@ export default function SideNav() {
 
 
     return (
-        <aside className="bg-white sticky top-0 left-0 h-screen max-w-sm w-3/12 flex flex-col items-center justify-between py-6 pb-20 gap-4  px-5  " >
+        <aside className="bg-white sticky top-0 left-0 h-screen max-w-[200px] lg:max-w-sm w-3/12 flex flex-col items-center justify-between py-6 pb-20 gap-4  px-5  " >
 
             <Link href={"/"} className="flex items-end justify-center gap-2" >
                 <Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[60px] " />

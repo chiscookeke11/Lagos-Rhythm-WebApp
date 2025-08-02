@@ -8,7 +8,7 @@ import Loader from "@/components/common/Loader";
 import toast from "react-hot-toast";
 import { ClerkAPIError } from '@clerk/types'
 import Image from "next/image";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, X } from "lucide-react";
 
 interface AuthModalProps {
     setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -193,15 +193,18 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
     return (
         <div
-            onClick={() => setShowAuthModal(false)}
             className="fixed h-screen w-full flex items-center justify-center bg-transparent backdrop-blur-md top-0 left-0 px-5 py-7"
         >
             {!pendingVerification ? (
                 <form
-                    onClick={(e) => e.stopPropagation()}
                     onSubmit={variant === "login" ? handleSignIn : handleSignUp}
-                    className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6"
+                    className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6 shadow-lg "
                 >
+
+                    <button onClick={() => setShowAuthModal(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={32} /></button>
+
+
+
                     <h1 className="font-merienda font-extrabold text-[#EF8F57] text-xl md:text-3xl">
                         {variant === "login" ? "Sign In" : "Create an account"}
                     </h1>
@@ -278,7 +281,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                 <form
                     onClick={(e) => e.stopPropagation()}
                     onSubmit={handleVerify}
-                    className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6"
+                    className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6 shadow-lg"
                 >
                     <h1 className="font-merienda font-extrabold text-[#05073C] text-xl md:text-3xl text-center">
                         Please enter your <span className="text-[#EF8F57]">verification code</span>
