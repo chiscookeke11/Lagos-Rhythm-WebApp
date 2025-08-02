@@ -37,6 +37,7 @@
     "lottie-react": "^2.4.1",
     "lucide": "^0.522.0",
     "lucide-react": "^0.522.0",
+    "md5": "^2.3.0",
     "next": "^15.4.4",
     "quill": "^2.0.3",
     "react": "^19.0.0",
@@ -59,6 +60,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/md5": "^2.3.5",
     "@types/node": "^20",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19",

@@ -5,6 +5,7 @@ import LazyLoader from "./LazyLoader";
 import { Edit, EllipsisVertical, Trash, X } from "lucide-react";
 import { deleteItem } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 
 
@@ -17,6 +18,8 @@ interface BlogCardProp {
 
 export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, onDelete }: BlogCardProp) {
 
+    const dashboard = usePathname()
+    const isDashboard = dashboard === "/dashboard/blog-control"
 
     const handleDelete = async (id: string) => {
         const toastId = toast.loading("Deleting ")
@@ -45,13 +48,15 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
 
                 <div className="w-full flex items-center justify-center h-full relative  rounded-lg overflow-hidden " >
                     {!blog.image ? <LazyLoader /> : (<Image src={blog.image} alt="blog-image" height={1000} width={1000} className=" w-full h-full group-hover:scale-200 transform duration-200 ease-in-out " />)}
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation()
-                            e.preventDefault()
-                            setShowOptionsIndex?.((prev: string | null) => (prev === blog.id ? null : blog.id))
-                        }}
-                        className="absolute top-2 right-2 cursor-pointer bg-white rounded-md p-4  " ><EllipsisVertical size={28} color="#EF8F57" /> </button>
+
+                    {isDashboard &&
+                        (<button
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                e.preventDefault()
+                                setShowOptionsIndex?.((prev: string | null) => (prev === blog.id ? null : blog.id))
+                            }}
+                            className="absolute top-2 right-2 cursor-pointer bg-white rounded-md p-4  " ><EllipsisVertical size={28} color="#EF8F57" /> </button>)}
 
 
                     <div
@@ -59,7 +64,7 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                             e.stopPropagation()
                             e.preventDefault()
                         }}
-                        className={`bg-blue-600 h-28 w-28 rounded-full  top-[-10px] overflow-hidden  absolute  transition-all duration-200 ease-in-out ${showOptionsIndex === blog.id ? "right-[-6%]" : "right-[-50%] "}`} >
+                        className={` h-28 w-28 rounded-full  top-[-10px] overflow-hidden  absolute  transition-all duration-200 ease-in-out ${showOptionsIndex === blog.id ? "right-[-6%]" : "right-[-50%] "}`} >
                         <div className="w-full h-full bg-white flex items-center justify-center  " >
                             <button onClick={(e) => {
                                 setShowOptionsIndex?.(null)
@@ -82,6 +87,8 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                             </button>
                         </div>
                     </div>
+
+
                 </div>
 
 

@@ -153,7 +153,7 @@ export default function Summary() {
 
 
     return (
-        <section className=" w-full max-w-4xl h-fit col-span-4  bg-white rounded-[20px] shadow-sm py-4 px-7 space-y-6 " >
+        <section className=" w-full  h-fit   bg-white rounded-[20px] shadow-sm py-4 px-7 space-y-6 " >
 
 
             <div className="w-full flex items-center justify-between gap-10" >
@@ -169,7 +169,7 @@ export default function Summary() {
 
 
 
-            <div className="w-full  grid grid-cols-4 grid-rows-2 justify-between gap-6 " >
+            <div className="w-full  grid grid-cols-3 lg:grid-cols-4 justify-between gap-6 " >
 
 
                 {summaryData.map((data, index) => (

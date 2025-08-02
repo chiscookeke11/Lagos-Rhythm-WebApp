@@ -11,6 +11,7 @@ import AuthModal from "./AuthModal"
 import Button from "./common/Button"
 import { useUser } from "@clerk/nextjs"
 import { DropdownMenuCheckboxes } from "./common/DropdowMenu"
+import { usePathname } from "next/navigation"
 
 
 
@@ -55,6 +56,22 @@ export default function Navbar() {
     const mobileNavRef = useRef<HTMLDivElement>(null)
     const [showAuthModal, setShowAuthModal] = useState(false)
     const { isSignedIn } = useUser()
+    const pathname = usePathname()
+
+
+
+    const isActivePath = (navPath: string) => {
+        if (navPath === "/" && pathname === "/") return true
+
+        if (navPath !== "/" && pathname.startsWith(navPath)) {
+            return true
+        }
+        return false
+    }
+
+
+
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -113,9 +130,12 @@ export default function Navbar() {
 
                 <ul className=" hidden w-fit lg:flex items-center justify-evenly gap-10" >
                     {
-                        navLinks.map((navLink, index) => (
-                            <Link href={navLink.path} key={index} ><li className={`font-normal text-base text-[#FFFFFF]  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"}  `} > {navLink.label} </li></Link>
-                        ))
+                        navLinks.map((navLink, index) => {
+                            const isActive = isActivePath(navLink.path)
+                            return (
+                                <Link href={navLink.path} key={index} ><li className={`font-normal text-base  ${isActive && scrolled ? "text-gray-300 " : isActive ? "text-[#EB662B]" : "text-[#FFFFFF]"}  transition-colors duration-150 ease-in-out cursor-pointer ${scrolled ? " hover:text-gray-300 " : "hover:text-[#EB662B]"}  `} > {navLink.label} </li></Link>
+                            )
+                        })
                     }
                 </ul>
 
@@ -130,7 +150,7 @@ export default function Navbar() {
 
 
 
-                {isSignedIn ? (<DropdownMenuCheckboxes /> ) : <Button onClick={() => setShowAuthModal(true)} label="Sign In" type="button" ariaLabel="Sign in" variant="outline" />}
+                {isSignedIn ? (<DropdownMenuCheckboxes />) : <Button onClick={() => setShowAuthModal(true)} label="Sign In" type="button" ariaLabel="Sign in" variant="outline" />}
 
 
 
@@ -151,15 +171,18 @@ export default function Navbar() {
 
 
                     <ul className=" w-full h-full justify-center flex flex-col items-start gap-5  py-12 px-6 "   >
-                        {navLinks.map((navLink, index) => (
-                            <motion.li
-                                initial={{ scale: 0, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: index * 0.05, type: "spring", stiffness: 100, damping: 15, }}
-                                viewport={{ amount: 0.1 }}
-                                onClick={() => setOpenMobileNav(false)}
-                                key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B] `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
-                        ))}
+                        {navLinks.map((navLink, index) => {
+                            const isActive = isActivePath(navLink.path)
+                            return (
+                                <motion.li
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    whileInView={{ scale: 1, opacity: 1 }}
+                                    transition={{ delay: index * 0.05, type: "spring", stiffness: 100, damping: 15, }}
+                                    viewport={{ amount: 0.1 }}
+                                    onClick={() => setOpenMobileNav(false)}
+                                    key={index} className={` font-normal text-base text-black  transition-colors duration-150 ease-in-out cursor-pointer hover:text-[#EB662B]  ${isActive && scrolled ? "text-gray-300 " : isActive ? "text-[#EB662B]" : "text-[#FFFFFF]"} `} > <Link href={navLink.path}  > {navLink.label}</Link> </motion.li>
+                            )
+                        })}
 
                     </ul>
                 </div>
