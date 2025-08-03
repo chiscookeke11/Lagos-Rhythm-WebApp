@@ -121,7 +121,7 @@ export default function UpdateBlogModal({ setShowEditBlogModal, selectedIndex, u
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (user?.primaryEmailAddress?.emailAddress !== "chiscookeke11@gmail.com") {
+        if (user?.primaryEmailAddress?.emailAddress !== "chiscookeke11@gmail.com" && user?.primaryEmailAddress?.emailAddress !== "damola-o@lagosrhythm.com") {
             toast.error("You don't have permission to do this")
             return
         }

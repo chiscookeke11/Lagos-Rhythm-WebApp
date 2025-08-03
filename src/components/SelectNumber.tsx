@@ -52,17 +52,17 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                     <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 " >
                         {crewAmountData.map((item, index) => (
 
-                            <Link key={index} href={"/exclusive-tour-form"} className="w-fit " >
+                            <Link key={index} href={"/exclusive-tour-form"} className="md:w-fit w-full " >
                                 <button onClick={() => {
                                     setShowSelectModal(false)
                                     setPopulationType(item.label)
                                     setPopulationAmount(item.maxAmount)
                                 }}
-                                    className="w-full h-full p-3 bg-[#ffffff]  text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all transform duration-150 ease-in-out font-lato  " >
+                                    className="w-full h-full py-3 px-2 bg-[#ffffff]  text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all transform duration-150 ease-in-out font-lato  " >
                                     <Users color="#EF8F57" />
                                     <span className="font-semibold text-base " >            {item.label}</span>
-                                    <span>   Per Tour Fee:           <span className="text-[#EF8F57] " >{item.perTourFee}</span></span>
-                                    <span>   Monthly Subscription: <span className=" text-[#EF8F57]" >{item.monthlySub}</span>  </span>
+                                    <span>   Per Tour Fee:           <span className="text-[#EF8F57] ml-1 " >${item.perTourFee}</span></span>
+                                    <span>   Monthly Subscription: <span className=" text-[#EF8F57]  ml-1" >${item.monthlySub}</span>  </span>
                                 </button>
                             </Link>
                         ))}

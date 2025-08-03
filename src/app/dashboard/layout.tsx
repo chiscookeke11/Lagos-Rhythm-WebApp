@@ -60,7 +60,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className=" bg-[#FAFBFC] w-full h-full relative flex items-start text-black " >
       <SideNav />
-      <main className="h-screen overflow-y-auto  w-full relative flex flex-col items-start gap-6 " >
+      <main className="h-screen overflow-y-auto  w-full relative flex flex-col items-start  " >
         <Header />
         <div className="w-full h-fit" >
           {children}

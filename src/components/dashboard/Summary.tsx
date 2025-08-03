@@ -16,13 +16,13 @@ import { fetchBlogsCount, fetchBookedExclusiveRhythmCount, fetchBookedFreeRhythm
 
 
 export default function Summary() {
-    const [feedbackCount, setFeedbackCount] = useState(0)
+    const [feedbackCount, setFeedbackCount] = useState<number | string>("-")
     const { users, setUsers } = useAppContext()
     const { user } = useUser()
-    const [subscribersCount, setSubscribersCount] = useState(0)
-    const [blogsCount, setBlogsCount] = useState(0)
-    const [freeRhythmCount, setFreeRhythmCount] = useState(0)
-    const [exsRhythmCount, setExsRhythmCount] = useState(0)
+    const [subscribersCount, setSubscribersCount] = useState<number | string>("-")
+    const [blogsCount, setBlogsCount] = useState<number | string>("-")
+    const [freeRhythmCount, setFreeRhythmCount] = useState<number | string>("-")
+    const [exsRhythmCount, setExsRhythmCount] = useState<number | string>("-")
 
     const summaryData = [
         {
@@ -44,7 +44,7 @@ export default function Summary() {
             precentage: "6"
         },
         {
-            value: freeRhythmCount + exsRhythmCount,
+            value: typeof freeRhythmCount === "number" && typeof exsRhythmCount === "number" ? freeRhythmCount + exsRhythmCount : "-",
             title: "Booked Tours",
             icon: <TicketPlus />,
             precentage: "6"
@@ -120,20 +120,20 @@ export default function Summary() {
             setSubscribersCount(subCount)
         }
 
-          async function getBlogs() {
+        async function getBlogs() {
             const blogsCount = await fetchBlogsCount();
             setBlogsCount(blogsCount)
         }
 
 
-           async function getFreeRhythmBookings() {
-            const freeBookingCount = await  fetchBookedFreeRhythmCount();
+        async function getFreeRhythmBookings() {
+            const freeBookingCount = await fetchBookedFreeRhythmCount();
             setFreeRhythmCount(freeBookingCount)
         }
 
 
-         async function getExclusiveBookings() {
-            const exsBookingCount = await  fetchBookedExclusiveRhythmCount();
+        async function getExclusiveBookings() {
+            const exsBookingCount = await fetchBookedExclusiveRhythmCount();
             setExsRhythmCount(exsBookingCount)
         }
 
