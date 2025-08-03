@@ -27,7 +27,7 @@ export default function SideNav() {
             </Button></Link>
 
 
-            <ul className=" w-full flex flex-col gap-4 justify-between pl-6 py-2 " >
+            <ul className=" w-full flex flex-col gap-4 justify-between pl-6 py-2 mb-[10%] " >
 
                 {sideNavLinks.map((navlink, index) => (
                     <li key={index} className="text-[#EF8F57] hover:text-[#EF8F57]/80  font-semibold text-xl font-lato tracking-wide  " > <Link href={navlink.route} className="flex items-center gap-4" >{navlink.icons}  {navlink.label}</Link> </li>

@@ -14,7 +14,7 @@ export default function BlogLanding() {
 
     return (
         <div  className="w-full flex flex-col gap-8 items-start justify-center bg-[#ffffff] py-[4%] px-[4%] ">
-             <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " >Blogs by <span className="text-[#EF8F57] ">Lagos Rhythm</span></h1>
+             <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " >Articles by <span className="text-[#EF8F57] ">Lagos Rhythm</span></h1>
 
             <section className="w-full " >
                 {blogs ? (

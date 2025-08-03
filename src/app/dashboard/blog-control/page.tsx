@@ -13,7 +13,7 @@ export default function Page() {
 
     return (
         <div className="w-full flex flex-col gap-8 items-start justify-center py-6 px-7 relative font-lato ">
-          <Button onClick={() => setOpenBlogModal(true)} className="flex items-center justify-center gap-4 bg-[#EF8F57] cursor-pointer hover:bg-[#EF8F57]/90 py-3 px-6 h-fit text-base font-medium font-lato ml-auto " >Add Blog</Button>
+            <Button onClick={() => setOpenBlogModal(true)} className="flex items-center justify-center gap-4 bg-[#EF8F57] cursor-pointer hover:bg-[#EF8F57]/90 py-3 px-6 h-fit text-base font-medium font-lato ml-auto " >Add Blog</Button>
             <h1 className="text-[#05073C] font-bold text-2xl md:text-3xl font-playfair " >Blogs</h1>
             <BlogSection setOpenBlogModal={setOpenBlogModal} openBlogModal={openBlogModal} />
 

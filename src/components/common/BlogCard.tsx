@@ -3,9 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import LazyLoader from "./LazyLoader";
 import { Edit, EllipsisVertical, Trash, X } from "lucide-react";
-import { deleteItem } from "@/lib/utils";
-import toast from "react-hot-toast";
 import { usePathname } from "next/navigation";
+import React, { SetStateAction } from "react";
 
 
 
@@ -13,31 +12,17 @@ interface BlogCardProp {
     blog: BlogDataType;
     showOptionsIndex?: string | null;
     setShowOptionsIndex?: React.Dispatch<React.SetStateAction<string | null>>;
-    onDelete?: (id: string) => void;
+    setSelectedIndex?: React.Dispatch<SetStateAction<string>>
+    setShowEditBlogModal?: React.Dispatch<SetStateAction<boolean>>
+    setConfirmDeleteModal?: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, onDelete }: BlogCardProp) {
+export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, setSelectedIndex, setShowEditBlogModal, setConfirmDeleteModal }: BlogCardProp) {
 
     const dashboard = usePathname()
     const isDashboard = dashboard === "/dashboard/blog-control"
 
-    const handleDelete = async (id: string) => {
-        const toastId = toast.loading("Deleting ")
 
-
-
-        try {
-            await deleteItem(id, "blogs")
-            toast.dismiss(toastId)
-            toast.success("Blog deleted successfully")
-            onDelete?.(id)
-        }
-        catch (err) {
-            console.error(err)
-            toast.dismiss(toastId)
-            toast.error("Failed to delete. please try again")
-        }
-    }
 
 
 
@@ -75,13 +60,23 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                             ><X size={26} color="#EF8F57" /></button>
 
 
-                            <button className=" absolute top-4 left-6 cursor-pointer  hover:scale-110 transition-all duration-200 ease-in-out" title="edit">
+                            <button onClick={() => {
+                                setSelectedIndex?.(blog.id);
+                                if (setShowEditBlogModal) {
+                                    setShowEditBlogModal(true)
+                                };
+                            }}
+                                className=" absolute top-4 left-6 cursor-pointer  hover:scale-110 transition-all duration-200 ease-in-out" title="edit">
                                 <Edit size={22} color="#EF8F57" />
                             </button>
 
 
                             <button
-                                onClick={() => handleDelete(blog.id)}
+                                onClick={() => {
+                                    setSelectedIndex?.(blog.id)
+                                    setConfirmDeleteModal?.(true)
+                                }
+                                }
                                 className=" absolute bottom-4 left-6  cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out" title="delete">
                                 <Trash size={22} color="#EF8F57" />
                             </button>
