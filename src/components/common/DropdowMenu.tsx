@@ -23,7 +23,7 @@ export function DropdownMenuCheckboxes() {
     const { signOut } = useAuth()
     const [signingOut, setSigningOut] = React.useState(false)
     const router = useRouter()
-      const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(false)
 
     const handleSignOut = async () => {
         setSigningOut(true)
@@ -44,9 +44,9 @@ export function DropdownMenuCheckboxes() {
     }
 
 
-      const handleClick = () => {
-    setOpen(false) // Close dropdown on link click
-  }
+    const handleClick = () => {
+        setOpen(false) // Close dropdown on link click
+    }
 
 
 
@@ -59,7 +59,7 @@ export function DropdownMenuCheckboxes() {
 
                 <Link href={"/profile"} className="w-full" onClick={handleClick} > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >View Profile</Button> </Link>
 
-                {user?.primaryEmailAddress?.emailAddress === "chiscookeke11@gmail.com" ? (<Link href={"/dashboard"} className="w-full" onClick={handleClick} > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >Dashboard</Button> </Link>) : null}
+                {user?.primaryEmailAddress?.emailAddress === "chiscookeke11@gmail.com" || user?.primaryEmailAddress?.emailAddress === "damola-o@lagosrhythm.com" ? (<Link href={"/dashboard"} className="w-full" onClick={handleClick} > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >Dashboard</Button> </Link>) : null}
 
                 <Button disabled={!user} onClick={handleSignOut} className={`w-full text-left  cursor-pointer flex  bg-red-400 hover:bg-red-500 text-base shadow-lg ${signingOut ? "justify-center items-center" : "justify-start items-start"} `}> {signingOut ? <Loader /> : "Log out"} </Button>
 
