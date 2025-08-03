@@ -6,6 +6,7 @@ import BlogCard from "./common/BlogCard";
 import { SetStateAction, useState } from "react";
 import { BlogDataType } from "@/Types/blogTypes";
 import AddBlogModal from "./dashboard/AddBlogModal";
+import UpdateBlogModal from "./dashboard/UpdateBlogModal";
 
 
 interface BlogSectionProps{
@@ -20,6 +21,7 @@ export default function BlogSection({setOpenBlogModal, openBlogModal}: BlogSecti
 
     const { blogs, setBlogs } = useAppContext()
     const [showOptionsIndex, setShowOptionsIndex] = useState<string | null>(null);
+    const [showEditBlogModal, setShowEditBlogModal] = useState(true)
 
 
     const removeBlogFromUI = (id: string) => {
@@ -45,7 +47,7 @@ const addBlogToUI = (newBlog: BlogDataType) => {
 
 
     return (
-        <section className="w-full " >
+        <section className="w-full relative " >
             {blogs ? (
                 <section className=" w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                     {blogs?.map((blog) => (
@@ -72,6 +74,7 @@ const addBlogToUI = (newBlog: BlogDataType) => {
 
    {openBlogModal && (       <AddBlogModal setOpenBlogModal={setOpenBlogModal} addBlogToUI={addBlogToUI}  />)}
 
+{showEditBlogModal && <UpdateBlogModal setShowEditBlogModal={setShowEditBlogModal} />}
         </section>
     )
 }
