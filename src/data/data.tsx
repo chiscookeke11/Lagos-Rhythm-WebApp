@@ -388,22 +388,22 @@ export const crewAmountData: CrewAmountItem[] = [
     {
         label: "1-3 (circle)",
         value: "circle",
-        perTourFee: 400,
-        monthlySub: 50000,
+        perTourFee: 60,
+        monthlySub: 200,
         maxAmount: 3
     },
     {
         label: "4-10 (crew)",
         value: "crew",
-        perTourFee: 400,
-        monthlySub: 50000,
+        perTourFee: 150,
+        monthlySub: 500,
         maxAmount: 10
     },
     {
         label: "11+ (community)",
         value: "community",
-        perTourFee: 400,
-        monthlySub: 50000,
+        perTourFee: 300,
+        monthlySub: 1000,
         maxAmount: 100
     },
 ]
@@ -505,7 +505,7 @@ export const sideNavLinks = [
     },
     {
         label: "Gallery",
-        route: "",
+        route: "/dashboard/gallery-control",
         icons: <Images size={18} />,
     },
 

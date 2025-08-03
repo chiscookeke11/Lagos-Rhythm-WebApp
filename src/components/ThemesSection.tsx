@@ -39,13 +39,13 @@ export default function ThemesSection() {
                         key={index} className="h-full w-full min-h-[250px]  rounded-xl flex items-center justify-center cursor-pointer  py-3 px-5  bg-no-repeat bg-cover bg-center relative overflow-hidden group shadow-xl "  >
 
                         <div className=" w-full absolute h-full top-0 left-0  backdrop-blur-3xl  ">
-                            <Image src={item.image} alt="image" height={500} width={500} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out group-hover:blur-xs " />
+                            <Image src={item.image} alt="image" height={500} width={500} className=" h-full w-full object-cover group-hover:scale-200  transition-all duration-300 ease-in-out lg:group-hover:blur-xs " />
                         </div>
 
 
-                        <div className=" h-12 px-3 py-3  w-full absolute bg-white/5 group-hover:bg-black/10 backdrop-blur-md bottom-0 left-0 overflow-hidden group-hover:h-[68%] md:group-hover:h-[70%] lg:group-hover:h-[75%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
+                        <div className=" lg:h-12  px-3 py-3  w-full absolute bg-white/5 group-hover:bg-black/10 backdrop-blur-md bottom-0 left-0 overflow-hidden h-[68%] md:h-[70%] lg:group-hover:h-[75%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
                             <h1 className="font-merienda font-bold text-lg lg:text-xl text-white " >{item.title} </h1>
-                            <p className="font-lato font-medium text-sm lg:text-base text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out " > {item.description} </p>
+                            <p className="font-lato font-medium text-sm lg:text-base text-white lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 ease-in-out " > {item.description} </p>
                             <Button onClick={() => {
                                 setShowSelectModal(true)
                                 setSelectedTheme(item.title)

@@ -36,12 +36,12 @@ export default function Page() {
 
 
         <div className=" absolute right-0 top-0 h-full w-fit " >
-          <Image src={"/blogs/side-waves.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
+          <Image src={"/blogs/right-new.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
         </div>
 
 
          <div className=" absolute left-0 top-0 h-full w-fit " >
-          <Image src={"/blogs/left-wave.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
+          <Image src={"/blogs/left-new.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
         </div>
       </div>
 
