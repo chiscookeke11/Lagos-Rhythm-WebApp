@@ -23,6 +23,7 @@ export function DropdownMenuCheckboxes() {
     const { signOut } = useAuth()
     const [signingOut, setSigningOut] = React.useState(false)
     const router = useRouter()
+      const [open, setOpen] = React.useState(false)
 
     const handleSignOut = async () => {
         setSigningOut(true)
@@ -42,16 +43,23 @@ export function DropdownMenuCheckboxes() {
 
     }
 
+
+      const handleClick = () => {
+    setOpen(false) // Close dropdown on link click
+  }
+
+
+
     return (
-        <DropdownMenu >
+        <DropdownMenu open={open} onOpenChange={setOpen}  >
             <DropdownMenuTrigger asChild>
                 <Button variant="default" className="bg-transparent hover:bg-transparent cursor-pointer text-sm md:text-base focus:outline-0 focus:shadow-none shadow-none border-none focus:border-none font-signika " >{user?.primaryEmailAddress?.emailAddress} </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 font-signika flex flex-col items-start justify-center gap-3 p-3 py-5 bg-[#ffffff] border-[#ffffff]">
 
-                <Link href={"/profile"} className="w-full" > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >View Profile</Button> </Link>
+                <Link href={"/profile"} className="w-full" onClick={handleClick} > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >View Profile</Button> </Link>
 
-                {user?.primaryEmailAddress?.emailAddress === "chiscookeke11@gmail.com" ? (<Link href={"/dashboard"} className="w-full" > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >Dashboard</Button> </Link>) : null}
+                {user?.primaryEmailAddress?.emailAddress === "chiscookeke11@gmail.com" ? (<Link href={"/dashboard"} className="w-full" onClick={handleClick} > <Button className="w-full text-left items-start cursor-pointer flex justify-start bg-white hover:bg-white text-[#EF8F57] text-base shadow-lg " >Dashboard</Button> </Link>) : null}
 
                 <Button disabled={!user} onClick={handleSignOut} className={`w-full text-left  cursor-pointer flex  bg-red-400 hover:bg-red-500 text-base shadow-lg ${signingOut ? "justify-center items-center" : "justify-start items-start"} `}> {signingOut ? <Loader /> : "Log out"} </Button>
 

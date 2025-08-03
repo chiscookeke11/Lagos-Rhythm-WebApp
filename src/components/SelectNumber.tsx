@@ -44,7 +44,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                     }}
                     className="w-full max-w-[700px] rounded-lg  bg-[#FDF4F1] h-fit py-6 px-5 flex flex-col gap-5 items-center  " >
 
-                    <button onClick={() => setShowSelectModal(false)} className="ml-auto text-red-600 font-bold cursor-pointer border-2 rounded-full border-red-600 p-0.5 flex items-center justify-center  " ><X size={30} /> </button>
+                    <button onClick={() => setShowSelectModal(false)} className="ml-auto text-red-600 font-bold cursor-pointer  p-0.5 flex items-center justify-center  " ><X size={30} /> </button>
 
 
                     <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a crew number</h1>
