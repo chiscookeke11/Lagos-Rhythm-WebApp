@@ -3,14 +3,19 @@
 
 import { useAppContext } from "@/app/context/AppContext";
 import BlogCard from "./common/BlogCard";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { BlogDataType } from "@/Types/blogTypes";
+import AddBlogModal from "./dashboard/AddBlogModal";
+
+
+interface BlogSectionProps{
+    openBlogModal: boolean
+    setOpenBlogModal: React.Dispatch<SetStateAction<boolean>>
+}
 
 
 
-
-
-
-export default function BlogSection() {
+export default function BlogSection({setOpenBlogModal, openBlogModal}: BlogSectionProps) {
 
 
     const { blogs, setBlogs } = useAppContext()
@@ -21,6 +26,15 @@ export default function BlogSection() {
         setBlogs(prev => (prev ? prev.filter(blog => blog.id !== id) : null))
     }
 
+
+const addBlogToUI = (newBlog: BlogDataType) => {
+    setBlogs((prev) => {
+        if (!prev) {
+            return [newBlog]
+        }
+        return [newBlog, ...prev]
+    })
+}
 
 
     if (blogs && blogs?.length < 1) {
@@ -54,6 +68,9 @@ export default function BlogSection() {
                 </div>
             )}
 
+
+
+   {openBlogModal && (       <AddBlogModal setOpenBlogModal={setOpenBlogModal} addBlogToUI={addBlogToUI}  />)}
 
         </section>
     )

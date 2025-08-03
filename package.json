@@ -33,6 +33,7 @@
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
     "firebase": "^11.10.0",
+    "firebase-admin": "^13.4.0",
     "framer-motion": "^12.23.0",
     "lottie-react": "^2.4.1",
     "lucide": "^0.522.0",

@@ -47,7 +47,7 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
             <article className=" w-full flex flex-col items-start gap-3 py-5 px-4 h-[380px] cursor-pointer  group  " >
 
                 <div className="w-full flex items-center justify-center h-full relative  rounded-lg overflow-hidden " >
-                    {!blog.image ? <LazyLoader /> : (<Image src={blog.image} alt="blog-image" height={1000} width={1000} className=" w-full h-full group-hover:scale-200 transform duration-200 ease-in-out " />)}
+                    {!blog.image ? <LazyLoader /> : (<Image src={blog.image} alt="blog-image" height={1000} width={1000} className=" w-full h-full group-hover:scale-200 transform duration-200 ease-in-out object-cover object-center " />)}
 
                     {isDashboard &&
                         (<button

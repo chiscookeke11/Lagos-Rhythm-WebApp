@@ -14,7 +14,7 @@ export default function Page() {
 
   const email = user?.primaryEmailAddress?.emailAddress;
   const gravatarUrl = email ? getGravatarUrl(email) : "/about/image.jpg";
-
+ 
   return (
     <div className="bg-[#FDF4F1]">
       <div className="bg-[#05073C] w-full h-[90vh] rounded-b-[64px] flex items-center justify-center py-4 px-7 flex-col gap-7">
