@@ -71,18 +71,18 @@ export default function BlogCard({ blog, setShowOptionsIndex, showOptionsIndex, 
                                 e.stopPropagation()
                                 e.preventDefault()
                             }}
-                                className="ml-8 cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out"
+                                className="ml-8 cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out" title="close"
                             ><X size={26} color="#EF8F57" /></button>
 
 
-                            <button className=" absolute top-4 left-6 cursor-pointer  hover:scale-110 transition-all duration-200 ease-in-out" >
+                            <button className=" absolute top-4 left-6 cursor-pointer  hover:scale-110 transition-all duration-200 ease-in-out" title="edit">
                                 <Edit size={22} color="#EF8F57" />
                             </button>
 
 
                             <button
                                 onClick={() => handleDelete(blog.id)}
-                                className=" absolute bottom-4 left-6  cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out" >
+                                className=" absolute bottom-4 left-6  cursor-pointer hover:scale-110 transition-all duration-200 ease-in-out" title="delete">
                                 <Trash size={22} color="#EF8F57" />
                             </button>
                         </div>

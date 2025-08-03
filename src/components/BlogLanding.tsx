@@ -19,7 +19,7 @@ export default function BlogLanding() {
             <section className="w-full " >
                 {blogs ? (
                     <section className=" w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                        {blogs?.map((blog, index) => (
+                        {blogs?.slice(0, 3).map((blog, index) => (
                             <BlogCard key={index} blog={blog} />
 
                         ))}
