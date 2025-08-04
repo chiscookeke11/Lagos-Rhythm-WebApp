@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { ClerkAPIError } from '@clerk/types'
 import Image from "next/image";
 import { Eye, EyeOff, X } from "lucide-react";
+import Link from "next/link";
 
 interface AuthModalProps {
     setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -239,10 +240,14 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     )}
 
 
-                    <button
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        type="button"
-                        className=" ml-auto cursor-pointer text-[#EF8F57] " > {showPassword ? <EyeOff /> : <Eye />} </button>
+                    <div className="ml-auto flex flex-col gap-[2px] " >
+                        {variant === "login" && (<Link href={"/reset-password"} onClick={() => setShowAuthModal(false)} className=" text-[#EF8F57] ml-auto " > Forgot password </Link>)}
+
+                        <button
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            type="button"
+                            className=" ml-auto cursor-pointer text-[#EF8F57] " > {showPassword ? <EyeOff /> : <Eye />} </button>
+                    </div>
 
                     <Button
                         label={(variant === "login" ? signingIn : signingUp) ? <Loader /> : "Submit"}
