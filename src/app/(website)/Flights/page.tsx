@@ -1,11 +1,11 @@
-import ComingSoonHero from "@/components/ComingSoonHero";
+import ReusableHero from "@/components/ReusableHero";
 
 
 
 export default function Page() {
     return(
         <div>
-            <ComingSoonHero title="Flights Feature" />
+            <ReusableHero pageTitle="Flights Feature" image="/flights/flight-hero.jpg" subtitle="Launching soon" />
         </div>
     )
 }
