@@ -8,24 +8,21 @@ import Loader from "@/components/common/Loader"
 import { X } from "lucide-react"
 import { addDoc, collection } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
+import { useUser } from "@clerk/nextjs"
+import { galleryTypes } from "@/Types/galleryType"
 
 interface GalleryImageUploadFormProps {
-    setOpenGalleryModal?: React.Dispatch<SetStateAction<boolean>>
+    setShowGalleryForm: React.Dispatch<SetStateAction<boolean>>
+    addImageToUI: (image: galleryTypes) => void
 }
 
-export default function GalleryImageUploadForm({ setOpenGalleryModal }: GalleryImageUploadFormProps) {
+export default function GalleryImageUploadForm({ setShowGalleryForm, addImageToUI }: GalleryImageUploadFormProps) {
     const [loading, setLoading] = useState(false)
-    const [files, setFiles] = useState<File[]>([])
+    const [file, setFile] = useState<File | null>(null)
+    const [text, setText] = useState("")
+    const { user } = useUser()
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            setFiles(Array.from(e.target.files))
-        }
-    }
 
-    const removeFile = (indexToRemove: number) => {
-        setFiles((prevFiles) => prevFiles.filter((_, index) => index !== indexToRemove))
-    }
 
     const uploadImageToCloudinary = async (file: File): Promise<string> => {
         const formData = new FormData()
@@ -33,51 +30,72 @@ export default function GalleryImageUploadForm({ setOpenGalleryModal }: GalleryI
         formData.append("upload_preset", "lagos_rhythm_preset")
         formData.append("cloud_name", "dwedz2laa")
 
+
+
         const response = await fetch("https://api.cloudinary.com/v1_1/dwedz2laa/image/upload", {
             method: "POST",
             body: formData,
         })
 
         if (!response.ok) {
-            throw new Error(`Image upload failed for ${file.name}`)
+            throw new Error("Image upload failed")
         }
+
         const data = await response.json()
         return data.secure_url
     }
 
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (files.length === 0) {
-            toast.error("Please select at least one image.")
+
+
+        if (user?.primaryEmailAddress?.emailAddress !== "chiscookeke11@gmail.com" && user?.primaryEmailAddress?.emailAddress !== "damola-o@lagosrhythm.com") {
+            toast.error("You don't have permission to do this")
+            return
+        }
+
+        if (!text.trim()) {
+            toast.error("Please fill in all fields")
+            return
+        }
+
+        if (!file) {
+            toast.error("Please select an image")
             return
         }
 
         setLoading(true)
+
+
         try {
-            const uploadedImageUrls: string[] = []
-            for (const file of files) {
-                const imageUrl = await uploadImageToCloudinary(file)
-                uploadedImageUrls.push(imageUrl)
+            const imageUrl = await uploadImageToCloudinary(file)
+
+
+            const galleryRef = await addDoc(collection(fireDB, "gallery"), {
+                title: text,
+                image: imageUrl
+            })
+
+            const newImage: galleryTypes = {
+                id: galleryRef.id,
+                image: imageUrl,
+                text: text
             }
 
+            addImageToUI(newImage)
 
-            await addDoc(collection(fireDB, "gallery"), {
-                urls: uploadedImageUrls,
-                addedAt: new Date(),
-            });
-
-            toast.success(`${uploadedImageUrls.length} image(s) uploaded successfully!`)
-            setFiles([])
-            setOpenGalleryModal?.(false)
-        } catch (error) {
-            console.error("Failed to upload images", error)
-            if (error instanceof Error) {
-                toast.error(`Failed to upload images: ${error.message}`)
-            } else {
-                toast.error("Failed to upload images.")
-            }
-        } finally {
+            setText("")
+            setFile(null)
+            toast.success("Image uploaded successfully!")
+            setShowGalleryForm(false)
+        }
+        catch (error) {
+            console.error("error uploading image", error)
+            toast.error("Failed to upload image")
+        }
+        finally {
             setLoading(false)
         }
     }
@@ -90,7 +108,7 @@ export default function GalleryImageUploadForm({ setOpenGalleryModal }: GalleryI
             >
                 <button
                     type="button"
-                    onClick={() => setOpenGalleryModal?.(false)}
+                    onClick={() => setShowGalleryForm?.(false)}
                     className="text-red-600 ml-auto cursor-pointer"
                 >
                     <X size={32} />
@@ -98,39 +116,33 @@ export default function GalleryImageUploadForm({ setOpenGalleryModal }: GalleryI
                 <h2 className="mx-auto text-center font-merienda font-extrabold text-[#EF8F57] text-xl md:text-3xl">
                     Upload Gallery Images
                 </h2>
-                <label htmlFor="images" className="w-full flex flex-col gap-1">
+                <label htmlFor="image" className="w-full flex flex-col gap-1">
                     <span className="text-lg font-semibold text-[#EF8F57]">Select Images *</span>
                     <Input
                         type="file"
-                        placeholder="Gallery Images"
-                        id="images"
+                        placeholder="Gallery Image"
+                        id="image"
                         accept="image/*"
-                        multiple
-                        onChange={handleFileChange}
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                setFile(e.target.files[0])
+                            }
+                        }}
                         className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#EF8F57] file:text-white hover:file:bg-[#EF8F57]/90 file:cursor-pointer"
                         required
                     />
                 </label>
 
-                {files.length > 0 && (
-                    <div className="w-full flex flex-col gap-2">
-                        <span className="text-lg font-semibold text-[#EF8F57]">Selected Files:</span>
-                        <ul className="list-disc list-inside">
-                            {files.map((file, index) => (
-                                <li key={index} className="flex items-center justify-between text-sm text-gray-700">
-                                    {file.name} ({Math.round(file.size / 1024)} KB)
-                                    <button
-                                        type="button"
-                                        onClick={() => removeFile(index)}
-                                        className="text-red-500 hover:text-red-700 ml-2"
-                                    >
-                                        <X size={16} />
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+
+
+                <Input
+                    type={"text"}
+                    value={text}
+                    placeholder="The river side"
+                    onChange={(e) => setText(e.target.value)}
+                    className="py-5 px-5 text-lg font-normal outline-none border-2 border-[#EF8F57] shadow-none focus:shadow-none focus:border-none focus:outline-none text-[#131313] font-merriweather"
+                    required
+                />
 
                 <div className="flex gap-4 ml-auto">
                     <Button
@@ -138,14 +150,14 @@ export default function GalleryImageUploadForm({ setOpenGalleryModal }: GalleryI
                         variant="outline"
                         className="border-[#EF8F57] text-[#EF8F57] hover:bg-[#EF8F57]/10 bg-transparent cursor-pointer py-3 px-6 h-fit"
                         onClick={() => {
-                            setFiles([])
+                            setFile(null)
                         }}
                     >
                         Clear
                     </Button>
                     <Button
                         type="submit"
-                        disabled={loading || files.length === 0}
+                        disabled={loading || !text}
                         className="flex items-center justify-center gap-4 bg-[#EF8F57] cursor-pointer hover:bg-[#EF8F57]/90 py-3 px-6 h-fit text-base font-medium font-lato"
                     >
                         {loading ? <Loader /> : "Upload Images"}
