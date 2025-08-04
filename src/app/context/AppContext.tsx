@@ -6,6 +6,7 @@ import { BlogDataType } from "@/Types/blogTypes";
 import { collection, getDocs } from "firebase/firestore";
 import { fireDB } from "../config/firebaseClient";
 import { ClerkUser } from "@/Types/UserType";
+import { galleryTypes } from "@/Types/galleryType";
 
 
 
@@ -31,6 +32,9 @@ interface AppContextProps {
 
   users: ClerkUser[] | null;
   setUsers: React.Dispatch<React.SetStateAction<ClerkUser[] | null>>
+
+  galleryImages: galleryTypes[] | null;
+  setGalleryImages: React.Dispatch<React.SetStateAction<galleryTypes[] | null>>
 
 
 
@@ -68,6 +72,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   const [blogs, setBlogs] = useState<BlogDataType[] | null>(null);
 
   const [users, setUsers] = useState<ClerkUser[] | null>([])
+
+  const [galleryImages, setGalleryImages] = useState<galleryTypes[] | null>(null)
 
 
 
@@ -111,7 +117,29 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [])
 
 
-  console.log(blogs)
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(fireDB, "gallery"));
+        const items: galleryTypes[] = querySnapshot.docs.map((doc) => {
+          const data = doc.data()
+
+          return {
+            id: doc.id,
+            image: data.image,
+            text: data.title
+          }
+        });
+        setGalleryImages(items)
+      }
+      catch (error) {
+        console.log("Error fetching images", error)
+      }
+    }
+    fetchGalleryImages()
+
+
+  }, [])
 
 
   return (
@@ -128,7 +156,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         blogs,
         setBlogs,
         users,
-        setUsers
+        setUsers,
+        galleryImages,
+        setGalleryImages
       }}
     >
       {children}

@@ -1,10 +1,11 @@
 "use client"
 
 
+import { useAppContext } from "@/app/context/AppContext"
 import Button from "@/components/common/Button"
 import LazyLoader from "@/components/common/LazyLoader"
 import GalleryImageUploadForm from "@/components/dashboard/GalleryImageUploadForm"
-import { pagesData } from "@/data/data"
+import { galleryTypes } from "@/Types/galleryType"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
@@ -20,6 +21,9 @@ export default function Page() {
     const [showFrame, setShowFrame] = useState(false)
     const [imageLoadStates, setImageLoadStates] = useState<{ [key: number]: boolean }>({})
     const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
+    const [showGalleryForm, setShowGalleryForm] = useState(false)
+    const { galleryImages, setGalleryImages } = useAppContext()
+
 
     const size = (index: number) => {
         switch (index) {
@@ -39,7 +43,7 @@ export default function Page() {
     }, [showFrame])
 
     const handleNextFrame = () => {
-        if (selectedFrame >= pagesData.length - 1) {
+        if (galleryImages && selectedFrame >= galleryImages.length - 1) {
             return
         }
         setSelectedFrame((prev) => prev + 1)
@@ -60,6 +64,26 @@ export default function Page() {
         setImageErrors((prev) => ({ ...prev, [index]: true }))
         setImageLoadStates((prev) => ({ ...prev, [index]: true })) // Stop showing loader
     }
+
+
+
+
+
+
+    const AddImageToUI = (newImage: galleryTypes) => {
+        setGalleryImages((prev) => {
+            if (!prev) {
+                return [newImage]
+            }
+            else {
+                return [newImage, ...prev]
+            }
+        })
+    }
+
+
+
+
 
     function ImagePreview({ image, text }: { image: string; text: string }) {
         const [previewLoaded, setPreviewLoaded] = useState(false)
@@ -113,7 +137,7 @@ export default function Page() {
                     </div>
 
                     <button
-                        disabled={selectedFrame >= pagesData.length - 1}
+                        disabled={selectedFrame >= (galleryImages?.length ?? 0) - 1}
                         className="absolute top-[50%] translate-y-[-50%] right-0 cursor-pointer bg-[#EF8F57]/80 w-10 h-10 rounded-full flex items-center justify-center disabled:bg-neutral-400"
                         onClick={handleNextFrame}
                     >
@@ -133,17 +157,26 @@ export default function Page() {
     }
 
 
-
+    if (!galleryImages) {
+        return (
+            <div className=" w-full h-[50vh] flex items-center justify-center " >
+                <div className="h-14 w-14 relative "   >
+                    <div className="animate-spin rounded-full h-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full border-4 border-[#EF8F57] border-t-transparent  transition-all duration-200 " />
+                    <div className="absolute border-4 border-[#EF8F57] border-t-transparent border-r-transparent rounded-full top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] h-7/12 w-7/12 animate-anti-spin" />
+                </div>
+            </div>
+        )
+    }
 
 
     return (
         <div className="bg-[#FDF4F1] w-full h-full flex items-center justify-center flex-col  text-black relative">
 
-            <Button label="Add Image" ariaLabel="add image" type="button" className=" !bg-[#EF8F57] ml-auto rounded-lg mt-3 " />
+            <Button onClick={() => setShowGalleryForm(true)} label="Add Image" ariaLabel="add image" type="button" className=" !bg-[#EF8F57] ml-auto rounded-lg mt-3 " />
 
 
             <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-10 px-4 cursor-pointer">
-                {pagesData.map((card, index) => (
+                {galleryImages?.map((card, index) => (
                     <div
                         onClick={() => {
                             setShowFrame(true)
@@ -191,13 +224,13 @@ export default function Page() {
             </div>
 
             <AnimatePresence>
-                {showFrame && pagesData[selectedFrame] && (
-                    <ImagePreview image={pagesData[selectedFrame].image} text={pagesData[selectedFrame].text} />
+                {showFrame && galleryImages[selectedFrame] && (
+                    <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} />
                 )}
             </AnimatePresence>
 
 
-            <GalleryImageUploadForm/>
+            {showGalleryForm && <GalleryImageUploadForm setShowGalleryForm={setShowGalleryForm} addImageToUI={AddImageToUI} />}
         </div>
     )
 }
