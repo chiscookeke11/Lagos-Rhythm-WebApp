@@ -1,7 +1,7 @@
 "use client"
 
+import { useAppContext } from "@/app/context/AppContext"
 import LazyLoader from "@/components/common/LazyLoader"
-import { pagesData } from "@/data/data"
 import { AnimatePresence, motion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
@@ -12,6 +12,7 @@ export default function Page() {
   const [showFrame, setShowFrame] = useState(false)
   const [imageLoadStates, setImageLoadStates] = useState<{ [key: number]: boolean }>({})
   const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
+  const { galleryImages } = useAppContext()
 
   const size = (index: number) => {
     switch (index) {
@@ -31,7 +32,7 @@ export default function Page() {
   }, [showFrame])
 
   const handleNextFrame = () => {
-    if (selectedFrame >= pagesData.length - 1) {
+    if (galleryImages && selectedFrame >= galleryImages?.length - 1) {
       return
     }
     setSelectedFrame((prev) => prev + 1)
@@ -50,7 +51,7 @@ export default function Page() {
 
   const handleImageError = (index: number) => {
     setImageErrors((prev) => ({ ...prev, [index]: true }))
-    setImageLoadStates((prev) => ({ ...prev, [index]: true })) // Stop showing loader
+    setImageLoadStates((prev) => ({ ...prev, [index]: true }))
   }
 
   function ImagePreview({ image, text }: { image: string; text: string }) {
@@ -105,7 +106,7 @@ export default function Page() {
           </div>
 
           <button
-            disabled={selectedFrame >= pagesData.length - 1}
+            disabled={selectedFrame >= (galleryImages?.length ?? 0) - 1}
             className="absolute top-[50%] translate-y-[-50%] right-0 cursor-pointer bg-[#EF8F57]/80 w-10 h-10 rounded-full flex items-center justify-center disabled:bg-neutral-400"
             onClick={handleNextFrame}
           >
@@ -127,7 +128,7 @@ export default function Page() {
   return (
     <div className="bg-[#05073C] w-full h-full flex items-center justify-center text-black">
       <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-20 px-4 cursor-pointer relative">
-        {pagesData.map((card, index) => (
+        {galleryImages?.map((card, index) => (
           <div
             onClick={() => {
               setShowFrame(true)
@@ -172,8 +173,8 @@ export default function Page() {
         ))}
 
         <AnimatePresence>
-          {showFrame && pagesData[selectedFrame] && (
-            <ImagePreview image={pagesData[selectedFrame].image} text={pagesData[selectedFrame].text} />
+          {showFrame && galleryImages?.[selectedFrame] && (
+            <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} />
           )}
         </AnimatePresence>
       </div>
