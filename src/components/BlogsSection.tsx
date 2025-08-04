@@ -68,7 +68,7 @@ export default function BlogSection({ setOpenBlogModal, openBlogModal }: BlogSec
             {blogs && blogs?.length < 1 ?
                 (
                     <div className="w-full h-[50vh] flex items-center justify-center text-center " >
-                        <p className=" text-3xl font-bold text-[#EF8F57]  " >No blogs found!</p>
+                        <p className=" text-3xl font-bold text-[#EF8F57]  " >No blog found!</p>
                     </div>
                 ) :
                 blogs ? (

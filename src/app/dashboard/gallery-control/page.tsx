@@ -5,11 +5,13 @@ import { useAppContext } from "@/app/context/AppContext"
 import Button from "@/components/common/Button"
 import LazyLoader from "@/components/common/LazyLoader"
 import GalleryImageUploadForm from "@/components/dashboard/GalleryImageUploadForm"
+import { deleteItem } from "@/lib/utils"
 import { galleryTypes } from "@/Types/galleryType"
 import { AnimatePresence, motion } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Trash } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 
 
@@ -81,11 +83,37 @@ export default function Page() {
         })
     }
 
+    const removeImageFromUI = (id: string) => {
+        setGalleryImages(prev => (prev ? prev.filter(galleryImage => galleryImage.id !== id) : null))
+    }
+
+
+
+    const handleDelete = async (id: string) => {
+
+        const toastId = toast.loading("Deleting image")
+        setShowFrame(false)
+
+
+        try {
+            await deleteItem(id, "gallery")
+            toast.success("Image has been deleted successfully")
+            removeImageFromUI(id)
+        }
+        catch (error) {
+            console.error(error)
+            toast.error("Failed to delete image")
+        }
+        finally {
+            toast.dismiss(toastId)
+        }
+    }
 
 
 
 
-    function ImagePreview({ image, text }: { image: string; text: string }) {
+
+    function ImagePreview({ image, text, id }: { image: string; text: string, id: string }) {
         const [previewLoaded, setPreviewLoaded] = useState(false)
         const [previewError, setPreviewError] = useState(false)
 
@@ -132,8 +160,9 @@ export default function Page() {
                         onError={() => setPreviewError(true)}
                     />
 
-                    <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
+                    <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3 flex items-center justify-between ">
                         <p className="text-base font-bold font-merriweather text-white">{text}</p>
+                        <button onClick={() => handleDelete(id)} className="  cursor-pointer p-1 bg-white rounded-full text-[#EF8F57]  " ><Trash/></button>
                     </div>
 
                     <button
@@ -151,6 +180,9 @@ export default function Page() {
                     >
                         <ChevronLeft />
                     </button>
+
+
+
                 </motion.div>
             </motion.div>
         )
@@ -169,63 +201,72 @@ export default function Page() {
     }
 
 
+
     return (
         <div className="bg-[#FDF4F1] w-full h-full flex items-center justify-center flex-col  text-black relative">
 
             <Button onClick={() => setShowGalleryForm(true)} label="Add Image" ariaLabel="add image" type="button" className=" !bg-[#EF8F57] ml-auto rounded-lg mt-3 " />
 
 
-            <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-10 px-4 cursor-pointer">
-                {galleryImages?.map((card, index) => (
-                    <div
-                        onClick={() => {
-                            setShowFrame(true)
-                            setSelectedFrame(index)
-                        }}
-                        key={index}
-                        className={`col-span-1 row-span-1 rounded-xl overflow-hidden relative min-h-[450px] ${size(index + 1)}`}
-                        title={card.text}
-                    >
-                        {/* Show loader while image is loading or if no image */}
-                        {(!card.image || !imageLoadStates[index]) && !imageErrors[index] && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                                <LazyLoader />
-                            </div>
-                        )}
-
-                        {/* Show error state if image failed to load */}
-                        {imageErrors[index] && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                                <p className="text-gray-500 text-center px-4">Failed to load image</p>
-                            </div>
-                        )}
-
-                        {/* Show image if it exists */}
-                        {card.image && (
-                            <Image
-                                src={card.image || "/placeholder.svg"}
-                                alt="gallery image"
-                                width={1000}
-                                height={1000}
-                                className="object-cover h-full w-full object-center absolute top-0 left-0"
-                                onLoad={() => handleImageLoad(index)}
-                                onError={() => handleImageError(index)}
-                            />
-                        )}
-
-                        {/* Text overlay */}
-                        <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
-                            <p className="text-base font-bold font-merriweather text-white">{card.text}</p>
-                        </div>
+            {galleryImages.length < 1 ?
+                (
+                    <div className=" w-full h-screen flex items-center justify-center text-center " >
+                        <p className=" text-3xl font-bold text-[#EF8F57]  " >No Image found!</p>
                     </div>
-                ))}
+                )
+                : (
+                    <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-10 px-4 cursor-pointer">
+                        {galleryImages?.map((card, index) => (
+                            <div
+                                onClick={() => {
+                                    setShowFrame(true)
+                                    setSelectedFrame(index)
+                                }}
+                                key={index}
+                                className={`col-span-1 row-span-1 rounded-xl overflow-hidden relative min-h-[450px] ${size(index + 1)}`}
+                                title={card.text}
+                            >
+                                {/* Show loader while image is loading or if no image */}
+                                {(!card.image || !imageLoadStates[index]) && !imageErrors[index] && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                                        <LazyLoader />
+                                    </div>
+                                )}
+
+                                {/* Show error state if image failed to load */}
+                                {imageErrors[index] && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                                        <p className="text-gray-500 text-center px-4">Failed to load image</p>
+                                    </div>
+                                )}
+
+                                {/* Show image if it exists */}
+                                {card.image && (
+                                    <Image
+                                        src={card.image || "/placeholder.svg"}
+                                        alt="gallery image"
+                                        width={1000}
+                                        height={1000}
+                                        className="object-cover h-full w-full object-center absolute top-0 left-0"
+                                        onLoad={() => handleImageLoad(index)}
+                                        onError={() => handleImageError(index)}
+                                    />
+                                )}
+
+                                {/* Text overlay */}
+                                <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
+                                    <p className="text-base font-bold font-merriweather text-white">{card.text}</p>
+                                </div>
+                            </div>
+                        ))}
 
 
-            </div>
+                    </div>
+                )}
 
             <AnimatePresence>
                 {showFrame && galleryImages[selectedFrame] && (
-                    <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} />
+                    <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} id={galleryImages[selectedFrame].id} />
                 )}
             </AnimatePresence>
 
