@@ -125,59 +125,92 @@ export default function Page() {
     )
   }
 
+
+
+  if (!galleryImages) {
+    return (
+      <div className=" w-full h-[50vh] flex items-center justify-center bg-[#05073C] " >
+        <div className="h-14 w-14 relative "   >
+          <div className="animate-spin rounded-full h-full absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full border-4 border-[#EF8F57] border-t-transparent  transition-all duration-200 " />
+          <div className="absolute border-4 border-[#EF8F57] border-t-transparent border-r-transparent rounded-full top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] h-7/12 w-7/12 animate-anti-spin" />
+        </div>
+      </div>
+    )
+  }
+
+
+
+
+
   return (
     <div className="bg-[#05073C] w-full h-full flex items-center justify-center text-black">
-      <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-20 px-4 cursor-pointer relative">
-        {galleryImages?.map((card, index) => (
-          <div
-            onClick={() => {
-              setShowFrame(true)
-              setSelectedFrame(index)
-            }}
-            key={index}
-            className={`col-span-1 row-span-1 rounded-xl overflow-hidden relative min-h-[450px] ${size(index + 1)}`}
-            title={card.text}
-          >
-            {/* Show loader while image is loading or if no image */}
-            {(!card.image || !imageLoadStates[index]) && !imageErrors[index] && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <LazyLoader />
-              </div>
-            )}
 
-            {/* Show error state if image failed to load */}
-            {imageErrors[index] && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <p className="text-gray-500 text-center px-4">Failed to load image</p>
-              </div>
-            )}
 
-            {/* Show image if it exists */}
-            {card.image && (
-              <Image
-                src={card.image || "/placeholder.svg"}
-                alt="gallery image"
-                width={1000}
-                height={1000}
-                className="object-cover h-full w-full object-center absolute top-0 left-0"
-                onLoad={() => handleImageLoad(index)}
-                onError={() => handleImageError(index)}
-              />
-            )}
 
-            {/* Text overlay */}
-            <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
-              <p className="text-base font-bold font-merriweather text-white">{card.text}</p>
-            </div>
+
+      {
+        galleryImages.length < 1 ? (
+          <div className=" w-full h-screen flex items-center justify-center text-center " >
+            <p className=" text-3xl font-bold text-[#EF8F57] font-lato " >No Image found!</p>
           </div>
-        ))}
+        )
+          :
+          (
+            <div className="w-full h-fit grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-3 py-20 px-4 cursor-pointer relative">
+              {galleryImages?.map((card, index) => (
+                <div
+                  onClick={() => {
+                    setShowFrame(true)
+                    setSelectedFrame(index)
+                  }}
+                  key={index}
+                  className={`col-span-1 row-span-1 rounded-xl overflow-hidden relative min-h-[450px] ${size(index + 1)}`}
+                  title={card.text}
+                >
+                  {/* Show loader while image is loading or if no image */}
+                  {(!card.image || !imageLoadStates[index]) && !imageErrors[index] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                      <LazyLoader />
+                    </div>
+                  )}
 
-        <AnimatePresence>
-          {showFrame && galleryImages?.[selectedFrame] && (
-            <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} />
-          )}
-        </AnimatePresence>
-      </div>
+                  {/* Show error state if image failed to load */}
+                  {imageErrors[index] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                      <p className="text-gray-500 text-center px-4">Failed to load image</p>
+                    </div>
+                  )}
+
+                  {/* Show image if it exists */}
+                  {card.image && (
+                    <Image
+                      src={card.image || "/placeholder.svg"}
+                      alt="gallery image"
+                      width={1000}
+                      height={1000}
+                      className="object-cover h-full w-full object-center absolute top-0 left-0"
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index)}
+                    />
+                  )}
+
+                  {/* Text overlay */}
+                  <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3">
+                    <p className="text-base font-bold font-merriweather text-white">{card.text}</p>
+                  </div>
+                </div>
+              ))}
+
+              <AnimatePresence>
+                {showFrame && galleryImages?.[selectedFrame] && (
+                  <ImagePreview image={galleryImages[selectedFrame].image} text={galleryImages[selectedFrame].text} />
+                )}
+              </AnimatePresence>
+            </div>
+          )
+      }
+
+
     </div>
   )
 }
