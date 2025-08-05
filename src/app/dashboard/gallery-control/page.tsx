@@ -25,6 +25,7 @@ export default function Page() {
     const [imageErrors, setImageErrors] = useState<{ [key: number]: boolean }>({})
     const [showGalleryForm, setShowGalleryForm] = useState(false)
     const { galleryImages, setGalleryImages } = useAppContext()
+    const [deleting, setDeleting] = useState(false)
 
 
     const size = (index: number) => {
@@ -91,6 +92,8 @@ export default function Page() {
 
     const handleDelete = async (id: string) => {
 
+        setDeleting(true)
+
         const toastId = toast.loading("Deleting image")
         setShowFrame(false)
 
@@ -106,6 +109,7 @@ export default function Page() {
         }
         finally {
             toast.dismiss(toastId)
+            setDeleting(false)
         }
     }
 
@@ -162,7 +166,7 @@ export default function Page() {
 
                     <div className="absolute bottom-0 left-0 w-full h-fit bg-black/40 backdrop-blur-sm py-4 px-3 flex items-center justify-between ">
                         <p className="text-base font-bold font-merriweather text-white">{text}</p>
-                        <button onClick={() => handleDelete(id)} className="  cursor-pointer p-1 bg-white rounded-full text-[#EF8F57]  " ><Trash/></button>
+                        <button disabled={deleting} onClick={() => handleDelete(id)} className="  cursor-pointer p-1 bg-white rounded-full text-[#EF8F57]  " ><Trash/></button>
                     </div>
 
                     <button
@@ -211,7 +215,7 @@ export default function Page() {
             {galleryImages.length < 1 ?
                 (
                     <div className=" w-full h-screen flex items-center justify-center text-center " >
-                        <p className=" text-3xl font-bold text-[#EF8F57]  " >No Image found!</p>
+                        <p className=" text-3xl font-bold text-[#EF8F57] font-lato  " >No Image found!</p>
                     </div>
                 )
                 : (
