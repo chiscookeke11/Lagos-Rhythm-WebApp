@@ -3,7 +3,7 @@
 import { Controller, useFieldArray, useForm } from "react-hook-form"
 import { Minus, PlusIcon } from "lucide-react"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import toast from "react-hot-toast"
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomCheckBox } from "@/components/common/CustomCheckbox"
@@ -15,11 +15,20 @@ import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } 
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
+import { fireDB } from "@/app/config/firebaseClient"
+import { sendConfirmationEmail } from "@/lib/utils"
 
 export default function Page() {
   const { participantsCount, setParticipantsCount, populationAmount, selectedTheme } = useAppContext()
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
+  const minDate = new Date("2025-08-01");
+  const maxDate = new Date("2025-08-31");
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const formatted = useMemo(() => {
+    return selectedDates.map((d) => d.toISOString());
+  }, [selectedDates]);
 
   const {
     register,
@@ -27,6 +36,7 @@ export default function Page() {
     watch,
     control,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<exclusiveBookingDataType>({
     defaultValues: {
@@ -75,17 +85,110 @@ export default function Page() {
 
   // FIX: Changed onSubmit signature to only accept data
   const onSubmit = async (data: exclusiveBookingDataType) => {
+
+
     setLoading(true)
+
+
     console.log("Form Data:", data)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    toast.success("Form submitted successfully!")
-    setLoading(false)
-    // Here you would typically send `data` to your backend
+
+    try {
+      const usersRef = collection(fireDB, "exclusive_Tour_form")
+      const q = query(usersRef, where("email", "==", formData.tourists));
+      const existingDocs = await getDocs(q)
+
+      if (!existingDocs.empty) {
+        toast.error("You have already booked a free E-Rhythm tour")
+        setLoading(false)
+        return;
+      }
+
+
+      await addDoc(collection(fireDB, "exclusive_Tour_form"), {
+        tourist: formData.tourists,
+        country: formData.country,
+        reasonForJoin: formData.reasonForJoin,
+        OtherReason: formData.OtherReason,
+        joiningAs: formData.joiningAs,
+        otherJoin: formData.otherJoin,
+        tourDate: formData.tourDate,
+        termsAgreement: formData.termsAgreement,
+        referralSource: formData.referralSource,
+        subscribedAt: new Date(),
+      })
+
+
+      // confirmation email function
+      try {
+        await sendConfirmationEmail({
+          name: formData.tourists[0]?.fullName,
+          email: formData.tourists[0]?.email,
+          service: "Exclusive E-Rhythm",
+          date: "21st august 2021",
+          tour_link: "www.unn.edu.ng"
+        })
+        console.log("Email sent Successfully")
+      }
+      catch (err) {
+        console.error("Failed to send confirmation email", err)
+      }
+
+      reset()
+      setSelectedDates([])
+      clearAllDates()
+
+
+
+    }
+    catch (error) {
+      toast.error("Failed to book tour")
+      console.error("Failed to book", error)
+    }
+    finally {
+      setLoading(false)
+    }
+
   }
 
 
   console.log(formData)
+
+
+
+
+  const handleDateChange = (date: Date | null) => {
+    if (!date) return;
+
+    const newDates = selectedDates.some(
+      (d) => d.toDateString() === date.toDateString()
+    )
+      ? selectedDates.filter((d) => d.toDateString() !== date.toDateString())
+      : [...selectedDates, date];
+
+    setSelectedDates(newDates);
+
+    const formatted = newDates.map((d) => d.toISOString());
+    setValue("tourDate", formatted, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
+  useEffect(() => {
+    setValue("tourDate", formatted, {
+      shouldDirty: false,
+      shouldValidate: false,
+    });
+  }, [selectedDates, setValue, formatted]);
+
+  const clearAllDates = () => {
+    setSelectedDates([]);
+    setValue("tourDate", [], {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
+
 
   return (
     <div className="w-full flex flex-col h-full text-[#05073C] relative">
@@ -179,18 +282,17 @@ export default function Page() {
               name="country"
               rules={{ required: "Country is required" }}
               render={({ field }) => {
-                // console.log(field)
                 return (
-                     <CustomSelect
-                  name={field.name}
-                  onChange={field.onChange}
-                  options={countryOptions}
-                  label="Country"
-                  placeholder="Please select an option"
-                  isRequired
-                  value={formData.country}
-                  error={errors.country?.message}
-                />
+                  <CustomSelect
+                    name={field.name}
+                    onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
+                    options={countryOptions}
+                    label="Country"
+                    placeholder="Please select an option"
+                    isRequired
+                    value={formData.country}
+                    error={errors.country?.message}
+                  />
                 )
               }}
             />
@@ -258,7 +360,7 @@ export default function Page() {
               render={({ field }) => (
                 <CustomSelect
                   name={field.name}
-                  onChange={field.onChange}
+                  onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
                   placeholder="Please select an option"
                   label="I am joining as a:"
                   options={joinAsData}
@@ -279,69 +381,56 @@ export default function Page() {
               />
             )}
 
-            <Controller
-              control={control}
-              name="tourDate"
-              rules={{ validate: (value) => (value && value.length > 0) || "Please select at least one tour date" }}
-              render={({ field }) => {
-                const currentDates: Date[] = Array.isArray(field.value)
-                  ? field.value.map((d: Date | string) => (d instanceof Date ? d : new Date(d)))
-                  : []
 
-                return (
-                  <div className="w-full">
-                    <label className="text-[#000000] font-medium text-base font-lato flex items-start gap-1">
-                      Next tour date <span className="text-red-600">*</span>
-                    </label>
-                    <DatePicker
-                      selectedDates={currentDates}
-                      onChange={(dates) => field.onChange(dates)}
-                      minDate={new Date()}
-                      maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
-                      placeholderText="Click to select multiple dates"
-                      className="block w-full rounded-lg px-4 py-3 text-lg cursor-pointer bg-white"
-                      wrapperClassName="w-full"
-                    />
-                    {currentDates.length > 0 && (
-                      <div className="space-y-2 mt-2">
-                        <div className="flex items-center justify-between">
-                          <p className="font-normal text-dark">Selected Dates:</p>
-                          <button
-                            type="button"
-                            onClick={() => field.onChange([])}
-                            className="text-red-500 text-sm hover:text-red-700 cursor-pointer"
-                          >
-                            Clear All
-                          </button>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {currentDates.map((date, index) => (
-                            <div
-                              key={index}
-                              className="bg-orange-100 text-[#EF8F57] px-3 py-1 rounded-full text-xs flex items-center gap-2"
-                            >
-                              <span>{date.toDateString()}</span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  field.onChange(currentDates.filter((_, i) => i !== index))
-                                }}
-                                className="text-orange-500 hover:text-orange-700 font-bold cursor-pointer"
-                              >
-                                &times;
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {errors.tourDate && (
-                      <p className="text-red-500 text-xs md:text-sm ml-auto">{errors.tourDate.message}</p>
-                    )}
+            <div className="w-full">
+              <label className="text-[#000000] font-medium text-base font-lato flex items-start gap-1">
+                Next tour date <span className="text-red-600">*</span>
+              </label>
+              <DatePicker
+                selected={null}
+                onChange={handleDateChange}
+                minDate={minDate}
+                maxDate={maxDate}
+                placeholderText="Click to select multiple dates"
+                className="block w-full rounded-lg px-4 py-3 text-lg cursor-pointer bg-white"
+                wrapperClassName="w-full"
+              />
+              {selectedDates.length > 0 && (
+                <div className="space-y-2 mt-2">
+                  <div className="flex items-center justify-between">
+                    <p className="font-normal text-dark">Selected Dates:</p>
+                    <button
+                      type="button"
+                      onClick={clearAllDates}
+                      className="text-red-500 text-sm hover:text-red-700 cursor-pointer"
+                    >
+                      Clear All
+                    </button>
                   </div>
-                )
-              }}
-            />
+                  <div className="flex flex-wrap gap-2">
+                    {selectedDates.map((date, index) => (
+                      <div
+                        key={index}
+                        className="bg-orange-100 text-[#EF8F57] px-3 py-1 rounded-full text-xs flex items-center gap-2"
+                      >
+                        <span>{date.toDateString()}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleDateChange(date)}
+                          className="text-orange-500 hover:text-orange-700 font-bold cursor-pointer"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {errors.tourDate && (
+                <p className="text-red-500 text-xs md:text-sm ml-auto">{errors.tourDate.message}</p>
+              )}
+            </div>
+
 
 
             <Controller
@@ -351,7 +440,7 @@ export default function Page() {
               render={({ field }) => (
                 <CustomSelect
                   name={field.name}
-                  onChange={field.onChange}
+                  onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
                   label="How did you hear about us?"
                   options={referralSourceData}
                   placeholder="Please select an option"
