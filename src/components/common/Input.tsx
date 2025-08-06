@@ -12,7 +12,7 @@ export default React.forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   return (
-    <label htmlFor={props.id || props.name} className="w-full flex flex-col items-start gap-1">
+    <label className="w-full flex flex-col items-start gap-1">
       <span className="text-[#000000] font-medium text-base font-lato flex items-start gap-1">
         {label}
         {isRequired && <div className="text-red-600">*</div>}
