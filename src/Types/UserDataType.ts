@@ -38,7 +38,7 @@ export type PopulationTypeInterface = string
 export interface CrewAmountItem {
     label: string;
     value: string;
-    perTourFee: number;
-    monthlySub: number;
+    perTourFee: (country: string) => string;
+    monthlySub: (country: string) => string;
     maxAmount: number
 }

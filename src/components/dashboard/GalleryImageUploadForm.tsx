@@ -56,11 +56,6 @@ export default function GalleryImageUploadForm({ setShowGalleryForm, addImageToU
             return
         }
 
-        if (!text.trim()) {
-            toast.error("Please fill in all fields")
-            return
-        }
-
         if (!file) {
             toast.error("Please select an image")
             return

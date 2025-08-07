@@ -15,7 +15,7 @@ import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } 
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
+import { addDoc, collection } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 
@@ -93,17 +93,6 @@ export default function Page() {
     console.log("Form Data:", data)
 
     try {
-      const usersRef = collection(fireDB, "exclusive_Tour_form")
-      const q = query(usersRef, where("email", "==", formData.tourists));
-      const existingDocs = await getDocs(q)
-
-      if (!existingDocs.empty) {
-        toast.error("You have already booked a free E-Rhythm tour")
-        setLoading(false)
-        return;
-      }
-
-
       await addDoc(collection(fireDB, "exclusive_Tour_form"), {
         tourist: formData.tourists,
         country: formData.country,

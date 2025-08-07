@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import emailjs from 'emailjs-com';
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { fireDB } from "@/app/config/firebaseClient";
 
 
@@ -133,3 +133,19 @@ export const deleteItem = async (id: string, collectionName: string) => {
 // }
 
 
+
+
+export const addUserToDb = async (user: string) => {
+  try {
+    await setDoc(doc(fireDB, "user_profile", user), {
+      fullName: "",
+      country: "",
+      createdAt: new Date()
+    })
+    console.log("USer document created in firestore")
+  }
+  catch (firestoreError) {
+    console.error("Error writing to firestore:", firestoreError)
+  }
+
+}

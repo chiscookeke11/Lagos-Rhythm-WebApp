@@ -10,6 +10,7 @@ import { ClerkAPIError } from '@clerk/types'
 import Image from "next/image";
 import { Eye, EyeOff, X } from "lucide-react";
 import Link from "next/link";
+import { addUserToDb } from "@/lib/utils";
 
 interface AuthModalProps {
     setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -96,6 +97,15 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                 await setActive?.({
                     session: completeSignUp.createdSessionId
                 })
+
+
+                // initial storing of the user email to the fire db
+
+                const user = completeSignUp.emailAddress
+                if (user) {
+                    addUserToDb(user)
+                }
+
                 toast.success("Account verified successfully!");
                 setShowAuthModal(false);
                 router.push("/")
