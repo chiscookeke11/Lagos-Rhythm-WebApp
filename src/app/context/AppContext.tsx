@@ -3,10 +3,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
 import { BlogDataType } from "@/Types/blogTypes";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { fireDB } from "../config/firebaseClient";
 import { ClerkUser } from "@/Types/UserType";
 import { galleryTypes } from "@/Types/galleryType";
+import { ProfileDataType } from "@/Types/ProfileDataType";
+import { useUser } from "@clerk/nextjs";
 
 
 
@@ -37,6 +39,14 @@ interface AppContextProps {
   setGalleryImages: React.Dispatch<React.SetStateAction<galleryTypes[] | null>>
 
 
+  userData: ProfileDataType | null;
+  setUserData: React.Dispatch<React.SetStateAction<ProfileDataType | null>>
+
+
+  email?: string
+
+
+  fetchUserData: (email: string) => void
 
 }
 
@@ -75,6 +85,16 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [galleryImages, setGalleryImages] = useState<galleryTypes[] | null>(null)
 
+  const { user } = useUser();
+  const email = user?.primaryEmailAddress?.emailAddress;
+
+  const [userData, setUserData] = useState<ProfileDataType | null>(null)
+
+
+
+
+
+
 
 
   useEffect(() => {
@@ -91,6 +111,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [selectedTheme]);
 
 
+
+
+  // function to fecth blog data
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
@@ -117,6 +140,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [])
 
 
+
+  // function to fetch gallery images
   useEffect(() => {
     const fetchGalleryImages = async () => {
       try {
@@ -142,6 +167,48 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [])
 
 
+
+
+  // function to fetch user data
+  const fetchUserData = async (email: string) => {
+    if (email) {
+      try {
+        const userRef = doc(fireDB, "user_profile", email)
+        const docSnap = await getDoc(userRef)
+
+        if (docSnap.exists()) {
+          const fetchedData = docSnap.data() as ProfileDataType
+          setUserData({
+            fullName: fetchedData.fullName,
+            country: fetchedData.country,
+            email: fetchedData.email,
+            imageUrl: fetchedData.imageUrl
+          })
+        }
+      }
+      catch (error) {
+        console.error("Error fetching user Data", error)
+      }
+    }
+
+  }
+
+
+
+  // function to fetch user profile
+  useEffect(() => {
+    if (email) {
+      fetchUserData(email)
+      console.log("I ran")
+    }
+      else{
+    console.log("Not fetched")}
+  }, [email])
+
+
+
+
+
   return (
     <AppContext.Provider
       value={{
@@ -158,7 +225,11 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         users,
         setUsers,
         galleryImages,
-        setGalleryImages
+        setGalleryImages,
+        email,
+        userData,
+        setUserData,
+        fetchUserData
       }}
     >
       {children}
