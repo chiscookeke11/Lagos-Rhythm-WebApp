@@ -72,7 +72,7 @@ export default function Page() {
         await setDoc(doc(fireDB, "user_profile", email), {
           fullName: userData.fullName,
           country: userData.country,
-          createdAt: new Date(),
+          UpdatedAt: new Date(),
           imageUrl: imageUrl
         })
 
@@ -92,11 +92,39 @@ export default function Page() {
       }
       catch (error) {
         console.log("Failed to update profile", error)
+        toast.error("Something went wrong! Please try again")
       }
       finally {
         setLoading(false)
       }
     }
+
+
+    // if the user wants to update only his name or country
+    if (!file) {
+      try {
+        await setDoc(doc(fireDB, "user_profile", email), {
+          fullName: userData.fullName,
+          country: userData.country,
+          UpdatedAt: new Date(),
+          imageUrl: userData.imageUrl ?? ""
+        });
+
+        const docSnap = await getDoc(doc(fireDB, "user_profile", email));
+        if (docSnap.exists()) {
+          setUserData(docSnap.data() as ProfileDataType);
+        }
+
+        toast.success("Profile updated successfully");
+      } catch (error) {
+        console.error("Failed to update profile", error);
+        toast.error("Failed to update profile");
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
 
 
   }
@@ -120,7 +148,7 @@ export default function Page() {
         <div className="z-10 h-[250px] w-[253px] lg:h-[330px] lg:w-[333px] transform relative before:absolute before:right-[-10px] before:top-[-10px] before:border-r-4 before:border-t-4 before:border-[#EF8F57] before:h-full before:w-full after:absolute after:h-full after:w-full after:top-[10px] after:left-[-10px] after:bottom-[-10px] after:border-l-4 after:border-b-4 after:border-l-[#EF8F57] after:border-b-[#EF8F57]">
           <Image
             src={userData?.imageUrl ?? "/profile/profile-placeholder.png"}
-            alt="User profile image"
+      alt={userData?.fullName ? `${userData.fullName}'s profile image` : "User profile image"}
             width={500}
             height={500}
             className="w-full h-full object-cover object-center"
