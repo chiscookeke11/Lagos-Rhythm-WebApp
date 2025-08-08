@@ -14,7 +14,7 @@ export function cn(...inputs: ClassValue[]) {
 
 
 
-
+// booking confirmation email
 export const sendConfirmationEmail = (data: {
   name: string;
   email: string;
@@ -38,7 +38,7 @@ export const sendConfirmationEmail = (data: {
 
 
 
-
+// newsletter confirmation email
 export const newsletterConfirmationMail = (data: { name: string, email: string }) => {
   return emailjs.send(
     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -54,7 +54,7 @@ export const newsletterConfirmationMail = (data: { name: string, email: string }
 
 
 
-
+// writing feedback data to firestore
 export async function fetchFeedbackCount() {
   const feedbackRef = collection(fireDB, "Feedback");
 
@@ -64,6 +64,7 @@ export async function fetchFeedbackCount() {
 }
 
 
+//  fetching the subscribers length
 export async function fetchSubscribersCount() {
   const subscribersRef = collection(fireDB, "subscribers");
 
@@ -73,6 +74,8 @@ export async function fetchSubscribersCount() {
 }
 
 
+
+// fetching the blogs length
 export async function fetchBlogsCount() {
   const blogsRef = collection(fireDB, "blogs");
 
@@ -82,6 +85,8 @@ export async function fetchBlogsCount() {
 }
 
 
+
+// fetching the length of customers that booked for the free E-Rhythm
 export async function fetchBookedFreeRhythmCount() {
   const freeRhythmCountRef = collection(fireDB, "booked_Free_Rhythm");
 
@@ -91,6 +96,8 @@ export async function fetchBookedFreeRhythmCount() {
 }
 
 
+
+// fetching the length of customers that booked for the exclusive rhythm
 export async function fetchBookedExclusiveRhythmCount() {
   const exclusiveRhythmCountRef = collection(fireDB, "exclusive_Tour_form");
 
@@ -99,7 +106,7 @@ export async function fetchBookedExclusiveRhythmCount() {
   return snapshot.size
 }
 
-
+// function to delete an item
 export const deleteItem = async (id: string, collectionName: string) => {
   try {
     await deleteDoc(doc(fireDB, collectionName, id))
@@ -112,29 +119,31 @@ export const deleteItem = async (id: string, collectionName: string) => {
 
 
 
-// export async function uploadImageToCloudinary(file: File) {
-//   const formData = new FormData()
-//   formData.append("file", file)
-//   formData.append("upload_preset", "lagos_rhythm_preset")
-//   formData.append("cloud_name", "dwedz2laa")
 
-
-//   const response = await fetch("https://api.cloudinary.com/v1_1/dwedz21aa/image/upload", {
-//     method: "POST",
-//     body: formData,
-//   })
-
-//   if (!response.ok) {
-//     throw new Error("Image upload failed")
-//   }
-
-//   const data = await response.json()
-//   return data.secure_url
-// }
+// function to upload an image to cloudinary
+export async function uploadImageToCloudinary(file: File, presetName: string) {
+  const formData = new FormData()
+  formData.append("file", file)
+  formData.append("upload_preset", presetName)
 
 
 
+  const response = await fetch("https://api.cloudinary.com/v1_1/dwedz2laa/image/upload", {
+    method: "POST",
+    body: formData,
+  })
 
+  if (!response.ok) {
+    throw new Error("Image upload failed")
+  }
+
+  const data = await response.json()
+  return data.secure_url
+}
+
+
+
+// function to add user to the database on successful signup
 export const addUserToDb = async (user: string) => {
   try {
     await setDoc(doc(fireDB, "user_profile", user), {
