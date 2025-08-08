@@ -201,8 +201,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
       fetchUserData(email)
       console.log("I ran")
     }
-      else{
-    console.log("Not fetched")}
+    else {
+      console.log("Not fetched")
+    }
   }, [email])
 
 
