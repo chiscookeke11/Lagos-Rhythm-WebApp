@@ -211,7 +211,7 @@ export default function Page() {
 
         <Button
           ariaLabel="Submit"
-          label={loading ? (<Loader />) : "Submit"}
+          label={loading ? (<Loader />) : "Update"}
           disabled={loading}
           type="submit"
           variant="primary"

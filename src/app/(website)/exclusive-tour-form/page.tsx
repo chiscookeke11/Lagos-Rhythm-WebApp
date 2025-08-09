@@ -18,6 +18,7 @@ import { addDoc, collection } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
+import PaymentModal from "@/components/payments/PaymentModal"
 
 export default function Page() {
   const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
@@ -27,6 +28,8 @@ export default function Page() {
   const minDate = new Date("2025-08-01");
   const maxDate = new Date("2025-08-31");
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
   }, [selectedDates]);
@@ -84,14 +87,21 @@ export default function Page() {
     setParticipantsCount((prev) => prev - 1)
   }
 
-  // FIX: Changed onSubmit signature to only accept data
-  const onSubmit = async (data: exclusiveBookingDataType) => {
 
+  const handleFormSubmit = (data: exclusiveBookingDataType) => {
+    setPendingFormData(data)
+    setShowPaymentModal(true)
+  }
+
+  // FIX: Changed onSubmit signature to only accept data
+  const completeBooking = async () => {
+
+    if (!pendingFormData) return
 
     setLoading(true)
 
 
-    console.log("Form Data:", data)
+    console.log("Form Data:", formData)
 
     try {
       await addDoc(collection(fireDB, "exclusive_Tour_form"), {
@@ -213,7 +223,7 @@ export default function Page() {
           </div>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(handleFormSubmit)}
             className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato"
           >
             <div className="w-full flex flex-col gap-1 items-start py-3 px-4">
@@ -468,6 +478,8 @@ export default function Page() {
           setShowConfirmationModal={setShowConfirmationModal}
         />
       )}
+
+      <PaymentModal isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
     </div>
   )
 }

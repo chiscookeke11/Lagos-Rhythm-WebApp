@@ -1,7 +1,7 @@
 "use client"
 
 import { Facebook, Instagram, Linkedin, X, Youtube } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowSize } from '@react-hook/window-size';
 import Confetti from 'react-confetti';
 import { BsTiktok } from "react-icons/bs";
@@ -22,6 +22,26 @@ export default function ConfirmationModal({ showConfirmationModal, setShowConfir
 
         return () => clearTimeout(timer);
     }, []);
+
+
+
+
+    useEffect(() => {
+        const closeModal = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setShowConfirmationModal(false)
+            }
+        }
+
+        document.addEventListener("keydown", closeModal)
+
+        return () => {
+            document.removeEventListener("keydown", closeModal)
+        }
+    }, [setShowConfirmationModal])
+
+
+
 
     return (
         <div className=" h-screen w-full fixed top-0 left-0 z-10  bg-black/50 backdrop-blur-md flex items-center justify-center font-lato px-3 " >

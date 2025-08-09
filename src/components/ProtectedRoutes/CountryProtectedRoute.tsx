@@ -5,16 +5,26 @@ import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Loader from "../common/Loader";
 import toast from "react-hot-toast";
+import { useUser } from "@clerk/nextjs";
 
 export default function CountryProtectedRoute({ children }: { children: ReactNode }) {
     const { userData } = useAppContext();
     const router = useRouter();
     const [isChecking, setIsChecking] = useState(true);
     const hasRedirected = useRef(false)
+    const { user } = useUser()
 
 
     useEffect(() => {
-        if (!userData?.country && !hasRedirected.current) {
+
+
+        if (!user) {
+            toast.error("Please sign in to continue");
+            hasRedirected.current = true
+            router.replace("/");
+            return
+        }
+        else if (user && !userData?.country && !hasRedirected.current) {
             toast.error("Complete your profile to continue.");
             hasRedirected.current = true
             router.replace("/profile");
@@ -22,7 +32,7 @@ export default function CountryProtectedRoute({ children }: { children: ReactNod
         } else {
             setIsChecking(false);
         }
-    }, [userData, router]);
+    }, [userData, router, user]);
 
     if (isChecking) {
         return (
