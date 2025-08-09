@@ -3,7 +3,6 @@
 import { useAppContext } from "@/app/context/AppContext"
 import ReusableHero from "@/components/ReusableHero"
 import { BlogDataType } from "@/Types/blogTypes"
-import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -35,14 +34,7 @@ export default function Page() {
         <div className="font-lato text-justify text-lg font-medium" dangerouslySetInnerHTML={{__html: currentBlog.text}} />
 
 
-        <div className=" absolute right-0 top-0 h-full w-fit " >
-          <Image src={"/blogs/right-new.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
-        </div>
 
-
-         <div className=" absolute left-0 top-0 h-full w-fit " >
-          <Image src={"/blogs/left-new.svg"} alt="abstract image" width={500} height={500} className=" w-full h-full" />
-        </div>
       </div>
 
     </>
