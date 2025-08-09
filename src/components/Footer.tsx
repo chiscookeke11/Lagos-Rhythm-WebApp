@@ -47,7 +47,7 @@ const supportOptions = [
     },
     {
         label: "How it works",
-        path: "/",
+        path: "/Live",
     },
     {
         label: "Feedback",

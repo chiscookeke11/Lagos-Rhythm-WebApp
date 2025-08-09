@@ -10,7 +10,6 @@ import { CustomCheckBox } from "@/components/common/CustomCheckbox"
 import { CustomSelect } from "@/components/common/CustomSelect"
 import Input from "@/components/common/Input"
 import Button from "@/components/common/Button"
-import { countryOptions } from "@/data/countryList"
 import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } from "@/data/data"
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
@@ -18,9 +17,11 @@ import DatePicker from "react-datepicker"
 import { addDoc, collection } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
+import ConfirmationModal from "@/components/ConfirmationModal"
 
 export default function Page() {
-  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme } = useAppContext()
+  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
+  const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
   const minDate = new Date("2025-08-01");
@@ -41,7 +42,7 @@ export default function Page() {
   } = useForm<exclusiveBookingDataType>({
     defaultValues: {
       tourists: Array.from({ length: participantsCount }, () => ({ fullName: "", email: "" })),
-      country: "",
+      country: userData?.country ?? "",
       reasonForJoin: [],
       OtherReason: "",
       joiningAs: "",
@@ -125,10 +126,9 @@ export default function Page() {
       reset()
       setSelectedDates([])
       clearAllDates()
-
-
-
+      setShowConfirmationModal(true)
     }
+
     catch (error) {
       toast.error("Failed to book tour")
       console.error("Failed to book", error)
@@ -266,25 +266,7 @@ export default function Page() {
 
             </div>
 
-            <Controller
-              control={control}
-              name="country"
-              rules={{ required: "Country is required" }}
-              render={({ field }) => {
-                return (
-                  <CustomSelect
-                    name={field.name}
-                    onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
-                    options={countryOptions}
-                    label="Country"
-                    placeholder="Please select an option"
-                    isRequired
-                    value={formData.country}
-                    error={errors.country?.message}
-                  />
-                )
-              }}
-            />
+
 
             <Controller
               control={control}
@@ -479,6 +461,13 @@ export default function Page() {
           </form>
         </div>
       </div>
+
+      {showConfirmationModal && (
+        <ConfirmationModal
+          showConfirmationModal={showConfirmationModal}
+          setShowConfirmationModal={setShowConfirmationModal}
+        />
+      )}
     </div>
   )
 }
