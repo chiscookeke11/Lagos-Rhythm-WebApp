@@ -11,6 +11,7 @@ import BlogLanding from "@/components/BlogLanding";
 import HeroFAQ from "@/components/HeroFAQ";
 
 
+
 export default function Home() {
   const [videoLoaded, setVideoLoaded] = useState(false);
 

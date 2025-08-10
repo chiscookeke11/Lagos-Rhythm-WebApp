@@ -3,7 +3,8 @@ import { crewAmountData } from "@/data/data";
 import { AnimatePresence, motion } from "framer-motion";
 import { Users, X } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import CurrencyConverter from "./CurrencyConverter";
 
 
 
@@ -16,6 +17,8 @@ interface SelectNumberprops {
 
 export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) {
     const { setPopulationType, populationType, setPopulationAmount, userData } = useAppContext()
+    const [hidePrices, setHidePrices] = useState(false)
+
 
     console.log(populationType)
 
@@ -49,8 +52,8 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
 
                     <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a crew number</h1>
 
-                    <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 " >
-                        {crewAmountData.map((item, index) => (
+                    <div className={`w-full h-full  grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 ${hidePrices ? "hidden lg:grid " : "grid" } `} >
+                        { crewAmountData.map((item, index) => (
 
                             <Link key={index} href={"/exclusive-tour-form"} className="md:w-fit w-full " >
                                 <button onClick={() => {
@@ -67,7 +70,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                             </Link>
                         ))}
                     </div>
-
+                    <CurrencyConverter setHidePrices={setHidePrices}  />
 
                 </motion.div>
 

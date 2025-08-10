@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 
 
+
 export default function ThemesSection() {
     const [showSelectModal, setShowSelectModal] = useState(false)
 
@@ -64,6 +65,8 @@ export default function ThemesSection() {
 
 
             </div>
+
+
         </section>
     )
 }
