@@ -509,6 +509,7 @@ export default function Page() {
                 <ConfirmationModal
                     showConfirmationModal={showConfirmationModal}
                     setShowConfirmationModal={setShowConfirmationModal}
+                    tourType="Free E-Rhythm!"
                 />
             )}
         </div>

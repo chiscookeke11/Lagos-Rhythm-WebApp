@@ -22,10 +22,6 @@ export default function VirtualTourHero() {
                     transition={{ duration: 0.5, ease: easeInOut, delay: 0.4 }}
                     className="font-normal text-base text-white font-merriweather max-w-2xl  "  >Experience Lagos like never before - real streets, real stories, real people.
                     Our live virtual tours connect you to the rhythm of Lagos, Nigeria’s significant city in real time. No filters. No stock footage. Just Lagos, as it lives and breathes.</motion.p>
-                <motion.p
-                    initial={{ x: "-100%", opacity: 0 }}
-                    animate={{ x: "0", opacity: 1 }}
-                    transition={{ duration: 0.5, ease: easeInOut, delay: 0.7 }} className="font-normal text-base text-white font-merriweather max-w-2xl">For students, travelers, heritage seekers, or curious souls - Lagos Rhythm brings the city to you.</motion.p>
             </div>
 
 

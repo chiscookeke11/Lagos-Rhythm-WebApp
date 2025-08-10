@@ -219,11 +219,11 @@ export default function Page() {
                     <div className="w-full basis-1/2 text-justify">
                         <h3 className="font-merienda font-semibold text-2xl text-[#EF8F57]">Our Partners & Collaborators</h3>
                         <p className="text-base md:text-xl font-normal font-lato text-[#05073C]">
-                            Lagos Rhythm is powered by a growing network of collaborators and allies—people and platforms who believe
+                            Lagos Rhythm is powered by a growing network of collaborators and allies, people and platforms who believe
                             in the power of cultural storytelling and global connection.
                         </p>
                         <ul className="text-base md:text-xl font-lato text-[#05073C] flex flex-col gap-1 list-disc my-4 marker:text-[#F59E0B] pl-5">
-                            <li className="font-semibold">Upstyle Travels</li>
+                            <li className="font-semibold">Upstyle Travel</li>
                             <li className="font-semibold">Local guides, artists, and cultural curators in Lagos</li>
                             <li className="font-semibold">Diaspora networks, schools, and DEI programs across continents</li>
                         </ul>

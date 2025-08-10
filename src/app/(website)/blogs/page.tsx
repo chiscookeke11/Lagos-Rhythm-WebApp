@@ -7,7 +7,7 @@ import ReusableHero from "@/components/ReusableHero";
 export default function Page() {
     return (
         <div className="w-full h-full "  >
-            <ReusableHero pageTitle="Blogs" subtitle="Interesting facts and concepts" image="/blogs/blog-hero.jpg" />
+            <ReusableHero pageTitle="Blog" subtitle="Interesting facts and concepts" image="/blogs/blog-hero.jpg" />
 
 
             <div className="w-full flex flex-col gap-8 items-start justify-center bg-[#FDF4F1] py-[4%] px-[4%] " >

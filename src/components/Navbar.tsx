@@ -42,7 +42,7 @@ const navLinks = [
         path: "/store",
     },
     {
-        label: "BLOGS",
+        label: "BLOG",
         path: "/blogs",
     },
 ]
