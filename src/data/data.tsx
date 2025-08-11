@@ -390,11 +390,11 @@ export const crewAmountData: CrewAmountItem[] = [
         value: "circle",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return "50,000 Naira";
-            else return "150 USDT"
+            else return "150 USD"
         },
         monthlySub: (country: string) => {
             if (country === "Nigeria") return "150,000 Naira";
-            else return "500 USD"
+            else return " 500 USD"
         },
         maxAmount: 3
     },

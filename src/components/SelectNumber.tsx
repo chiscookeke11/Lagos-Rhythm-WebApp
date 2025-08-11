@@ -50,7 +50,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                     <button onClick={() => setShowSelectModal(false)} className="ml-auto text-red-600 font-bold cursor-pointer  p-0.5 flex items-center justify-center  " ><X size={30} /> </button>
 
 
-                    <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a crew number</h1>
+                    <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a tour size</h1>
 
                     <div className={`w-full h-full  grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 ${hidePrices ? "hidden lg:grid " : "grid" } `} >
                         { crewAmountData.map((item, index) => (
