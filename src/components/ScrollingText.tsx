@@ -19,7 +19,7 @@ const lagosFacts = [
 
 export default function ScrollingText() {
     return (
-        <div className="w-full bg-black/40 backdrop-blur-xs absolute bottom-2 md:bottom-0 py-2" >
+        <div className="w-full bg-black/40 backdrop-blur-xs absolute bottom-3 md:bottom-0 py-2" >
             <Marquee >
 {
     lagosFacts.map((text, index) => (

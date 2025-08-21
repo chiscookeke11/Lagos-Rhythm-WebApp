@@ -35,7 +35,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess }: Paym
         <p className="mb-4">Please proceed to payment to confirm your booking.</p>
         <div className="flex gap-3">
           <Button ariaLabel="cancel" type="button" label="Cancel" onClick={onClose} variant="primary" className="!bg-[red]" />
-          <Button ariaLabel="Pay now" type="button" label="Pay Now"  variant="primary" className="!bg-[#EF8F57]"/>
+          <Button  ariaLabel="Pay now" type="button" label="Pay Now" onClick={handlePayment}  variant="primary" className="!bg-[#EF8F57]"/>
         </div>
       </div>
     </div>
