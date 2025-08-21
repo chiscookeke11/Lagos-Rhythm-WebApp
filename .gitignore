@@ -43,3 +43,6 @@ next-env.d.ts
 .next/
 node_modules/
 public/hero-video.mp4
+
+# clerk configuration (can include secrets)
+/.clerk/
