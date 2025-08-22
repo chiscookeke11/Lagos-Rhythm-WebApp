@@ -163,7 +163,7 @@ export default function Page() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="  mx-auto w-full max-w-3xl flex flex-col gap-6 items-start  justify-center text-[#05073C] py-[4%]  ">
+      <form onSubmit={handleSubmit} className="  mx-auto w-full max-w-3xl flex flex-col gap-6 items-start  justify-center text-[#05073C] py-[4%] px-[3%]  ">
 
 
 
