@@ -71,7 +71,7 @@ export default function Page() {
         append({ fullName: "", email: "" })
       }
     } else if (participantsCount < currentFieldsLength) {
-      // FIX: Changed append to remove when participantsCount decreases
+
       for (let i = currentFieldsLength; i > participantsCount; i--) {
         remove(i - 1)
       }
@@ -94,7 +94,7 @@ export default function Page() {
     setShowPaymentModal(true)
   }
 
-  // FIX: Changed onSubmit signature to only accept data
+  // onSubmit signature to only accept data
   const completeBooking = async () => {
 
     if (!pendingFormData) return
@@ -189,6 +189,8 @@ export default function Page() {
     });
   };
 
+
+  console.log(selectedTheme)
 
   return (
     <CountryProtectedRoute>
@@ -463,11 +465,11 @@ export default function Page() {
                       </span>
                     </>
                   ) : (
-                    "Submit"
+                    "Proceed to Payment"
                   )
                 }
                 type="submit"
-                ariaLabel="Submit"
+                ariaLabel="Proceed to Payment"
                 variant="ghost"
                 disabled={loading}
                 className="!bg-[#EF8F57] w-full max-w-sm"
@@ -484,7 +486,7 @@ export default function Page() {
           />
         )}
 
-        <PaymentModal isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
+        <PaymentModal formData={formData} isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
 
       </div>
     </CountryProtectedRoute>

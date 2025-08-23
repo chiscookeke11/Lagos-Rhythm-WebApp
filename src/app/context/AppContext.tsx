@@ -45,6 +45,9 @@ interface AppContextProps {
 
   email?: string
 
+  price: number
+  setPrice: React.Dispatch<React.SetStateAction<number>>
+
 
   fetchUserData: (email: string) => void
 
@@ -90,6 +93,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [userData, setUserData] = useState<ProfileDataType | null>(null)
 
+  const [price, setPrice] = useState< number>(Number(getFromLocalStorage("themePrice", 0)))
+
 
 
 
@@ -113,7 +118,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
 
 
-  // function to fecth blog data
+  // function to fetch blog data
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
@@ -207,7 +212,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [email])
 
 
-
+console.log(price)
 
 
   return (
@@ -230,7 +235,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         email,
         userData,
         setUserData,
-        fetchUserData
+        fetchUserData,
+        price,
+        setPrice
       }}
     >
       {children}
