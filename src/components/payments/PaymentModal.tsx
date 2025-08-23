@@ -5,6 +5,7 @@ import { X } from "lucide-react"
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3"
 import { exclusiveBookingDataType } from "@/Types/UserDataType"
 import { useAppContext } from "@/app/context/AppContext"
+import { useState } from "react"
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -16,6 +17,8 @@ interface PaymentModalProps {
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
   const { selectedTheme, price } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
+  const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
+  const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
 
   if (!flutterwavePublicKey) {
     console.error("NEXT_PUBLIC_FLUTTERWAVE_API_KEY is not defined")
@@ -25,7 +28,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
     amount: price,
-    currency: "USD",
+    currency: paymentCurrency,
     payment_options: "card,mobilemoney,ussd",
     customer: {
       email: formData.tourists[0].email,
@@ -45,7 +48,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const handleFiatPayment = async () => {
     handleFlutterPayment({
       callback: (response) => {
-        console.log(response)
+        console.log("The response", response)
         if (response.status === "successful") {
           onPaymentSuccess()
           onClose()
@@ -88,19 +91,46 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
           </Button>
           <Button
             type="button"
-            onClick={() => {
-              if (!flutterwavePublicKey) {
-                console.error("Cannot process payment: Flutterwave API key not configured")
-                return
-              }
-              handleFiatPayment()
-            }}
+            onClick={() => setShowCurrencyBtns((prev) => !prev)}
             className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer  font-merriweather"
             aria-label="Pay with Fiat"
           >
             Pay with Fiat
           </Button>
         </div>
+
+
+        {showCurrencyBtns &&
+          <div className="mx-auto flex flex-col gap-1 items-center mt-3" >
+            <h3>Select Currency:</h3>
+            <div className=" w-fit flex items-center gap-3  " >
+              <Button
+                onClick={() => {
+                  setPaymentCurrency("NGN")
+                  if (!flutterwavePublicKey) {
+                    console.error("Cannot process payment: Flutterwave API key not configured")
+                    return
+                  }
+                  handleFiatPayment()
+                }}
+                className=" cursor-pointer bg-white text-[#EF8F57] shadow-md hover:bg-white" >NGN</Button>
+
+
+
+              <Button onClick={() => {
+                setPaymentCurrency("USD")
+                if (!flutterwavePublicKey) {
+                  console.error("Cannot process payment: Flutterwave API key not configured")
+                  return
+                }
+                handleFiatPayment()
+              }
+              }
+                className=" cursor-pointer bg-white text-[#EF8F57] shadow-md hover:bg-white ">USD</Button>
+            </div>
+          </div>}
+
+
       </div>
     </div>
   )
