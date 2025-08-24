@@ -389,11 +389,11 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "1-3 (circle)",
         value: "circle",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return 150;
+            if (country === "Nigeria") return 60;
             else return 150
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return 500 ;
+            if (country === "Nigeria") return 200 ;
             else return 500
         },
         maxAmount: 3
@@ -402,11 +402,11 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "4-10 (crew)",
         value: "crew",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return 60;
+            if (country === "Nigeria") return 150;
             else return 60
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return 200 ;
+            if (country === "Nigeria") return 500 ;
             else return 200
         },
         maxAmount: 10
@@ -542,3 +542,8 @@ export const sideNavLinks = [
 ]
 
 
+export const timeOptions = [
+  { label: "3:00pm WAT", value: "15:00" },
+  { label: "4:00pm WAT", value: "16:00" },
+  { label: "5:00pm WAT", value: "17:00" },
+]
