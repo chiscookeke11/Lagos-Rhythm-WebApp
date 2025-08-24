@@ -5,6 +5,7 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3"
 import { exclusiveBookingDataType } from "@/Types/UserDataType"
 import { useAppContext } from "@/app/context/AppContext"
 import { useState, useCallback, useEffect } from "react"
+import { CustomCheckBox } from "../common/CustomCheckbox"
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -14,17 +15,18 @@ interface PaymentModalProps {
 }
 
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
-  const { selectedTheme, price } = useAppContext()
+  const { selectedTheme, price, setPrice } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
   const [isProcessing, setIsProcessing] = useState(false)
+  const [subscriptionType, setSubscriptionType] = useState("")
 
   if (!flutterwavePublicKey) {
     console.error("NEXT_PUBLIC_FLUTTERWAVE_API_KEY is not defined")
   }
 
-  // Create config at the top level
+
   const config = {
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
@@ -38,12 +40,12 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     },
     customizations: {
       title: `THEME: ${selectedTheme}`,
-      description: "Exclusive E-Rhythm booking",
+      description: subscriptionType === "per-tour" ? "Per Tour Subscription Booking" : "Monthly Subscription Booking",
       logo: "https://res.cloudinary.com/dwedz2laa/image/upload/v1752824400/logo_ajy1ca.png",
     },
   }
 
-  // Call useFlutterwave at the top level
+
   const handleFlutterPayment = useFlutterwave(config)
 
   const handleFiatPayment = useCallback((currency: "USD" | "NGN") => {
@@ -56,7 +58,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     setPaymentCurrency(currency)
   }, [flutterwavePublicKey])
 
-  // Use useEffect to trigger payment after currency state is updated
+
   useEffect(() => {
     if (isProcessing && paymentCurrency) {
       handleFlutterPayment({
@@ -75,6 +77,10 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
       })
     }
   }, [isProcessing, paymentCurrency, handleFlutterPayment, onPaymentSuccess, onClose])
+
+
+  console.log(subscriptionType)
+  console.log("New price", price)
 
   if (!isOpen) return null
 
@@ -104,11 +110,39 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         <p className="mb-2 mx-auto font-lato">Please proceed to payment to confirm your booking.</p>
 
         <h3 className="text-sm text-[#EF8F57] font-bold font-merriweather">THEME: {selectedTheme}</h3>
-        <h3 className="text-sm mb-4 text-[#EF8F57] font-bold font-merriweather">PRICE: {price} USD</h3>
+        <h3 className="text-sm mb-1 text-[#EF8F57] font-bold font-merriweather">PRICE: {price} USD</h3>
+
+
+        <div className="font-merriweather flex flex-col gap-1 items-start my-3 text-sm " >
+          Pick a subscription type
+          <div className="  w-full block gap-3 !text-xs mt-1 " >
+            <CustomCheckBox
+              id="perTour"
+              label="Per Tour subscription (150 USD) "
+              onCheckedChange={(checked) => {
+                if (checked) setSubscriptionType("per-tour")
+                  setPrice(150)
+              }}
+              checked={subscriptionType === "per-tour"}
+            />
+
+            <CustomCheckBox
+              id="monthly"
+              label="Monthly subscription (500 USD) "
+              onCheckedChange={(checked) => {
+                if (checked) setSubscriptionType("monthly")
+                  setPrice(500)
+              }}
+              checked={subscriptionType === "monthly"}
+            />
+
+          </div>
+        </div>
 
         <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
           <Button
             type="button"
+            disabled={!subscriptionType}
             className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
             aria-label="Pay with Crypto"
           >
@@ -116,6 +150,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
           </Button>
           <Button
             type="button"
+            disabled={!subscriptionType}
             onClick={() => setShowCurrencyBtns((prev) => !prev)}
             className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
             aria-label="Pay with Fiat"
@@ -125,7 +160,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         </div>
 
         {showCurrencyBtns && (
-          <div className="mx-auto flex flex-col gap-3 items-center mt-3 w-full">
+          <div className="mx-auto flex flex-col gap-3 items-center mt-3 w-full font-merriweather ">
             <h3 className="font-medium">Select Currency:</h3>
             <div className="flex items-center gap-3 w-full">
               <Button
