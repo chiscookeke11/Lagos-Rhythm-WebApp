@@ -49,7 +49,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     else return
   }, [API_KEY, paymentCurrency])
 
-const convertToNGN = (rate: number) => rate > 0 ? price * rate : 0
+  const convertToNGN = (rate: number) => rate > 0 ? price * rate : 0
 
 
   console.log("Fee in NGN", convertToNGN(currentRate))
