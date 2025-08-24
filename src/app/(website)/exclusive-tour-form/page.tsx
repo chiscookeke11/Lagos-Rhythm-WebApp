@@ -19,7 +19,7 @@ import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+
 
 export default function Page() {
   const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
