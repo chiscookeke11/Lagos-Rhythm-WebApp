@@ -11,7 +11,7 @@ import { validateUserData } from "@/lib/validation";
 import { userDataType } from "@/Types/UserDataType";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { fireDB } from "../../config/firebaseClient";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
@@ -20,9 +20,9 @@ import { sendConfirmationEmail } from "@/lib/utils";
 
 
 export default function Page() {
-    const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-    const minDate = new Date("2025-08-01");
-    const maxDate = new Date("2025-08-31");
+    // const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+    // const minDate = new Date("2025-08-01");
+    // const maxDate = new Date("2025-08-31");
     const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
     const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
@@ -34,7 +34,7 @@ export default function Page() {
         country: "",
         joiningAs: "",
         otherJoin: "",
-        tourDate: [],
+        // tourDate: [],
         reasonForJoin: [],
         referralSource: "",
         termsAgreement: undefined,
@@ -42,33 +42,33 @@ export default function Page() {
     });
 
     // date selection function
-    const handleDateChange = (date: Date | null) => {
-        if (!date) return;
+    // const handleDateChange = (date: Date | null) => {
+    //     if (!date) return;
 
-        const newDates = selectedDates.some(d => d.toDateString() === date.toDateString())
-            ? selectedDates.filter(d => d.toDateString() !== date.toDateString())
-            : [...selectedDates, date];
+    //     const newDates = selectedDates.some(d => d.toDateString() === date.toDateString())
+    //         ? selectedDates.filter(d => d.toDateString() !== date.toDateString())
+    //         : [...selectedDates, date];
 
-        setSelectedDates(newDates);
-        const formatted = newDates.map(d => d.toISOString());
+    //     setSelectedDates(newDates);
+    //     const formatted = newDates.map(d => d.toISOString());
 
-        const updated = { ...userData, tourDate: formatted };
-        setUserData(updated);
+    //     const updated = { ...userData, tourDate: formatted };
+    //     setUserData(updated);
 
-        const fieldError = validateUserData(updated, "tourDate");
+    //     const fieldError = validateUserData(updated, "tourDate");
 
-        setFormErrors(prev => {
-            const rest = { ...prev };
-            delete rest.tourDate;
-            return fieldError.tourDate ? { ...rest, tourDate: fieldError.tourDate } : rest;
-        });
-    };
+    //     setFormErrors(prev => {
+    //         const rest = { ...prev };
+    //         delete rest.tourDate;
+    //         return fieldError.tourDate ? { ...rest, tourDate: fieldError.tourDate } : rest;
+    //     });
+    // };
 
     // clear all dates function
-    const clearAllDates = () => {
-        setSelectedDates([]);
-        setUserData({ ...userData, tourDate: [] });
-    };
+    // const clearAllDates = () => {
+    //     setSelectedDates([]);
+    //     setUserData({ ...userData, tourDate: [] });
+    // };
 
     // input change function
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,7 +196,7 @@ export default function Page() {
                 reasonForJoin: userData.reasonForJoin,
                 joiningAs: userData.joiningAs,
                 otherJoin: userData.otherJoin,
-                tour_date: userData.tourDate,
+                // tour_date: userData.tourDate,
                 agree_to_TC: userData.termsAgreement,
                 referral: userData.referralSource,
                 subscribedAt: new Date(),
@@ -216,14 +216,14 @@ export default function Page() {
                 console.error("Failed to send confirmation email", err)
             }
 
-            clearAllDates()
+            // clearAllDates()
             setUserData({
                 email: "",
                 fullName: "",
                 country: "",
                 joiningAs: "",
                 referralSource: "",
-                tourDate: [],
+                // tourDate: [],
                 reasonForJoin: [],
                 communicationConsent: false,
                 termsAgreement: false,
@@ -412,7 +412,7 @@ export default function Page() {
                             />
                         ) : null}
 
-                        <div className="w-full">
+                        {/* <div className="w-full">
                             <label className="text-[#000000] font-medium text-base font-lato flex items-start gap-1">
                                 Next tour date <span className="text-red-500">*</span>
                             </label>
@@ -459,7 +459,7 @@ export default function Page() {
                                 </div>
                             )}
                             {formErrors.tourDate && <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.tourDate}</p>}
-                        </div>
+                        </div> */}
 
                         <CustomSelect
                             name="referralSource"
