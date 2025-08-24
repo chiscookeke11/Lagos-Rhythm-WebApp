@@ -7,7 +7,7 @@ export interface userDataType {
     reasonForJoin: string[],
     joiningAs: string,
     otherJoin?: string,
-    tourDate: string[],
+    // tourDate: string[],
     referralSource: string,
     communicationConsent?: boolean,
     termsAgreement?: boolean
