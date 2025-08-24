@@ -389,12 +389,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "1-3 (circle)",
         value: "circle",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "150 USD";
-            else return "150 USD"
+            if (country === "Nigeria") return 150;
+            else return 150
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "500 USD";
-            else return " 500 USD"
+            if (country === "Nigeria") return 500 ;
+            else return 500
         },
         maxAmount: 3
     },
@@ -402,12 +402,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "4-10 (crew)",
         value: "crew",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "60 USD";
-            else return "60 USD"
+            if (country === "Nigeria") return 60;
+            else return 60
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "200 USD";
-            else return "200 USD"
+            if (country === "Nigeria") return 200 ;
+            else return 200
         },
         maxAmount: 10
     },
@@ -415,12 +415,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "11+ (community)",
         value: "community",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "300 USD";
-            else return "300 USD"
+            if (country === "Nigeria") return 300;
+            else return 300
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "1000 USD";
-            else return "1000 USD"
+            if (country === "Nigeria") return 1000;
+            else return 1000
         },
         maxAmount: 100
     },

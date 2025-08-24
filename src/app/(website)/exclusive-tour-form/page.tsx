@@ -19,7 +19,7 @@ import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+
 
 export default function Page() {
   const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
@@ -71,7 +71,7 @@ export default function Page() {
         append({ fullName: "", email: "" })
       }
     } else if (participantsCount < currentFieldsLength) {
-      // FIX: Changed append to remove when participantsCount decreases
+
       for (let i = currentFieldsLength; i > participantsCount; i--) {
         remove(i - 1)
       }
@@ -94,7 +94,7 @@ export default function Page() {
     setShowPaymentModal(true)
   }
 
-  // FIX: Changed onSubmit signature to only accept data
+  // onSubmit signature to only accept data
   const completeBooking = async () => {
 
     if (!pendingFormData) return
@@ -190,8 +190,9 @@ export default function Page() {
   };
 
 
+  console.log(selectedTheme)
+
   return (
-    <CountryProtectedRoute>
       <div className="w-full flex flex-col h-full text-[#05073C] relative">
         <div className="h-[300px] w-full relative">
           <div className="w-full h-full absolute top-0 left-0 bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
@@ -463,11 +464,11 @@ export default function Page() {
                       </span>
                     </>
                   ) : (
-                    "Submit"
+                    "Proceed to Payment"
                   )
                 }
                 type="submit"
-                ariaLabel="Submit"
+                ariaLabel="Proceed to Payment"
                 variant="ghost"
                 disabled={loading}
                 className="!bg-[#EF8F57] w-full max-w-sm"
@@ -484,9 +485,8 @@ export default function Page() {
           />
         )}
 
-        <PaymentModal isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
+        <PaymentModal formData={formData} isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
 
       </div>
-    </CountryProtectedRoute>
   )
 }

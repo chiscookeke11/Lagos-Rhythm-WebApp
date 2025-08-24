@@ -57,11 +57,11 @@ export function validateUserData(
           errors.otherJoin = "A minimum of 3 characters is required"
         }
 
-      case "tourDate":
-        if (!data.tourDate || data.tourDate.length === 0) {
-          errors.tourDate = "At least one tour date must be selected";
-        }
-        break;
+      // case "tourDate":
+      //   if (!data.tourDate || data.tourDate.length === 0) {
+      //     errors.tourDate = "At least one tour date must be selected";
+      //   }
+      //   break;
 
       case "referralSource":
         if (!data.referralSource) {

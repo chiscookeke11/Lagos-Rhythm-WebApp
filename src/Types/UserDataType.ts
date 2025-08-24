@@ -7,7 +7,7 @@ export interface userDataType {
     reasonForJoin: string[],
     joiningAs: string,
     otherJoin?: string,
-    tourDate: string[],
+    // tourDate: string[],
     referralSource: string,
     communicationConsent?: boolean,
     termsAgreement?: boolean
@@ -38,7 +38,7 @@ export type PopulationTypeInterface = string
 export interface CrewAmountItem {
     label: string;
     value: string;
-    perTourFee: (country: string) => string;
-    monthlySub: (country: string) => string;
+    perTourFee: (country: string) => number;
+    monthlySub: (country: string) => number;
     maxAmount: number
 }

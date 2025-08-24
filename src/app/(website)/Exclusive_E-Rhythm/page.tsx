@@ -2,7 +2,6 @@
 
 
 import Button from "@/components/common/Button"
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
 import ThemesSection from "@/components/ThemesSection"
 import { whatYouGetData } from "@/data/data"
 import { motion } from "framer-motion"
@@ -19,7 +18,7 @@ const bookingLink = "bookings@lagosrhythm.com"
 export default function Page() {
     return (
 
-        <CountryProtectedRoute>
+
             <>
 
                 {/* hero section  */}
@@ -124,6 +123,6 @@ export default function Page() {
 
             </>
 
-         </CountryProtectedRoute>
+
     )
 }

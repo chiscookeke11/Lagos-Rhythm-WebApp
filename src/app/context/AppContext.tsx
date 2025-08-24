@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
 import { BlogDataType } from "@/Types/blogTypes";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 import { fireDB } from "../config/firebaseClient";
 import { ClerkUser } from "@/Types/UserType";
 import { galleryTypes } from "@/Types/galleryType";
@@ -44,6 +44,9 @@ interface AppContextProps {
 
 
   email?: string
+
+  price: number
+  setPrice: React.Dispatch<React.SetStateAction<number>>
 
 
   fetchUserData: (email: string) => void
@@ -90,6 +93,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [userData, setUserData] = useState<ProfileDataType | null>(null)
 
+  const [price, setPrice] = useState<number>(Number(getFromLocalStorage("themePrice", 0)))
+
 
 
 
@@ -113,13 +118,19 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
 
 
-  // function to fecth blog data
+  // function to fetch blog data
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(fireDB, "blogs"));
+        const q = query(
+          collection(fireDB, "blogs"),
+          orderBy("addedAt", "desc")
+        )
+
+        const querySnapshot = await getDocs(q)
+
         const items: BlogDataType[] = querySnapshot.docs.map((doc) => {
-          const data = doc.data();
+          const data = doc.data()
           return {
             id: doc.id,
             title: data.title,
@@ -127,17 +138,18 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
             image: data.image,
             author: data.author,
             addedAt: data.addedAt?.toDate().toDateString() || "",
-          };
-        });
-        setBlogs(items);
-      }
-      catch (error) {
+          }
+        })
+
+        setBlogs(items)
+      } catch (error) {
         console.error("error fetching data:", error)
       }
-
     }
+
     fetchBlogData()
   }, [])
+
 
 
 
@@ -207,7 +219,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   }, [email])
 
 
-
+  console.log(price)
 
 
   return (
@@ -230,7 +242,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         email,
         userData,
         setUserData,
-        fetchUserData
+        fetchUserData,
+        price,
+        setPrice
       }}
     >
       {children}
