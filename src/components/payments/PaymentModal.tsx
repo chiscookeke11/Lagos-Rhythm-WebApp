@@ -14,6 +14,12 @@ interface PaymentModalProps {
   formData: exclusiveBookingDataType
 }
 
+interface ExchangeRateResponse {
+  result: string;
+  base_code: string;
+  conversion_rates: Record<string, number>;
+}
+
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
   const { selectedTheme, price, setPrice } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
@@ -21,6 +27,32 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
   const [isProcessing, setIsProcessing] = useState(false)
   const [subscriptionType, setSubscriptionType] = useState("")
+  const [currentRate, setCurrentRate] = useState<number>(0)
+  const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
+
+
+
+
+
+  useEffect(() => {
+    if (paymentCurrency === "NGN") {
+      fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
+        .then((res) => res.json())
+        .then((data: ExchangeRateResponse) => {
+          if (data.conversion_rates) {
+            setCurrentRate(data.conversion_rates.NGN)
+            console.log("Current NGN price", data.conversion_rates.NGN)
+          }
+        })
+        .catch((err) => console.error("Error fetching currencies:", err))
+    }
+    else return
+  }, [API_KEY, paymentCurrency])
+
+const convertToNGN = (rate: number) => rate > 0 ? price * rate : 0
+
+
+  console.log("Fee in NGN", convertToNGN(currentRate))
 
   if (!flutterwavePublicKey) {
     console.error("NEXT_PUBLIC_FLUTTERWAVE_API_KEY is not defined")
@@ -30,7 +62,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const config = {
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
-    amount: price,
+    amount: paymentCurrency === "USD" ? price : convertToNGN(currentRate),
     currency: paymentCurrency,
     payment_options: "card,mobilemoney,ussd",
     customer: {
@@ -121,7 +153,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
               label="Per Tour subscription (150 USD) "
               onCheckedChange={(checked) => {
                 if (checked) setSubscriptionType("per-tour")
-                  setPrice(150)
+                setPrice(150)
               }}
               checked={subscriptionType === "per-tour"}
             />
@@ -131,7 +163,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
               label="Monthly subscription (500 USD) "
               onCheckedChange={(checked) => {
                 if (checked) setSubscriptionType("monthly")
-                  setPrice(500)
+                setPrice(500)
               }}
               checked={subscriptionType === "monthly"}
             />
