@@ -31,6 +31,7 @@ export interface exclusiveBookingDataType {
     communicationConsent?: boolean,
     termsAgreement?: boolean
     OtherReason: string
+    time:  string
 }
 
 export type PopulationTypeInterface = string
