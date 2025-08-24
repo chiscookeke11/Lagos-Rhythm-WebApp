@@ -141,27 +141,9 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
                 USD
               </Button>
             </div>
-            <p className="text-xs text-gray-500 text-center mt-2">
-              Selected: {paymentCurrency} | Rate: 1 USD = {paymentCurrency === "NGN" ? "1,500" : "1"} NGN
-            </p>
           </div>
         )}
 
-        <div className="mt-4 pt-4 border-t border-gray-200 w-full">
-          <h4 className="font-medium text-sm mb-2">Payment Summary:</h4>
-          <div className="flex justify-between text-sm">
-            <span>Theme Package:</span>
-            <span>{price} USD</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Currency:</span>
-            <span>{paymentCurrency}</span>
-          </div>
-          <div className="flex justify-between text-sm font-medium mt-2">
-            <span>Total Amount:</span>
-            <span>{paymentCurrency === "NGN" ? (price * 1500).toLocaleString() : price} {paymentCurrency}</span>
-          </div>
-        </div>
       </div>
     </div>
   )
