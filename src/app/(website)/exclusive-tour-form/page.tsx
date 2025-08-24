@@ -193,7 +193,6 @@ export default function Page() {
   console.log(selectedTheme)
 
   return (
-    <CountryProtectedRoute>
       <div className="w-full flex flex-col h-full text-[#05073C] relative">
         <div className="h-[300px] w-full relative">
           <div className="w-full h-full absolute top-0 left-0 bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
@@ -489,6 +488,5 @@ export default function Page() {
         <PaymentModal formData={formData} isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
 
       </div>
-    </CountryProtectedRoute>
   )
 }
