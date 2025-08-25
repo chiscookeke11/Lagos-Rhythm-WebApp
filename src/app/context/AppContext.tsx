@@ -93,7 +93,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [userData, setUserData] = useState<ProfileDataType | null>(null)
 
-  const [price, setPrice] = useState<number>(Number(getFromLocalStorage("themePrice", 0)))
+  const [price, setPrice] = useState<number>(0)
 
 
 
@@ -211,15 +211,11 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (email) {
       fetchUserData(email)
-      console.log("I ran")
-    }
-    else {
-      console.log("Not fetched")
     }
   }, [email])
 
 
-  console.log(price)
+
 
 
   return (

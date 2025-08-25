@@ -55,7 +55,8 @@ export default function Page() {
       tourDate: [],
       termsAgreement: false,
       referralSource: "",
-      time: ""
+      time: "",
+      discountCode: ""
     },
   })
 
@@ -104,7 +105,6 @@ export default function Page() {
     setLoading(true)
 
 
-    console.log("Form Data:", formData)
 
     try {
       await addDoc(collection(fireDB, "exclusive_Tour_form"), {
@@ -118,6 +118,8 @@ export default function Page() {
         termsAgreement: formData.termsAgreement,
         referralSource: formData.referralSource,
         subscribedAt: new Date(),
+        time: formData.time,
+        discountCode: formData.discountCode
       })
 
 
@@ -130,7 +132,6 @@ export default function Page() {
           date: "21st august 2021",
           tour_link: "www.unn.edu.ng"
         })
-        console.log("Email sent Successfully")
       }
       catch (err) {
         console.error("Failed to send confirmation email", err)
@@ -153,7 +154,7 @@ export default function Page() {
   }
 
 
-  console.log(formData)
+
 
 
 
@@ -192,7 +193,7 @@ export default function Page() {
   };
 
 
-  console.log(selectedTheme)
+
 
   return (
     <div className="w-full flex flex-col h-full text-[#05073C] relative">
@@ -456,6 +457,14 @@ export default function Page() {
               )}
             />
 
+            <Input
+              label="Enter discount code (optional)"
+              {...register("discountCode")}
+              name="discountCode"
+              type="text"
+              placeholder="FT743JU7"
+            />
+
             <div className="w-full flex items-start flex-col gap-3">
               <Controller
                 control={control}
@@ -507,7 +516,7 @@ export default function Page() {
 
       <PaymentModal formData={formData} isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
 
-        <TimeConverter baseTime={formData.time} />
+      <TimeConverter baseTime={formData.time} />
 
     </div>
   )

@@ -210,7 +210,6 @@ export default function Page() {
                     date: "21st August 2021",
                     tour_link: "www.unn.edu.ng"
                 });
-                console.log("Email sent Successfully")
             }
             catch (err) {
                 console.error("Failed to send confirmation email", err)
@@ -284,7 +283,6 @@ export default function Page() {
 
 
 
-    console.log(userData)
     return (
         <div className="w-full flex flex-col h-full text-[#05073C] relative">
 
