@@ -104,7 +104,6 @@ export default function Page() {
     setLoading(true)
 
 
-    console.log("Form Data:", formData)
 
     try {
       await addDoc(collection(fireDB, "exclusive_Tour_form"), {
@@ -130,7 +129,6 @@ export default function Page() {
           date: "21st august 2021",
           tour_link: "www.unn.edu.ng"
         })
-        console.log("Email sent Successfully")
       }
       catch (err) {
         console.error("Failed to send confirmation email", err)
@@ -153,7 +151,7 @@ export default function Page() {
   }
 
 
-  console.log(formData)
+
 
 
 
@@ -192,7 +190,7 @@ export default function Page() {
   };
 
 
-  console.log(selectedTheme)
+
 
   return (
     <div className="w-full flex flex-col h-full text-[#05073C] relative">

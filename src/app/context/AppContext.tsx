@@ -211,15 +211,11 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (email) {
       fetchUserData(email)
-      console.log("I ran")
-    }
-    else {
-      console.log("Not fetched")
     }
   }, [email])
 
 
-  console.log(price)
+
 
 
   return (

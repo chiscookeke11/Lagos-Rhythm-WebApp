@@ -17,11 +17,9 @@ interface SelectNumberprops {
 
 
 export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) {
-    const { setPopulationType, populationType, setPopulationAmount, userData, setPrice } = useAppContext()
+    const { setPopulationType,  setPopulationAmount, userData, setPrice } = useAppContext()
     const [hidePrices, setHidePrices] = useState(false)
 
-
-    console.log(populationType)
 
 
     const chooseTheme = (item: CrewAmountItem, themePrice: number) => {

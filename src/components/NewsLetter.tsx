@@ -32,7 +32,6 @@ export default function NewsLetter() {
 
     if (!isvalid) {
       toast.error("Please fill in the required fields")
-      console.log(isvalid)
       return;
     }
 
@@ -62,7 +61,7 @@ export default function NewsLetter() {
 
 
       if (!querySnapshot.empty) {
-        toast.error("You are already subscribed with this email");
+        toast.error("This email is already subscribed to our newsletter");
         setIsSubmitting(false);
         return;
       }
@@ -79,10 +78,9 @@ export default function NewsLetter() {
           name: formData.name,
           email: formData.email
         });
-        console.log("Email sent successfully")
       }
       catch (err) {
-        console.error("Failed to send confirmation email", err)
+        console.error( err)
       }
 
       setFormData({ name: "", email: "" });
@@ -91,7 +89,7 @@ export default function NewsLetter() {
       setIsSubmitting(false)
     } catch (error) {
       console.log(error)
-      toast.error("Subscription failed ");
+      toast.error("Subscription failed! Please try again" );
       setIsSubmitting(false)
     }
   };
