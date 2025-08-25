@@ -21,7 +21,7 @@ interface ExchangeRateResponse {
 }
 
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
-  const { selectedTheme, price, setPrice } = useAppContext()
+  const { selectedTheme, price, setPrice, populationType } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
@@ -30,6 +30,24 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const [currentRate, setCurrentRate] = useState<number>(0)
   const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
 
+
+  const pickPrice = (populationType: string, subscriptionType: string) => {
+    if (populationType === "1-3 (circle)" && subscriptionType === "per-tour") {
+      setPrice(60)
+    } else if (populationType === "1-3 (circle)" && subscriptionType === "monthly") {
+      setPrice(200)
+    } else if (populationType === "4-10 (crew)" && subscriptionType === "per-tour") {
+      setPrice(150)
+    } else if (populationType === "4-10 (crew)" && subscriptionType === "monthly") {
+      setPrice(500)
+    } else if (populationType === "11+ (community)" && subscriptionType === "per-tour") {
+      setPrice(300)
+    } else if (populationType === "11+ (community)" && subscriptionType === "monthly") {
+      setPrice(1000)
+    } else {
+      console.warn("No price found for given options")
+    }
+  }
 
 
 
@@ -147,20 +165,24 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
           <div className="  w-full block gap-3 !text-xs mt-1 " >
             <CustomCheckBox
               id="perTour"
-              label="Per Tour subscription (150 USD) "
+              label="Per Tour subscription "
               onCheckedChange={(checked) => {
-                if (checked) setSubscriptionType("per-tour")
-                setPrice(150)
+                if (checked) {
+                  setSubscriptionType("per-tour")
+                  pickPrice(populationType, "per-tour")
+                }
               }}
               checked={subscriptionType === "per-tour"}
             />
 
             <CustomCheckBox
               id="monthly"
-              label="Monthly subscription (500 USD) "
+              label="Monthly subscription "
               onCheckedChange={(checked) => {
-                if (checked) setSubscriptionType("monthly")
-                setPrice(500)
+                if (checked) {
+                  setSubscriptionType("monthly")
+                  pickPrice(populationType, "monthly")
+                }
               }}
               checked={subscriptionType === "monthly"}
             />
