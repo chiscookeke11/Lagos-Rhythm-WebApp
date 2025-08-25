@@ -92,7 +92,6 @@ export default function Summary() {
                     }
 
                     const data = await res.json()
-                    console.log("the users are:", data)
 
 
                     setUsers(data.data || data)
@@ -104,7 +103,7 @@ export default function Summary() {
         }
 
 
-    }, [user])
+    }, [user, setUsers])
 
 
 

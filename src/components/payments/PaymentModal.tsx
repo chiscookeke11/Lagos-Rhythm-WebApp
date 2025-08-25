@@ -41,7 +41,6 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         .then((data: ExchangeRateResponse) => {
           if (data.conversion_rates) {
             setCurrentRate(data.conversion_rates.NGN)
-            console.log("Current NGN price", data.conversion_rates.NGN)
           }
         })
         .catch((err) => console.error("Error fetching currencies:", err))
@@ -52,7 +51,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const convertToNGN = (rate: number) => rate > 0 ? price * rate : 0
 
 
-  console.log("Fee in NGN", convertToNGN(currentRate))
+
 
   if (!flutterwavePublicKey) {
     console.error("NEXT_PUBLIC_FLUTTERWAVE_API_KEY is not defined")
@@ -95,7 +94,6 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     if (isProcessing && paymentCurrency) {
       handleFlutterPayment({
         callback: (response) => {
-          console.log("The response", response)
           setIsProcessing(false)
           if (response.status === "completed") {
             onPaymentSuccess()
@@ -111,8 +109,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   }, [isProcessing, paymentCurrency, handleFlutterPayment, onPaymentSuccess, onClose])
 
 
-  console.log(subscriptionType)
-  console.log("New price", price)
+
 
   if (!isOpen) return null
 
