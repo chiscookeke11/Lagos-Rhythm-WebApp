@@ -6,6 +6,7 @@ import { exclusiveBookingDataType } from "@/Types/UserDataType"
 import { useAppContext } from "@/app/context/AppContext"
 import { useState, useCallback, useEffect } from "react"
 import { CustomCheckBox } from "../common/CustomCheckbox"
+import { crewAmountData } from "@/data/data"
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -14,59 +15,42 @@ interface PaymentModalProps {
   formData: exclusiveBookingDataType
 }
 
-interface ExchangeRateResponse {
-  result: string;
-  base_code: string;
-  conversion_rates: Record<string, number>;
-}
+
 
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
-  const { selectedTheme, price, setPrice, populationType } = useAppContext()
+  const { selectedTheme, price, setPrice, populationType, userData } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
   const [isProcessing, setIsProcessing] = useState(false)
   const [subscriptionType, setSubscriptionType] = useState("")
-  const [currentRate, setCurrentRate] = useState<number>(0)
-  const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
+  const country = userData?.country
 
 
-  const pickPrice = (populationType: string, subscriptionType: string) => {
-    if (populationType === "1-3 (circle)" && subscriptionType === "per-tour") {
-      setPrice(60)
-    } else if (populationType === "1-3 (circle)" && subscriptionType === "monthly") {
-      setPrice(200)
-    } else if (populationType === "4-10 (crew)" && subscriptionType === "per-tour") {
-      setPrice(150)
-    } else if (populationType === "4-10 (crew)" && subscriptionType === "monthly") {
-      setPrice(500)
-    } else if (populationType === "11+ (community)" && subscriptionType === "per-tour") {
-      setPrice(300)
-    } else if (populationType === "11+ (community)" && subscriptionType === "monthly") {
-      setPrice(1000)
-    } else {
+  const pickPrice = (populationType: string, subscriptionType: string, country: string) => {
+    const crewItem = crewAmountData.find(item => populationType.includes(item.value))
+
+    if (!crewItem) {
       console.warn("No price found for given options")
+      return
     }
+
+    let newPrice = 0
+
+    if (subscriptionType === "per-tour") {
+      newPrice = crewItem.perTourFee(country)
+    }
+    else if (subscriptionType === "monthly") {
+      newPrice = crewItem.monthlySub(country)
+    }
+
+
+    setPrice(newPrice)
+
   }
 
 
 
-
-  useEffect(() => {
-    if (paymentCurrency === "NGN") {
-      fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
-        .then((res) => res.json())
-        .then((data: ExchangeRateResponse) => {
-          if (data.conversion_rates) {
-            setCurrentRate(data.conversion_rates.NGN)
-          }
-        })
-        .catch((err) => console.error("Error fetching currencies:", err))
-    }
-    else return
-  }, [API_KEY, paymentCurrency])
-
-  const convertToNGN = (rate: number) => rate > 0 ? price * rate : 0
 
 
 
@@ -79,7 +63,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const config = {
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
-    amount: paymentCurrency === "USD" ? price : convertToNGN(currentRate),
+    amount: price,
     currency: paymentCurrency,
     payment_options: "card,mobilemoney,ussd",
     customer: {
@@ -94,6 +78,8 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
     },
   }
 
+
+  console.log(config)
 
   const handleFlutterPayment = useFlutterwave(config)
 
@@ -157,7 +143,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         <p className="mb-2 mx-auto font-lato">Please proceed to payment to confirm your booking.</p>
 
         <h3 className="text-sm text-[#EF8F57] font-bold font-merriweather">THEME: {selectedTheme}</h3>
-        <h3 className="text-sm mb-1 text-[#EF8F57] font-bold font-merriweather">PRICE: {price} USD</h3>
+        <h3 className="text-sm mb-1 text-[#EF8F57] font-bold font-merriweather">PRICE: {price < 1 ? "-" : price} {country === "Nigeria" ? "NGN" : "USD"}</h3>
 
 
         <div className="font-merriweather flex flex-col gap-1 items-start my-3 text-sm " >
@@ -167,9 +153,9 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
               id="perTour"
               label="Per Tour subscription "
               onCheckedChange={(checked) => {
-                if (checked) {
+                if (checked && country) {
                   setSubscriptionType("per-tour")
-                  pickPrice(populationType, "per-tour")
+                  pickPrice(populationType, "per-tour", country)
                 }
               }}
               checked={subscriptionType === "per-tour"}
@@ -179,9 +165,9 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
               id="monthly"
               label="Monthly subscription "
               onCheckedChange={(checked) => {
-                if (checked) {
+                if (checked && country) {
                   setSubscriptionType("monthly")
-                  pickPrice(populationType, "monthly")
+                  pickPrice(populationType, "monthly", country)
                 }
               }}
               checked={subscriptionType === "monthly"}
