@@ -24,6 +24,7 @@
     "@react-hook/window-size": "^3.1.1",
     "@react-three/drei": "^10.5.0",
     "@react-three/fiber": "^9.2.0",
+    "@tanstack/react-query": "^5.85.5",
     "@tiptap/react": "^3.0.7",
     "@tiptap/starter-kit": "^3.0.7",
     "@tsparticles/engine": "^3.8.1",
@@ -59,7 +60,9 @@
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "three": "^0.178.0",
-    "tsparticles": "^3.8.1"
+    "tsparticles": "^3.8.1",
+    "viem": "^2.35.1",
+    "wagmi": "^2.16.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

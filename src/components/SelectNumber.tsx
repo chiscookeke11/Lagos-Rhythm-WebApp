@@ -17,7 +17,7 @@ interface SelectNumberprops {
 
 
 export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) {
-    const { setPopulationType,  setPopulationAmount, userData, setPrice } = useAppContext()
+    const { setPopulationType,  setPopulationAmount, userData } = useAppContext()
     const [hidePrices, setHidePrices] = useState(false)
 
 
@@ -26,9 +26,8 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
         setShowSelectModal(false)
         setPopulationType(item.label)
         setPopulationAmount(item.maxAmount)
-        setPrice(themePrice)
-        localStorage.setItem("themePrice", JSON.stringify(themePrice))
     }
+
 
 
     return (

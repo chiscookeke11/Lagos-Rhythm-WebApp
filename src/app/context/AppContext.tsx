@@ -93,7 +93,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [userData, setUserData] = useState<ProfileDataType | null>(null)
 
-  const [price, setPrice] = useState<number>(Number(getFromLocalStorage("themePrice", 0)))
+  const [price, setPrice] = useState<number>(0)
 
 
 

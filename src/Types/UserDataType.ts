@@ -28,10 +28,10 @@ export interface exclusiveBookingDataType {
     otherJoin?: string,
     tourDate: string[],
     referralSource: string,
-    communicationConsent?: boolean,
-    termsAgreement?: boolean
-    OtherReason: string
-    time:  string
+    termsAgreement?: boolean,
+    OtherReason: string,
+    time:  string,
+    discountCode?: string
 }
 
 export type PopulationTypeInterface = string
