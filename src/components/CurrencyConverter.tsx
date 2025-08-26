@@ -11,12 +11,12 @@ interface ExchangeRateResponse {
 }
 
 
-interface CurrencyConverterProps{
-        setHidePrices: React.Dispatch<SetStateAction<boolean>>
+interface CurrencyConverterProps {
+    setHidePrices: React.Dispatch<SetStateAction<boolean>>
 }
 
 
-export default function CurrencyConverter({setHidePrices}: CurrencyConverterProps) {
+export default function CurrencyConverter({ setHidePrices }: CurrencyConverterProps) {
     const [amount, setAmount] = useState<number>(1)
     const [fromCurrency, setFromCurrency] = useState<string>("USD")
     const [toCurrency, setToCurrency] = useState<string>("NGN")
@@ -29,6 +29,10 @@ export default function CurrencyConverter({setHidePrices}: CurrencyConverterProp
 
 
     useEffect(() => {
+        if (currencies.length > 0) {
+            return;
+        }
+
 
         fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
             .then((res) => res.json())
@@ -61,79 +65,78 @@ export default function CurrencyConverter({setHidePrices}: CurrencyConverterProp
 
 
 
-    {
-        if (!showConversionModal)
-            return (<button
-                onClick={() => {
-                    setshowConversionModal(true)
-                    setHidePrices(true)
-                }}
-                className=" bg-[#EF8F57] text-white p-2 rounded-md w-fit ml-auto cursor-pointer flex items-center justify-center " >Convert currency</button>)
+
+    if (!showConversionModal)
+        return (<button
+            onClick={() => {
+                setshowConversionModal(true)
+                setHidePrices(true)
+            }}
+            className=" bg-[#EF8F57] text-white p-2 rounded-md w-fit ml-auto cursor-pointer flex items-center justify-center " >Convert currency</button>)
 
 
 
-        else
-            return (
-                <div className="mx-auto w-[300px] h-fit py-6 px-5 rounded-xl flex flex-col items-center gap-5 bg-[#ffffff] text-black shadow-2xl " >
+    else
+        return (
+            <div className="mx-auto w-[300px] h-fit py-6 px-5 rounded-xl flex flex-col items-center gap-5 bg-[#ffffff] text-black shadow-2xl " >
 
-                    <button onClick={() => setshowConversionModal(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={20} /></button>
+                <button onClick={() => setshowConversionModal(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={20} /></button>
 
-                    <h1 className="text-[#EF8F57] font-semibold font-merriweather text-xl " >Currency Converter</h1>
+                <h1 className="text-[#EF8F57] font-semibold font-merriweather text-xl " >Currency Converter</h1>
 
-                    <Input
-                        value={amount}
-                        onChange={(e) => setAmount(parseFloat(e.target.value))}
-                        type="number"
-                        className="  mx-auto flex items-center justify-center p-1 w-fit border-2 border-black   "
-                    />
-
-
-                    <div className=" w-full flex items-center justify-between gap-5 " >
+                <Input
+                    value={amount}
+                    onChange={(e) => setAmount(parseFloat(e.target.value))}
+                    type="number"
+                    className="  mx-auto flex items-center justify-center p-1 w-fit border-2 border-black   "
+                />
 
 
-
-                        <select
-                            value={fromCurrency}
-                            onChange={(e) => setFromCurrency(e.target.value)}
-                        >
-                            <option value="USD">USD</option>
-                        </select>
-
-
-                        <select
-                            value={toCurrency}
-                            onChange={(e) => setToCurrency(e.target.value)}
-                        >
-                            {currencies.map((currency) => (
-                                <option key={currency} value={currency}  > {currency} </option>
-                            ))}
-                        </select>
-                    </div>
+                <div className=" w-full flex items-center justify-between gap-5 " >
 
 
 
+                    <select
+                        value={fromCurrency}
+                        onChange={(e) => setFromCurrency(e.target.value)}
+                    >
+                        <option value="USD">USD</option>
+                    </select>
 
 
-
-
-
-                    <Button
-                        ariaLabel="Convert"
-                        label="Convert"
-                        type="button"
-                        variant="primary"
-                        onClick={convertCurrency}
-                        className=" !bg-[#EF8F57] w-full " />
-
-
-
-                    {convertedAmount !== null && (
-                        <h3>
-                            {amount} {fromCurrency} = {convertedAmount.toFixed(2)} {toCurrency}
-                        </h3>
-                    )}
-
+                    <select
+                        value={toCurrency}
+                        onChange={(e) => setToCurrency(e.target.value)}
+                    >
+                        {currencies.map((currency) => (
+                            <option key={currency} value={currency}  > {currency} </option>
+                        ))}
+                    </select>
                 </div>
-            )
-    }
+
+
+
+
+
+
+
+
+                <Button
+                    ariaLabel="Convert"
+                    label="Convert"
+                    type="button"
+                    variant="primary"
+                    onClick={convertCurrency}
+                    className=" !bg-[#EF8F57] w-full " />
+
+
+
+                {convertedAmount !== null && (
+                    <h3>
+                        {amount} {fromCurrency} = {convertedAmount.toFixed(2)} {toCurrency}
+                    </h3>
+                )}
+
+            </div>
+        )
 }
