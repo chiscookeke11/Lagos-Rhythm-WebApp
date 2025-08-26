@@ -17,6 +17,17 @@ const bookingLink = "bookings@lagosrhythm.com"
 
 
 export default function Page() {
+
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+    const d = new Date()
+    let day = d.getDay()
+
+
+
+    console.log("today is:", weekday[day])
+    console.log("The date is:", d)
+
     return (
 
 
