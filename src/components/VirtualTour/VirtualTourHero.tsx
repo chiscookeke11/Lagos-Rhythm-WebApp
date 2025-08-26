@@ -8,7 +8,7 @@ import AvatarModel from "./AvatarModel";
 
 export default function VirtualTourHero() {
     return (
-        <section className="min-h-[80vh] flex items-center justify-between flex-col md:flex-row gap-10  py-28 px-[5%] relative bg-[#05073C] " >
+        <section className="min-h-[80vh] flex items-center justify-between flex-col md:flex-row gap-10 pt-28 pb-14 md:py-28 px-[5%] relative bg-[#05073C] " >
             <div className="w-full basis-2/3 flex flex-col items-start gap-3 overflow-hidden " >
                 <motion.h1
                     initial={{ x: "-100%", opacity: 0 }}
@@ -25,7 +25,7 @@ export default function VirtualTourHero() {
             </div>
 
 
-            <div className="w-full basis-1/3 flex flex-col  items-center justify-center h-full relative "  >
+            <div className="w-full basis-1/3 flex flex-col  items-center justify-center h-full relative transform  md:scale-100  "  >
                 {/* 3d image here  */}
 
                 <ErrorBoundary fallback={<div>Failed to load 3D avatar</div>} >
