@@ -17,6 +17,8 @@ const bookingLink = "bookings@lagosrhythm.com"
 
 
 export default function Page() {
+
+
     return (
 
 

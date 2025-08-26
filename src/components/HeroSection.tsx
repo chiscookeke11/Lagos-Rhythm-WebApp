@@ -34,7 +34,7 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
         loop
         muted
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
+        <source src="/video-image.png" type="video/mp4" />
       </video>
 
 
