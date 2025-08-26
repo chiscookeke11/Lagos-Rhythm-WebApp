@@ -20,7 +20,7 @@ export default function ReusableHero({ pageTitle, subtitle, description, image =
 
 
     return (
-        <section className={`w-full h-[60vh] md:h-screen   bg-no-repeat bg-cover lg:bg-center flex flex-col gap-4 items-center justify-center px-4 py-5 relative `} style={{ backgroundImage: `url(${image})` }} >
+        <section className={`w-full h-screen   bg-no-repeat bg-cover bg-center flex flex-col gap-4 items-center justify-center px-4 py-5 relative `} style={{ backgroundImage: `url(${image})` }} >
             <div className="inset-0 bg-black/55 absolute h-full w-full " />
             <div className="overflow-hidden text-center z-10 space-y-1 flex flex-col items-center ">
                 <motion.h1
