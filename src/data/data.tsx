@@ -390,11 +390,11 @@ export const crewAmountData: CrewAmountItem[] = [
         value: "circle",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return 50000;
-            else return 150
+            else return 60
         },
         monthlySub: (country: string) => {
             if (country === "Nigeria") return 160000 ;
-            else return 500
+            else return 200
         },
         maxAmount: 3
     },
@@ -403,11 +403,11 @@ export const crewAmountData: CrewAmountItem[] = [
         value: "crew",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return 100000;
-            else return 60
+            else return 150
         },
         monthlySub: (country: string) => {
             if (country === "Nigeria") return 320000 ;
-            else return 200
+            else return 500
         },
         maxAmount: 10
     },
