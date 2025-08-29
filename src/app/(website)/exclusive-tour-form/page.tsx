@@ -28,8 +28,9 @@ export default function Page() {
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
-  const minDate = new Date("2025-08-01");
-  const maxDate = new Date("2025-08-31");
+  const minDate = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 3)
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)

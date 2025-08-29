@@ -390,11 +390,11 @@ export const crewAmountData: CrewAmountItem[] = [
         value: "circle",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return 50000;
-            else return 150
+            else return 60
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return 160000 ;
-            else return 500
+            if (country === "Nigeria") return 160000;
+            else return 200
         },
         maxAmount: 3
     },
@@ -403,11 +403,11 @@ export const crewAmountData: CrewAmountItem[] = [
         value: "crew",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return 100000;
-            else return 60
+            else return 150
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return 320000 ;
-            else return 200
+            if (country === "Nigeria") return 320000;
+            else return 500
         },
         maxAmount: 10
     },
@@ -543,7 +543,11 @@ export const sideNavLinks = [
 
 
 export const timeOptions = [
-  { label: "3:00pm WAT", value: "15:00" },
-  { label: "4:00pm WAT", value: "16:00" },
-  { label: "5:00pm WAT", value: "17:00" },
-]
+    { label: "9:00 PM WAT", value: "21:00" },
+    { label: "10:00 AM WAT", value: "10:00" },
+    { label: "11:00 AM WAT", value: "11:00" },
+    { label: "12:00 PM WAT", value: "12:00" },
+    { label: "1:00 PM WAT", value: "13:00" },
+    { label: "2:00 PM WAT", value: "14:00" },
+    { label: "3:00 PM WAT", value: "15:00" },
+];
