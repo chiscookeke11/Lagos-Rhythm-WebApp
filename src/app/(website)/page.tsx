@@ -26,7 +26,7 @@ export default function Home() {
     };
 
     setVh();
-    window.addEventListener("resize", setVh); // update on resize
+    window.addEventListener("resize", setVh);
 
     return () => {
       window.removeEventListener("resize", setVh);

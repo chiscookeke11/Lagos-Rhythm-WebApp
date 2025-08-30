@@ -19,11 +19,15 @@ export default function NewsLetter() {
 
 
 
+
+  // Input onchange function
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+
+  // form submit function
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,6 +47,8 @@ export default function NewsLetter() {
     setIsSubmitting(true)
 
 
+
+    // checking if email exists here
     const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${formData.email}&smtp=1&format=1`)
     const data = await validationRes.json();
 
@@ -52,7 +58,8 @@ export default function NewsLetter() {
       return
     }
 
-
+    // email actually exist
+    // queries the database to see it the subscribers email already exists
     try {
 
       const subscribersRef = collection(fireDB, "subscribers");
@@ -67,6 +74,7 @@ export default function NewsLetter() {
       }
 
 
+      // if email doesn't exist in the database then the subscription goes through
       await addDoc(collection(fireDB, "subscribers"), {
         name: formData.name,
         email: formData.email,
@@ -80,7 +88,7 @@ export default function NewsLetter() {
         });
       }
       catch (err) {
-        console.error( err)
+        console.error(err)
       }
 
       setFormData({ name: "", email: "" });
@@ -89,7 +97,7 @@ export default function NewsLetter() {
       setIsSubmitting(false)
     } catch (error) {
       console.log(error)
-      toast.error("Subscription failed! Please try again" );
+      toast.error("Subscription failed! Please try again");
       setIsSubmitting(false)
     }
   };
