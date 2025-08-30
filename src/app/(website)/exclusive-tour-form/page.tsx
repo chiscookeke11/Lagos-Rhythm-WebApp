@@ -88,6 +88,8 @@ export default function Page() {
     setParticipantsCount((prev) => prev + 1)
   }
 
+
+  
   const decreaseParticipantsCount = () => {
     if (participantsCount < 2) return
     setParticipantsCount((prev) => prev - 1)
