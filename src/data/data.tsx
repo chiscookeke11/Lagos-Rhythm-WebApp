@@ -543,7 +543,7 @@ export const sideNavLinks = [
 
 
 export const timeOptions = [
-    { label: "9:00 PM WAT", value: "21:00" },
+    { label: "9:00 AM WAT", value: "21:00" },
     { label: "10:00 AM WAT", value: "10:00" },
     { label: "11:00 AM WAT", value: "11:00" },
     { label: "12:00 PM WAT", value: "12:00" },
