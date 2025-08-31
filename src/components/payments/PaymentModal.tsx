@@ -15,6 +15,11 @@ interface PaymentModalProps {
   formData: exclusiveBookingDataType
 }
 
+interface ExchangeRateResponse {
+  result: string;
+  base_code: string;
+  conversion_rates: Record<string, number>;
+}
 
 
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
@@ -24,7 +29,35 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
   const [isProcessing, setIsProcessing] = useState(false)
   const [subscriptionType, setSubscriptionType] = useState("")
+  const [nairaRate, setNairaRate] = useState(0)
   const country = userData?.country
+  const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
+
+
+
+
+
+
+  // trying to fecth the current NGN Rate here
+  useEffect(() => {
+    if (nairaRate !== 0) {
+      return;
+    }
+
+
+    fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
+      .then((res) => res.json())
+      .then((data: ExchangeRateResponse) => {
+        if (data.conversion_rates) {
+          setNairaRate(data.conversion_rates.NGN)
+          console.log("the converion rates", data.conversion_rates)
+          console.log("The NGN rate", data.conversion_rates.NGN)
+        }
+      })
+      .catch((err) => console.error("Error fetching currencies:", err))
+  }, [])
+
+
 
 
   const pickPrice = (populationType: string, subscriptionType: string, country: string) => {
@@ -63,7 +96,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const config = {
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
-    amount: price,
+    amount: country !== "Nigeria" && paymentCurrency === "NGN" ? nairaRate * price : price,
     currency: paymentCurrency,
     payment_options: "card,mobilemoney,ussd",
     customer: {
