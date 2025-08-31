@@ -15,6 +15,7 @@ import students from "../app/animated-icons/students.json";
 import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
+import { ThemeDataType } from "@/Types/ThemeDataType";
 
 
 
@@ -324,7 +325,7 @@ export const bookFormImages = [
 ]
 
 
-export const themesData = [
+export const themesData:ThemeDataType[] = [
     {
         title: "Art",
         description: "Where expression becomes memory. Discover how Lagos art makes statements, starts conversations, and preserves truth.",
