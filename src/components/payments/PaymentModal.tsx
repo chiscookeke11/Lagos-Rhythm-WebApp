@@ -96,7 +96,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const config = {
     public_key: flutterwavePublicKey || "",
     tx_ref: `tx-${Date.now()}`,
-    amount: country !== "Nigeria" && paymentCurrency === "NGN" ? nairaRate * price : price,
+    amount: country !== "Nigeria" && paymentCurrency === "NGN" ? nairaRate * price : country === "Nigeria" && paymentCurrency === "USD" ? (price / nairaRate) : price,
     currency: paymentCurrency,
     payment_options: "card,mobilemoney,ussd",
     customer: {

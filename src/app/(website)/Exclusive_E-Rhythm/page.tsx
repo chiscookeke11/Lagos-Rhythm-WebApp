@@ -2,7 +2,6 @@
 
 
 import Button from "@/components/common/Button"
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
 import ThemesSection from "@/components/ThemesSection"
 import { whatYouGetData } from "@/data/data"
 import { motion } from "framer-motion"
@@ -23,7 +22,6 @@ export default function Page() {
 
 
         <>
-            <CountryProtectedRoute>
                 {/* hero section  */}
                 <section className={`w-full h-screen bg-[url('/exclusive_Rhythm/exclusive-page-hero.jpg')]  bg-no-repeat bg-cover bg-center flex flex-col gap-4 items-center justify-center px-4 py-5 relative `}   >
                     <div className="inset-0 bg-black/55 absolute h-full w-full " />
@@ -121,7 +119,6 @@ export default function Page() {
 
 
 
-            </CountryProtectedRoute>
 
 
         </>
