@@ -6,6 +6,7 @@ import { LagosRhythmProvider } from "./context/AppContext";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import Providers from "./providers/Providers";
 
 
 
@@ -77,12 +78,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} ${merienda.variable} ${signika.variable} antialiased`}
       >
+        <Providers>
          <ClerkProvider>
           <LagosRhythmProvider>
             {children}
             <Toaster position="bottom-right" />
           </LagosRhythmProvider>
           </ClerkProvider>
+          </Providers>
       </body>
     </html>
   );

@@ -4,15 +4,22 @@ import { X, Loader2 } from "lucide-react"
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3"
 import { exclusiveBookingDataType } from "@/Types/UserDataType"
 import { useAppContext } from "@/app/context/AppContext"
-import { useState, useCallback, useEffect } from "react"
+import React, { useState, useCallback, useEffect, SetStateAction } from "react"
 import { CustomCheckBox } from "../common/CustomCheckbox"
 import { crewAmountData } from "@/data/data"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
+import CustomConnectButton from "./CustomConnectButton"
+import { useAccount } from "wagmi"
 
 interface PaymentModalProps {
   isOpen: boolean
   onClose: () => void
   onPaymentSuccess: () => void
   formData: exclusiveBookingDataType
+  setShowCryptoPaymentModal: React.Dispatch<SetStateAction<boolean>>
+  setPaidPrice: React.Dispatch<SetStateAction<number>>
+  subscriptionType: string
+  setSubscriptionType: React.Dispatch<SetStateAction<string>>
 }
 
 interface ExchangeRateResponse {
@@ -22,16 +29,16 @@ interface ExchangeRateResponse {
 }
 
 
-export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, setShowCryptoPaymentModal, setPaidPrice, subscriptionType, setSubscriptionType }: PaymentModalProps) {
   const { selectedTheme, price, setPrice, populationType, userData } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
   const [paymentCurrency, setPaymentCurrency] = useState<"USD" | "NGN">("USD")
   const [isProcessing, setIsProcessing] = useState(false)
-  const [subscriptionType, setSubscriptionType] = useState("")
   const [nairaRate, setNairaRate] = useState(0)
   const country = userData?.country
   const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
+  const account = useAccount()
 
 
 
@@ -55,7 +62,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         }
       })
       .catch((err) => console.error("Error fetching currencies:", err))
-  }, [])
+  }, [nairaRate])
 
 
 
@@ -133,6 +140,9 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         callback: (response) => {
           setIsProcessing(false)
           if (response.status === "completed") {
+            setPaidPrice(response.amount)
+            console.log("Just called setPaidPrice with:", response.amount)
+
             onPaymentSuccess()
             onClose()
           }
@@ -146,6 +156,27 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   }, [isProcessing, paymentCurrency, handleFlutterPayment, onPaymentSuccess, onClose])
 
 
+
+  {/* <Button
+            type="button"
+            disabled={!subscriptionType}
+            onClick={() => {
+              setShowCryptoPaymentModal(true)
+              onClose()
+            }}
+            className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
+            aria-label="Pay with Crypto"
+          >
+            Pay with Crypto
+          </Button> */}
+
+
+  useEffect(() => {
+    if (account.status === "connected" && price > 0) {
+      setShowCryptoPaymentModal(true)
+      onClose()
+    }
+  }, [account, price])
 
 
   if (!isOpen) return null
@@ -210,14 +241,13 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         </div>
 
         <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
-          <Button
-            type="button"
-            disabled={!subscriptionType}
-            className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
-            aria-label="Pay with Crypto"
-          >
-            Pay with Crypto
-          </Button>
+
+
+          <CustomConnectButton />
+
+
+
+
           <Button
             type="button"
             disabled={!subscriptionType}
