@@ -21,6 +21,7 @@ import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
 import TimeConverter from "@/components/TimeConverter"
 import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
 
 
 export default function Page() {
@@ -30,10 +31,13 @@ export default function Page() {
   const [loading, setLoading] = useState(false)
   const minDate = new Date();
   const maxDate = new Date();
-  maxDate.setDate(maxDate.getDate() + 3)
+  maxDate.setDate(maxDate.getDate() + 30)
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
+  const [paidPrice, setPaidPrice] = useState<number>(0)
+  const [subscriptionType, setSubscriptionType] = useState("")
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
   }, [selectedDates]);
@@ -63,6 +67,7 @@ export default function Page() {
   })
 
   const formData = watch()
+  console.log("The paid price", paidPrice)
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -89,7 +94,7 @@ export default function Page() {
   }
 
 
-  
+
   const decreaseParticipantsCount = () => {
     if (participantsCount < 2) return
     setParticipantsCount((prev) => prev - 1)
@@ -123,7 +128,9 @@ export default function Page() {
         referralSource: formData.referralSource,
         subscribedAt: new Date(),
         time: formData.time,
-        discountCode: formData.discountCode
+        discountCode: formData.discountCode,
+        subscriptionType: subscriptionType,
+        paidPrice: paidPrice
       })
 
 
@@ -200,7 +207,7 @@ export default function Page() {
 
 
   return (
-    <CountryProtectedRoute>
+    // <CountryProtectedRoute>
       <div className="w-full flex flex-col h-full text-[#05073C] relative">
         <div className="h-[300px] w-full relative">
           <div className="w-full h-full absolute top-0 left-0 bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
@@ -519,11 +526,22 @@ export default function Page() {
           />
         )}
 
-        <PaymentModal formData={formData} isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
+        <PaymentModal
+          formData={formData}
+          isOpen={showPaymentModal}
+          onClose={() => setShowPaymentModal(false)}
+          onPaymentSuccess={completeBooking}
+          setPaidPrice={setPaidPrice}
+          subscriptionType={subscriptionType}
+          setSubscriptionType={setSubscriptionType}
+          setShowCryptoPaymentModal={setShowCryptoPaymentModal} />
+
+
+        <CryptoPaymentModal isOpen={showCryptoPaymentModal} onClose={() => setShowCryptoPaymentModal(false)} />
 
         <TimeConverter baseTime={formData.time} />
 
       </div>
-    </CountryProtectedRoute>
+    // </CountryProtectedRoute>
   )
 }
