@@ -7,7 +7,6 @@ import { useAppContext } from "@/app/context/AppContext"
 import React, { useState, useCallback, useEffect, SetStateAction } from "react"
 import { CustomCheckBox } from "../common/CustomCheckbox"
 import { crewAmountData } from "@/data/data"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 import CustomConnectButton from "./CustomConnectButton"
 import { useAccount } from "wagmi"
 
