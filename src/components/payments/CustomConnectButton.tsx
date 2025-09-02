@@ -40,7 +40,7 @@ export default function CustomConnectButton() {
                             if (!connected) {
                                 return (
                                     <button onClick={openConnectModal} type="button" className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather text-white rounded-md px-4 py-2 h-9 flex items-center justify-center ">
-                                        Connect Wallet
+                                        Pay with Crypto
                                     </button>
                                 );
                             }
@@ -54,11 +54,14 @@ export default function CustomConnectButton() {
                             }
 
                             return (
-                                <div style={{ display: 'flex', gap: 12 }}>
-                                    <button
+                                <div
+                                 className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather text-white  rounded-md px-4 py-2 h-9 flex items-center justify-center "
+                                 >
+                                    {/* <button
                                         onClick={openChainModal}
-                                        style={{ display: 'flex', alignItems: 'center' }}
+                                        style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}
                                         type="button"
+
                                     >
                                         {chain.hasIcon && (
                                             <div
@@ -80,14 +83,11 @@ export default function CustomConnectButton() {
                                                 )}
                                             </div>
                                         )}
-                                        {chain.name}
-                                    </button>
 
-                                    <button onClick={openAccountModal} type="button">
+                                    </button> */}
+
+                                    <button onClick={openAccountModal} type="button" className="cursor-pointer" >
                                         {account.displayName}
-                                        {account.displayBalance
-                                            ? ` (${account.displayBalance})`
-                                            : ''}
                                     </button>
                                 </div>
                             );
