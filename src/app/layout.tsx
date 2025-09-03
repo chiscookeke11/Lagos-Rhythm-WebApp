@@ -65,7 +65,7 @@ const signika = Signika({
 
 export const metadata: Metadata = {
   title: "Lagos Rhythm",
-  description: "Tour guide in Lagos",
+  description: "Tourism Technology",
 };
 
 export default function RootLayout({
