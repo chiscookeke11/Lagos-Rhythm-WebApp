@@ -46,23 +46,16 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
 
   // trying to fecth the current NGN Rate here
   useEffect(() => {
-    if (nairaRate !== 0) {
-      return;
-    }
-
-
-    fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
+    fetch("/api/rates")
       .then((res) => res.json())
-      .then((data: ExchangeRateResponse) => {
+      .then((data) => {
         if (data.conversion_rates) {
-          setNairaRate(data.conversion_rates.NGN)
-          console.log("the converion rates", data.conversion_rates)
-          console.log("The NGN rate", data.conversion_rates.NGN)
+          setNairaRate(data.conversion_rates.NGN);
+          console.log("the NGN price", data.conversion_rates.NGN)
         }
-      })
-      .catch((err) => console.error("Error fetching currencies:", err))
-  }, [nairaRate])
+      });
 
+  }, [])
 
 
 
@@ -232,7 +225,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
                   setSubscriptionType("monthly")
                   pickPrice(populationType, "monthly", country)
                 }
-              }}
+              }} env
               checked={subscriptionType === "monthly"}
             />
 
