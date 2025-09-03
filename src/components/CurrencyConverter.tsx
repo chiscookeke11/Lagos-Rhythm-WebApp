@@ -29,20 +29,15 @@ export default function CurrencyConverter({ setHidePrices }: CurrencyConverterPr
 
 
     useEffect(() => {
-        if (currencies.length > 0) {
-            return;
-        }
-
-
-        fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`)
+        fetch("/api/rates")
             .then((res) => res.json())
-            .then((data: ExchangeRateResponse) => {
+            .then((data) => {
                 if (data.conversion_rates) {
-                    setCurrencies(Object.keys(data.conversion_rates))
+                    setCurrencies(Object.keys(data.conversion_rates));
                 }
-            })
-            .catch((err) => console.error("Error fetching currencies:", err))
-    }, [API_KEY])
+            });
+
+    }, [])
 
 
     const convertCurrency = () => {
