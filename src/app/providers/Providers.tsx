@@ -12,6 +12,7 @@ import {
   optimism,
   arbitrum,
   base,
+  sepolia,
 } from 'wagmi/chains';
 import {
   QueryClientProvider,
@@ -22,7 +23,7 @@ import { ReactNode } from "react";
 const config = getDefaultConfig({
   appName: 'Lagos Rhythm',
   projectId: 'ab127ae3e1b012816be79ea6ca41aeb2',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [sepolia],
   ssr: true,
 });
 

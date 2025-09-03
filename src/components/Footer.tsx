@@ -18,15 +18,15 @@ const footerLinks = [
     },
     {
         label: "In-person Tour",
-        path: "/",
+        path: "/InPersonTour",
     },
     {
         label: "Flights",
-        path: "/",
+        path: "/Flights",
     },
     {
         label: "Store",
-        path: "/book_form",
+        path: "/store",
     },
     {
         label: "About Lagos Rhythm",
