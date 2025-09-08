@@ -34,11 +34,11 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
         loop
         muted
       >
-        <source src="/video-image.png" type="video/mp4" />
+        <source src="/hero-video.mp4" type="video/mp4" />
       </video>
 
 
-      {!videoLoaded && (<Image src={"/hero-image.png"} alt="hero-image" fill />)}
+      {!videoLoaded && (<Image src={"/video-image.png"} alt="hero-image" fill />)}
 
 
       <div className="w-full h-full absolute bg-black/50 z-10 flex items-center justify-center px-4 py-3">
