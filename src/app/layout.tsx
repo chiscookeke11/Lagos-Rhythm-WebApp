@@ -62,11 +62,57 @@ const signika = Signika({
   subsets: ['latin']
 })
 
-
 export const metadata: Metadata = {
   title: "Lagos Rhythm",
   description: "Tourism Technology",
+  keywords: [
+    "Lagos, Lagos Rhythm, Lagos Tourism"
+  ],
+  applicationName: "Lagos Rhythm",
+  authors: [{ name: "Lagos Rhythm Team", url: "https://www.lagosrhythm.com" }],
+  creator: "Lagos Rhythm Team",
+  publisher: "Lagos Rhythm",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+  robots: "index, follow",
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#fff",
+  colorScheme: "light",
+  icons: {
+    icon: "./favicon.ico",
+    shortcut: "./favicon.ico",
+    apple: "./favicon.ico",
+  },
+  openGraph: {
+    title: "Lagos Rhythm",
+    description:
+      "Tourism Technology",
+    url: "https://www.lagosrhythm.com",
+    siteName: "Lagos Rhythm",
+    images: [
+      {
+        url: "./favicon.ico",
+        width: 1200,
+        height: 630,
+        alt: "Lagos Rhythm",
+      },
+    ],
+    locale: "en_NG",
+    type: "website",
+  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Lagos Rhythm",
+  //   description:
+  //     "Tourism Technology",
+  //   site: "@Eth_Enugu",
+  //   creator: "@",
+  //   images: ["./favicon.ico"],
+  // },
+  metadataBase: new URL("https://www.lagosrhythm.com"),
 };
+
+
 
 export default function RootLayout({
   children,
@@ -79,13 +125,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${lato.variable} ${merriWeather.variable} ${merienda.variable} ${signika.variable} antialiased`}
       >
         <Providers>
-         <ClerkProvider>
-          <LagosRhythmProvider>
-            {children}
-            <Toaster position="bottom-right" />
-          </LagosRhythmProvider>
+          <ClerkProvider>
+            <LagosRhythmProvider>
+              {children}
+              <Toaster position="bottom-right" />
+            </LagosRhythmProvider>
           </ClerkProvider>
-          </Providers>
+        </Providers>
       </body>
     </html>
   );

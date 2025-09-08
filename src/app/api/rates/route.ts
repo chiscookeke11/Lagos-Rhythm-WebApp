@@ -1,4 +1,3 @@
-// src/app/api/rates/route.ts
 import { NextResponse } from "next/server";
 
 const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
@@ -10,7 +9,6 @@ export async function GET() {
     }
 
     const url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
-    console.log("Fetching rates from:", url);
 
     const res = await fetch(url);
     if (!res.ok) {
@@ -19,8 +17,16 @@ export async function GET() {
 
     const data = await res.json();
     return NextResponse.json(data);
-  } catch (err: any) {
-    console.error("Error in /api/rates:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    } else if (typeof err === "string") {
+      message = err;
+    }
+
+    console.error("Error in /api/rates:", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
