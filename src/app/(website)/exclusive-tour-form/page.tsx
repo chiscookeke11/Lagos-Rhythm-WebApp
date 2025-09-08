@@ -20,7 +20,7 @@ import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
 import TimeConverter from "@/components/TimeConverter"
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+// import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
 import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
 
 

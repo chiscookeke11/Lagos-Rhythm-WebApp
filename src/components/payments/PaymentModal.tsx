@@ -7,8 +7,9 @@ import { useAppContext } from "@/app/context/AppContext"
 import React, { useState, useCallback, useEffect, SetStateAction } from "react"
 import { CustomCheckBox } from "../common/CustomCheckbox"
 import { crewAmountData } from "@/data/data"
-import CustomConnectButton from "./CustomConnectButton"
-import { useAccount } from "wagmi"
+// import CustomConnectButton from "./CustomConnectButton"
+// import { useAccount } from "wagmi"
+import toast from "react-hot-toast"
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -21,11 +22,11 @@ interface PaymentModalProps {
   setSubscriptionType: React.Dispatch<SetStateAction<string>>
 }
 
-interface ExchangeRateResponse {
-  result: string;
-  base_code: string;
-  conversion_rates: Record<string, number>;
-}
+// interface ExchangeRateResponse {
+//   result: string;
+//   base_code: string;
+//   conversion_rates: Record<string, number>;
+// }
 
 
 export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, setShowCryptoPaymentModal, setPaidPrice, subscriptionType, setSubscriptionType }: PaymentModalProps) {
@@ -36,9 +37,8 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const [isProcessing, setIsProcessing] = useState(false)
   const [nairaRate, setNairaRate] = useState(0)
   const country = userData?.country
-  const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
-  const account = useAccount()
-
+  // const account = useAccount()
+console.log(setShowCryptoPaymentModal)
 
 
 
@@ -163,12 +163,12 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
           </Button> */}
 
 
-  useEffect(() => {
-    if (account.status === "connected" && price > 0) {
-      setShowCryptoPaymentModal(true)
-      onClose()
-    }
-  }, [account, price])
+  // useEffect(() => {
+  //   if (account.status === "connected" && price > 0) {
+  //     setShowCryptoPaymentModal(true)
+  //     onClose()
+  //   }
+  // }, [account, price])
 
 
   if (!isOpen) return null
@@ -225,7 +225,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
                   setSubscriptionType("monthly")
                   pickPrice(populationType, "monthly", country)
                 }
-              }} env
+              }}
               checked={subscriptionType === "monthly"}
             />
 
@@ -235,7 +235,19 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
         <div className="flex flex-col md:flex-row gap-3 w-full items-center justify-center">
 
 
-          <CustomConnectButton />
+          {/* <CustomConnectButton /> */}
+
+          <Button
+            type="button"
+            disabled={!subscriptionType}
+            onClick={() => toast("Crypto feature payment coming soon!")}
+            className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
+            aria-label="Pay with Fiat"
+          >
+            Pay with Crypto
+          </Button>
+
+
 
 
 
