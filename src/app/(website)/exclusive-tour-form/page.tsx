@@ -20,7 +20,7 @@ import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
 import TimeConverter from "@/components/TimeConverter"
-// import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
 import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
 
 
@@ -207,7 +207,7 @@ export default function Page() {
 
 
   return (
-    // <CountryProtectedRoute>
+    <CountryProtectedRoute>
       <div className="w-full flex flex-col h-full text-[#05073C] relative">
         <div className="h-[300px] w-full relative">
           <div className="w-full h-full absolute top-0 left-0 bg-[url('/booking-form/booking-form-hero-bg.jpg')] bg-no-repeat bg-center bg-cover" />
@@ -542,6 +542,7 @@ export default function Page() {
         <TimeConverter baseTime={formData.time} />
 
       </div>
-    // </CountryProtectedRoute>
+    </CountryProtectedRoute>
   )
 }
+

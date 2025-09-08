@@ -240,7 +240,7 @@ console.log(setShowCryptoPaymentModal)
           <Button
             type="button"
             disabled={!subscriptionType}
-            onClick={() => toast("Crypto feature payment coming soon!")}
+            onClick={() => toast("Crypto payment feature  coming soon!")}
             className="bg-[#EF8F57] hover:bg-[#EF8F57]/90 w-full basis-1/2 cursor-pointer font-merriweather"
             aria-label="Pay with Fiat"
           >
