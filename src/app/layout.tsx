@@ -7,6 +7,7 @@ import {
   ClerkProvider,
 } from '@clerk/nextjs'
 import Providers from "./providers/Providers";
+import { metadataKeywords } from "@/data/data";
 
 
 
@@ -65,9 +66,7 @@ const signika = Signika({
 export const metadata: Metadata = {
   title: "Lagos Rhythm",
   description: "Tourism Technology",
-  keywords: [
-    "Lagos, Lagos Rhythm, Lagos Tourism"
-  ],
+  keywords: metadataKeywords,
   applicationName: "Lagos Rhythm",
   authors: [{ name: "Lagos Rhythm Team", url: "https://www.lagosrhythm.com" }],
   creator: "Lagos Rhythm Team",
@@ -100,15 +99,15 @@ export const metadata: Metadata = {
     locale: "en_NG",
     type: "website",
   },
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "Lagos Rhythm",
-  //   description:
-  //     "Tourism Technology",
-  //   site: "@Eth_Enugu",
-  //   creator: "@",
-  //   images: ["./favicon.ico"],
-  // },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lagos Rhythm",
+    description:
+      "Tourism Technology",
+    site: "@Rhythmfmlagos",
+    creator: "@Rhythmfmlagos",
+    images: ["./favicon.ico"],
+  },
   metadataBase: new URL("https://www.lagosrhythm.com"),
 };
 
