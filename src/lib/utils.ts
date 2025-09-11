@@ -24,7 +24,7 @@ export const sendConfirmationEmail = (data: {
 }) => {
   return emailjs.send(
     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+    process.env.NEXT_PUBLIC_EMAILJS_BOOKING_CONFIRMATION_TEMPLATE_ID!,
     {
       name: data.name,
       email: data.email,
@@ -42,7 +42,7 @@ export const sendConfirmationEmail = (data: {
 export const newsletterConfirmationMail = (data: { name: string, email: string }) => {
   return emailjs.send(
     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-    process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!,
+    process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_CONFIRMATION_TEMPLATE_ID!,
     {
       name: data.name,
       email: data.email

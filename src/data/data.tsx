@@ -325,7 +325,7 @@ export const bookFormImages = [
 ]
 
 
-export const themesData:ThemeDataType[] = [
+export const themesData: ThemeDataType[] = [
     {
         title: "Art",
         description: "Where expression becomes memory. Discover how Lagos art makes statements, starts conversations, and preserves truth.",
@@ -552,3 +552,56 @@ export const timeOptions = [
     { label: "2:00 PM WAT", value: "14:00" },
     { label: "3:00 PM WAT", value: "15:00" },
 ];
+
+
+export const metadataKeywords = [
+    "Lagos",
+    "Lagos Rhythm",
+    "Tour",
+    "Virtual",
+    "Culture",
+    "Nightlife",
+    "Food",
+    "Art",
+    "Nature",
+    "Vibe",
+    "Travel",
+    "Blog",
+    "Community",
+    "Experience",
+    "Escape",
+    "Tour Packages",
+    "Flavors",
+    "Lagos virtual tour",
+    "Virtual Lagos experience",
+    "In-person Lagos tour",
+    "Lagos food tour",
+    "Lagos nightlife guide",
+    "Lagos culture tours",
+    "Authentic Lagos vibes",
+    "Explore Lagos virtually",
+    "Lagos rhythm travel",
+    "Lagos art culture",
+    "Lagos nature escapes",
+    "Lagos themed package",
+    "Global easy payments",
+    "Crypto payment tours",
+    "Community-driven travel",
+    "Travel support Lagos",
+    "Experience Lagos in its natural form.",
+    "Live the vibe, please the mind.",
+    "Explore Lagos’s food, culture, and nightlife.",
+    "Free virtual tours of Lagos culture and landmarks.",
+    "Affordable themed packages for local and foreign travelers.",
+    "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
+    "Tailored group and corporate cultural experiences.",
+    "Built for the culture, proudly local, globally relevant.",
+    "Discover Lagos’s art, food, nightlife, nature, and escapes.",
+    "Join our community and step into Lagos’s rhythm.",
+    "Tourism",
+    "Lagos Tourism",
+    "Nigeria",
+    "Nigerian Tourism",
+    "Tourism technology"
+];
+
