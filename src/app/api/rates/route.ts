@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const API_KEY = process.env.NEXT_PUBLIC_EXCHANGERATE_API_KEY;
+const API_KEY = process.env.EXCHANGERATE_API_KEY;
 
 export async function GET() {
   try {
