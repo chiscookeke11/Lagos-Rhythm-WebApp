@@ -390,7 +390,7 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "1-3 (circle)",
         value: "circle",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return 50000;
+            if (country === "Nigeria") return 1000;
             else return 60
         },
         monthlySub: (country: string) => {
