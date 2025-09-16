@@ -30,8 +30,8 @@ function Loader() {
 
 export default function AvatarModel({ modelUrl }: { modelUrl: string }) {
     return (
-        <div className="w-full h-full min-h-[300px]">
-            <div className="overflow-hidden h-[500px] rounded-lg">
+        <div className="w-full h-full md:min-h-[300px]">
+            <div className="overflow-hidden h-[350px] md:h-[500px] rounded-lg">
                 <Canvas camera={{ position: [0, 1.5, 7], fov: 45 }}>
                     <Suspense fallback={<Loader />}>
                         <ambientLight intensity={0.5} />

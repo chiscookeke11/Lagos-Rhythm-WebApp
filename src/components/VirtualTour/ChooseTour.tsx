@@ -9,15 +9,16 @@ import Button from "../common/Button";
 
 const tourPackagesData = [
     {
+        title: "Free E-Rhythm",
+        content: "Want a taste of Lagos? Join our open-access tours streamed live from the city’s most vibrant spots. It’s free, it’s real-time, and it’s your first step into the rhythm of Nigeria.",
+        path: "/Free_E-Rhythm",
+    },
+    {
         title: "Exclusive E-Rhythm",
         content: "Go deeper with Lagos-curated, private virtual tours designed for schools, corporate teams, cultural groups, and special events",
         path: "/Exclusive_E-Rhythm",
     },
-    {
-        title: "Free E-Rhythm",
-        content: "Want a taste of Lagos? Join our open-access tours streamed live from the city’s most vibrant spots. It’s free, it’s real-time, and it’s your first step into the rhythm of Nigeria.",
-        path: "/Free_E-Rhythm",
-    }
+
 ]
 
 export default function ChooseTour() {

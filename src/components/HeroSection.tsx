@@ -38,7 +38,7 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
       </video>
 
 
-      {!videoLoaded && (<Image src={"/hero-image.png"} alt="hero-image" fill />)}
+      {!videoLoaded && (<Image src={"/video-image.png"} alt="hero-image" width={500} height={500}  className=" w-full h-full object-cover object-center"  />)}
 
 
       <div className="w-full h-full absolute bg-black/50 z-10 flex items-center justify-center px-4 py-3">

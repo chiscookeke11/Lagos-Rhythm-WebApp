@@ -15,6 +15,7 @@ import students from "../app/animated-icons/students.json";
 import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
+import { ThemeDataType } from "@/Types/ThemeDataType";
 
 
 
@@ -324,7 +325,7 @@ export const bookFormImages = [
 ]
 
 
-export const themesData = [
+export const themesData: ThemeDataType[] = [
     {
         title: "Art",
         description: "Where expression becomes memory. Discover how Lagos art makes statements, starts conversations, and preserves truth.",
@@ -389,12 +390,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "1-3 (circle)",
         value: "circle",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "150 USD";
-            else return "150 USD"
+            if (country === "Nigeria") return 50000;
+            else return 60
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "500 USD";
-            else return " 500 USD"
+            if (country === "Nigeria") return 160000;
+            else return 200
         },
         maxAmount: 3
     },
@@ -402,12 +403,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "4-10 (crew)",
         value: "crew",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "60 USD";
-            else return "60 USD"
+            if (country === "Nigeria") return 100000;
+            else return 150
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "200 USD";
-            else return "200 USD"
+            if (country === "Nigeria") return 320000;
+            else return 500
         },
         maxAmount: 10
     },
@@ -415,12 +416,12 @@ export const crewAmountData: CrewAmountItem[] = [
         label: "11+ (community)",
         value: "community",
         perTourFee: (country: string) => {
-            if (country === "Nigeria") return "300 USD";
-            else return "300 USD"
+            if (country === "Nigeria") return 150000;
+            else return 300
         },
         monthlySub: (country: string) => {
-            if (country === "Nigeria") return "1000 USD";
-            else return "1000 USD"
+            if (country === "Nigeria") return 500000;
+            else return 1000
         },
         maxAmount: 100
     },
@@ -541,4 +542,66 @@ export const sideNavLinks = [
 
 ]
 
+
+export const timeOptions = [
+    { label: "9:00 AM WAT", value: "21:00" },
+    { label: "10:00 AM WAT", value: "10:00" },
+    { label: "11:00 AM WAT", value: "11:00" },
+    { label: "12:00 PM WAT", value: "12:00" },
+    { label: "1:00 PM WAT", value: "13:00" },
+    { label: "2:00 PM WAT", value: "14:00" },
+    { label: "3:00 PM WAT", value: "15:00" },
+];
+
+
+export const metadataKeywords = [
+    "Lagos",
+    "Lagos Rhythm",
+    "Tour",
+    "Virtual",
+    "Culture",
+    "Nightlife",
+    "Food",
+    "Art",
+    "Nature",
+    "Vibe",
+    "Travel",
+    "Blog",
+    "Community",
+    "Experience",
+    "Escape",
+    "Tour Packages",
+    "Flavors",
+    "Lagos virtual tour",
+    "Virtual Lagos experience",
+    "In-person Lagos tour",
+    "Lagos food tour",
+    "Lagos nightlife guide",
+    "Lagos culture tours",
+    "Authentic Lagos vibes",
+    "Explore Lagos virtually",
+    "Lagos rhythm travel",
+    "Lagos art culture",
+    "Lagos nature escapes",
+    "Lagos themed package",
+    "Global easy payments",
+    "Crypto payment tours",
+    "Community-driven travel",
+    "Travel support Lagos",
+    "Experience Lagos in its natural form.",
+    "Live the vibe, please the mind.",
+    "Explore Lagos’s food, culture, and nightlife.",
+    "Free virtual tours of Lagos culture and landmarks.",
+    "Affordable themed packages for local and foreign travelers.",
+    "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
+    "Tailored group and corporate cultural experiences.",
+    "Built for the culture, proudly local, globally relevant.",
+    "Discover Lagos’s art, food, nightlife, nature, and escapes.",
+    "Join our community and step into Lagos’s rhythm.",
+    "Tourism",
+    "Lagos Tourism",
+    "Nigeria",
+    "Nigerian Tourism",
+    "Tourism technology"
+];
 

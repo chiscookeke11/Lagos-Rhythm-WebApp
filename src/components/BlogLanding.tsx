@@ -84,7 +84,7 @@ export default function BlogLanding() {
             </>
 
 
-            <Link href={"/blogs"} className=" font-lato  text-[#05073C] text-base underline mx-auto "  >   See all Blog</Link>
+            <Link href={"/blogs"} className=" font-lato  text-[#05073C] text-base underline mx-auto "  >View all</Link>
 
 
         </div>

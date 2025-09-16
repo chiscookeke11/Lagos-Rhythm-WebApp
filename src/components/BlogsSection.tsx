@@ -44,7 +44,7 @@ export default function BlogSection({ setOpenBlogModal, openBlogModal }: BlogSec
 
 
 
-    console.log(selectedIndex)
+
 
 
     const updateBlogInUI = (updatedBlog: BlogDataType) => {
