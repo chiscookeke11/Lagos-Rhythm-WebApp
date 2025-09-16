@@ -10,7 +10,7 @@ import { CustomCheckBox } from "@/components/common/CustomCheckbox"
 import { CustomSelect } from "@/components/common/CustomSelect"
 import Input from "@/components/common/Input"
 import Button from "@/components/common/Button"
-import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } from "@/data/data"
+import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData, timeOptions } from "@/data/data"
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
@@ -19,18 +19,25 @@ import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
 import PaymentModal from "@/components/payments/PaymentModal"
+import TimeConverter from "@/components/TimeConverter"
 import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
+import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
+
 
 export default function Page() {
   const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
-  const minDate = new Date("2025-08-01");
-  const maxDate = new Date("2025-08-31");
+  const minDate = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 30)
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
+  const [paidPrice, setPaidPrice] = useState<number>(0)
+  const [subscriptionType, setSubscriptionType] = useState("")
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
   }, [selectedDates]);
@@ -53,11 +60,14 @@ export default function Page() {
       otherJoin: "",
       tourDate: [],
       termsAgreement: false,
-      referralSource: ""
+      referralSource: "",
+      time: "",
+      discountCode: ""
     },
   })
 
   const formData = watch()
+  console.log("The paid price", paidPrice)
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -71,7 +81,7 @@ export default function Page() {
         append({ fullName: "", email: "" })
       }
     } else if (participantsCount < currentFieldsLength) {
-      // FIX: Changed append to remove when participantsCount decreases
+
       for (let i = currentFieldsLength; i > participantsCount; i--) {
         remove(i - 1)
       }
@@ -82,6 +92,8 @@ export default function Page() {
     if (participantsCount >= maxParticipantCount) return
     setParticipantsCount((prev) => prev + 1)
   }
+
+
 
   const decreaseParticipantsCount = () => {
     if (participantsCount < 2) return
@@ -94,7 +106,7 @@ export default function Page() {
     setShowPaymentModal(true)
   }
 
-  // FIX: Changed onSubmit signature to only accept data
+  // onSubmit signature to only accept data
   const completeBooking = async () => {
 
     if (!pendingFormData) return
@@ -102,7 +114,6 @@ export default function Page() {
     setLoading(true)
 
 
-    console.log("Form Data:", formData)
 
     try {
       await addDoc(collection(fireDB, "exclusive_Tour_form"), {
@@ -116,6 +127,10 @@ export default function Page() {
         termsAgreement: formData.termsAgreement,
         referralSource: formData.referralSource,
         subscribedAt: new Date(),
+        time: formData.time,
+        discountCode: formData.discountCode,
+        subscriptionType: subscriptionType,
+        paidPrice: paidPrice
       })
 
 
@@ -128,7 +143,6 @@ export default function Page() {
           date: "21st august 2021",
           tour_link: "www.unn.edu.ng"
         })
-        console.log("Email sent Successfully")
       }
       catch (err) {
         console.error("Failed to send confirmation email", err)
@@ -151,7 +165,7 @@ export default function Page() {
   }
 
 
-  console.log(formData)
+
 
 
 
@@ -188,6 +202,8 @@ export default function Page() {
       shouldDirty: true,
     });
   };
+
+
 
 
   return (
@@ -417,6 +433,24 @@ export default function Page() {
               </div>
 
 
+              <Controller
+                control={control}
+                name="time"
+                rules={{ required: "Please select a time you prefer" }}
+                render={({ field }) => (
+                  <CustomSelect
+                    name={field.name}
+                    onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
+                    placeholder="Please select an option"
+                    label="Time"
+                    options={timeOptions}
+                    value={field.value}
+                    error={errors.time?.message}
+                  />
+                )}
+              />
+
+
 
               <Controller
                 control={control}
@@ -433,6 +467,14 @@ export default function Page() {
                     error={errors.referralSource?.message}
                   />
                 )}
+              />
+
+              <Input
+                label="Enter discount code (optional)"
+                {...register("discountCode")}
+                name="discountCode"
+                type="text"
+                placeholder="FT743JU7"
               />
 
               <div className="w-full flex items-start flex-col gap-3">
@@ -463,11 +505,11 @@ export default function Page() {
                       </span>
                     </>
                   ) : (
-                    "Submit"
+                    "Proceed to Payment"
                   )
                 }
                 type="submit"
-                ariaLabel="Submit"
+                ariaLabel="Proceed to Payment"
                 variant="ghost"
                 disabled={loading}
                 className="!bg-[#EF8F57] w-full max-w-sm"
@@ -484,9 +526,23 @@ export default function Page() {
           />
         )}
 
-        <PaymentModal isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} onPaymentSuccess={completeBooking} />
+        <PaymentModal
+          formData={formData}
+          isOpen={showPaymentModal}
+          onClose={() => setShowPaymentModal(false)}
+          onPaymentSuccess={completeBooking}
+          setPaidPrice={setPaidPrice}
+          subscriptionType={subscriptionType}
+          setSubscriptionType={setSubscriptionType}
+          setShowCryptoPaymentModal={setShowCryptoPaymentModal} />
+
+
+        <CryptoPaymentModal isOpen={showCryptoPaymentModal} onClose={() => setShowCryptoPaymentModal(false)} />
+
+        <TimeConverter baseTime={formData.time} />
 
       </div>
     </CountryProtectedRoute>
   )
 }
+

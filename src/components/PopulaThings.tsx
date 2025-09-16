@@ -18,13 +18,7 @@ interface FlipEvent {
   data: number
 }
 
-interface OrientationEvent {
-  data: string
-}
 
-interface StateEvent {
-  data: string
-}
 
 
 
@@ -100,15 +94,7 @@ export default function PopularThings() {
     setCurrentPage(e.data)
   }
 
-  const onChangeOrientation = (e: OrientationEvent) => {
 
-    console.log("Orientation changed:", e.data)
-  }
-
-  const onChangeState = (e: StateEvent) => {
-
-    console.log("State changed:", e.data)
-  }
 
 
 
@@ -170,8 +156,6 @@ export default function PopularThings() {
           showPageCorners={true}
           disableFlipByClick={false}
           onFlip={onFlip}
-          onChangeOrientation={onChangeOrientation}
-          onChangeState={onChangeState}
           ref={flipBookRef}
         >
           {/* Front page cover */}

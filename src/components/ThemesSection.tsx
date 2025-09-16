@@ -7,11 +7,16 @@ import { motion } from "framer-motion"
 import SelectNumber from "./SelectNumber";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/context/AppContext";
+import { useUser } from "@clerk/nextjs";
+import toast from "react-hot-toast";
+import { ThemeDataType } from "@/Types/ThemeDataType";
 
 
 
 export default function ThemesSection() {
     const [showSelectModal, setShowSelectModal] = useState(false)
+    const { userData } = useAppContext()
+    const { user } = useUser()
 
     const { setSelectedTheme } = useAppContext()
 
@@ -19,6 +24,21 @@ export default function ThemesSection() {
         document.body.style.overflowY = showSelectModal ? "hidden" : "auto"
     }, [showSelectModal])
 
+
+    const previewTheme = (item: ThemeDataType) => {
+        if (!user) {
+            toast.error("Please sign in to continue");
+            return;
+        }
+        else if (user && !userData?.country) {
+            toast.error("Complete your profile to continue.");
+            return;
+        }
+        else {
+            setShowSelectModal(true)
+            setSelectedTheme(item.title)
+        }
+    }
 
 
     return (
@@ -44,13 +64,10 @@ export default function ThemesSection() {
                         </div>
 
 
-                        <div className=" lg:h-12  px-3 py-3  w-full absolute bg-white/5 group-hover:bg-black/10 backdrop-blur-md bottom-0 left-0 overflow-hidden h-[68%] md:h-[70%] lg:group-hover:h-[75%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
+                        <div className=" lg:h-12  px-3 py-3  w-full absolute bg-black/25 group-hover:bg-black/35 backdrop-blur-md bottom-0 left-0 overflow-hidden h-[68%] md:h-[70%] lg:group-hover:h-[75%] group-hover:p-3 group-hover:px-4  transition-all duration-300 ease-in-out flex flex-col gap-2 lg:gap-1   " >
                             <h1 className="font-merienda font-bold text-lg lg:text-xl text-white " >{item.title} </h1>
                             <p className="font-lato font-medium text-sm lg:text-base text-white lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 ease-in-out " > {item.description} </p>
-                            <Button onClick={() => {
-                                setShowSelectModal(true)
-                                setSelectedTheme(item.title)
-                            }} type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
+                            <Button onClick={() => previewTheme(item)} type="button" ariaLabel="Get started" label="Get Started" className="w-fit ml-auto !bg-[#EF8F57]  " variant="primary" />
                         </div>
 
 

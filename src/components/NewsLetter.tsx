@@ -19,11 +19,15 @@ export default function NewsLetter() {
 
 
 
+
+  // Input onchange function
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+
+  // form submit function
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,7 +36,6 @@ export default function NewsLetter() {
 
     if (!isvalid) {
       toast.error("Please fill in the required fields")
-      console.log(isvalid)
       return;
     }
 
@@ -44,6 +47,8 @@ export default function NewsLetter() {
     setIsSubmitting(true)
 
 
+
+    // checking if email exists here
     const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${formData.email}&smtp=1&format=1`)
     const data = await validationRes.json();
 
@@ -53,7 +58,8 @@ export default function NewsLetter() {
       return
     }
 
-
+    // email actually exist
+    // queries the database to see it the subscribers email already exists
     try {
 
       const subscribersRef = collection(fireDB, "subscribers");
@@ -62,12 +68,13 @@ export default function NewsLetter() {
 
 
       if (!querySnapshot.empty) {
-        toast.error("You are already subscribed with this email");
+        toast.error("This email is already subscribed to our newsletter");
         setIsSubmitting(false);
         return;
       }
 
 
+      // if email doesn't exist in the database then the subscription goes through
       await addDoc(collection(fireDB, "subscribers"), {
         name: formData.name,
         email: formData.email,
@@ -79,10 +86,9 @@ export default function NewsLetter() {
           name: formData.name,
           email: formData.email
         });
-        console.log("Email sent successfully")
       }
       catch (err) {
-        console.error("Failed to send confirmation email", err)
+        console.error(err)
       }
 
       setFormData({ name: "", email: "" });
@@ -91,7 +97,7 @@ export default function NewsLetter() {
       setIsSubmitting(false)
     } catch (error) {
       console.log(error)
-      toast.error("Subscription failed ");
+      toast.error("Subscription failed! Please try again");
       setIsSubmitting(false)
     }
   };
