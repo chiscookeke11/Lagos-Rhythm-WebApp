@@ -24,6 +24,7 @@ const YouTubeEmbed = () => {
 
   return (
     <div className="flex justify-center items-center h-screen w-full bg-[#05073C] relative">
+      LIVE
       <div className="z-10 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
 
         <div className="block md:hidden">
