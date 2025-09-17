@@ -14,10 +14,9 @@ import toast from "react-hot-toast"
 interface PaymentModalProps {
   isOpen: boolean
   onClose: () => void
-  onPaymentSuccess: () => void
+  onPaymentSuccess: (paidPrice: string) => void
   formData: exclusiveBookingDataType
   setShowCryptoPaymentModal: React.Dispatch<SetStateAction<boolean>>
-  setPaidPrice: React.Dispatch<SetStateAction<number>>
   subscriptionType: string
   setSubscriptionType: React.Dispatch<SetStateAction<string>>
 }
@@ -29,7 +28,7 @@ interface PaymentModalProps {
 // }
 
 
-export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, setShowCryptoPaymentModal, setPaidPrice, subscriptionType, setSubscriptionType }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, setShowCryptoPaymentModal, subscriptionType, setSubscriptionType }: PaymentModalProps) {
   const { selectedTheme, price, setPrice, populationType, userData } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
@@ -132,10 +131,9 @@ console.log(setShowCryptoPaymentModal)
         callback: (response) => {
           setIsProcessing(false)
           if (response.status === "completed") {
-            setPaidPrice(response.amount)
             console.log("Just called setPaidPrice with:", response.amount)
 
-            onPaymentSuccess()
+            onPaymentSuccess(`${response.currency} ${response.amount}`)
             onClose()
           }
           closePaymentModal()
