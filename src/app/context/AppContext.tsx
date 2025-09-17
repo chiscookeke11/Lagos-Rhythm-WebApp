@@ -170,7 +170,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         setGalleryImages(items)
       }
       catch (error) {
-        console.log("Error fetching images", error)
+        console.error("Error fetching images", error)
       }
     }
     fetchGalleryImages()

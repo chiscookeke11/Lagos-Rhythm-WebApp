@@ -151,7 +151,6 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                 setShowAuthModal(false);
                 router.push("/")
             } else {
-                console.log("Sign-in not complete:", result?.status)
                 toast.error("Sign-in incomplete. Please try again.");
             }
         } catch (error) {
