@@ -110,7 +110,6 @@ export async function fetchBookedExclusiveRhythmCount() {
 export const deleteItem = async (id: string, collectionName: string) => {
   try {
     await deleteDoc(doc(fireDB, collectionName, id))
-    console.log("Item deleted successfully")
   }
   catch (error) {
     console.error(error)
@@ -151,7 +150,6 @@ export const addUserToDb = async (user: string) => {
       country: "",
       createdAt: new Date()
     })
-    console.log("USer document created in firestore")
   }
   catch (firestoreError) {
     console.error("Error writing to firestore:", firestoreError)

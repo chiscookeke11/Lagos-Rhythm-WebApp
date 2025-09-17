@@ -28,7 +28,7 @@ interface PaymentModalProps {
 // }
 
 
-export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, setShowCryptoPaymentModal, subscriptionType, setSubscriptionType }: PaymentModalProps) {
+export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formData, subscriptionType, setSubscriptionType }: PaymentModalProps) {
   const { selectedTheme, price, setPrice, populationType, userData } = useAppContext()
   const flutterwavePublicKey = process.env.NEXT_PUBLIC_FLUTTERWAVE_API_KEY
   const [showCurrencyBtns, setShowCurrencyBtns] = useState(false)
@@ -37,7 +37,7 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
   const [nairaRate, setNairaRate] = useState(0)
   const country = userData?.country
   // const account = useAccount()
-console.log(setShowCryptoPaymentModal)
+
 
 
 
@@ -50,7 +50,6 @@ console.log(setShowCryptoPaymentModal)
       .then((data) => {
         if (data.conversion_rates) {
           setNairaRate(data.conversion_rates.NGN);
-          console.log("the NGN price", data.conversion_rates.NGN)
         }
       });
 
@@ -110,7 +109,6 @@ console.log(setShowCryptoPaymentModal)
   }
 
 
-  console.log(config)
 
   const handleFlutterPayment = useFlutterwave(config)
 
@@ -131,8 +129,6 @@ console.log(setShowCryptoPaymentModal)
         callback: (response) => {
           setIsProcessing(false)
           if (response.status === "completed") {
-            console.log("Just called setPaidPrice with:", response.amount)
-
             onPaymentSuccess(`${response.currency} ${response.amount}`)
             onClose()
           }
