@@ -88,7 +88,6 @@ export default function FeedbackPage() {
                 timestamp: new Date(),
             })
             setSubmitted(true)
-            console.log("Feedback submitted:", data)
             toast.success("Feedback submitted successfully!")
             reset()
         } catch (err) {

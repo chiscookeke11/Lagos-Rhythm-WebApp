@@ -47,7 +47,7 @@ export default function Page() {
             setSuccessfulCreation(true)
         }
         catch (err) {
-            console.log(err)
+            console.error(err)
             toast.error("Failed")
         }
         finally {
@@ -87,7 +87,7 @@ export default function Page() {
 
 
         catch (err) {
-            console.log(err)
+            console.error(err)
             toast.error("failed")
         }
 

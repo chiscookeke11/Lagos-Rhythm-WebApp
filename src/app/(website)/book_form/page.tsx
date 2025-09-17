@@ -26,7 +26,6 @@ export default function Page() {
     const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
     const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
-    const apiKey = process.env.NEXT_PUBLIC_MAILBOX_API_KEY
 
     const [userData, setUserData] = useState<userDataType>({
         fullName: "",
@@ -165,16 +164,6 @@ export default function Page() {
         }
 
         setLoading(true);
-
-        const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${userData.email}&smtp=1&format=1`);
-        const data = await validationRes.json();
-
-        if (!(data.smtp_check && data.format_valid && data.mx_found)) {
-            toast.error("Email address does not exist");
-            setLoading(false);
-            return;
-        }
-
 
         try {
 
