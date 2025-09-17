@@ -62,7 +62,7 @@ export default function UpdateBlogModal({ setShowEditBlogModal, selectedIndex, u
                 }
             }
             catch (error) {
-                console.log(error)
+                console.error(error)
                 toast.error("Error fetching blog data")
             }
         }
@@ -170,7 +170,7 @@ export default function UpdateBlogModal({ setShowEditBlogModal, selectedIndex, u
 
     }
 
-    console.log(selectedIndex)
+
 
 
 

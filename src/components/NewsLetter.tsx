@@ -14,7 +14,7 @@ export default function NewsLetter() {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [isSubmitting, setIsSubmitting] = useState(false)
   const Motionbutton = useMemo(() => motion(Button), [])
-  const apiKey = process.env.NEXT_PUBLIC_MAILBOX_API_KEY
+
 
 
 
@@ -45,18 +45,6 @@ export default function NewsLetter() {
     }
 
     setIsSubmitting(true)
-
-
-
-    // checking if email exists here
-    const validationRes = await fetch(`https://apilayer.net/api/check?access_key=${apiKey}&email=${formData.email}&smtp=1&format=1`)
-    const data = await validationRes.json();
-
-    if (!(data.smtp_check && data.format_valid && data.mx_found)) {
-      toast.error("Email address does not exist")
-      setIsSubmitting(false)
-      return
-    }
 
     // email actually exist
     // queries the database to see it the subscribers email already exists
@@ -96,7 +84,7 @@ export default function NewsLetter() {
       toast.success("Subscribed successfully ");
       setIsSubmitting(false)
     } catch (error) {
-      console.log(error)
+      console.error(error)
       toast.error("Subscription failed! Please try again");
       setIsSubmitting(false)
     }

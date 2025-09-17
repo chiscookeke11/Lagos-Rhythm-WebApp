@@ -56,7 +56,6 @@ export default function Page() {
     }
 
     if (!email) {
-      console.log("No email available")
       toast.error("Please sign up ")
       return
     }
@@ -91,7 +90,7 @@ export default function Page() {
         toast.success("Profile updated successfully")
       }
       catch (error) {
-        console.log("Failed to update profile", error)
+        console.error(error)
         toast.error("Something went wrong! Please try again")
       }
       finally {
