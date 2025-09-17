@@ -36,7 +36,6 @@ export default function Page() {
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
-  const [paidPrice, setPaidPrice] = useState<number>(0)
   const [subscriptionType, setSubscriptionType] = useState("")
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
@@ -67,7 +66,7 @@ export default function Page() {
   })
 
   const formData = watch()
-  console.log("The paid price", paidPrice)
+
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -107,7 +106,7 @@ export default function Page() {
   }
 
   // onSubmit signature to only accept data
-  const completeBooking = async () => {
+  const completeBooking = async (paidPrice: string) => {
 
     if (!pendingFormData) return
 
@@ -130,7 +129,9 @@ export default function Page() {
         time: formData.time,
         discountCode: formData.discountCode,
         subscriptionType: subscriptionType,
-        paidPrice: paidPrice
+        paidPrice: paidPrice,
+        populationSize: participantsCount,
+        tourTheme: selectedTheme,
       })
 
 
@@ -531,7 +532,6 @@ export default function Page() {
           isOpen={showPaymentModal}
           onClose={() => setShowPaymentModal(false)}
           onPaymentSuccess={completeBooking}
-          setPaidPrice={setPaidPrice}
           subscriptionType={subscriptionType}
           setSubscriptionType={setSubscriptionType}
           setShowCryptoPaymentModal={setShowCryptoPaymentModal} />

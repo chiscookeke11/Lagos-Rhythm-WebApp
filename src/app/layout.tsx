@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter, Lato, Merienda, Merriweather, Playfair_Display, Signika } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
@@ -75,8 +75,6 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
-  themeColor: "#fff",
-  colorScheme: "light",
   icons: {
     icon: "./favicon.ico",
     shortcut: "./favicon.ico",
@@ -111,7 +109,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.lagosrhythm.com"),
 };
 
-
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light",
+};
 
 export default function RootLayout({
   children,
