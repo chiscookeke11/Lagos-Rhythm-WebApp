@@ -514,12 +514,12 @@ export const sideNavLinks = [
     },
     {
         label: "Exclusive Tour Bookings",
-        route: "/dashboard/exclusive-bookings",
+        route: "/dashboard/Exclusive-tour-booking",
         icons: <Sparkles size={18} />,
     },
     {
         label: "Free Tour Bookings",
-        route: "",
+        route: "/dashboard/free-tour-book",
         icons: <TicketPercent size={18} />,
     },
     {

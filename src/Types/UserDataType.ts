@@ -31,7 +31,10 @@ export interface exclusiveBookingDataType {
     termsAgreement?: boolean,
     OtherReason: string,
     time:  string,
-    discountCode?: string
+    discountCode?: string,
+    populationSize: string,
+    tourTheme: string,
+    subscriptionType: string,
 }
 
 export type PopulationTypeInterface = string
