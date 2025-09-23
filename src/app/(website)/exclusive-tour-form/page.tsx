@@ -61,7 +61,7 @@ export default function Page() {
       termsAgreement: false,
       referralSource: "",
       time: "",
-      discountCode: ""
+      discountCode: "",
     },
   })
 
