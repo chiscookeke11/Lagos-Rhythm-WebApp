@@ -128,10 +128,12 @@ export default function Page() {
         subscribedAt: new Date(),
         time: formData.time,
         discountCode: formData.discountCode,
+        // tour details info here
         subscriptionType: subscriptionType,
         paidPrice: paidPrice,
         populationSize: participantsCount,
         tourTheme: selectedTheme,
+        tourCompleted: false,
       })
 
 
