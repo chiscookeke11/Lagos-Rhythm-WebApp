@@ -133,6 +133,7 @@ export default function Page() {
         paidPrice: paidPrice,
         populationSize: participantsCount,
         tourTheme: selectedTheme,
+        tourCompleted: false,
       })
 
 
