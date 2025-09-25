@@ -17,4 +17,5 @@ export interface ExclusiveTourBookingDataType {
     paidPrice: string,
     populationSize: string,
     tourTheme: string,
+    isCompleted: boolean
 }

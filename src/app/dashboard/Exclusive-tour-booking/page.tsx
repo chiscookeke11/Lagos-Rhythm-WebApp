@@ -40,6 +40,7 @@ export default function Page() {
                         otherJoin: data.otherJoin,
                         reasonForJoin: data.reasonForJoin,
                         subscribedAt: data.subscribedAt?.toDate().toDateString() || "",
+                        isCompleted: data.isCompleted
                     }
                 })
                 setExclusiveTourBookingData(items)
