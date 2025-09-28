@@ -17,11 +17,11 @@ interface SelectNumberprops {
 
 
 export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) {
-    const { setPopulationType,  setPopulationAmount, userData } = useAppContext()
+    const { setPopulationType, setPopulationAmount, userData, selectedTheme } = useAppContext()
     const [hidePrices, setHidePrices] = useState(false)
 
 
-
+// This function adds the details of the chosen
     const chooseTheme = (item: CrewAmountItem) => {
         setShowSelectModal(false)
         setPopulationType(item.label)
@@ -62,18 +62,21 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
                     <div className={`w-full h-full  grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 ${hidePrices ? "hidden lg:grid " : "grid"} `} >
                         {crewAmountData.map((item, index) => {
 
-
-
-
                             return (
 
-                                <Link key={index} href={"/exclusive-tour-form"} className="md:w-fit w-full " >
+                                <Link key={index} href={"/exclusive-tour-form"} className=" w-full " >
                                     <button onClick={() => chooseTheme(item)}
                                         className="w-full h-full py-3 px-2 bg-[#ffffff]  text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all transform duration-150 ease-in-out font-lato  " >
                                         <Users color="#EF8F57" />
                                         <span className="font-semibold text-base " >            {item.label}</span>
-                                        <span>   Per Tour Fee:           <span className="text-[#EF8F57] ml-1 " >{item.perTourFee(userData?.country ?? "").toLocaleString("en")} {userData?.country === "Nigeria" ? "NGN" : "USD"} </span></span>
-                                        <span>   Monthly Fee: <span className=" text-[#EF8F57]  ml-1" >{item.monthlySub(userData?.country ?? "").toLocaleString("enf")} {userData?.country === "Nigeria" ? "NGN" : "USD"}</span>  </span>
+                                        {
+                                            selectedTheme === "Custom Tour" ?
+                                                (null) :
+                                                <>
+                                                    <span>   Per Tour Fee:           <span className="text-[#EF8F57] ml-1 " >{item.perTourFee(userData?.country ?? "").toLocaleString("en")} {userData?.country === "Nigeria" ? "NGN" : "USD"} </span></span>
+                                                    <span>   Monthly Fee: <span className=" text-[#EF8F57]  ml-1" >{item.monthlySub(userData?.country ?? "").toLocaleString("enf")} {userData?.country === "Nigeria" ? "NGN" : "USD"}</span>  </span>
+                                                </>
+                                        }
                                     </button>
                                 </Link>
                             )
