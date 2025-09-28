@@ -25,7 +25,7 @@ import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
 
 
 export default function Page() {
-  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
+  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData, price } = useAppContext()
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
@@ -100,9 +100,16 @@ export default function Page() {
   }
 
 
+
+  // This function checks if the selectedTheme is not custom themesData, then display modal for PaymentModal, else just submit
   const handleFormSubmit = (data: exclusiveBookingDataType) => {
     setPendingFormData(data)
-    setShowPaymentModal(true)
+    if (selectedTheme !== "Custom Tour") {
+      setShowPaymentModal(true)
+    }
+    else {
+      completeBooking("--")
+    }
   }
 
   // onSubmit signature to only accept data
@@ -243,12 +250,16 @@ export default function Page() {
               <p className="font-medium text-base md:text-lg font-lato">Experience Something New Every Moment</p>
             </div>
 
+
+            {/* The booking form  */}
             <form
               onSubmit={handleSubmit(handleFormSubmit)}
               className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato"
             >
               <div className="w-full flex flex-col gap-1 items-start py-3 px-4">
                 <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme: {selectedTheme}</h2>
+                <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme Tour Population: {populationAmount}</h2>
+                <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme Price: {price}</h2>
               </div>
               <div className="w-full flex flex-col items-start gap-7">
                 {fields.map((field, index) => (
@@ -507,9 +518,13 @@ export default function Page() {
                         <span className="w-2 h-2 bg-[#ffffff] rounded-full animate-bounce"></span>
                       </span>
                     </>
-                  ) : (
-                    "Proceed to Payment"
-                  )
+                  ) :
+                    selectedTheme === "Custom Tour" ?
+                      "Submit"
+                      :
+                      (
+                        "Proceed to Payment"
+                      )
                 }
                 type="submit"
                 ariaLabel="Proceed to Payment"
