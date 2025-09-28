@@ -25,7 +25,7 @@ import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
 
 
 export default function Page() {
-  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData, price } = useAppContext()
+  const { participantsCount, setParticipantsCount, populationAmount, selectedTheme, userData } = useAppContext()
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
@@ -257,9 +257,7 @@ export default function Page() {
               className="w-full max-w-5xl py-3.5 lg:py-7 px-1 md:px-5 rounded-[20px] flex flex-col items-center gap-7 font-lato"
             >
               <div className="w-full flex flex-col gap-1 items-start py-3 px-4">
-                <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme: {selectedTheme}</h2>
-                <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme Tour Population: {populationAmount}</h2>
-                <h2 className="mr-auto text-[#EF8F57] font-semibold text-lg">Selected Theme Price: {price}</h2>
+                <h2 className="mr-auto text-[#EF8F57] font-semibold text-xl">Selected Theme: {selectedTheme}</h2>
               </div>
               <div className="w-full flex flex-col items-start gap-7">
                 {fields.map((field, index) => (
