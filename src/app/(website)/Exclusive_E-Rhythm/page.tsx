@@ -6,6 +6,7 @@ import ThemesSection from "@/components/ThemesSection"
 import { whatYouGetData } from "@/data/data"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import toast from "react-hot-toast"
 
 
 
@@ -61,6 +62,7 @@ export default function Page() {
                             label="Request a Demo"
                             ariaLabel="Request a Demo"
                             type="button"
+                            onClick={() => toast("Coming Soon")}
                         />
                     </div>
                 </div>
