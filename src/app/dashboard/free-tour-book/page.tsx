@@ -43,15 +43,16 @@ export default function Page() {
   }, [])
 
   return (
-    <div className="w-full h-fit py-8 px-6">
+    <div className="w-full h-fit py-8 px-6 flex flex-col gap-10 items-center   ">
+                  <h2 className="text-[#EF8F57] hover:text-[#EF8F57]/80  font-semibold text-3xl font-lato tracking-wide  " >Feedbacks</h2>
       {freeTourBookingData && freeTourBookingData.length > 0 ? (
-        <table className="min-w-full border border-gray-200 rounded-lg shadow-sm">
+        <table className="min-w-full border border-gray-200 rounded-lg shadow-sm ">
           <thead className="bg-gray-100">
             <tr>
               {Object.keys(freeTourBookingData[0]).map((key) => (
                 <th
                   key={key}
-                  className="px-4 py-2 text-left text-sm font-semibold text-gray-700 border-b"
+                  className="px-4 py-2 text-left text-sm font-semibold text-gray-700 border-b "
                 >
                   {key.charAt(0).toUpperCase() + key.slice(1)}
                 </th>
