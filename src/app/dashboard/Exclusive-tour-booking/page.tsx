@@ -53,7 +53,8 @@ export default function Page() {
     }, [])
 
     return (
-        <div className="w-full h-fit py-8 px-6">
+        <div className="w-full h-fit py-8 px-6 flex flex-col items-center gap-10 ">
+            <h2 className="text-[#EF8F57] hover:text-[#EF8F57]/80  font-semibold text-3xl font-lato tracking-wide  " >Exclusive Tour bookings</h2>
             {exclusiveTourBookingData && exclusiveTourBookingData.length > 0 ? (
                 <table className="min-w-full border border-gray-200 rounded-lg shadow-sm">
                     <thead className="bg-gray-100">

@@ -509,7 +509,7 @@ export const sideNavLinks = [
     },
     {
         label: "Feedbacks",
-        route: "/Feedbacks",
+        route: "/dashboard/Feedbacks",
         icons: <PenSquare size={18} />,
     },
     {
