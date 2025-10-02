@@ -150,7 +150,7 @@ export default function Page() {
           name: formData.tourists[0]?.fullName,
           email: formData.tourists[0]?.email,
           service: "Exclusive E-Rhythm",
-          date: "21st august 2021",
+          date: "11th October 2025",
           tour_link: "www.unn.edu.ng"
         })
       }
