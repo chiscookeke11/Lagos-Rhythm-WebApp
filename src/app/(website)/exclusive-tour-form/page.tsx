@@ -151,7 +151,7 @@ export default function Page() {
           email: formData.tourists[0]?.email,
           service: "Exclusive E-Rhythm",
           date: "11th October 2025",
-          tour_link: "www.unn.edu.ng"
+          tour_link: "https://lagosrhythm.com/"
         })
       }
       catch (err) {

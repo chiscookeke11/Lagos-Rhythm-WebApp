@@ -68,7 +68,7 @@ export default function Page() {
 
     return (
         <div className="w-full h-fit py-8 px-6 flex flex-col gap-10 items-center   ">
-            <h2 className="text-[#EF8F57] hover:text-[#EF8F57]/80  font-semibold text-3xl font-lato tracking-wide  " >Free Tour bookings</h2>
+            <h2 className="text-[#EF8F57] hover:text-[#EF8F57]/80  font-semibold text-3xl font-lato tracking-wide  " >Feedback</h2>
 
             {
                 feedbackData && feedbackData.length < 1 ?
