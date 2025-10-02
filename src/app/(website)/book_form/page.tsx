@@ -196,7 +196,7 @@ export default function Page() {
                     name: userData.fullName,
                     email: userData.email,
                     service: "Free E-Rhythm",
-                    date: "21st August 2021",
+                    date: "11th October 2025",
                     tour_link: "www.unn.edu.ng"
                 });
             }
