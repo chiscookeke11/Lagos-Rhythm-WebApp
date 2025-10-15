@@ -196,7 +196,7 @@ export default function Page() {
                     name: userData.fullName,
                     email: userData.email,
                     service: "Free E-Rhythm",
-                    date: "11th October 2025",
+                    date: "25th October 2025",
                     tour_link: "https://lagosrhythm.com/"
                 });
             }
