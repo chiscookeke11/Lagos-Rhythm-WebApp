@@ -2,7 +2,6 @@
 
 import { fireDB } from "@/app/config/firebaseClient";
 import Loader from "@/components/common/Loader";
-import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute";
 import AnimatedBg from "@/components/ui/AnimatedBg";
 import { useUser } from "@clerk/nextjs";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -66,7 +65,7 @@ const YouTubeEmbed = () => {
     }
 
     checkAccess()
-  }, [user, tourId])
+  }, [user, tourId, tourDate, userEmail])
 
 
 
