@@ -1,6 +1,6 @@
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react"
 import Link from "next/link"
-import { BsTiktok } from "react-icons/bs"
+import { BsTiktok, BsTwitterX } from "react-icons/bs"
 import { FaWhatsapp } from "react-icons/fa"
 
 
@@ -128,6 +128,12 @@ export default function Footer() {
                         <li>
                             <a href="https://www.linkedin.com/company/lagos-rhythm/" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
                                 <Linkedin size={20} />
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://x.com/LagosRhythm" target="_blank" rel="noopener noreferrer" className="text-sm text-[#ffffff] hover:text-gray-400 transition-colors duration-150 ease-in-out ">
+                                <BsTwitterX size={20} />
                             </a>
                         </li>
 
