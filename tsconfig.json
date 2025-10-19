@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ui/AnimatedBg.js", "src/app/(website)/blogs/[id]"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ui/AnimatedBg.js", "src/app/(website)/blogs/[id]", "src/components/flights/FlightTypeTab.js"],
   "exclude": ["node_modules"]
 }

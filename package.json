@@ -33,6 +33,7 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
+    "dockerode": "^4.0.9",
     "emailjs-com": "^3.2.0",
     "firebase": "^11.10.0",
     "firebase-admin": "^13.4.0",
