@@ -9,9 +9,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "../ui/button"
-import { useUser } from "@clerk/nextjs"
+import { useAuth, useUser } from "@clerk/nextjs"
 import Link from "next/link"
-import { useAuth } from "@clerk/clerk-react"
 import Loader from "./Loader"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"

@@ -3,7 +3,7 @@
 import { motion, spring } from "framer-motion";
 import React, { ReactNode, SetStateAction, useRef, useState } from "react"
 
-interface CursorProps{
+interface CursorProps {
     position: PositionProps
 }
 
@@ -20,14 +20,20 @@ interface CursorProps {
 }
 
 
-interface TabProps {
+interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     setPosition: React.Dispatch<SetStateAction<PositionProps>>
 }
 
 
-const Tab = ({ children, setPosition }: TabProps) => {
-    const ref = useRef < HTMLButtonElement > (null)
+interface FlightTypeTabProps {
+    flightType: string
+    setFlightType: React.Dispatch<SetStateAction<"One-Way" | "Round-Trip">>
+}
+
+
+const Tab = ({ children, setPosition, ...rest }: TabProps) => {
+    const ref = useRef<HTMLButtonElement>(null)
 
     return (
         <button
@@ -42,7 +48,7 @@ const Tab = ({ children, setPosition }: TabProps) => {
                     left: ref.current.offsetLeft,
                 })
             }}
-
+            {...rest}
             className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
         >{children} </button>
     )
@@ -66,18 +72,17 @@ const Cursor = ({ position }: CursorProps) => {
 
 
 
-export default function FlightTypeTab() {
+export default function FlightTypeTab({ flightType, setFlightType }: FlightTypeTabProps) {
     const [position, setPosition] = useState<PositionProps>({
         left: 0,
         width: 0,
         opacity: 0
     })
     return (
-        <div className="relative w-full max-w-3xl flex items-center justify-between gap-10 py-5 px-7 shadow-inner bg-white rounded-[120px] shadow-inner " >
+        <div className="relative w-full max-w-3xl flex items-center justify-between gap-10 py-5 px-7 bg-white rounded-[120px] shadow-inner " >
 
-            <Tab setPosition={setPosition} >One-way</Tab>
-            <Tab setPosition={setPosition} >Round Trip</Tab>
-            <Tab setPosition={setPosition} >Multi-city</Tab>
+            <Tab setPosition={setPosition} onClick={() => setFlightType("One-Way")} >One-Way</Tab>
+            <Tab setPosition={setPosition} onClick={() => setFlightType("Round-Trip")}>Round-Trip</Tab>
 
             <Cursor position={position} />
         </div>
