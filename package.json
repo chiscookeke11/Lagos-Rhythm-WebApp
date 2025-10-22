@@ -60,6 +60,7 @@
     "react-tsparticles": "^2.12.2",
     "react-youtube": "^10.1.0",
     "swiper": "^11.2.10",
+    "swr": "^2.3.6",
     "tailwind-merge": "^3.3.1",
     "three": "^0.178.0",
     "tsparticles": "^3.8.1",

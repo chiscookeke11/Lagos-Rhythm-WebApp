@@ -2,7 +2,6 @@
 
 import { fireDB } from "@/app/config/firebaseClient";
 import Loader from "@/components/common/Loader";
-import AnimatedBg from "@/components/ui/AnimatedBg";
 import { useUser } from "@clerk/nextjs";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -11,13 +10,10 @@ import YouTube from "react-youtube";
 const YouTubeEmbed = () => {
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress;
-
   const [accessAllowed, setAccessAllowed] = useState<boolean | null>(null);
   const [fetching, setFetching] = useState(true);
   const [tourId, setTourId] = useState<string | null>(null);
-
-
-
+  const [emails, setEmails] = useState<string[] | null>(null)
 
   const sizes = {
     sm: { w: 350, h: 300 },
@@ -32,7 +28,7 @@ const YouTubeEmbed = () => {
     playerVars: { autoplay: 0 },
   });
 
-  // 🟢 Step 1: Fetch current tour ID
+  // 🟢 Step 1: Fetch current tour ID from the livestream details table
   useEffect(() => {
     const fetchTourId = async () => {
       try {
@@ -54,11 +50,36 @@ const YouTubeEmbed = () => {
     fetchTourId();
   }, []);
 
-  // 🟢 Step 2: Check access using CURRENT TIME (for testing)
+
+  // Step 2: check if the user email is among the emails that booked for a tour
+  // Firstly fetch all tours
+  useEffect(() => {
+    const getEmails = async () => {
+
+      const q = query(
+        collection(fireDB, "booked_Free_Rhythm"),
+        where("agree_to_TC", "==", true)
+      );
+
+      const querySnapshot = await getDocs(q)
+      const emails = querySnapshot.docs.map((doc) => doc.data().email);
+
+      setEmails(emails)
+    }
+
+    getEmails()
+
+  }, [])
+
+
+
+
+
+  // 🟢 Step 3: Check access using CURRENT TIME (for testing)
   useEffect(() => {
     const checkAccess = async () => {
       if (!user) {
-        setAccessAllowed(false);
+        // setAccessAllowed(false);
         return;
       }
 
@@ -95,7 +116,7 @@ const YouTubeEmbed = () => {
     checkAccess();
   }, [user, userEmail, tourId]);
 
-  // 🟢 Step 3: Handle UI states
+  // 🟢 Step 4: Handle UI states
   if (fetching || accessAllowed === null) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair flex-col gap-3">
@@ -105,20 +126,42 @@ const YouTubeEmbed = () => {
     );
   }
 
-  if (!accessAllowed) {
+  if (!user) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
         <p className="font-medium text-2xl text-center">
-          You can only access this during the booked time.
+          Please sign in to access this feature
         </p>
       </div>
     );
   }
 
+  if (userEmail && emails && !emails?.includes(userEmail)) {
+    return (
+      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+        <p className="font-medium text-2xl text-center">
+          Sorry you didn't book for this tour
+        </p>
+      </div>
+    )
+  }
+
+  if (userEmail === "chisoc") {
+    return (
+      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+        <p className="font-medium text-2xl text-center">
+          You do not have access to this
+        </p>
+      </div>
+    )
+  }
+
   // 🟢 Step 4: Show the livestream player
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-[#05073C] relative">
-      <div className="z-10 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
+    <div className="flex justify-center items-center h-screen w-full bg-[#05073C] relative bg-no-repeat bg-center bg-cover " style={{ backgroundImage: "url('/live/Live-bg.png')" }} >
+      <div className="w-full h-screen absolute inset-0 bg-black/40 z-20 " />
+
+      <div className="z-40 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
         <div className="block md:hidden">
           <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.sm.w, sizes.sm.h)} />
         </div>
@@ -132,7 +175,6 @@ const YouTubeEmbed = () => {
           <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.xl.w, sizes.xl.h)} />
         </div>
       </div>
-      <AnimatedBg />
     </div>
   );
 };
