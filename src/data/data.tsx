@@ -548,15 +548,15 @@ export const sideNavLinks = [
 ]
 
 
-export const timeOptions = [
-    { label: "9:00 AM WAT", value: "21:00" },
-    { label: "10:00 AM WAT", value: "10:00" },
-    { label: "11:00 AM WAT", value: "11:00" },
-    { label: "12:00 PM WAT", value: "12:00" },
-    { label: "1:00 PM WAT", value: "13:00" },
-    { label: "2:00 PM WAT", value: "14:00" },
-    { label: "3:00 PM WAT", value: "15:00" },
-];
+// export const timeOptions = [
+//     { label: "9:00 AM WAT", value: "21:00" },
+//     { label: "10:00 AM WAT", value: "10:00" },
+//     { label: "11:00 AM WAT", value: "11:00" },
+//     { label: "12:00 PM WAT", value: "12:00" },
+//     { label: "1:00 PM WAT", value: "13:00" },
+//     { label: "2:00 PM WAT", value: "14:00" },
+//     { label: "3:00 PM WAT", value: "15:00" },
+// ];
 
 
 export const metadataKeywords = [
