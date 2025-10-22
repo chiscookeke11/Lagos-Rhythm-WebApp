@@ -14,7 +14,7 @@ import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } 
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
-import { addDoc, collection, getDocs, query, QuerySnapshot, where } from "firebase/firestore"
+import { addDoc, collection, getDocs, query } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
