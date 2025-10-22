@@ -10,11 +10,11 @@ import { CustomCheckBox } from "@/components/common/CustomCheckbox"
 import { CustomSelect } from "@/components/common/CustomSelect"
 import Input from "@/components/common/Input"
 import Button from "@/components/common/Button"
-import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData, timeOptions } from "@/data/data"
+import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData } from "@/data/data"
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, getDocs, query, QuerySnapshot, where } from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
@@ -22,6 +22,7 @@ import PaymentModal from "@/components/payments/PaymentModal"
 import TimeConverter from "@/components/TimeConverter"
 import CountryProtectedRoute from "@/components/ProtectedRoutes/CountryProtectedRoute"
 import CryptoPaymentModal from "@/components/payments/CryptoPaymentModal"
+import { customSelectTypes } from "@/Types/CustomSelectTypes"
 
 
 export default function Page() {
@@ -37,6 +38,7 @@ export default function Page() {
   const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
   const [subscriptionType, setSubscriptionType] = useState("")
+  const [timeOptions, setTimeOptions] = useState<customSelectTypes[] | null>(null)
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
   }, [selectedDates]);
@@ -212,6 +214,27 @@ export default function Page() {
       shouldDirty: true,
     });
   };
+
+
+  // function to fetch time all the time options of exclusive tour
+  useEffect(() => {
+
+    const fetchTime = async () => {
+      const q = query(
+        collection(fireDB, "tour"),
+        where("tourType", "==", "Free_Tour"),
+        where("isCompleted", "==", true)
+      );
+
+      const querySnapshot = await getDocs(q)
+      const time = querySnapshot.docs.map((doc) => doc.data().time)
+
+      setTimeOptions(time)
+      console.log("The time in the db:", time)
+    }
+
+    fetchTime()
+  }, [])
 
 
 
@@ -455,7 +478,7 @@ export default function Page() {
                     onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
                     placeholder="Please select an option"
                     label="Time"
-                    options={timeOptions}
+                    options={timeOptions ?? [{label:"No time available for this tour", value: "No time available for this tour"}]}
                     value={field.value}
                     error={errors.time?.message}
                   />
