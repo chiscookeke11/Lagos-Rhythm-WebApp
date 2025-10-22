@@ -140,7 +140,7 @@ const YouTubeEmbed = () => {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
         <p className="font-medium text-2xl text-center">
-          Sorry you didn't book for this tour
+          Sorry you didn&apos;t book for this tour
         </p>
       </div>
     )
