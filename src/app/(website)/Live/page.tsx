@@ -14,6 +14,7 @@ const YouTubeEmbed = () => {
   const [fetching, setFetching] = useState(true);
   const [tourId, setTourId] = useState<string | null>(null);
   const [emails, setEmails] = useState<string[] | null>(null)
+  const [tourTime, setTourTime] = useState<Date | null>(null)
 
   const sizes = {
     sm: { w: 350, h: 300 },
@@ -71,22 +72,61 @@ const YouTubeEmbed = () => {
 
   }, [])
 
+useEffect(() => {
+  const getTourTime = async () => {
+    const q = query(
+      collection(fireDB, "tour"),
+      where("tourType", "==", "Free_Tour"),
+      where("isCompleted", "==", true),
+    );
 
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const firstDoc = querySnapshot.docs[0];
+      const data = firstDoc.data();
+      const timeField = data.time;
+
+      let jsDate: Date | null = null;
+
+      if (timeField?.value?.toDate) {
+        // ✅ Properly convert Firestore Timestamp nested inside "value"
+        jsDate = timeField.value.toDate();
+      } else if (timeField?.value && typeof timeField.value === "string") {
+        // Fallback: handle string
+        jsDate = new Date(timeField.value);
+      }
+
+      if (jsDate && !isNaN(jsDate.getTime())) {
+        setTourTime(jsDate);
+        console.log("✅ Parsed tour time:", jsDate);
+      } else {
+        console.error("❌ Invalid time format:", timeField);
+      }
+    }
+  };
+
+  getTourTime();
+}, []);
 
 
 
   // 🟢 Step 3: Check access using CURRENT TIME (for testing)
   useEffect(() => {
+    // firstly fetch tour time
+
+
     const checkAccess = async () => {
       if (!user) {
-        // setAccessAllowed(false);
+        setAccessAllowed(false);
         return;
       }
 
+
+
       // Simulate time window: allow access for 1.5 hours centered around now
       const now = new Date();
-      const startTime = new Date(now.getTime() - 30 * 60 * 1000); // 30 mins before
-      const endTime = new Date(now.getTime() + 60 * 60 * 1000);   // 1 hour after
+      const startTime = tourTime ? new Date(tourTime?.getTime() - 30 * 60 * 1000) : ""; // 30 mins before
+      const endTime = tourTime ? new Date(tourTime?.getTime() + 30 * 60 * 1000) : "";   // 1 hour after
 
       try {
         const q = query(
@@ -105,14 +145,13 @@ const YouTubeEmbed = () => {
 
         // Always allow access during test window
         const allowed = now >= startTime && now <= endTime;
-        console.log({ now, startTime, endTime, allowed });
         setAccessAllowed(allowed);
+        console.log(allowed)
       } catch (err) {
         console.error("Access check failed:", err);
         setAccessAllowed(false);
       }
     };
-
     checkAccess();
   }, [user, userEmail, tourId]);
 
@@ -146,7 +185,7 @@ const YouTubeEmbed = () => {
     )
   }
 
-  if (userEmail === "chisoc") {
+  if (!accessAllowed) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
         <p className="font-medium text-2xl text-center">
