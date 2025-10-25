@@ -39,7 +39,7 @@ const footerLinks = [
 const supportOptions = [
     {
         label: "Live chat",
-        path: "/Live",
+        path: "#",
     },
     {
         label: "FAQ",
