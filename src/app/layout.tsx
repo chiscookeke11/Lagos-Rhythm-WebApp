@@ -102,8 +102,8 @@ export const metadata: Metadata = {
     title: "Lagos Rhythm",
     description:
       "Tourism Technology",
-    site: "@Rhythmfmlagos",
-    creator: "@Rhythmfmlagos",
+    site: "@LagosRhythm",
+    creator: "@LagosRhythm",
     images: ["./favicon.ico"],
   },
   metadataBase: new URL("https://www.lagosrhythm.com"),

@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
+import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Radio, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
@@ -539,19 +539,24 @@ export const sideNavLinks = [
         route: "",
         icons: <UsersRound size={18} />,
     },
+       {
+        label: "Create Live stream",
+        route: "/dashboard/Live-Stream-settings",
+        icons: <Radio />,
+    },
 
 ]
 
 
-export const timeOptions = [
-    { label: "9:00 AM WAT", value: "21:00" },
-    { label: "10:00 AM WAT", value: "10:00" },
-    { label: "11:00 AM WAT", value: "11:00" },
-    { label: "12:00 PM WAT", value: "12:00" },
-    { label: "1:00 PM WAT", value: "13:00" },
-    { label: "2:00 PM WAT", value: "14:00" },
-    { label: "3:00 PM WAT", value: "15:00" },
-];
+// export const timeOptions = [
+//     { label: "9:00 AM WAT", value: "21:00" },
+//     { label: "10:00 AM WAT", value: "10:00" },
+//     { label: "11:00 AM WAT", value: "11:00" },
+//     { label: "12:00 PM WAT", value: "12:00" },
+//     { label: "1:00 PM WAT", value: "13:00" },
+//     { label: "2:00 PM WAT", value: "14:00" },
+//     { label: "3:00 PM WAT", value: "15:00" },
+// ];
 
 
 export const metadataKeywords = [
