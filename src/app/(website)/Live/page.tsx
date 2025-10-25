@@ -96,7 +96,7 @@ const YouTubeEmbed = () => {
       // Simulate time window: allow access for 1.5 hours centered around now
       const now = new Date();
       const startTime = tourTime ? new Date(tourTime?.getTime() - 30 * 60 * 1000) : ""; // 30 mins before
-      const endTime = tourTime ? new Date(tourTime?.getTime() + 30 * 60 * 1000) : "";   // 1 hour after
+      const endTime = tourTime ? new Date(tourTime?.getTime() + 2 * 60 * 60 * 1000) : "";   // 2 hour after
 
       try {
         // Always allow access during test window
