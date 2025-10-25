@@ -2,18 +2,14 @@
 
 import { fireDB } from "@/app/config/firebaseClient";
 import Loader from "@/components/common/Loader";
-import { useUser } from "@clerk/nextjs";
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
 const YouTubeEmbed = () => {
-  const { user } = useUser();
-  const userEmail = user?.primaryEmailAddress?.emailAddress;
   const [accessAllowed, setAccessAllowed] = useState<boolean | null>(null);
   const [fetching, setFetching] = useState(true);
   const [tourId, setTourId] = useState<string | null>(null);
-  const [emails, setEmails] = useState<string[] | null>(null)
   const [tourTime, setTourTime] = useState<Date | null>(null)
 
   const sizes = {
@@ -52,61 +48,42 @@ const YouTubeEmbed = () => {
   }, []);
 
 
-  // Step 2: check if the user email is among the emails that booked for a tour
-  // Firstly fetch all tours
-  useEffect(() => {
-    const getEmails = async () => {
 
+  useEffect(() => {
+    const getTourTime = async () => {
       const q = query(
-        collection(fireDB, "booked_Free_Rhythm"),
-        where("agree_to_TC", "==", true)
+        collection(fireDB, "tour"),
+        where("tourType", "==", "Free_Tour"),
+        where("isCompleted", "==", true),
       );
 
-      const querySnapshot = await getDocs(q)
-      const emails = querySnapshot.docs.map((doc) => doc.data().email);
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const firstDoc = querySnapshot.docs[0];
+        const data = firstDoc.data();
+        const timeField = data.time;
 
-      setEmails(emails)
-    }
+        let jsDate: Date | null = null;
 
-    getEmails()
+        if (timeField?.value?.toDate) {
+          //  Properly convert Firestore Timestamp nested inside "value"
+          jsDate = timeField.value.toDate();
+        } else if (timeField?.value && typeof timeField.value === "string") {
+          // Fallback: handle string
+          jsDate = new Date(timeField.value);
+        }
 
-  }, [])
-
-useEffect(() => {
-  const getTourTime = async () => {
-    const q = query(
-      collection(fireDB, "tour"),
-      where("tourType", "==", "Free_Tour"),
-      where("isCompleted", "==", true),
-    );
-
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      const firstDoc = querySnapshot.docs[0];
-      const data = firstDoc.data();
-      const timeField = data.time;
-
-      let jsDate: Date | null = null;
-
-      if (timeField?.value?.toDate) {
-        // ✅ Properly convert Firestore Timestamp nested inside "value"
-        jsDate = timeField.value.toDate();
-      } else if (timeField?.value && typeof timeField.value === "string") {
-        // Fallback: handle string
-        jsDate = new Date(timeField.value);
+        if (jsDate && !isNaN(jsDate.getTime())) {
+          setTourTime(jsDate);
+          console.log("Parsed tour time:", jsDate);
+        } else {
+          console.error(" Invalid time format:", timeField);
+        }
       }
+    };
 
-      if (jsDate && !isNaN(jsDate.getTime())) {
-        setTourTime(jsDate);
-        console.log("✅ Parsed tour time:", jsDate);
-      } else {
-        console.error("❌ Invalid time format:", timeField);
-      }
-    }
-  };
-
-  getTourTime();
-}, []);
+    getTourTime();
+  }, []);
 
 
 
@@ -114,14 +91,7 @@ useEffect(() => {
   useEffect(() => {
     // firstly fetch tour time
 
-
     const checkAccess = async () => {
-      if (!user) {
-        setAccessAllowed(false);
-        return;
-      }
-
-
 
       // Simulate time window: allow access for 1.5 hours centered around now
       const now = new Date();
@@ -129,20 +99,6 @@ useEffect(() => {
       const endTime = tourTime ? new Date(tourTime?.getTime() + 30 * 60 * 1000) : "";   // 1 hour after
 
       try {
-        const q = query(
-          collection(fireDB, "booked_Free_Rhythm"),
-          where("email", "==", userEmail)
-          // Uncomment when ready to use real tour ID:
-          // where("tourId", "==", tourId)
-        );
-
-        const snapshot = await getDocs(q);
-        if (snapshot.empty) {
-          console.warn("No booking found for:", userEmail);
-          setAccessAllowed(false);
-          return;
-        }
-
         // Always allow access during test window
         const allowed = now >= startTime && now <= endTime;
         setAccessAllowed(allowed);
@@ -153,7 +109,7 @@ useEffect(() => {
       }
     };
     checkAccess();
-  }, [user, userEmail, tourId]);
+  }, [tourId]);
 
   // 🟢 Step 4: Handle UI states
   if (fetching || accessAllowed === null) {
@@ -165,31 +121,13 @@ useEffect(() => {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">
-          Please sign in to access this feature
-        </p>
-      </div>
-    );
-  }
 
-  if (userEmail && emails && !emails?.includes(userEmail)) {
-    return (
-      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">
-          Sorry you didn&apos;t book for this tour
-        </p>
-      </div>
-    )
-  }
 
   if (!accessAllowed) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
         <p className="font-medium text-2xl text-center">
-          You do not have access to this
+          The tour hasn’t started yet.
         </p>
       </div>
     )
