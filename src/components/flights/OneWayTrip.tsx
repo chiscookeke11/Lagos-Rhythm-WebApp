@@ -51,7 +51,7 @@ export default function OneWayTripComponent() {
                             // options={countryOptions}
                             placeholder="Please select an option"
                             value={flightDetails.depatureAirport}
-                            
+
                         />
 
                     </label>

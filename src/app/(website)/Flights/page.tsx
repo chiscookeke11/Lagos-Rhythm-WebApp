@@ -29,7 +29,7 @@ export default function Page() {
 
 
 
-            <p className="text-white" >{flightType}</p>
+
 
 
         </div>
