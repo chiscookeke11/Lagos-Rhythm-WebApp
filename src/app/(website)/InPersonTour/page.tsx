@@ -74,11 +74,21 @@ export default function Page() {
 
 
                     {themeJourneys.map((data, index) => (
-                        <div key={index} className=" bg-[#05073C] relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-28 " >
+                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-36 ">
 
-                           <div className="w-full absolute bottom-1 right-1 bg-white h-full hover:bottom-3 hover:right-3 transition-all duration-300  " >
+                            <div className=" bg-[#05073C] h-full w-full absolute top-0 left-0  shadow-2xl " style={{
+                                clipPath:
+                                    "polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% 100%, calc(100% - 12px) 100%, 12px 100%, 0 100%, 0 0)",
+                            }} />
 
-                           </div>
+                            <div className="w-full absolute bottom-1 right-1 bg-white h-full hover:bottom-3 hover:right-3 transition-all duration-300 flex flex-col items-start gap-2 text-[#05073C] cursor-pointer py-5 px-4 " style={{
+                                clipPath:
+                                    "polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% 100%, calc(100% - 12px) 100%, 12px 100%, 0 100%, 0 0)",
+                            }} >
+                                <h3 className="font-merienda font-semibold text-xl " > {data.title} </h3>
+                                <p className="font-lato font-normal text-base " > {data.description} </p>
+
+                            </div>
 
                         </div>
                     ))}
