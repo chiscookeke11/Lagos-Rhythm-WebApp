@@ -539,7 +539,7 @@ export const sideNavLinks = [
         route: "",
         icons: <UsersRound size={18} />,
     },
-       {
+    {
         label: "Create Live stream",
         route: "/dashboard/Live-Stream-settings",
         icons: <Radio />,
@@ -609,4 +609,61 @@ export const metadataKeywords = [
     "Nigerian Tourism",
     "Tourism technology"
 ];
+
+
+export const inpersonExperience = [
+    {
+        title: "Personal Journeykeeper",
+        description: "Assigned before arrival, your dedicated guide ensures comfort, coordination, and a seamless experience from start to finish."
+    },
+    {
+        title: "Themed Journeys",
+        description: "Each tour tells a living story of culture, history, and the people who make Lagos unforgettable."
+    },
+    {
+        title: "Maximum Living",
+        description: "From arrival to departure, we curate moments of taste, music, and connection that bring Lagos to life."
+    },
+    {
+        title: "Tour Safety and Wellbeing Cover",
+        description: "Your safety and health are fully supported with secure logistics, medical access, and on-tour coordination."
+    },
+    {
+        title: "Rhythm Flex",
+        description: "Short or long stay, solo or group, flexible options let you experience Lagos at your own pace."
+    }
+];
+
+
+export const themeJourneys = [
+    {
+        title: "Another Day, Another Lagos",
+        description: "Every sunrise reveals a new side of the city, from calm to thrill, from laughter to awe."
+    },
+    {
+        title: "Love or Lost?",
+        description: "Romance, reflection, or rediscovery, Lagos brings emotion to life in the most unexpected ways."
+    },
+    {
+        title: "Joy is Free",
+        description: "When Lagos celebrates, it never holds back. This is pure energy, laughter, and life without limits."
+    },
+    {
+        title: "Lagos After Dark",
+        description: "When the sun sets, the rhythm rises. Dive into the city’s nightlife, sounds, and stories that last till dawn."
+    },
+    {
+        title: "The Lagos Dream",
+        description: "Ambition meets culture in the city that never stops dreaming. See why the world keeps watching."
+    },
+    {
+        title: "Work & Vibe",
+        description: "Work by day, vibe by night. Lagos is where productivity meets inspiration, flavor, and fun."
+    },
+    {
+        title: "Your Perfect Lagos, Your Way",
+        description: "Create your own story. Pick your pace, passions, and path, and let Lagos unfold your rhythm."
+    }
+];
+
 
