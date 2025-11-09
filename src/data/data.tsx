@@ -560,152 +560,152 @@ export const sideNavLinks = [
 
 
 export const metadataKeywords = [
-  // General Keywords
-  "Lagos",
-  "Lagos Rhythm",
-  "Tour",
-  "Virtual",
-  "Culture",
-  "Nightlife",
-  "Food",
-  "Art",
-  "Nature",
-  "Vibe",
-  "Travel",
-  "Blog",
-  "Community",
-  "Experience",
-  "Escape",
-  "Tour Packages",
-  "Flavors",
-  "Tourism",
-  "Lagos Tourism",
-  "Nigeria",
-  "Nigerian Tourism",
-  "Tourism technology",
-  "Crypto payment tours",
-  "Community-driven travel",
-  "Travel support Lagos",
-  "Global easy payments",
-  "Built for the culture, proudly local, globally relevant.",
-  "Explore Lagos’s food, culture, and nightlife.",
-  "Discover Lagos’s art, food, nightlife, nature, and escapes.",
-  "Live the vibe, please the mind.",
-  "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
-  "Tailored group and corporate cultural experiences.",
-  "Free virtual tours of Lagos culture and landmarks.",
-  "Affordable themed packages for local and foreign travelers.",
-  "Experience Lagos in its natural form.",
-  "Join our community and step into Lagos’s rhythm.",
+    // General Keywords
+    "Lagos",
+    "Lagos Rhythm",
+    "Tour",
+    "Virtual",
+    "Culture",
+    "Nightlife",
+    "Food",
+    "Art",
+    "Nature",
+    "Vibe",
+    "Travel",
+    "Blog",
+    "Community",
+    "Experience",
+    "Escape",
+    "Tour Packages",
+    "Flavors",
+    "Tourism",
+    "Lagos Tourism",
+    "Nigeria",
+    "Nigerian Tourism",
+    "Tourism technology",
+    "Crypto payment tours",
+    "Community-driven travel",
+    "Travel support Lagos",
+    "Global easy payments",
+    "Built for the culture, proudly local, globally relevant.",
+    "Explore Lagos’s food, culture, and nightlife.",
+    "Discover Lagos’s art, food, nightlife, nature, and escapes.",
+    "Live the vibe, please the mind.",
+    "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
+    "Tailored group and corporate cultural experiences.",
+    "Free virtual tours of Lagos culture and landmarks.",
+    "Affordable themed packages for local and foreign travelers.",
+    "Experience Lagos in its natural form.",
+    "Join our community and step into Lagos’s rhythm.",
 
-  // Homepage SEO
-  "Lagos virtual tour",
-  "Nigerian culture online",
-  "Lagos tourism startup",
-  "Explore Lagos online",
-  "African virtual experiences",
-  "Best virtual tour of Lagos",
-  "Interactive African tours",
-  "Cultural tourism Nigeria",
-  "Lagos city tour live",
-  "Lagos Rhythm online",
+    // Homepage SEO
+    "Lagos virtual tour",
+    "Nigerian culture online",
+    "Lagos tourism startup",
+    "Explore Lagos online",
+    "African virtual experiences",
+    "Best virtual tour of Lagos",
+    "Interactive African tours",
+    "Cultural tourism Nigeria",
+    "Lagos city tour live",
+    "Lagos Rhythm online",
 
-  // About Page SEO
-  "About Lagos Rhythm",
-  "Tourism tech startup Africa",
-  "Lagos tourism innovation",
-  "Virtual tourism company Nigeria",
-  "African culture experience",
-  "Meet Lagos Rhythm team",
-  "How Lagos Rhythm works",
-  "Virtual travel startup Africa",
+    // About Page SEO
+    "About Lagos Rhythm",
+    "Tourism tech startup Africa",
+    "Lagos tourism innovation",
+    "Virtual tourism company Nigeria",
+    "African culture experience",
+    "Meet Lagos Rhythm team",
+    "How Lagos Rhythm works",
+    "Virtual travel startup Africa",
 
-  // Free E-Rhythm Page SEO
-  "Free virtual tour Lagos",
-  "Free African culture experience",
-  "Virtual Lagos city walk",
-  "Lagos Rhythm free experience",
-  "Free online tourism Nigeria",
-  "Virtual African heritage",
-  "Virtual education tour Lagos",
-  "Lagos online cultural tour",
+    // Free E-Rhythm Page SEO
+    "Free virtual tour Lagos",
+    "Free African culture experience",
+    "Virtual Lagos city walk",
+    "Lagos Rhythm free experience",
+    "Free online tourism Nigeria",
+    "Virtual African heritage",
+    "Virtual education tour Lagos",
+    "Lagos online cultural tour",
 
-  // Exclusive Page SEO
-  "Exclusive Lagos virtual tour",
-  "Premium African experience",
-  "Private virtual tour Lagos",
-  "Immersive Lagos city tour",
-  "Paid virtual tourism Nigeria",
-  "Corporate cultural experience Africa",
-  "Exclusive Lagos Rhythm experience",
+    // Exclusive Page SEO
+    "Exclusive Lagos virtual tour",
+    "Premium African experience",
+    "Private virtual tour Lagos",
+    "Immersive Lagos city tour",
+    "Paid virtual tourism Nigeria",
+    "Corporate cultural experience Africa",
+    "Exclusive Lagos Rhythm experience",
 
-  // In-person Page SEO
-  "In-person Lagos tour",
-  "Visit Lagos Nigeria",
-  "Guided Lagos city tour",
-  "Lagos tourism package",
-  "Heritage tour Lagos",
-  "Best places to visit in Lagos",
-  "Lagos travel experience",
-  "Book Lagos tour online",
+    // In-person Page SEO
+    "In-person Lagos tour",
+    "Visit Lagos Nigeria",
+    "Guided Lagos city tour",
+    "Lagos tourism package",
+    "Heritage tour Lagos",
+    "Best places to visit in Lagos",
+    "Lagos travel experience",
+    "Book Lagos tour online",
 
-  // Flights Page SEO
-  "Cheap flights from Lagos",
-  "Book flight Nigeria",
-  "Lagos travel booking",
-  "Affordable flights from Africa",
-  "Lagos Rhythm flights",
-  "Nigeria ticket booking online",
-  "African travel deals",
-  "Flight booking Lagos Nigeria",
-  "Book international flights from Africa",
-  "Cheap flights to Lagos Nigeria",
-  "Affordable flights from Lagos to London",
-  "Best African flight booking site",
-  "International flight deals from Nigeria",
-  "Flights from Ghana to Europe",
-  "Cheap flights from Kenya to Dubai",
-  "Africa to UK flights online booking",
-  "Lagos to Paris flights",
-  "Book return tickets Africa to USA",
-  "Book flights online Africa",
-  "International flight booking portal",
-  "Flights from West Africa to Europe",
-  "Cheap flights Africa to Canada",
-  "Compare international airfares online",
-  "Book multi-city flights from Africa",
-  "Lagos Rhythm flight booking",
-  "African travel agency for flights",
-  "Book flights via Duffel API",
-  "Global flight deals from Africa",
-  "Flights from Accra to Lagos",
-  "Nairobi to London flights",
-  "Johannesburg to Lagos flight deals",
-  "Flights from Abuja to Toronto",
-  "Dakar to Paris flights",
-  "Flights from Lagos to Amsterdam",
-  "Cheap flights from Africa to Asia",
-  "Book Dubai to Lagos flights",
+    // Flights Page SEO
+    "Cheap flights from Lagos",
+    "Book flight Nigeria",
+    "Lagos travel booking",
+    "Affordable flights from Africa",
+    "Lagos Rhythm flights",
+    "Nigeria ticket booking online",
+    "African travel deals",
+    "Flight booking Lagos Nigeria",
+    "Book international flights from Africa",
+    "Cheap flights to Lagos Nigeria",
+    "Affordable flights from Lagos to London",
+    "Best African flight booking site",
+    "International flight deals from Nigeria",
+    "Flights from Ghana to Europe",
+    "Cheap flights from Kenya to Dubai",
+    "Africa to UK flights online booking",
+    "Lagos to Paris flights",
+    "Book return tickets Africa to USA",
+    "Book flights online Africa",
+    "International flight booking portal",
+    "Flights from West Africa to Europe",
+    "Cheap flights Africa to Canada",
+    "Compare international airfares online",
+    "Book multi-city flights from Africa",
+    "Lagos Rhythm flight booking",
+    "African travel agency for flights",
+    "Book flights via Duffel API",
+    "Global flight deals from Africa",
+    "Flights from Accra to Lagos",
+    "Nairobi to London flights",
+    "Johannesburg to Lagos flight deals",
+    "Flights from Abuja to Toronto",
+    "Dakar to Paris flights",
+    "Flights from Lagos to Amsterdam",
+    "Cheap flights from Africa to Asia",
+    "Book Dubai to Lagos flights",
 
-  // Store SEO
-  "Lagos Rhythm store",
-  "African travel merch",
-  "Nigerian culture souvenirs",
-  "Buy Lagos themed items",
-  "African travel accessories",
-  "Lagos Rhythm products",
-  "Virtual tour gift cards",
-  "Lagos cultural gifts",
+    // Store SEO
+    "Lagos Rhythm store",
+    "African travel merch",
+    "Nigerian culture souvenirs",
+    "Buy Lagos themed items",
+    "African travel accessories",
+    "Lagos Rhythm products",
+    "Virtual tour gift cards",
+    "Lagos cultural gifts",
 
-  // Blog SEO
-  "Lagos tourism blog",
-  "African travel stories",
-  "Nigerian culture articles",
-  "Lagos Rhythm blog",
-  "Virtual travel insights Africa",
-  "Explore Lagos online blog",
-  "African tourism innovation",
-  "Culture and travel in Lagos"
+    // Blog SEO
+    "Lagos tourism blog",
+    "African travel stories",
+    "Nigerian culture articles",
+    "Lagos Rhythm blog",
+    "Virtual travel insights Africa",
+    "Explore Lagos online blog",
+    "African tourism innovation",
+    "Culture and travel in Lagos"
 ];
 
 
@@ -713,23 +713,28 @@ export const metadataKeywords = [
 export const inpersonExperience = [
     {
         title: "Personal Journeykeeper",
-        description: "Assigned before arrival, your dedicated guide ensures comfort, coordination, and a seamless experience from start to finish."
+        description: "Assigned before arrival, your dedicated guide ensures comfort, coordination, and a seamless experience from start to finish.",
+        image: "/"
     },
     {
         title: "Themed Journeys",
-        description: "Each tour tells a living story of culture, history, and the people who make Lagos unforgettable."
+        description: "Each tour tells a living story of culture, history, and the people who make Lagos unforgettable.",
+        image: "/"
     },
     {
         title: "Maximum Living",
-        description: "From arrival to departure, we curate moments of taste, music, and connection that bring Lagos to life."
+        description: "From arrival to departure, we curate moments of taste, music, and connection that bring Lagos to life.",
+        image: "/"
     },
     {
         title: "Tour Safety and Wellbeing Cover",
-        description: "Your safety and health are fully supported with secure logistics, medical access, and on-tour coordination."
+        description: "Your safety and health are fully supported with secure logistics, medical access, and on-tour coordination.",
+        image: "/"
     },
     {
         title: "Rhythm Flex",
-        description: "Short or long stay, solo or group, flexible options let you experience Lagos at your own pace."
+        description: "Short or long stay, solo or group, flexible options let you experience Lagos at your own pace.",
+        image: "/"
     }
 ];
 
@@ -766,3 +771,41 @@ export const themeJourneys = [
 ];
 
 
+
+
+
+
+export const themePrices = [
+  {
+    id: 1,
+    title: "1 to 5: Single",
+    options: [
+      { duration: "3 days", price: "$800" },
+      { duration: "5 days", price: "$1200" },
+    ],
+  },
+  {
+    id: 2,
+    title: "1 to 5: Double",
+    options: [
+      { duration: "3 days", price: "$1000" },
+      { duration: "5 days", price: "$1500" },
+    ],
+  },
+  {
+    id: 3,
+    title: "6 (Work & Vibe): Single",
+    options: [
+      { duration: "2 weeks", price: "$3000" },
+      { duration: "1 month", price: "$5000" },
+    ],
+  },
+  {
+    id: 4,
+    title: "6 (Work & Vibe): Double",
+    options: [
+      { duration: "2 weeks", price: "$4000" },
+      { duration: "1 month", price: "$6000" },
+    ],
+  },
+];
