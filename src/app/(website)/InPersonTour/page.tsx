@@ -110,7 +110,7 @@ export default function Page() {
 
     const MotionButton = useMemo(() => motion(Button), [])
     const [showPreviewModal, setShowPreviewModal] = useState(false)
-    const { selectedInpersonTheme, setSelectedInpersonTheme } = useAppContext()
+    const { setSelectedInpersonTheme } = useAppContext()
 
     useEffect(() => {
 
