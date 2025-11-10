@@ -55,6 +55,10 @@ interface AppContextProps {
   inpersonTourPackage: string;
   setInpersonTourPackage: React.Dispatch<SetStateAction<string>>
 
+
+  selectedInpersonTheme: string;
+  setSelectedInpersonTheme: React.Dispatch<SetStateAction<string>>
+
 }
 
 
@@ -103,6 +107,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     getFromLocalStorage("inpersonPackage", "")
   )
 
+  const [selectedInpersonTheme, setSelectedInpersonTheme] = useState<string>(
+    getFromLocalStorage("selectedPersonTheme", "")
+  )
 
 
 
@@ -126,6 +133,10 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     localStorage.setItem("inpersonPackage", JSON.stringify(inpersonTourPackage))
   }, [inpersonTourPackage])
+
+useEffect(() => {
+    localStorage.setItem("selectedPersonTheme", JSON.stringify(selectedInpersonTheme))
+  }, [selectedInpersonTheme])
 
 
 
@@ -254,7 +265,9 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         price,
         setPrice,
         inpersonTourPackage,
-        setInpersonTourPackage
+        setInpersonTourPackage,
+        selectedInpersonTheme,
+        setSelectedInpersonTheme
       }}
     >
       {children}
