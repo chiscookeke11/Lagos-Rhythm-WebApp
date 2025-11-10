@@ -714,27 +714,27 @@ export const inpersonExperience = [
     {
         title: "Personal Journeykeeper",
         description: "Assigned before arrival, your dedicated guide ensures comfort, coordination, and a seamless experience from start to finish.",
-        image: "/"
+        image: "/in-person/journeykeeper.jpg"
     },
     {
         title: "Themed Journeys",
         description: "Each tour tells a living story of culture, history, and the people who make Lagos unforgettable.",
-        image: "/"
+        image: "/in-person/themed-journeys.jpg"
     },
     {
         title: "Maximum Living",
         description: "From arrival to departure, we curate moments of taste, music, and connection that bring Lagos to life.",
-        image: "/"
+        image: "/in-person/maximum-living.jpg"
     },
     {
         title: "Tour Safety and Wellbeing Cover",
         description: "Your safety and health are fully supported with secure logistics, medical access, and on-tour coordination.",
-        image: "/"
+        image: "/in-person/tour-and-safety.jpg"
     },
     {
         title: "Rhythm Flex",
         description: "Short or long stay, solo or group, flexible options let you experience Lagos at your own pace.",
-        image: "/"
+        image: "/in-person/rhythm-flex.jpg"
     }
 ];
 
@@ -778,7 +778,7 @@ export const themeJourneys = [
 export const themePrices = [
   {
     id: 1,
-    title: "1 to 5: Single",
+    title: "Single",
     options: [
       { duration: "3 days", price: "$800" },
       { duration: "5 days", price: "$1200" },
@@ -786,26 +786,10 @@ export const themePrices = [
   },
   {
     id: 2,
-    title: "1 to 5: Double",
+    title: " Double",
     options: [
       { duration: "3 days", price: "$1000" },
       { duration: "5 days", price: "$1500" },
-    ],
-  },
-  {
-    id: 3,
-    title: "6 (Work & Vibe): Single",
-    options: [
-      { duration: "2 weeks", price: "$3000" },
-      { duration: "1 month", price: "$5000" },
-    ],
-  },
-  {
-    id: 4,
-    title: "6 (Work & Vibe): Double",
-    options: [
-      { duration: "2 weeks", price: "$4000" },
-      { duration: "1 month", price: "$6000" },
     ],
   },
 ];
