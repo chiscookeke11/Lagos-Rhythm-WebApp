@@ -275,9 +275,9 @@ export default function Page() {
 
                 <form className=" w-full h-full bg-amber-400 relative  inset-0  flex items-center justify-center  overflow-hidden    " >
 
-                    {/* <StepOne /> */}
-                    <StepTwo />
-                    <StepThree />
+                    <StepOne />
+                    {/* <StepTwo />
+                    <StepThree /> */}
 
                 </form>
 
