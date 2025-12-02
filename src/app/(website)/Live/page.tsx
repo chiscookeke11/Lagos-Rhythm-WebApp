@@ -123,37 +123,55 @@ const YouTubeEmbed = () => {
 
 
 
-  if (!accessAllowed) {
-    return (
-      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">
-          The tour hasn’t started yet.
-        </p>
-      </div>
-    )
-  }
+  // if (!accessAllowed) {
+  //   return (
+  //     <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+  //       <p className="font-medium text-2xl text-center">
+  //         The tour hasn’t started yet.
+  //       </p>
+  //     </div>
+  //   )
+  // }
 
   // 🟢 Step 4: Show the livestream player
-  return (
-    <div className="flex justify-center items-center h-screen w-full bg-[#05073C] relative bg-no-repeat bg-center bg-cover " style={{ backgroundImage: "url('/live/Live-bg.png')" }} >
-      <div className="w-full h-screen absolute inset-0 bg-black/40 z-20 " />
+  // return (
+  //   <div className="flex justify-center items-center h-screen w-full bg-[#05073C] relative bg-no-repeat bg-center bg-cover " style={{ backgroundImage: "url('/live/Live-bg.png')" }} >
+  //     <div className="w-full h-screen absolute inset-0 bg-black/40 z-20 " />
 
-      <div className="z-40 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
-        <div className="block md:hidden">
-          <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.sm.w, sizes.sm.h)} />
-        </div>
-        <div className="hidden md:block lg:hidden">
-          <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.md.w, sizes.md.h)} />
-        </div>
-        <div className="hidden lg:block xl:hidden">
-          <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.lg.w, sizes.lg.h)} />
-        </div>
-        <div className="hidden xl:block">
-          <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.xl.w, sizes.xl.h)} />
-        </div>
-      </div>
+  //     <div className="z-40 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
+  //       <div className="block md:hidden">
+  //         <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.sm.w, sizes.sm.h)} />
+  //       </div>
+  //       <div className="hidden md:block lg:hidden">
+  //         <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.md.w, sizes.md.h)} />
+  //       </div>
+  //       <div className="hidden lg:block xl:hidden">
+  //         <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.lg.w, sizes.lg.h)} />
+  //       </div>
+  //       <div className="hidden xl:block">
+  //         <YouTube videoId={tourId ?? ""} opts={getOptions(sizes.xl.w, sizes.xl.h)} />
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+
+
+
+
+
+
+
+  return (
+    <div className=" w-full min-h-screen flex justify-center items-center  bg-[#05073C] relative bg-no-repeat bg-center bg-cover " style={{ backgroundImage: "url('/live/Live-bg.png')" }}  >
+
     </div>
-  );
+  )
+
+
+
+
+
+
 };
 
 export default YouTubeEmbed;
