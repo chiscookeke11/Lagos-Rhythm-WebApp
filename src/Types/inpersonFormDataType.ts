@@ -6,12 +6,14 @@ export interface inpersonFormUserData {
     phoneNumber: string;
     country: string;
     isAdult?:  "" | "yes" | "no";
+    fitForTravel: "";
     arrivalDate: Date | null;
     reasonForTour: string;
+    otherReasonForTour: string;
     joiningAs: string;
-    preferredFood: string;
+    preferredFood: string[];
     specialRequest: string;
-    howDidYouHere: string;
+    howDidYouHear: string;
     discountCode: string;
     otherMessage: string;
     paymentType: "Full Payment" | "Deposit (50%)"
