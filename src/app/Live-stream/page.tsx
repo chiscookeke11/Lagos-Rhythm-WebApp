@@ -1,6 +1,6 @@
 "use client"
 
-import {SendHorizontal, Sparkle, Timer } from "lucide-react";
+import { SendHorizontal, Smile, Sparkle, Timer } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import EmojiPicker from 'emoji-picker-react';
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,9 @@ import { mock_tour_data } from "@/data/mockTourData";
 export default function Page() {
     const [message, setMessage] = useState("");
     const [countdown, setCountdown] = useState<number>(0);
+    const [showEmojis, setShowEmojis] = useState(false)
+    const isAllowed = Date.now() > new Date(mock_tour_data.date).getTime()
+    console.log(isAllowed)
 
     const tourTime = new Date(mock_tour_data.date);
 
@@ -35,6 +38,22 @@ export default function Page() {
             .toString()
             .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     };
+
+
+    if (!isAllowed) {
+        return (
+            <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+                <p className="font-medium text-2xl text-center">
+                    The tour hasn’t started yet.
+                </p>
+            </div>
+        )
+    }
+
+
+
+
+
 
     return (
         <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
@@ -63,7 +82,7 @@ export default function Page() {
             </header>
 
             {/* Hero Section */}
-            <section className="w-full h-[90vh] flex items-center justify-center bg-no-repeat bg-center bg-cover relative" style={{ backgroundImage: "url('/live/Live-bg.png')" }}>
+            <section className="w-full h-[50vh] lg:h-[90vh] flex items-center justify-center bg-no-repeat bg-center bg-cover relative" style={{ backgroundImage: "url('/live/Live-bg.png')" }}>
                 <div className="w-full h-full absolute inset-0 bg-black/40 z-20" />
 
                 <div className="z-40 absolute top-0 left-0 w-full h-full flex items-center justify-center p-5">
@@ -104,7 +123,7 @@ export default function Page() {
                     <div className="flex flex-col flex-1 items-start gap-1 w-full">
                         <div className="flex items-center gap-4">
                             <h4 className="text-sm md:text-base">{mock_tour_data.hostName}</h4>
-                            <span className="text-sm md:text-base font-medium">Host</span>
+                            <span className="text-sm md:text-base font-medium text-[#EB662B] ">Host</span>
                         </div>
                         <p className="text-white text-sm md:text-base">The message the host sends on the call</p>
                     </div>
@@ -120,16 +139,23 @@ export default function Page() {
                         placeholder="Share your thoughts on this tour..."
                         className="w-full h-full text-sm md:text-base outline-none border-none"
                     />
-                    <button className="h-10 w-10 bg-[#EB662B] rounded-sm flex items-center justify-center p-2 cursor-pointer">
-                        <SendHorizontal size={20} />
-                    </button>
+
+                    <div className="w-fit flex gap-3 items-center" >
+                        <button onClick={() => setShowEmojis((prev) => !prev)} type="button" className="h-10 w-10 bg-white text-[#EB662B] rounded-sm flex items-center justify-center p-2 cursor-pointer">
+                            <Smile size={20} />
+                        </button>
+
+                        <button className="h-10 w-10 bg-white text-[#EB662B] rounded-sm flex items-center justify-center p-2 cursor-pointer">
+                            <SendHorizontal size={20} />
+                        </button>
+                    </div>
                 </form>
 
                 {/* Emoji Picker */}
                 <div className="mx-auto w-[95%] lg:w-[80%] flex items-center gap-3 px-[4%] mt-5">
                     <EmojiPicker
                         width={"100%"}
-                        height={400}
+                        height={showEmojis ? 400 : 0}
                         onEmojiClick={(emojiData) => setMessage(prev => prev + emojiData.emoji)}
                     />
                 </div>

@@ -12,6 +12,6 @@ export const mock_tour_data = {
         "Food & Market Scene",
         "Waterfront Stories"
     ],
-    hostName: "Lagos Storykeeper",
+    hostName: "Storykeeper",
 
 }
