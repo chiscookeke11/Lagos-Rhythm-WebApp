@@ -982,3 +982,64 @@ export const IamJoiningAsData = [
     },
 
 ]
+
+
+
+
+export const preferredFoodOptions = [
+    {
+        label: "Nigerian Cuisine",
+        value: "Nigerian Cuisine"
+    },
+    {
+        label: "Continental",
+        value: "Continental"
+    },
+    {
+        label: "Vegetarian",
+        value: "Vegetarian"
+    },
+    {
+        label: "Vegan",
+        value: "Vegan"
+    },
+    {
+        label: "No Preference",
+        value: "No Preference"
+    },
+    {
+        label: "Other (please specify)",
+        value: "Other (please specify)"
+    },
+]
+
+
+
+export const howDidYouHear = [
+    {
+        label: "Instagram",
+        value: "Instagram"
+    },
+    {
+        label: "TikTok",
+        value: "TikTok"
+    },
+    {
+        label: "Friend/Referral",
+        value: "Friend/Referral"
+    },
+    {
+        label: "Press Feature",
+        value: "Press Feature"
+    },
+    {
+        label: "Event",
+        value: "Event"
+    },
+    {
+        label: "Other",
+        value: "Other"
+    }
+]
+
+
