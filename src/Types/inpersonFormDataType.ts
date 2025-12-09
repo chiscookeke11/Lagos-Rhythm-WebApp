@@ -11,7 +11,8 @@ export interface inpersonFormUserData {
     reasonForTour: string;
     otherReasonForTour: string;
     joiningAs: string;
-    preferredFood: string[];
+    preferredFood: string;
+    otherPreferredFood: string;
     specialRequest: string;
     howDidYouHear: string;
     discountCode: string;
