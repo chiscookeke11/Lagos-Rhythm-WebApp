@@ -16,6 +16,7 @@ import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
 import { ThemeDataType } from "@/Types/ThemeDataType";
+import { ThemeJourneyType } from "@/Types/ThemeJourneyType";
 
 
 
@@ -739,57 +740,306 @@ export const inpersonExperience = [
 ];
 
 
-export const themeJourneys = [
+
+
+export const themeJourneys: ThemeJourneyType[] = [
     {
         title: "Another Day, Another Lagos",
-        description: "Every sunrise reveals a new side of the city, from calm to thrill, from laughter to awe."
+        description:
+            "Every sunrise reveals a new side of the city, from calm to thrill, from laughter to awe.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
     },
+
     {
         title: "Love or Lost?",
-        description: "Romance, reflection, or rediscovery, Lagos brings emotion to life in the most unexpected ways."
+        description:
+            "Romance, reflection, or rediscovery, Lagos brings emotion to life in the most unexpected ways.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
     },
+
     {
         title: "Joy is Free",
-        description: "When Lagos celebrates, it never holds back. This is pure energy, laughter, and life without limits."
+        description:
+            "When Lagos celebrates, it never holds back. This is pure energy, laughter, and life without limits.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
     },
+
     {
         title: "Lagos After Dark",
-        description: "When the sun sets, the rhythm rises. Dive into the city’s nightlife, sounds, and stories that last till dawn."
+        description:
+            "When the sun sets, the rhythm rises. Dive into the city’s nightlife, sounds, and stories that last till dawn.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
     },
+
     {
         title: "The Lagos Dream",
-        description: "Ambition meets culture in the city that never stops dreaming. See why the world keeps watching."
+        description:
+            "Ambition meets culture in the city that never stops dreaming. See why the world keeps watching.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
     },
+
     {
         title: "Work & Vibe",
-        description: "Work by day, vibe by night. Lagos is where productivity meets inspiration, flavor, and fun."
+        description:
+            "Work by day, vibe by night. Lagos is where productivity meets inspiration, flavor, and fun.",
+        majorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "2 Weeks", price: 3000 },
+                    { duration: "1 Month", price: 5000 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "2 Weeks", price: 4000 },
+                    { duration: "1 Month", price: 6000 },
+                ],
+            },
+        ],
     },
+
     {
-        title: "Your Perfect Lagos, Your Way",
-        description: "Create your own story. Pick your pace, passions, and path, and let Lagos unfold your rhythm."
-    }
+        title: "Custom tour",
+        description:
+            "Create your own story. Pick your pace, passions, and path, and let Lagos unfold your rhythm",
+    },
 ];
-
-
 
 
 
 
 export const themePrices = [
-  {
-    id: 1,
-    title: "Single",
-    options: [
-      { duration: "3 days", price: "$800" },
-      { duration: "5 days", price: "$1200" },
-    ],
-  },
-  {
-    id: 2,
-    title: " Double",
-    options: [
-      { duration: "3 days", price: "$1000" },
-      { duration: "5 days", price: "$1500" },
-    ],
-  },
+    {
+        id: 1,
+        title: "Single",
+        options: [
+            { duration: "3 days", price: "$800" },
+            { duration: "5 days", price: "$1200" },
+        ],
+    },
+    {
+        id: 2,
+        title: " Double",
+        options: [
+            { duration: "3 days", price: "$1000" },
+            { duration: "5 days", price: "$1500" },
+        ],
+    },
 ];
+
+
+
+
+
+export const whatBringsYouToTourOptions = [
+    {
+        label: "Leisure",
+        value: "Leisure",
+    },
+
+    {
+        label: "Research",
+        value: "Research",
+    },
+    {
+        label: "Team bonding",
+        value: "Team bonding",
+    },
+    {
+        label: "Content creation",
+        value: "Content creation",
+    },
+    {
+        label: "Cultural exploration",
+        value: "Cultural exploration",
+    },
+    {
+        label: " Education",
+        value: " Education",
+    },
+    {
+        label: "Other",
+        value: "Other",
+    },
+
+]
+
+
+
+export const IamJoiningAsData = [
+    {
+        label: "Solo Traveler",
+        value: "Solo Traveler",
+    },
+    {
+        label: "Couple",
+        value: "Couple",
+    },
+    {
+        label: "Family",
+        value: "Family",
+    },
+    {
+        label: "Group",
+        value: "Group",
+    },
+    {
+        label: "Corporate Team",
+        value: "Corporate Team",
+    },
+    {
+        label: "School Tour",
+        value: "School Tour",
+    },
+
+]
+
+
+
+
+export const preferredFoodOptions = [
+    {
+        label: "Nigerian Cuisine",
+        value: "Nigerian Cuisine"
+    },
+    {
+        label: "Continental",
+        value: "Continental"
+    },
+    {
+        label: "Vegetarian",
+        value: "Vegetarian"
+    },
+    {
+        label: "Vegan",
+        value: "Vegan"
+    },
+    {
+        label: "No Preference",
+        value: "No Preference"
+    },
+    {
+        label: "Other (please specify)",
+        value: "Other (please specify)"
+    },
+]
+
+
+
+export const howDidYouHear = [
+    {
+        label: "Instagram",
+        value: "Instagram"
+    },
+    {
+        label: "TikTok",
+        value: "TikTok"
+    },
+    {
+        label: "Friend/Referral",
+        value: "Friend/Referral"
+    },
+    {
+        label: "Press Feature",
+        value: "Press Feature"
+    },
+    {
+        label: "Event",
+        value: "Event"
+    },
+    {
+        label: "Other",
+        value: "Other"
+    }
+]
+
+
