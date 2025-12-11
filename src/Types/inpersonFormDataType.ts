@@ -17,5 +17,7 @@ export interface inpersonFormUserData {
     howDidYouHear: string;
     discountCode: string;
     otherMessage: string;
-    paymentType: "Full Payment" | "Deposit (50%)"
+    paymentType: "Full Payment" | "Deposit (50%)" | "";
+    price: number | null;
+    duration: string;
 }
