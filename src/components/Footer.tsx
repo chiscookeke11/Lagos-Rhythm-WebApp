@@ -169,6 +169,7 @@ export default function Footer() {
                             {supportOptions.map((link, index) => (
                                 <li key={index} className="font-normal text-sm hover:text-gray-400 transition-colors duration-150 ease-in-out">   <Link  href={link.path} > {link.label}</Link> </li>
                             ))}
+                            <Link href={"/Live-stream"} > Live stream page</Link>
                         </ul>
 
                     </div>
