@@ -6,10 +6,12 @@ import { AnimatePresence, motion } from "framer-motion"
 import Link from "next/link"
 import { SetStateAction, useEffect, useMemo, useState } from "react"
 import Button from "@/components/common/Button"
-import { inpersonExperience, themeJourneys, themePrices } from "@/data/data"
+import { inpersonExperience, themeJourneys } from "@/data/data"
 import Image from "next/image"
 import { Users, X } from "lucide-react"
 import { useAppContext } from "@/app/context/AppContext"
+import { ThemeJourneyType } from "@/Types/ThemeJourneyType"
+import { useRouter } from "next/navigation"
 
 
 
@@ -22,13 +24,14 @@ import { useAppContext } from "@/app/context/AppContext"
 
 interface PreviewModalProps {
     setShowPreviewModal: React.Dispatch<SetStateAction<boolean>>
+    data?: ThemeJourneyType
 }
 
 
 
 
 
-const PreviewModal = ({ setShowPreviewModal }: PreviewModalProps) => {
+const PreviewModal = ({ setShowPreviewModal, data }: PreviewModalProps) => {
 
 
     const { setInpersonTourPackage } = useAppContext()
@@ -61,12 +64,8 @@ const PreviewModal = ({ setShowPreviewModal }: PreviewModalProps) => {
 
                     <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a package</h1>
 
-
-
-
-
                     <div className={`w-full h-full grid grid-cols-1 md:grid-cols-2 place-items-center  justify-items-center gap-5  `} >
-                        {themePrices.map((item) => {
+                        {(data?.majorPackages ?? data?.minorPackages)?.map((item) => {
 
                             return (
 
@@ -78,7 +77,7 @@ const PreviewModal = ({ setShowPreviewModal }: PreviewModalProps) => {
                                         <span className="font-semibold text-base " >            {item.title}</span>
                                         {
                                             item.options.map((option, i) => (
-                                                <span key={i}>              <span className="text-[#EF8F57] ml-1 "> {option.duration} </span> {option.price} </span>
+                                                <span key={i}>              <span className="text-[#EF8F57] ml-1 font-semibold "> {option.duration}: </span>${option.price} </span>
                                             ))
 
                                         }
@@ -111,6 +110,8 @@ export default function Page() {
     const MotionButton = useMemo(() => motion(Button), [])
     const [showPreviewModal, setShowPreviewModal] = useState(false)
     const { setSelectedInpersonTheme } = useAppContext()
+    const [selectedThemeIndex, setSelectedThemeIndex] = useState(0)
+    const router = useRouter()
 
     useEffect(() => {
 
@@ -230,7 +231,7 @@ export default function Page() {
 
 
                     {themeJourneys.map((data, index) => (
-                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-44 ">
+                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-52 ">
 
                             <div className=" bg-[#05073C] h-full w-full absolute top-0 left-0  shadow-2xl " style={{
                                 clipPath:
@@ -245,8 +246,13 @@ export default function Page() {
                                 <p className="font-lato font-normal text-base " > {data.description} </p>
 
                                 <Button onClick={() => {
-                                    setShowPreviewModal(true)
                                     setSelectedInpersonTheme(data.title)
+                                    setSelectedThemeIndex(index)
+                                    if (data.majorPackages || data.minorPackages) {
+                                        setShowPreviewModal(true);
+                                    } else {
+                                        router.push("/Inperson-Form");
+                                    }
                                 }}
                                     ariaLabel="Get started" label="Get started" type="button" variant="primary" className="w-fit !bg-[#EF8F57] text-white !py-2 ml-auto " />
                             </div>
@@ -260,7 +266,7 @@ export default function Page() {
 
 
             {
-                showPreviewModal && <PreviewModal setShowPreviewModal={setShowPreviewModal} />
+                showPreviewModal && <PreviewModal setShowPreviewModal={setShowPreviewModal} data={themeJourneys[selectedThemeIndex]} />
             }
 
 
