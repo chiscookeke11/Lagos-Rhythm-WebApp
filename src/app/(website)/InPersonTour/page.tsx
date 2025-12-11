@@ -231,7 +231,7 @@ export default function Page() {
 
 
                     {themeJourneys.map((data, index) => (
-                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-48 ">
+                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-52 ">
 
                             <div className=" bg-[#05073C] h-full w-full absolute top-0 left-0  shadow-2xl " style={{
                                 clipPath:
