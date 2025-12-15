@@ -186,12 +186,12 @@ export default function Page() {
 
     return (
         <div
-            className="w-full min-h-[120vh] text-black flex items-center justify-center bg-cover bg-center bg-no-repeat relative font-merienda py-32 px-[4%] "
+            className="w-full h-full text-black flex items-center justify-center bg-cover bg-center bg-no-repeat relative font-merienda py-32 px-[4%] "
             style={{ backgroundImage: "url('/in-person/inperson-form-bg.jpg')" }}
         >
             <div className="inset-0 bg-black/55 absolute h-full w-full" />
 
-            <form className="w-full h-fit relative inset-0 flex items-center justify-center">
+            <form className="w-full h-full flex items-center justify-center z-10">
                 {renderStep()}
             </form>
         </div>
