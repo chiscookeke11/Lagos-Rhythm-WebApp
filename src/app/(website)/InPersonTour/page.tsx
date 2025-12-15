@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import Link from "next/link"
 import { SetStateAction, useEffect, useMemo, useState } from "react"
 import Button from "@/components/common/Button"
-import { inpersonExperience, themeJourneys, themePrices } from "@/data/data"
+import { inpersonExperience, themeJourneys } from "@/data/data"
 import Image from "next/image"
 import { Users, X } from "lucide-react"
 import { useAppContext } from "@/app/context/AppContext"
@@ -231,7 +231,7 @@ export default function Page() {
 
 
                     {themeJourneys.map((data, index) => (
-                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-48 ">
+                        <div key={index} className=" relative pb-3 px-1 flex flex-col gap-1 w-full text-black h-52 ">
 
                             <div className=" bg-[#05073C] h-full w-full absolute top-0 left-0  shadow-2xl " style={{
                                 clipPath:
@@ -248,7 +248,11 @@ export default function Page() {
                                 <Button onClick={() => {
                                     setSelectedInpersonTheme(data.title)
                                     setSelectedThemeIndex(index)
-                                      {data.majorPackages || data.minorPackages ? setShowPreviewModal(true) : router.push("/Inperson-Form") }
+                                    if (data.majorPackages || data.minorPackages) {
+                                        setShowPreviewModal(true);
+                                    } else {
+                                        router.push("/Inperson-Form");
+                                    }
                                 }}
                                     ariaLabel="Get started" label="Get started" type="button" variant="primary" className="w-fit !bg-[#EF8F57] text-white !py-2 ml-auto " />
                             </div>

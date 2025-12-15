@@ -1,294 +1,199 @@
-"use client"
+"use client";
 
-import { useAppContext } from "@/app/context/AppContext"
-import Button from "@/components/common/Button";
-import { CustomCheckBox } from "@/components/common/CustomCheckbox";
-import { CustomSelect } from "@/components/common/CustomSelect";
-import Input from "@/components/common/Input";
-import { countryOptions } from "@/data/countryList";
+import { fireDB } from "@/app/config/firebaseClient";
+import { useAppContext } from "@/app/context/AppContext";
+import StepFour from "@/components/inperson_tour_form_steps/StepFour";
+import { StepOne } from "@/components/inperson_tour_form_steps/StepOne";
+import { StepThree } from "@/components/inperson_tour_form_steps/StepThree";
+import { StepTwo } from "@/components/inperson_tour_form_steps/StepTwo";
+import { themeJourneys } from "@/data/data";
 import { inpersonFormUserData } from "@/Types/inpersonFormDataType";
-import { useState } from "react";
+import { ThemeJourneyType } from "@/Types/ThemeJourneyType";
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
 
+export default function Page() {
+    const { inpersonTourPackage, selectedInpersonTheme } = useAppContext();
+    const [packageDetails, setPackageDetails] = useState<ThemeJourneyType | null>(null)
 
-
-
-
-// Step one
-const StepOne = () => {
     const [formValues, setFormValues] = useState<inpersonFormUserData>({
         fullName: "",
         emailAddress: "",
         country: "",
         arrivalDate: null,
         discountCode: "",
-        howDidYouHere: "",
+        howDidYouHear: "",
         isAdult: "",
         joiningAs: "",
         otherMessage: "",
-        paymentType: "Full Payment",
+        paymentType: "",
         phoneNumber: "",
         preferredFood: "",
+        otherPreferredFood: "",
         reasonForTour: "",
-        specialRequest: ""
-    })
+        otherReasonForTour: "",
+        fitForTravel: "",
+        specialRequest: "",
+        price: null,
+        duration: ""
+    });
+
+
+    console.log(formValues)
+
+    const [currentStep, setCurrentStep] = useState<"StepOne" | "StepTwo" | "StepThree" | "StepFour">("StepOne");
+
+
+    const setStepOne = () => {
+        setCurrentStep("StepOne")
+    }
+
+    const setStepTwo = () => {
+        setCurrentStep("StepTwo")
+    }
+
+
+    const setStepThree = () => {
+        setCurrentStep("StepThree")
+    }
+
+    const setStepFour = () => {
+        setCurrentStep("StepFour")
+    }
 
 
 
 
 
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        // const updated = { ...userData, [name]: value };
-        // setUserData(updated);
-
-        // const fieldName = name as keyof userDataType;
-        // const fieldError = validateUserData(updated, fieldName);
-
-        // setFormErrors(prev => {
-        //     const rest = { ...prev };
-        //     delete rest[fieldName];
-        //     return fieldError[fieldName] ? { ...rest, [fieldName]: fieldError[fieldName] } : rest;
-        // });
-    };
-
-
-
-    // select change function
-    const handleSelectChange = (name: string, value: string) => {
-        const updated = { ...formValues, [name]: value };
-        setFormValues(updated);
-
-        // const field = name as keyof userDataType;
-        // const fieldError = validateUserData(updated, field);
-
-        // setFormErrors(prev => {
-        //     const rest = { ...prev };
-        //     delete rest[field];
-        //     return fieldError[field] ? { ...rest, [field]: fieldError[field] } : rest;
-        // });
-    };
-
-
-
-
-    // checkbox function
-    const handleCheckboxChange = (name: string, checked: boolean, value?: string) => {
-        if (value) {
-            setFormValues({
-                ...formValues,
-                [name]: value,
-            });
+    // retrieving the tour package details
+    useEffect(() => {
+        const details = themeJourneys.find((packageDetail) => packageDetail.title === selectedInpersonTheme)
+        if (details) {
+            setPackageDetails(details)
         }
-
-        const fieldToValidate = name as keyof inpersonFormUserData
-        // const fieldError = validateUserData(updatedUserData, fieldToValidate)
-
-        // setFormErrors((prev) => {
-        //     const rest = { ...prev }
-        //     delete rest[fieldToValidate]
-        //     // Special handling for OtherReason error if 'others' is deselected
-        //     if (fieldToValidate === "reasonForJoin" && !updatedUserData.reasonForJoin.includes("others")) {
-        //         delete rest.OtherReason
-        //     }
-        //     return fieldError[fieldToValidate] ? { ...rest, [fieldToValidate]: fieldError[fieldToValidate] } : rest
-        // })
+    }, [selectedInpersonTheme])
 
 
+    //Persist values to localStorage whenever formValues change
+    useEffect(() => {
+        const hasValue = Object.values(formValues).some(
+            (v) => typeof v === "string" && v.trim() !== ""
+        );
+
+        if (hasValue) {
+            localStorage.setItem("form_details", JSON.stringify(formValues));
+        }
+    }, [formValues]);
+
+
+
+    // Retrieve from localStorage on first load
+    useEffect(() => {
+        const saved = localStorage.getItem("form_details");
+        if (!saved) return;
+
+        const parsed = JSON.parse(saved);
+        console.log("the parsed data:", parsed)
+
+        // Restore all fields + fix Date type
+        setFormValues({
+            ...parsed,
+        });
+    }, []);
+
+
+
+    useEffect(() => {
+        const selectedThemeTest = themeJourneys.find(t => t.title === selectedInpersonTheme);
+
+        console.log("In person package:", inpersonTourPackage)
+        console.log("selected Theme:", selectedInpersonTheme)
+
+        if (!selectedThemeTest) return;
+
+        const group = selectedThemeTest.minorPackages?.find(p => p.title === inpersonTourPackage) || selectedThemeTest.majorPackages?.find(p => p.title === inpersonTourPackage);
+        const option = group?.options.find(o => o.duration === formValues.duration);
+
+        console.log("TEST PRICE:", option?.price);
+        setFormValues({
+            ...formValues,
+            price: option?.price && formValues.paymentType === "Deposit (50%)" ? option?.price / 2 : option?.price ?? 0
+        })
+    }, [formValues.duration, formValues.paymentType]);
+
+
+
+    const saveToDatabase = async () => {
+        try {
+            await addDoc(collection(fireDB, "inperson_form"), { ...formValues });
+
+            setFormValues({
+                fullName: "",
+                emailAddress: "",
+                country: "",
+                arrivalDate: null,
+                discountCode: "",
+                howDidYouHear: "",
+                isAdult: "",
+                joiningAs: "",
+                otherMessage: "",
+                paymentType: "",
+                phoneNumber: "",
+                preferredFood: "",
+                otherPreferredFood: "",
+                reasonForTour: "",
+                otherReasonForTour: "",
+                fitForTravel: "",
+                specialRequest: "",
+                price: null,
+                duration: ""
+            });
+
+            localStorage.removeItem("form_details");
+            toast.success("Form Submitted Successfully!");
+
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
     };
 
 
 
-    return (
 
-        <div className=" bg-green-600 flex items-center justify-center  h-full w-full px-4 absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%]  " >
-            <div className=" bg-[#FDF4F1] h-fit w-full max-w-4xl  flex items-center justify-center py-4 px-3 flex-col gap-4 rounded-md  " >
-                <h3 className=" text-2xl font-semibold text-black " >Personal details</h3>
+    const renderStep = () => {
+        switch (currentStep) {
+            case "StepOne":
+                return <StepOne formValues={formValues} setFormValues={setFormValues} setStepTwo={setStepTwo} />;
 
-                {/* full name input  */}
-                <Input
-                    value={formValues.fullName}
-                    type="string"
-                    label="Full name"
-                    name="fullName"
-                    onChange={handleChange}
-                    placeholder="John Ade"
-                    isRequired
-                />
+            case "StepTwo":
+                return <StepTwo formValues={formValues} setFormValues={setFormValues} setStepOne={setStepOne} setStepThree={setStepThree} />;
 
+            case "StepThree":
+                return <StepThree formValues={formValues} setFormValues={setFormValues} setStepTwo={setStepTwo} setStepFour={setStepFour} />;
 
-                {/* email address input  */}
-                <Input
-                    value={formValues.emailAddress}
-                    type="string"
-                    label="Email address"
-                    name="emailAddress"
-                    onChange={handleChange}
-                    placeholder="JohnAde@gmail.com"
-                    isRequired
-                />
+            case "StepFour":
+                return <StepFour formValues={formValues} setFormValues={setFormValues} packageDetails={packageDetails} setStepThree={setStepThree} onSuccessfulPayment={saveToDatabase} />;
 
-
-                {/* phone number input   */}
-                <Input
-                    value={formValues.phoneNumber}
-                    type="string"
-                    label="Phone Number"
-                    name="phoneNumber"
-                    onChange={handleChange}
-                    isRequired
-                />
-
-
-
-                {/* country input  */}
-                <CustomSelect
-                    name="country"
-                    onChange={handleSelectChange}
-                    options={countryOptions}
-                    label="Country"
-                    placeholder="Please select an option"
-                    //  error={formErrors.country}
-                    isRequired
-                    value={formValues.country}
-                />
-
-
-
-                {/* Age input  */}
-                <div className="w-full flex flex-col items-start gap-5 " >
-                    <h1 className="text-[#000000] font-medium text-base font-lato flex items-start gap-1" >Are you 18 years or older?  <div className=" text-red-600" >*</div></h1>
-
-
-                    <div className=" grid grid-cols-1 md:grid-cols-2 gap-4 justify-items-stretch  "  >
-                        {["yes", "no"].map((option, index) => {
-                            const isChecked = formValues.isAdult === option
-                            return (
-                                <CustomCheckBox
-                                    key={index}
-                                    checked={isChecked}
-                                    onCheckedChange={() => handleCheckboxChange("isAdult", true, option)}
-                                    label={option.toUpperCase()}
-                                    id={option}
-
-                                />
-                            )
-                        })}
-                    </div>
-                    {/* {formErrors.reasonForJoin && (
-                                <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.reasonForJoin}</p>
-                            )} */}
-                </div>
-
-
-                <Button
-                    label="Next"
-                    type="button"
-                    ariaLabel="next"
-                    variant="ghost"
-                    className="!bg-[#EF8F57] w-fit rounded-sm ml-auto  "
-                />
-
-            </div>
-        </div>
-    )
-}
-
-
-
-
-
-// Step two
-const StepTwo = () => {
-    return (
-        <div className=" bg-green-600 flex items-center justify-center  h-full w-full px-4 absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[-50%]  " >
-            <div className=" bg-[#FDF4F1] h-fit w-full max-w-4xl  flex items-center justify-center py-4 px-3 flex-col gap-4 rounded-md  " >
-                <h3 className=" text-2xl font-semibold text-black " >Tour Specifics</h3>
-
-
-
-
-                <div className=" w-full flex items-center justify-between " >
-
-                    <Button
-                        label="Prev"
-                        type="button"
-                        ariaLabel="Previous"
-                        variant="ghost"
-                        className="!bg-[#EF8F57] w-fit rounded-sm "
-                    />
-
-
-                    <Button
-                        label="Next"
-                        type="button"
-                        ariaLabel="next"
-                        variant="ghost"
-                        className="!bg-[#EF8F57] w-fit rounded-sm   "
-                    />
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-
-
-
-
-// Step three
-const StepThree = () => {
-    return (
-        <div className=" bg-green-600 flex items-center justify-center  h-full w-full px-4 absolute top-[50%] left-[50%] translate-x-[-50%]  translate-y-[500%]  " >
-            <div className=" bg-white h-fit w-full max-w-6xl  flex items-center justify-center py-4 px-3 flex-col gap-4 rounded-md" >
-                3rd step
-
-                <button> Submit</button>
-            </div>
-        </div>
-    )
-}
-
-
-
-
-
-
-
-
-
-export default function Page() {
-
-    const { inpersonTourPackage } = useAppContext()
-
+            default:
+                return <StepOne formValues={formValues} setFormValues={setFormValues} setStepTwo={setStepTwo} />;
+        }
+    };
 
 
     return (
-        <div className="w-full min-h-screen text-black flex items-center justify-center bg-cover bg-center bg-no-repeat relative font-merienda " style={{ backgroundImage: "url('/in-person/inperson-form-bg.jpg')" }} >
-            <div className="inset-0 bg-black/55 absolute h-full w-full " />
+        <div
+            className="w-full h-full text-black flex items-center justify-center bg-cover bg-center bg-no-repeat relative font-merienda py-32 px-[4%] "
+            style={{ backgroundImage: "url('/in-person/inperson-form-bg.jpg')" }}
+        >
+            <div className="inset-0 bg-black/55 absolute h-full w-full" />
 
-
-
-            <div className="  absolute inset-0 bg-red-600 w-full h-full px " >
-
-
-                <form className=" w-full h-full bg-amber-400 relative  inset-0  flex items-center justify-center  overflow-hidden    " >
-
-                    {/* <StepOne /> */}
-                    <StepTwo />
-                    <StepThree />
-
-                </form>
-
-
-            </div>
-
-
-
-
-
-            {inpersonTourPackage}
+            <form className="w-full h-full flex items-center justify-center z-10">
+                {renderStep()}
+            </form>
         </div>
-    )
+    );
 }
