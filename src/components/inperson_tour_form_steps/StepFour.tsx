@@ -40,7 +40,7 @@ export default function StepFour({ formValues, setFormValues, packageDetails, se
         public_key: flutterwavePublicKey || "",
         tx_ref: `tx-${Date.now()}`,
         amount: convertedPrice,
-        currency: "NGN",
+        currency: "USD",
         payment_options: "card,mobilemoney,ussd",
         customer: {
             email: formValues.emailAddress,
