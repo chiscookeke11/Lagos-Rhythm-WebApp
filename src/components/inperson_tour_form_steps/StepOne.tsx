@@ -54,7 +54,7 @@ export const StepOne = ({ formValues, setFormValues, setStepTwo }: StepOneProps)
 
 
     const handleNext = () => {
-        if (!formValues.fullName || !formValues.emailAddress || !formValues.phoneNumber || !formValues.country || !formValues.isAdult ) {
+        if (!formValues.fullName || !formValues.emailAddress || !formValues.country || !formValues.isAdult ) {
             toast.error("All required fields must be completed!")
             return;
         }
@@ -97,7 +97,6 @@ export const StepOne = ({ formValues, setFormValues, setStepTwo }: StepOneProps)
                 label="Phone Number"
                 name="phoneNumber"
                 onChange={handleChange}
-                isRequired
             />
 
 
