@@ -40,6 +40,9 @@ export default function Page() {
         OtherReason: ""
     });
 
+
+    console.log(userData)
+
     // date selection function
     const handleDateChange = (date: Date | null) => {
         if (!date) return;
@@ -49,7 +52,8 @@ export default function Page() {
             : [...selectedDates, date];
 
         setSelectedDates(newDates);
-        const formatted = newDates.map(d => d.toISOString());
+
+        const formatted = newDates.map(d => d.toDateString());
 
         const updated = { ...userData, tourDate: formatted };
         setUserData(updated);
