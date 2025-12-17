@@ -43,7 +43,7 @@
     "lucide-react": "^0.522.0",
     "moment": "^2.30.1",
     "moment-timezone": "^0.6.0",
-    "next": "15.4.8",
+    "next": "15.4.10",
     "next-sitemap": "^4.2.3",
     "quill": "^2.0.3",
     "react": "^19.0.0",
