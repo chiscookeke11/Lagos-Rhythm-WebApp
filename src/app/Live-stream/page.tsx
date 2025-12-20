@@ -39,8 +39,6 @@ export default function Page() {
 
   // Socket connection for user count
   useEffect(() => {
-    if (!isAllowed) return
-
     socket.connect()
     socket.on("update-user-count", (count: number) => {
       setUserCount(count)
@@ -50,11 +48,11 @@ export default function Page() {
       socket.off("update-user-count")
       socket.disconnect()
     }
-  }, [isAllowed])
+  }, [])
 
   // Firebase listener for messages
   useEffect(() => {
-    if (!isAllowed) return
+
 
     const q = query(collection(fireDB, "messages"), orderBy("createdAt", "asc"))
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -71,7 +69,7 @@ export default function Page() {
     })
 
     return () => unsubscribe()
-  }, [isAllowed])
+  }, [])
 
   const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000)
@@ -140,7 +138,7 @@ export default function Page() {
                 key={i}
                 className="h-3 w-3 md:h-7 md:w-7 rounded-full bg-gray-300 border border-purple-950 flex items-center justify-center ml-[-10px]"
               >
-                {emoji}
+                {userCount > 0 ? emoji : null}
               </div>
             ))}
           </div>
