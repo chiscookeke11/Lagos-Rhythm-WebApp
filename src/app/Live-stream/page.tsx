@@ -12,6 +12,7 @@ import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firesto
 import { fireDB } from "../config/firebaseClient"
 import { useAppContext } from "../context/AppContext"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Page() {
   const [message, setMessage] = useState("")
@@ -116,10 +117,26 @@ export default function Page() {
     setShowEmojis(false)
   }
 
+
+  if (!isAllowed) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-[#05073C] text-white " >
+        <h1 className="font-merienda text-4xl font-semibold " >The tour has ended </h1>
+
+      </div>
+    )
+  }
+
+
+
   return (
     <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
       {/* Header */}
       <header className="w-full bg-[#05073C] py-6 px-[4%] flex items-center justify-evenly gap-12 flex-wrap">
+
+     <Link href={"/"} ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+
+
         <span className="flex items-center gap-2 text-xs md:text-sm">
           {countdown > 0 && (
             <>
@@ -132,8 +149,8 @@ export default function Page() {
         <h1 className="text-xl md:text-2xl text-center">{mock_tour_data.tourTitle}</h1>
 
         <div className="w-fit flex items-center gap-3">
-          <div className="flex w-fit items-center">
-            {["🐯", "🦊", "🐼"].map((emoji, i) => (
+          <div className="flex w-fit items-center shrink-0">
+            {["🐯", "🦊", "🐼"].slice(0, userCount).map((emoji, i) => (
               <div
                 key={i}
                 className="h-3 w-3 md:h-7 md:w-7 rounded-full bg-gray-300 border border-purple-950 flex items-center justify-center ml-[-10px]"
@@ -171,11 +188,11 @@ export default function Page() {
 
         {/* Chat Section for desktop view */}
         <section className="w-full max-w-sm h-full hidden md:flex flex-col items-start gap-3 bg-blue-950 py-4 z-50  ">
-          <h2 className="ml-10 text-base lg:text-lg">Talking Drum</h2>
+          <h2 className="ml-10 text-base lg:text-lg">Story Pot</h2>
           <hr className="w-full border-[0.5px] border-gray-600 my-2" />
 
           <div className="w-full lg:w-[80%] h-[400px] flex flex-col items-start justify-start gap-7 border border-gray-500 py-5 px-4 border-l-2 border-l-yellow-500 rounded-lg mx-auto overflow-y-auto">
-            <div className="w-fit  flex items-center justify-start gap-4">
+            {/* <div className="w-fit  flex items-center justify-start gap-4">
               <div className="h-8 w-8 rounded-full flex-shrink-0 bg-gray-400 border border-purple-950 flex items-center justify-center overflow-hidden">
                 <Image
                   src={"/profile/profile-placeholder.png"}
@@ -192,7 +209,7 @@ export default function Page() {
                 </div>
                 <p className="text-white text-[10px] md:text-xs">The message the host sends on the call</p>
               </div>
-            </div>
+            </div> */}
 
             {sentMessages?.map((data, index) => (
               <div key={index} className="w-fit  flex items-center justify-start gap-4">
