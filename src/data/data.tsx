@@ -429,6 +429,23 @@ export const crewAmountData: CrewAmountItem[] = [
 ]
 
 
+export const customTourPrices: CrewAmountItem[] = [
+    {
+        label: "1 Person",
+        value: "Individual",
+        perTourFee: (country: string) => {
+            if (country === "Nigeria") return 5000;
+            else return 600
+        },
+        monthlySub: (country: string) => {
+            if (country === "Nigeria") return 16000;
+            else return 2000
+        },
+        maxAmount: 1
+    },
+]
+
+
 export const faq = [
     {
         question: "Is Lagos Rhythm a travel agency?",
@@ -549,15 +566,29 @@ export const sideNavLinks = [
 ]
 
 
-// export const timeOptions = [
-//     { label: "9:00 AM WAT", value: "21:00" },
-//     { label: "10:00 AM WAT", value: "10:00" },
-//     { label: "11:00 AM WAT", value: "11:00" },
-//     { label: "12:00 PM WAT", value: "12:00" },
-//     { label: "1:00 PM WAT", value: "13:00" },
-//     { label: "2:00 PM WAT", value: "14:00" },
-//     { label: "3:00 PM WAT", value: "15:00" },
-// ];
+export const timeOptions = [
+    { label: "8:00 AM WAT", value: "08:00" },
+    { label: "8:30 AM WAT", value: "08:30" },
+    { label: "9:00 AM WAT", value: "09:00" },
+    { label: "9:30 AM WAT", value: "09:30" },
+    { label: "10:00 AM WAT", value: "10:00" },
+    { label: "10:30 AM WAT", value: "10:30" },
+    { label: "11:00 AM WAT", value: "11:00" },
+    { label: "11:30 AM WAT", value: "11:30" },
+    { label: "12:00 PM WAT", value: "12:00" },
+    { label: "12:30 PM WAT", value: "12:30" },
+    { label: "1:00 PM WAT", value: "13:00" },
+    { label: "1:30 PM WAT", value: "13:30" },
+    { label: "2:00 PM WAT", value: "14:00" },
+    { label: "2:30 PM WAT", value: "14:30" },
+    { label: "3:00 PM WAT", value: "15:00" },
+    { label: "3:30 PM WAT", value: "15:30" },
+    { label: "4:00 PM WAT", value: "16:00" },
+    { label: "4:30 PM WAT", value: "16:30" },
+    { label: "5:00 PM WAT", value: "17:00" },
+    { label: "5:30 PM WAT", value: "17:30" },
+    { label: "6:00 PM WAT", value: "18:00" },
+];
 
 
 export const metadataKeywords = [
