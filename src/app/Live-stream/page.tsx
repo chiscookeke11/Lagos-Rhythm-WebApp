@@ -18,7 +18,7 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const TWENTY_MINUTES = 20 * 60 * 1000
+  const TWENTY_MINUTES = 50 * 60 * 1000
   const isAllowed = Date.now()  > new Date(mock_tour_data.date).getTime() + TWENTY_MINUTES;
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
@@ -172,7 +172,6 @@ export default function Page() {
             src={mock_tour_data.videoUrl}
             autoPlay
             controls
-            muted
             loop={false}
             playsInline
             className="w-full max-w-5xl h-full object-cover object-center"
@@ -180,7 +179,7 @@ export default function Page() {
         </div>
 
         {/* Chat Section for desktop view */}
-        <section className="w-full max-w-sm h-full hidden md:flex flex-col items-start gap-3 bg-blue-950 py-4 z-50  ">
+        <section className="w-full max-w-sm h-fit hidden md:flex flex-col items-start gap-3 bg-blue-950 py-4 z-50  ">
           <h2 className="ml-10 text-base lg:text-lg">Story Pot</h2>
           <hr className="w-full border-[0.5px] border-gray-600 my-2" />
 
