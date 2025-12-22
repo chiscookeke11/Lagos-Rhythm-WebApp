@@ -18,7 +18,8 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const isAllowed = Date.now() > new Date(mock_tour_data.date).getTime()
+  const TWENTY_MINUTES = 20 * 60 * 1000
+  const isAllowed = Date.now()  > new Date(mock_tour_data.date).getTime() + TWENTY_MINUTES;
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
   const [userCount, setUserCount] = useState(0)
@@ -83,13 +84,6 @@ export default function Page() {
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
   }
 
-  if (!isAllowed) {
-    return (
-      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">The tour hasn&apos;t started yet.</p>
-      </div>
-    )
-  }
 
   const writeToDB = async (messenger: string, message: string, messangerPic: string) => {
     await addDoc(collection(fireDB, "messages"), {
@@ -120,21 +114,19 @@ export default function Page() {
 
   if (!isAllowed) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-[#05073C] text-white " >
-        <h1 className="font-merienda text-4xl font-semibold " >The tour has ended </h1>
-
+      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+        <p className="font-medium text-2xl text-center">The tour hasn&apos;t started yet.</p>
       </div>
     )
   }
 
-
-
   return (
     <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
+         <Link href={"/"} className="block md:hidden mx-auto my-4 "  ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
       {/* Header */}
-      <header className="w-full bg-[#05073C] py-6 px-[4%] flex items-center justify-evenly gap-12 flex-wrap">
+      <header className="w-full bg-[#05073C] py-6 px-[4%] flex items-center justify-center md:justify-evenly gap-12 flex-wrap">
 
-     <Link href={"/"} ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+     <Link href={"/"} className="hidden md:block " ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
 
 
         <span className="flex items-center gap-2 text-xs md:text-sm">
@@ -182,6 +174,7 @@ export default function Page() {
             controls
             muted
             loop={false}
+            playsInline
             className="w-full max-w-5xl h-full object-cover object-center"
           />
         </div>
