@@ -112,7 +112,7 @@ export default function Page() {
   }
 
 
-  if (!isAllowed) {
+  if (isAllowed) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
         <p className="font-medium text-2xl text-center">The tour hasn&apos;t started yet.</p>
