@@ -18,7 +18,7 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const TWENTY_MINUTES = 120 * 60 * 1000
+  const TWENTY_MINUTES = 240 * 60 * 1000
   const isAllowed = Date.now()  > new Date(mock_tour_data.date).getTime() + TWENTY_MINUTES;
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
