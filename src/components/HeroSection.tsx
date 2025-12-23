@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import Button from "./common/Button";
 import { motion } from "framer-motion";
 import ScrollingText from "./ScrollingText";
+import Link from "next/link";
 import Image from "next/image";
 
 
@@ -58,14 +59,14 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
               Live the vibe, please the mind!
             </motion.p>
           </div>
-          <a href={"https://www.lagosrhythm.com/exclusive-tour-form"} target="_blank" >
+          <Link href={"/Free_E-Rhythm"} >
             <MotionButton
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.1, delay: 0.7 }}
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: 1.3 }}
-              type="button" label=" Detty December Tour" > </MotionButton></a>
+              type="button" label="Free Virtual Tour" > </MotionButton></Link>
         </div>
       </div>
       <ScrollingText />
