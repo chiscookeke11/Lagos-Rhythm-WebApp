@@ -29,9 +29,9 @@ export default function Page() {
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
-  const minDate = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(maxDate.getDate() + 30)
+  const minDate = new Date("2025-12-29");
+  const maxDate = new Date("2026-01-02");
+  // maxDate.setDate(maxDate.getDate() + 30)
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
