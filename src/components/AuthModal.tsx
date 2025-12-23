@@ -14,9 +14,10 @@ import { addUserToDb } from "@/lib/utils";
 
 interface AuthModalProps {
     setShowAuthModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    showCloseIcon?: boolean
 }
 
-export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
+export default function AuthModal({ setShowAuthModal, showCloseIcon }: AuthModalProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -211,7 +212,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6 shadow-lg "
                 >
 
-                    <button onClick={() => setShowAuthModal?.(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={32} /></button>
+                    {showCloseIcon && <button onClick={() => setShowAuthModal?.(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={32} /></button>}
 
 
 

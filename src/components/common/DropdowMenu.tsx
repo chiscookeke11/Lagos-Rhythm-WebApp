@@ -30,7 +30,7 @@ export function DropdownMenuCheckboxes() {
         try {
             await signOut()
             toast.success("Sign out successful")
-            router.push("/")
+            router.push("/auth")
         }
         catch (error) {
             console.error(error)
