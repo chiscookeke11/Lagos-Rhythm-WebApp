@@ -21,7 +21,7 @@ export default function CountryProtectedRoute({ children }: { children: ReactNod
         if (!user) {
             toast.error("Please sign in to continue");
             hasRedirected.current = true
-            router.replace("/");
+            router.replace("/auth");
             return
         }
         else if (user && !userData?.country && !hasRedirected.current) {
