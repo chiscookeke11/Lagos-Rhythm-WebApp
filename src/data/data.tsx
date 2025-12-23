@@ -435,7 +435,7 @@ export const customTourPrices: CrewAmountItem[] = [
         value: "Individual",
         perTourFee: (country: string) => {
             if (country === "Nigeria") return 5000;
-            else return 600
+            else return 10
         },
         monthlySub: (country: string) => {
             if (country === "Nigeria") return 16000;
