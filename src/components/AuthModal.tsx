@@ -13,10 +13,11 @@ import Link from "next/link";
 import { addUserToDb } from "@/lib/utils";
 
 interface AuthModalProps {
-    setShowAuthModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowAuthModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    showCloseIcon?: boolean
 }
 
-export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
+export default function AuthModal({ setShowAuthModal, showCloseIcon }: AuthModalProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -107,7 +108,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                 }
 
                 toast.success("Account verified successfully!");
-                setShowAuthModal(false);
+                setShowAuthModal?.(false);
                 router.push("/")
             } else {
                 toast.error("Verification incomplete. Please try again.");
@@ -148,7 +149,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
             if (result?.status === "complete") {
                 await signInActive?.({ session: result.createdSessionId })
                 toast.success("Signed in successfully!");
-                setShowAuthModal(false);
+                setShowAuthModal?.(false);
                 router.push("/")
             } else {
                 toast.error("Sign-in incomplete. Please try again.");
@@ -203,7 +204,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
     return (
         <div
-            className="fixed h-screen w-full flex items-center justify-center bg-transparent backdrop-blur-md top-0 left-0 px-5 py-7"
+            className="fixed min-h-screen w-full flex items-center justify-center bg-transparent backdrop-blur-md top-0 left-0 px-5 py-20 "
         >
             {!pendingVerification ? (
                 <form
@@ -211,7 +212,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
                     className="w-full max-w-md flex items-center justify-center flex-col gap-6 z-10 bg-[#FDF4F1] rounded-md py-7 px-6 shadow-lg "
                 >
 
-                    <button onClick={() => setShowAuthModal(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={32} /></button>
+                    {showCloseIcon && <button onClick={() => setShowAuthModal?.(false)} className="text-red-600 ml-auto cursor-pointer " ><X size={32} /></button>}
 
 
 
@@ -250,7 +251,7 @@ export default function AuthModal({ setShowAuthModal }: AuthModalProps) {
 
 
                     <div className="ml-auto flex flex-col gap-[2px] " >
-                        {variant === "login" && (<Link href={"/reset-password"} onClick={() => setShowAuthModal(false)} className=" text-[#EF8F57] ml-auto " > Forgot password </Link>)}
+                        {variant === "login" && (<Link href={"/reset-password"} onClick={() => setShowAuthModal?.(false)} className=" text-[#EF8F57] ml-auto " > Forgot password </Link>)}
 
                         <button
                             onClick={() => setShowPassword((prev) => !prev)}
