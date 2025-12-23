@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import Button from "./common/Button";
 import { motion } from "framer-motion";
 import ScrollingText from "./ScrollingText";
-import Link from "next/link";
 import Image from "next/image";
 
 
