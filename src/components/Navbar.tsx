@@ -199,6 +199,7 @@ export default function Navbar() {
             {
                 showAuthModal && (
                     <AuthModal setShowAuthModal={setShowAuthModal}
+                    showCloseIcon = {true}
                     />
                 )
             }
