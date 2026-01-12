@@ -45,6 +45,10 @@ const navLinks = [
         label: "BLOG",
         path: "/blogs",
     },
+      {
+        label: "New Feature",
+        path: "/new-feature",
+    },
 ]
 
 
