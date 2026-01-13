@@ -14,7 +14,7 @@ import { bookFormImages, joinAsData, reasonForJoinOptions, referralSourceData, t
 import { useAppContext } from "../../context/AppContext"
 import type { exclusiveBookingDataType } from "@/Types/UserDataType"
 import DatePicker from "react-datepicker"
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection} from "firebase/firestore"
 import { fireDB } from "@/app/config/firebaseClient"
 import { sendConfirmationEmail } from "@/lib/utils"
 import ConfirmationModal from "@/components/ConfirmationModal"
@@ -29,14 +29,15 @@ export default function Page() {
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
   const maxParticipantCount = populationAmount
   const [loading, setLoading] = useState(false)
-  const minDate = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(maxDate.getDate() + 30)
+  const minDate = new Date("2025-12-29");
+  const maxDate = new Date("2026-01-02");
+  // maxDate.setDate(maxDate.getDate() + 30)
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [showCryptoPaymentModal, setShowCryptoPaymentModal] = useState(false)
   const [pendingFormData, setPendingFormData] = useState<exclusiveBookingDataType | null>(null)
   const [subscriptionType, setSubscriptionType] = useState("")
+  // const [timeOptions, setTimeOptions] = useState<customSelectTypes[] | null>(null)
   const formatted = useMemo(() => {
     return selectedDates.map((d) => d.toISOString());
   }, [selectedDates]);
@@ -88,13 +89,15 @@ export default function Page() {
   }, [participantsCount, append, remove, fields.length])
 
   const increaseParticipantsCount = () => {
-    if (participantsCount >= maxParticipantCount) return
+    if (selectedTheme === "Custom Tour") return;
+    if (participantsCount >= maxParticipantCount) return;
     setParticipantsCount((prev) => prev + 1)
   }
 
 
 
   const decreaseParticipantsCount = () => {
+    if (selectedTheme === "Custom Tour") return;
     if (participantsCount < 2) return
     setParticipantsCount((prev) => prev - 1)
   }
@@ -104,12 +107,8 @@ export default function Page() {
   // This function checks if the selectedTheme is not custom themesData, then display modal for PaymentModal, else just submit
   const handleFormSubmit = (data: exclusiveBookingDataType) => {
     setPendingFormData(data)
-    if (selectedTheme !== "Custom Tour") {
+
       setShowPaymentModal(true)
-    }
-    else {
-      completeBooking("--")
-    }
   }
 
   // onSubmit signature to only accept data
@@ -212,6 +211,27 @@ export default function Page() {
       shouldDirty: true,
     });
   };
+
+
+  // function to fetch time all the time options of exclusive tour
+  // useEffect(() => {
+
+  //   const fetchTime = async () => {
+  //     const q = query(
+  //       collection(fireDB, "tour"),
+  //       where("tourType", "==", "Free_Tour"),
+  //       where("isCompleted", "==", true)
+  //     );
+
+  //     const querySnapshot = await getDocs(q)
+  //     const time = querySnapshot.docs.map((doc) => doc.data().time)
+
+  //     setTimeOptions(time)
+  //     console.log("The time in the db:", time)
+  //   }
+
+  //   fetchTime()
+  // }, [])
 
 
 
@@ -455,7 +475,7 @@ export default function Page() {
                     onChange={(nameFromCustomSelect, valueFromCustomSelect) => field.onChange(valueFromCustomSelect)}
                     placeholder="Please select an option"
                     label="Time"
-                    options={timeOptions}
+                    options={timeOptions ?? [{ label: "No time available for this tour", value: "No time available for this tour" }]}
                     value={field.value}
                     error={errors.time?.message}
                   />
@@ -517,12 +537,7 @@ export default function Page() {
                       </span>
                     </>
                   ) :
-                    selectedTheme === "Custom Tour" ?
-                      "Submit"
-                      :
-                      (
                         "Proceed to Payment"
-                      )
                 }
                 type="submit"
                 ariaLabel="Proceed to Payment"

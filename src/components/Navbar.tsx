@@ -154,7 +154,7 @@ export default function Navbar() {
 
 
 
-                {isSignedIn ? (<DropdownMenuCheckboxes />) : <Button onClick={() => setShowAuthModal(true)} label="Sign In" type="button" ariaLabel="Sign in" variant="outline" />}
+                {isSignedIn ? (<DropdownMenuCheckboxes />) : <Button onClick={() => setShowAuthModal(true)} label="Sign In" type="button" ariaLabel="Sign in" variant="outline" className={pathname === "/auth" ? "hidden" : "" } />}
 
 
 
@@ -203,6 +203,7 @@ export default function Navbar() {
             {
                 showAuthModal && (
                     <AuthModal setShowAuthModal={setShowAuthModal}
+                    showCloseIcon = {true}
                     />
                 )
             }
