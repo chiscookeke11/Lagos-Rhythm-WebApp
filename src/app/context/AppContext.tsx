@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, SetStateAction, useContext, useEffect, useState } from "react";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
 import { BlogDataType } from "@/Types/blogTypes";
 import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
@@ -51,6 +51,14 @@ interface AppContextProps {
 
   fetchUserData: (email: string) => void
 
+
+  inpersonTourPackage: string;
+  setInpersonTourPackage: React.Dispatch<SetStateAction<string>>
+
+
+  selectedInpersonTheme: string;
+  setSelectedInpersonTheme: React.Dispatch<SetStateAction<string>>
+
 }
 
 
@@ -95,6 +103,13 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
 
   const [price, setPrice] = useState<number>(0)
 
+  const [inpersonTourPackage, setInpersonTourPackage] = useState<string>(
+    getFromLocalStorage("inpersonPackage", "")
+  )
+
+  const [selectedInpersonTheme, setSelectedInpersonTheme] = useState<string>(
+    getFromLocalStorage("selectedPersonTheme", "")
+  )
 
 
 
@@ -114,6 +129,14 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme));
   }, [selectedTheme]);
+
+  useEffect(() => {
+    localStorage.setItem("inpersonPackage", JSON.stringify(inpersonTourPackage))
+  }, [inpersonTourPackage])
+
+useEffect(() => {
+    localStorage.setItem("selectedPersonTheme", JSON.stringify(selectedInpersonTheme))
+  }, [selectedInpersonTheme])
 
 
 
@@ -240,7 +263,11 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
         setUserData,
         fetchUserData,
         price,
-        setPrice
+        setPrice,
+        inpersonTourPackage,
+        setInpersonTourPackage,
+        selectedInpersonTheme,
+        setSelectedInpersonTheme
       }}
     >
       {children}
