@@ -6,7 +6,7 @@ import { exclusiveBookingDataType } from "@/Types/UserDataType"
 import { useAppContext } from "@/app/context/AppContext"
 import React, { useState, useCallback, useEffect, SetStateAction } from "react"
 import { CustomCheckBox } from "../common/CustomCheckbox"
-import { crewAmountData } from "@/data/data"
+import { crewAmountData, customTourPrices } from "@/data/data"
 // import CustomConnectButton from "./CustomConnectButton"
 // import { useAccount } from "wagmi"
 import toast from "react-hot-toast"
@@ -59,25 +59,36 @@ export default function PaymentModal({ isOpen, onClose, onPaymentSuccess, formDa
 
   const pickPrice = (populationType: string, subscriptionType: string, country: string) => {
     const crewItem = crewAmountData.find(item => populationType.includes(item.value))
+    const customItem = customTourPrices[0]
 
-    if (!crewItem) {
-      console.warn("No price found for given options")
-      return
-    }
 
     let newPrice = 0
 
-    if (subscriptionType === "per-tour") {
-      newPrice = crewItem.perTourFee(country)
+    if (selectedTheme === "Custom Tour" && subscriptionType === "per-tour") {
+      newPrice = customItem?.perTourFee(country) ?? 0
     }
-    else if (subscriptionType === "monthly") {
-      newPrice = crewItem.monthlySub(country)
+    else if (selectedTheme === "Custom Tour" && subscriptionType === "monthly") {
+      newPrice = customItem?.monthlySub(country) ?? 0
+    }
+
+    else if (selectedTheme !== "Custom Tour" && subscriptionType === "monthly") {
+      newPrice = crewItem?.monthlySub(country) ?? 0
+    }
+    else if (selectedTheme !== "Custom Tour" && subscriptionType === "per-tour") {
+      newPrice = crewItem?.perTourFee(country) ?? 0
     }
 
 
     setPrice(newPrice)
 
   }
+
+
+  useEffect(() => {
+    if (subscriptionType && country) {
+      pickPrice(populationType, subscriptionType, country)
+    }
+  }, [selectedTheme, subscriptionType, populationType, country])
 
 
 

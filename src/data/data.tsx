@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
+import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Radio, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
@@ -16,6 +16,7 @@ import { CrewAmountItem } from "@/Types/UserDataType";
 import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
 import { ThemeDataType } from "@/Types/ThemeDataType";
+import { ThemeJourneyType } from "@/Types/ThemeJourneyType";
 
 
 
@@ -428,6 +429,23 @@ export const crewAmountData: CrewAmountItem[] = [
 ]
 
 
+export const customTourPrices: CrewAmountItem[] = [
+    {
+        label: "1 Person",
+        value: "Individual",
+        perTourFee: (country: string) => {
+            if (country === "Nigeria") return 5000;
+            else return 10
+        },
+        monthlySub: (country: string) => {
+            if (country === "Nigeria") return 16000;
+            else return 2000
+        },
+        maxAmount: 1
+    },
+]
+
+
 export const faq = [
     {
         question: "Is Lagos Rhythm a travel agency?",
@@ -539,22 +557,42 @@ export const sideNavLinks = [
         route: "",
         icons: <UsersRound size={18} />,
     },
+    {
+        label: "Create Live stream",
+        route: "/dashboard/Live-Stream-settings",
+        icons: <Radio />,
+    },
 
 ]
 
 
 export const timeOptions = [
-    { label: "9:00 AM WAT", value: "21:00" },
+    { label: "8:00 AM WAT", value: "08:00" },
+    { label: "8:30 AM WAT", value: "08:30" },
+    { label: "9:00 AM WAT", value: "09:00" },
+    { label: "9:30 AM WAT", value: "09:30" },
     { label: "10:00 AM WAT", value: "10:00" },
+    { label: "10:30 AM WAT", value: "10:30" },
     { label: "11:00 AM WAT", value: "11:00" },
+    { label: "11:30 AM WAT", value: "11:30" },
     { label: "12:00 PM WAT", value: "12:00" },
+    { label: "12:30 PM WAT", value: "12:30" },
     { label: "1:00 PM WAT", value: "13:00" },
+    { label: "1:30 PM WAT", value: "13:30" },
     { label: "2:00 PM WAT", value: "14:00" },
+    { label: "2:30 PM WAT", value: "14:30" },
     { label: "3:00 PM WAT", value: "15:00" },
+    { label: "3:30 PM WAT", value: "15:30" },
+    { label: "4:00 PM WAT", value: "16:00" },
+    { label: "4:30 PM WAT", value: "16:30" },
+    { label: "5:00 PM WAT", value: "17:00" },
+    { label: "5:30 PM WAT", value: "17:30" },
+    { label: "6:00 PM WAT", value: "18:00" },
 ];
 
 
 export const metadataKeywords = [
+    // General Keywords
     "Lagos",
     "Lagos Rhythm",
     "Tour",
@@ -572,36 +610,467 @@ export const metadataKeywords = [
     "Escape",
     "Tour Packages",
     "Flavors",
-    "Lagos virtual tour",
-    "Virtual Lagos experience",
-    "In-person Lagos tour",
-    "Lagos food tour",
-    "Lagos nightlife guide",
-    "Lagos culture tours",
-    "Authentic Lagos vibes",
-    "Explore Lagos virtually",
-    "Lagos rhythm travel",
-    "Lagos art culture",
-    "Lagos nature escapes",
-    "Lagos themed package",
-    "Global easy payments",
-    "Crypto payment tours",
-    "Community-driven travel",
-    "Travel support Lagos",
-    "Experience Lagos in its natural form.",
-    "Live the vibe, please the mind.",
-    "Explore Lagos’s food, culture, and nightlife.",
-    "Free virtual tours of Lagos culture and landmarks.",
-    "Affordable themed packages for local and foreign travelers.",
-    "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
-    "Tailored group and corporate cultural experiences.",
-    "Built for the culture, proudly local, globally relevant.",
-    "Discover Lagos’s art, food, nightlife, nature, and escapes.",
-    "Join our community and step into Lagos’s rhythm.",
     "Tourism",
     "Lagos Tourism",
     "Nigeria",
     "Nigerian Tourism",
-    "Tourism technology"
+    "Tourism technology",
+    "Crypto payment tours",
+    "Community-driven travel",
+    "Travel support Lagos",
+    "Global easy payments",
+    "Built for the culture, proudly local, globally relevant.",
+    "Explore Lagos’s food, culture, and nightlife.",
+    "Discover Lagos’s art, food, nightlife, nature, and escapes.",
+    "Live the vibe, please the mind.",
+    "Easy global payments in NGN, USD, EUR, GBP, or crypto.",
+    "Tailored group and corporate cultural experiences.",
+    "Free virtual tours of Lagos culture and landmarks.",
+    "Affordable themed packages for local and foreign travelers.",
+    "Experience Lagos in its natural form.",
+    "Join our community and step into Lagos’s rhythm.",
+
+    // Homepage SEO
+    "Lagos virtual tour",
+    "Nigerian culture online",
+    "Lagos tourism startup",
+    "Explore Lagos online",
+    "African virtual experiences",
+    "Best virtual tour of Lagos",
+    "Interactive African tours",
+    "Cultural tourism Nigeria",
+    "Lagos city tour live",
+    "Lagos Rhythm online",
+
+    // About Page SEO
+    "About Lagos Rhythm",
+    "Tourism tech startup Africa",
+    "Lagos tourism innovation",
+    "Virtual tourism company Nigeria",
+    "African culture experience",
+    "Meet Lagos Rhythm team",
+    "How Lagos Rhythm works",
+    "Virtual travel startup Africa",
+
+    // Free E-Rhythm Page SEO
+    "Free virtual tour Lagos",
+    "Free African culture experience",
+    "Virtual Lagos city walk",
+    "Lagos Rhythm free experience",
+    "Free online tourism Nigeria",
+    "Virtual African heritage",
+    "Virtual education tour Lagos",
+    "Lagos online cultural tour",
+
+    // Exclusive Page SEO
+    "Exclusive Lagos virtual tour",
+    "Premium African experience",
+    "Private virtual tour Lagos",
+    "Immersive Lagos city tour",
+    "Paid virtual tourism Nigeria",
+    "Corporate cultural experience Africa",
+    "Exclusive Lagos Rhythm experience",
+
+    // In-person Page SEO
+    "In-person Lagos tour",
+    "Visit Lagos Nigeria",
+    "Guided Lagos city tour",
+    "Lagos tourism package",
+    "Heritage tour Lagos",
+    "Best places to visit in Lagos",
+    "Lagos travel experience",
+    "Book Lagos tour online",
+
+    // Flights Page SEO
+    "Cheap flights from Lagos",
+    "Book flight Nigeria",
+    "Lagos travel booking",
+    "Affordable flights from Africa",
+    "Lagos Rhythm flights",
+    "Nigeria ticket booking online",
+    "African travel deals",
+    "Flight booking Lagos Nigeria",
+    "Book international flights from Africa",
+    "Cheap flights to Lagos Nigeria",
+    "Affordable flights from Lagos to London",
+    "Best African flight booking site",
+    "International flight deals from Nigeria",
+    "Flights from Ghana to Europe",
+    "Cheap flights from Kenya to Dubai",
+    "Africa to UK flights online booking",
+    "Lagos to Paris flights",
+    "Book return tickets Africa to USA",
+    "Book flights online Africa",
+    "International flight booking portal",
+    "Flights from West Africa to Europe",
+    "Cheap flights Africa to Canada",
+    "Compare international airfares online",
+    "Book multi-city flights from Africa",
+    "Lagos Rhythm flight booking",
+    "African travel agency for flights",
+    "Book flights via Duffel API",
+    "Global flight deals from Africa",
+    "Flights from Accra to Lagos",
+    "Nairobi to London flights",
+    "Johannesburg to Lagos flight deals",
+    "Flights from Abuja to Toronto",
+    "Dakar to Paris flights",
+    "Flights from Lagos to Amsterdam",
+    "Cheap flights from Africa to Asia",
+    "Book Dubai to Lagos flights",
+
+    // Store SEO
+    "Lagos Rhythm store",
+    "African travel merch",
+    "Nigerian culture souvenirs",
+    "Buy Lagos themed items",
+    "African travel accessories",
+    "Lagos Rhythm products",
+    "Virtual tour gift cards",
+    "Lagos cultural gifts",
+
+    // Blog SEO
+    "Lagos tourism blog",
+    "African travel stories",
+    "Nigerian culture articles",
+    "Lagos Rhythm blog",
+    "Virtual travel insights Africa",
+    "Explore Lagos online blog",
+    "African tourism innovation",
+    "Culture and travel in Lagos"
 ];
+
+
+
+export const inpersonExperience = [
+    {
+        title: "Personal Journeykeeper",
+        description: "Assigned before arrival, your dedicated guide ensures comfort, coordination, and a seamless experience from start to finish.",
+        image: "/in-person/journeykeeper.jpg"
+    },
+    {
+        title: "Themed Journeys",
+        description: "Each tour tells a living story of culture, history, and the people who make Lagos unforgettable.",
+        image: "/in-person/themed-journeys.jpg"
+    },
+    {
+        title: "Maximum Living",
+        description: "From arrival to departure, we curate moments of taste, music, and connection that bring Lagos to life.",
+        image: "/in-person/maximum-living.jpg"
+    },
+    {
+        title: "Tour Safety and Wellbeing Cover",
+        description: "Your safety and health are fully supported with secure logistics, medical access, and on-tour coordination.",
+        image: "/in-person/tour-and-safety.jpg"
+    },
+    {
+        title: "Rhythm Flex",
+        description: "Short or long stay, solo or group, flexible options let you experience Lagos at your own pace.",
+        image: "/in-person/rhythm-flex.jpg"
+    }
+];
+
+
+
+
+export const themeJourneys: ThemeJourneyType[] = [
+    {
+        title: "Another Day, Another Lagos",
+        description:
+            "Every sunrise reveals a new side of the city, from calm to thrill, from laughter to awe.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "Love or Lost?",
+        description:
+            "Romance, reflection, or rediscovery, Lagos brings emotion to life in the most unexpected ways.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "Joy is Free",
+        description:
+            "When Lagos celebrates, it never holds back. This is pure energy, laughter, and life without limits.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "Lagos After Dark",
+        description:
+            "When the sun sets, the rhythm rises. Dive into the city’s nightlife, sounds, and stories that last till dawn.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "The Lagos Dream",
+        description:
+            "Ambition meets culture in the city that never stops dreaming. See why the world keeps watching.",
+        minorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "3 Days", price: 800 },
+                    { duration: "5 Days", price: 1200 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "3 Days", price: 1000 },
+                    { duration: "5 Days", price: 1500 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "Work & Vibe",
+        description:
+            "Work by day, vibe by night. Lagos is where productivity meets inspiration, flavor, and fun.",
+        majorPackages: [
+            {
+                id: 1,
+                title: "Single",
+                options: [
+                    { duration: "2 Weeks", price: 3000 },
+                    { duration: "1 Month", price: 5000 },
+                ],
+            },
+            {
+                id: 2,
+                title: "Double",
+                options: [
+                    { duration: "2 Weeks", price: 4000 },
+                    { duration: "1 Month", price: 6000 },
+                ],
+            },
+        ],
+    },
+
+    {
+        title: "Custom tour",
+        description:
+            "Create your own story. Pick your pace, passions, and path, and let Lagos unfold your rhythm",
+    },
+];
+
+
+
+
+export const themePrices = [
+    {
+        id: 1,
+        title: "Single",
+        options: [
+            { duration: "3 days", price: "$800" },
+            { duration: "5 days", price: "$1200" },
+        ],
+    },
+    {
+        id: 2,
+        title: " Double",
+        options: [
+            { duration: "3 days", price: "$1000" },
+            { duration: "5 days", price: "$1500" },
+        ],
+    },
+];
+
+
+
+
+
+export const whatBringsYouToTourOptions = [
+    {
+        label: "Leisure",
+        value: "Leisure",
+    },
+
+    {
+        label: "Research",
+        value: "Research",
+    },
+    {
+        label: "Team bonding",
+        value: "Team bonding",
+    },
+    {
+        label: "Content creation",
+        value: "Content creation",
+    },
+    {
+        label: "Cultural exploration",
+        value: "Cultural exploration",
+    },
+    {
+        label: " Education",
+        value: " Education",
+    },
+    {
+        label: "Other",
+        value: "Other",
+    },
+
+]
+
+
+
+export const IamJoiningAsData = [
+    {
+        label: "Solo Traveler",
+        value: "Solo Traveler",
+    },
+    {
+        label: "Couple",
+        value: "Couple",
+    },
+    {
+        label: "Family",
+        value: "Family",
+    },
+    {
+        label: "Group",
+        value: "Group",
+    },
+    {
+        label: "Corporate Team",
+        value: "Corporate Team",
+    },
+    {
+        label: "School Tour",
+        value: "School Tour",
+    },
+
+]
+
+
+
+
+export const preferredFoodOptions = [
+    {
+        label: "Nigerian Cuisine",
+        value: "Nigerian Cuisine"
+    },
+    {
+        label: "Continental",
+        value: "Continental"
+    },
+    {
+        label: "Vegetarian",
+        value: "Vegetarian"
+    },
+    {
+        label: "Vegan",
+        value: "Vegan"
+    },
+    {
+        label: "No Preference",
+        value: "No Preference"
+    },
+    {
+        label: "Other (please specify)",
+        value: "Other (please specify)"
+    },
+]
+
+
+
+export const howDidYouHear = [
+    {
+        label: "Instagram",
+        value: "Instagram"
+    },
+    {
+        label: "TikTok",
+        value: "TikTok"
+    },
+    {
+        label: "Friend/Referral",
+        value: "Friend/Referral"
+    },
+    {
+        label: "Press Feature",
+        value: "Press Feature"
+    },
+    {
+        label: "Event",
+        value: "Event"
+    },
+    {
+        label: "Other",
+        value: "Other"
+    }
+]
+
 
