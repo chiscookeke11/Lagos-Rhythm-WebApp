@@ -1,5 +1,5 @@
 import { useAppContext } from "@/app/context/AppContext";
-import { crewAmountData } from "@/data/data";
+import { crewAmountData, customTourPrices } from "@/data/data";
 import { AnimatePresence, motion } from "framer-motion";
 import { Users, X } from "lucide-react";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
     const [hidePrices, setHidePrices] = useState(false)
 
 
-// This function adds the details of the chosen
+    // This function adds the details of the chosen
     const chooseTheme = (item: CrewAmountItem) => {
         setShowSelectModal(false)
         setPopulationType(item.label)
@@ -59,29 +59,68 @@ export default function SelectNumber({ setShowSelectModal }: SelectNumberprops) 
 
                     <h1 className=" mx-auto font-merriweather text-xl font-bold text-[#05073C] " >Choose a tour size</h1>
 
-                    <div className={`w-full h-full  grid-cols-1 md:grid-cols-3 place-items-center  justify-items-center gap-5 ${hidePrices ? "hidden lg:grid " : "grid"} `} >
-                        {crewAmountData.map((item, index) => {
 
-                            return (
-
-                                <Link key={index} href={"/exclusive-tour-form"} className=" w-full " >
-                                    <button onClick={() => chooseTheme(item)}
-                                        className="w-full h-full py-3 px-2 bg-[#ffffff]  text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all transform duration-150 ease-in-out font-lato  " >
+                    {selectedTheme === "Custom Tour" ? (
+                        <div
+                            className={`w-full h-full grid-cols-1  place-items-center justify-items-center gap-5 ${hidePrices ? "hidden lg:grid" : "grid"
+                                }`}
+                        >
+                            {customTourPrices.map((item, index) => (
+                                <Link key={index} href="/exclusive-tour-form" className="w-fit mx-auto">
+                                    <button
+                                        onClick={() => chooseTheme(item)}
+                                        className="w-full h-full py-3 px-2 bg-white text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all duration-150 font-lato"
+                                    >
                                         <Users color="#EF8F57" />
-                                        <span className="font-semibold text-base " >            {item.label}</span>
-                                        {
-                                            selectedTheme === "Custom Tour" ?
-                                                (null) :
-                                                <>
-                                                    <span>   Per Tour Fee:           <span className="text-[#EF8F57] ml-1 " >{item.perTourFee(userData?.country ?? "").toLocaleString("en")} {userData?.country === "Nigeria" ? "NGN" : "USD"} </span></span>
-                                                    <span>   Monthly Fee: <span className=" text-[#EF8F57]  ml-1" >{item.monthlySub(userData?.country ?? "").toLocaleString("enf")} {userData?.country === "Nigeria" ? "NGN" : "USD"}</span>  </span>
-                                                </>
-                                        }
+                                        <span className="font-semibold text-base">{item.label}</span>
+                                        <span>
+                                            Tour Fee:
+                                            <span className="text-[#EF8F57] ml-1">
+                                                {item.perTourFee(userData?.country ?? "").toLocaleString("en")}{" "}
+                                                {userData?.country === "Nigeria" ? "NGN" : "USD"}
+                                            </span>
+                                        </span>
                                     </button>
                                 </Link>
-                            )
-                        })}
-                    </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div
+                            className={`w-full h-full grid-cols-1 md:grid-cols-3 place-items-center justify-items-center gap-5 ${hidePrices ? "hidden lg:grid" : "grid"
+                                }`}
+                        >
+                            {crewAmountData.map((item, index) => (
+                                <Link key={index} href="/exclusive-tour-form" className="w-full">
+                                    <button
+                                        onClick={() => chooseTheme(item)}
+                                        className="w-full h-full py-3 px-2 bg-white text-[#05073C] cursor-pointer flex items-center flex-col gap-2 justify-center shadow-xl rounded-sm text-sm hover:scale-105 transition-all duration-150 font-lato"
+                                    >
+                                        <Users color="#EF8F57" />
+                                        <span className="font-semibold text-base">{item.label}</span>
+
+                                        <span>
+                                            Per Tour Fee:
+                                            <span className="text-[#EF8F57] ml-1">
+                                                {item.perTourFee(userData?.country ?? "").toLocaleString("en")}{" "}
+                                                {userData?.country === "Nigeria" ? "NGN" : "USD"}
+                                            </span>
+                                        </span>
+
+                                        <span>
+                                            Monthly Fee:
+                                            <span className="text-[#EF8F57] ml-1">
+                                                {item.monthlySub(userData?.country ?? "").toLocaleString("en")}{" "}
+                                                {userData?.country === "Nigeria" ? "NGN" : "USD"}
+                                            </span>
+                                        </span>
+                                    </button>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+
+
+
                     <CurrencyConverter setHidePrices={setHidePrices} />
 
                 </motion.div>
