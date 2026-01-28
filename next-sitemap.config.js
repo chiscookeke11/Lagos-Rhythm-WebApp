@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://www.lagosrhythm.com', // your live domain
-  generateRobotsTxt: true, // generates robots.txt file
+  siteUrl: 'https://www.lagosrhythm.com',
+  generateRobotsTxt: true,
   sitemapSize: 7000,
 };
