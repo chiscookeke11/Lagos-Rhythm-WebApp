@@ -36,6 +36,16 @@ export default function Page() {
     const fromNormalized = normalizeText(from)
     const toNormalized = normalizeText(to)
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude
+            const lng = position.coords.longitude
+
+            const address = await getAddressFromCoords(lat, lng)
+            setLocationInWords(address)
+        })
+    }, [])
+
     // function to search database for resources
     const findDirection = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -66,7 +76,7 @@ export default function Page() {
 
         // Find routes that appear in both queries (matching both from and to)
         const mergedData = data1.filter((route) => data2.some((r) => r.id === route.id))
-
+        console.log(mergedData)
         setResults(mergedData)
         setLoading(false)
         setCurrentTab("Videos")
@@ -117,15 +127,7 @@ export default function Page() {
         return data.display_name
     }
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-            const lat = position.coords.latitude
-            const lng = position.coords.longitude
 
-            const address = await getAddressFromCoords(lat, lng)
-            setLocationInWords(address)
-        })
-    }, [])
 
     return (
         <div className="w-full min-h-screen flex flex-col items-center justify-center py-32  px-[4%] gap-6 text-black relative bg-[#05073C]  ">
@@ -184,7 +186,7 @@ export default function Page() {
                 {results ? (
                     <>
                         <div className="w-full h-fit py-5 px-3 lg:px-5 bg-[#FDF4F1] max-w-6xl rounded-sm font-merriweather flex flex-col items-start gap-5 ">
-                            <h3 className="font-semibold text-2xl text-[#05073C] mx-auto mb-5 ">Results</h3>
+                            <h3 className="font-semibold text-2xl text-[#05073C] mx-auto mb-5 ">Results  {results ? `for ${from.toUpperCase()} to ${to.toUpperCase()} ` : ""} </h3>
 
                             <div className="w-full flex items-center gap-5 overflow-x-auto py-2 px-4 bg-gray-200 ">
                                 <button
