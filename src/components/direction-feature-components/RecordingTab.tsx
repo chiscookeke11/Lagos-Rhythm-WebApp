@@ -20,20 +20,25 @@ export default function RecordingTab({ data }: RecordingTabProps) {
     }
 
     return (
-     <div className="w-full flex flex-col items-center gap-5" >
-           <section className=" w-full grid grid-cols-5 place-items-center justify-items-center gap-5 " >
+        <div className="w-full flex flex-col items-center gap-5" >
+            <section className=" w-full grid grid-cols-3 place-items-center justify-items-center gap-5 " >
 
-            {
-                data?.map((sound, index) => (
-                    <div key={index} className="w-full h-[200px] flex items-center justify-center bg-blue-300 rounded-xs " >
-                        {sound.id}
-                    </div>
-                ))
-            }
+                {
+                    data?.map((sound, index) => (
+                        <div key={index} className="w-full bg-white py-4 px-3 rounded-xs space-y-2 shadow-md " >
+                            <p className="text-sm " >{sound.type[0].toUpperCase() + sound.type.slice(1)} route</p>
+                            <p className="text-sm " >Language: {sound.language && sound.language[0].toUpperCase() + sound.language.slice(1)} </p>
+                            <audio controls className="mt-3 " >
+                                <source src={sound.content_url} type="audio/mpeg" />
+                                Your browser does not support audio.
+                            </audio>
+                        </div>
+                    ))
+                }
 
-        </section>
+            </section>
 
-        <span> {data?.length} recording{data && data?.length > 1 ? "s" : ""} found </span>
-     </div>
+            <span> {data?.length} recording{data && data?.length > 1 ? "s" : ""} found </span>
+        </div>
     )
 }
