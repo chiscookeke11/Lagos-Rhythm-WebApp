@@ -29,8 +29,8 @@ export default function AIDirectionTab({ data }: AIDirectionTabProps) {
 
             {
                 data?.map((image, index) => (
-                    <div key={index} className="w-full h-[200px] flex items-center justify-center bg-blue-300 rounded-xs  " >
-                   <p className="text-wrap flex-wrap text-xs " >     {image.id} </p>
+                    <div key={index} className="w-full h-[200px] flex items-center justify-center bg-blue-300 rounded-xs " >
+                        {image.id}
                     </div>
                 ))
             }
