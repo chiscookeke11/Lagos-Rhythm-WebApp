@@ -94,6 +94,7 @@ export default function Page() {
         if (!results) return
 
         const textResources = results.filter((resource) => resource.type.toLocaleLowerCase() === "text")
+        console.log(textResources)
         setTextResults(textResources)
     }
 
@@ -101,6 +102,7 @@ export default function Page() {
         if (!results) return
 
         const imageResources = results.filter((resource) => resource.type.toLocaleLowerCase() === "image")
+        console.log(imageResources)
         setImageResults(imageResources)
     }
 

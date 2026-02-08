@@ -21,14 +21,14 @@ export default function RecordingTab({ data }: RecordingTabProps) {
 
     return (
         <div className="w-full flex flex-col items-center gap-5" >
-            <section className=" w-full grid grid-cols-3 place-items-center justify-items-center gap-5 " >
+            <section className=" w-full grid grid-cols-1 md:grid-cols-2 place-items-center justify-items-center gap-5 " >
 
                 {
                     data?.map((sound, index) => (
-                        <div key={index} className="w-full bg-white py-4 px-3 rounded-xs space-y-2 shadow-md " >
-                            <p className="text-sm " >{sound.type[0].toUpperCase() + sound.type.slice(1)} route</p>
-                            <p className="text-sm " >Language: {sound.language && sound.language[0].toUpperCase() + sound.language.slice(1)} </p>
-                            <audio controls className="mt-3 " >
+                        <div key={index} className="w-full bg-white py-4 px-3 rounded-xs space-y-2 shadow-md flex flex-col items-start gap-1 " >
+                            <p className="text-xs " >{sound.type[0].toUpperCase() + sound.type.slice(1)} route</p>
+                            <p className="text-xs " >Language: {sound.language && sound.language[0].toUpperCase() + sound.language.slice(1)} </p>
+                            <audio controls className="mt-3 mx-auto" >
                                 <source src={sound.content_url} type="audio/mpeg" />
                                 Your browser does not support audio.
                             </audio>

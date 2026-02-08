@@ -1,4 +1,6 @@
 import { LocationResourceDataType } from "@/Types/LocationResourceDataType"
+import { Download } from "lucide-react"
+
 
 
 
@@ -23,9 +25,9 @@ export default function TextTab({ data }: TextTabProps) {
 
             {
                 data?.map((text, index) => (
-                    <div key={index} className="w-full h-[200px] flex items-center justify-center bg-green-300 rounded-xs " >
-                        {text.id}
-                    </div>
+
+                    <a key={index} href={text.content_url} target="_blank" className="px-4 py-1 w-full h-[70px] text-xs font-medium flex items-center justify-center flex-col bg-[#05073C] text-white  rounded-sm " >Download PDF <Download size={17} /> </a>
+
                 ))
             }
 
