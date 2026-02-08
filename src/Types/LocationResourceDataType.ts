@@ -13,5 +13,6 @@ export interface LocationResourceDataType {
     type: string,
     id: string,
     route_key: string,
-    language?: string
+    language?: string,
+    step_images?: string[]
 }
