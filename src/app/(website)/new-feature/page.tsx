@@ -27,6 +27,7 @@ export default function Page() {
     const [textResults, setTextResults] = useState<LocationResourceDataType[] | null>([])
     const [soundResults, setSoundResults] = useState<LocationResourceDataType[] | null>([])
     const [imageResults, setImageResults] = useState<LocationResourceDataType[] | null>([])
+    const [AIResults, setAIResults] = useState<LocationResourceDataType[] | null>([])
     const [locationInWords, setLocationInWords] = useState<string | null>(null)
 
     const normalizeText = (text: string) => {
@@ -113,12 +114,20 @@ export default function Page() {
         setSoundResults(soundResources)
     }
 
+        const filterAIResources = () => {
+        if (!results) return
+
+        const aiResources = results.filter((resource) => resource.type.toLocaleLowerCase() === "AI")
+        setAIResults(aiResources)
+    }
+
     // The function then runs once there is a change in results
     useEffect(() => {
         filterVideos()
         filterTextResources()
         filterImageResources()
         filterSoundResources()
+        filterAIResources()
     }, [results])
 
     // converting geolocation coordinates to words
@@ -231,7 +240,7 @@ export default function Page() {
                                 {currentTab === "Text" && <TextTab data={textResults} />}
                                 {currentTab === "Sound recording" && <RecordingTab data={soundResults} />}
                                 {currentTab === "image" && <ImageTab data={imageResults} />}
-                                {currentTab === "AI direction" && <AIDirectionTab data={imageResults} />}
+                                {currentTab === "AI direction" && <AIDirectionTab data={AIResults} />}
                             </div>
                         </div>
                     </>
