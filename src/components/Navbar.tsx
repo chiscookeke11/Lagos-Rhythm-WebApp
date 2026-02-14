@@ -46,8 +46,8 @@ const navLinks = [
         path: "/blogs",
     },
       {
-        label: "New Feature",
-        path: "/new-feature",
+        label: "STREET RHYTHM",
+        path: "/street-rhythm",
     },
 ]
 
