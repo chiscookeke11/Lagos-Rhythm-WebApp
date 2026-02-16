@@ -158,7 +158,7 @@ export function SearchCard() {
           />
           <button
             type="button"
-            className="cursor-pointer"
+            className="cursor-pointer hidden "
             onClick={() => setFrom(locationInWords ?? "")}
             title="current location"
           >
