@@ -6,9 +6,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 1rem;
-  padding-top: calc(1rem + env(safe-area-inset-top));
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  padding: 40px 16px;
 }
 
 .hero::before {
