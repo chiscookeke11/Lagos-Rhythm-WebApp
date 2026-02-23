@@ -15,4 +15,5 @@ export interface LocationResourceDataType {
     route_key: string,
     language?: string,
     step_images?: string[]
+    order?: number
 }

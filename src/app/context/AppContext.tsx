@@ -200,7 +200,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     } finally {
       setLoading(false);
       setHasSearched(true)
-      router.push("/street-rhythm-2/#route")
+      router.push("/street-rhythm/#route")
     }
   };
 
