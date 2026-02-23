@@ -26,14 +26,20 @@ export default function VideoTab({ data }: VideoTabProps) {
 
                 {
                     data?.map((video, index) => (
-                        <video
+                        <div
                             key={index}
-                            className="w-full h-[200px] bg-amber-300 rounded-xs overflow-hidden"
-                            preload="metadata"
-                            controls>
-                            <source src={video.content_url} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                        >
+                            <video
+                                className="w-full h-[200px] bg-amber-300 rounded-xs overflow-hidden"
+                                preload="metadata"
+                                controls>
+                                <source src={video.content_url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <p className="text-xs " >{video.type[0].toUpperCase() + video.type.slice(1)} route</p>
+                            <p className="text-xs " >Language: {video.language && video.language[0].toUpperCase() + video.language.slice(1)} </p>
+                        </div>
 
                     ))
                 }
