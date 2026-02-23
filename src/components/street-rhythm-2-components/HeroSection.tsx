@@ -32,7 +32,7 @@ export default function HeroSection() {
                 " >Local</span></h1>
 
 
-                <p className="text-[1.05rem] text-[#CBD5E0] font-medium " >Video-guided journeys through Lagos's informal transport system. See your route before you take it—with real commuter footage and step-by-step navigation.</p>
+                <p className="text-[1.05rem] text-[#CBD5E0] font-medium " >Video-guided journeys through Lagos&apos;s informal transport system. See your route before you take it—with real commuter footage and step-by-step navigation.</p>
 
 
                 <div className="w-fit flex items-center flex-col md:flex-row gap-4 md:gap-10  mt-4" >
