@@ -86,7 +86,7 @@ export default function RouteDetails() {
         `}
                                 >
                                     {tab === "Text" ? "Text direction" :
-                                        tab === "image" ? "Image" :
+                                        tab === "image" ? "Landmarks" :
                                             tab}
                                 </button>
                             )
