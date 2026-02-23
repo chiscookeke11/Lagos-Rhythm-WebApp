@@ -1,70 +1,79 @@
-"use client";
+'use client'
 
-import React, { createContext, SetStateAction, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, SetStateAction } from "react";
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
+import { fireDB } from "@/app/config/firebaseClient";
 import { PopulationTypeInterface } from "@/Types/UserDataType";
 import { BlogDataType } from "@/Types/blogTypes";
-import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
-import { fireDB } from "../config/firebaseClient";
 import { ClerkUser } from "@/Types/UserType";
 import { galleryTypes } from "@/Types/galleryType";
 import { ProfileDataType } from "@/Types/ProfileDataType";
+import { LocationResourceDataType } from "@/Types/LocationResourceDataType";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
-
-
-
-
-
+// ====================== Context Interface ======================
 interface AppContextProps {
+  // --- General app state ---
   populationType: PopulationTypeInterface;
   setPopulationType: React.Dispatch<React.SetStateAction<PopulationTypeInterface>>;
-
   populationAmount: number;
   setPopulationAmount: React.Dispatch<React.SetStateAction<number>>;
-
   participantsCount: number;
   setParticipantsCount: React.Dispatch<React.SetStateAction<number>>;
-
   selectedTheme: string;
   setSelectedTheme: React.Dispatch<React.SetStateAction<string>>;
 
-
+  // --- Blogs ---
   blogs: BlogDataType[] | null;
-  setBlogs: React.Dispatch<React.SetStateAction<BlogDataType[] | null>>
+  setBlogs: React.Dispatch<React.SetStateAction<BlogDataType[] | null>>;
 
+  // --- Users ---
   users: ClerkUser[] | null;
-  setUsers: React.Dispatch<React.SetStateAction<ClerkUser[] | null>>
+  setUsers: React.Dispatch<React.SetStateAction<ClerkUser[] | null>>;
 
+  // --- Gallery ---
   galleryImages: galleryTypes[] | null;
-  setGalleryImages: React.Dispatch<React.SetStateAction<galleryTypes[] | null>>
+  setGalleryImages: React.Dispatch<React.SetStateAction<galleryTypes[] | null>>;
 
-
+  // --- User profile ---
   userData: ProfileDataType | null;
-  setUserData: React.Dispatch<React.SetStateAction<ProfileDataType | null>>
+  setUserData: React.Dispatch<React.SetStateAction<ProfileDataType | null>>;
+  email?: string;
+  fetchUserData: (email: string) => void;
 
-
-  email?: string
-
-  price: number
-  setPrice: React.Dispatch<React.SetStateAction<number>>
-
-
-  fetchUserData: (email: string) => void
-
-
+  // --- Pricing / Packages ---
+  price: number;
+  setPrice: React.Dispatch<React.SetStateAction<number>>;
   inpersonTourPackage: string;
-  setInpersonTourPackage: React.Dispatch<SetStateAction<string>>
-
-
+  setInpersonTourPackage: React.Dispatch<SetStateAction<string>>;
   selectedInpersonTheme: string;
-  setSelectedInpersonTheme: React.Dispatch<SetStateAction<string>>
+  setSelectedInpersonTheme: React.Dispatch<SetStateAction<string>>;
 
+  // --- Search / Directions ---
+  from: string;
+  setFrom: React.Dispatch<React.SetStateAction<string>>;
+  to: string;
+  setTo: React.Dispatch<React.SetStateAction<string>>;
+  results: LocationResourceDataType[] | null;
+  videoResults: LocationResourceDataType[] | null;
+  textResults: LocationResourceDataType[] | null;
+  soundResults: LocationResourceDataType[] | null;
+  imageResults: LocationResourceDataType[] | null;
+  AIResults: LocationResourceDataType[] | null;
+  currentTab: "Videos" | "Text" | "AI direction" | "Sound recording" | "image";
+  setCurrentTab: React.Dispatch<React.SetStateAction<"Videos" | "Text" | "AI direction" | "Sound recording" | "image">>;
+  loading: boolean;
+  findDirection: (e?: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  locationInWords: string | null;
+  hasSearched: boolean,
+  setHasSearched: React.Dispatch<SetStateAction<boolean>>
 }
 
-
+// ====================== Context Creation ======================
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-
+// ====================== Helper ======================
 const getFromLocalStorage = <T,>(key: string, defaultValue: T): T => {
   if (typeof window === "undefined") return defaultValue;
   try {
@@ -75,211 +84,169 @@ const getFromLocalStorage = <T,>(key: string, defaultValue: T): T => {
   }
 };
 
-
+// ====================== Provider ======================
 export const LagosRhythmProvider = ({ children }: { children: React.ReactNode }) => {
-  const [populationType, setPopulationType] = useState<PopulationTypeInterface>(
-    getFromLocalStorage("populationType", "1-3 (circle)")
-  );
-  const [populationAmount, setPopulationAmount] = useState<number>(
-    getFromLocalStorage("populationAmount", 0)
-  );
-  const [participantsCount, setParticipantsCount] = useState<number>(1)
-
-
-  const [selectedTheme, setSelectedTheme] = useState<string>(
-    getFromLocalStorage("selectedTheme", "")
-  );
-
-  const [blogs, setBlogs] = useState<BlogDataType[] | null>(null);
-
-  const [users, setUsers] = useState<ClerkUser[] | null>([])
-
-  const [galleryImages, setGalleryImages] = useState<galleryTypes[] | null>(null)
-
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
 
-  const [userData, setUserData] = useState<ProfileDataType | null>(null)
+  // ---------------------- App / Profile State ----------------------
+  const [populationType, setPopulationType] = useState<PopulationTypeInterface>(getFromLocalStorage("populationType", "1-3 (circle)"));
+  const [populationAmount, setPopulationAmount] = useState<number>(getFromLocalStorage("populationAmount", 0));
+  const [participantsCount, setParticipantsCount] = useState<number>(1);
+  const [selectedTheme, setSelectedTheme] = useState<string>(getFromLocalStorage("selectedTheme", ""));
+  const [blogs, setBlogs] = useState<BlogDataType[] | null>(null);
+  const [users, setUsers] = useState<ClerkUser[] | null>([]);
+  const [galleryImages, setGalleryImages] = useState<galleryTypes[] | null>(null);
+  const [userData, setUserData] = useState<ProfileDataType | null>(null);
+  const [price, setPrice] = useState<number>(0);
+  const [inpersonTourPackage, setInpersonTourPackage] = useState<string>(getFromLocalStorage("inpersonPackage", ""));
+  const [selectedInpersonTheme, setSelectedInpersonTheme] = useState<string>(getFromLocalStorage("selectedPersonTheme", ""));
 
-  const [price, setPrice] = useState<number>(0)
+  // ---------------------- Search / Directions State ----------------------
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState<LocationResourceDataType[] | null>(null);
+  const [videoResults, setVideoResults] = useState<LocationResourceDataType[] | null>([]);
+  const [textResults, setTextResults] = useState<LocationResourceDataType[] | null>([]);
+  const [soundResults, setSoundResults] = useState<LocationResourceDataType[] | null>([]);
+  const [imageResults, setImageResults] = useState<LocationResourceDataType[] | null>([]);
+  const [AIResults, setAIResults] = useState<LocationResourceDataType[] | null>([]);
+  const [currentTab, setCurrentTab] = useState<"Videos" | "Text" | "AI direction" | "Sound recording" | "image">("Videos");
+  const [locationInWords, setLocationInWords] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false)
 
-  const [inpersonTourPackage, setInpersonTourPackage] = useState<string>(
-    getFromLocalStorage("inpersonPackage", "")
-  )
+  const normalizeText = (text: string) => text.toLowerCase().trim();
+  const fromNormalized = normalizeText(from);
+  const toNormalized = normalizeText(to);
 
-  const [selectedInpersonTheme, setSelectedInpersonTheme] = useState<string>(
-    getFromLocalStorage("selectedPersonTheme", "")
-  )
+  const router  = useRouter()
 
+  // ---------------------- Local Storage Effects ----------------------
+  useEffect(() => { localStorage.setItem("populationType", JSON.stringify(populationType)); }, [populationType]);
+  useEffect(() => { localStorage.setItem("populationAmount", JSON.stringify(populationAmount)); }, [populationAmount]);
+  useEffect(() => { localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme)); }, [selectedTheme]);
+  useEffect(() => { localStorage.setItem("inpersonPackage", JSON.stringify(inpersonTourPackage)); }, [inpersonTourPackage]);
+  useEffect(() => { localStorage.setItem("selectedPersonTheme", JSON.stringify(selectedInpersonTheme)); }, [selectedInpersonTheme]);
 
-
-
-
-
-
-  useEffect(() => {
-    localStorage.setItem("populationType", JSON.stringify(populationType));
-  }, [populationType]);
-
-  useEffect(() => {
-    localStorage.setItem("populationAmount", JSON.stringify(populationAmount));
-  }, [populationAmount]);
-
-
-  useEffect(() => {
-    localStorage.setItem("selectedTheme", JSON.stringify(selectedTheme));
-  }, [selectedTheme]);
-
-  useEffect(() => {
-    localStorage.setItem("inpersonPackage", JSON.stringify(inpersonTourPackage))
-  }, [inpersonTourPackage])
-
-useEffect(() => {
-    localStorage.setItem("selectedPersonTheme", JSON.stringify(selectedInpersonTheme))
-  }, [selectedInpersonTheme])
-
-
-
-
-  // function to fetch blog data
+  // ---------------------- Fetch Blogs ----------------------
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const q = query(
-          collection(fireDB, "blogs"),
-          orderBy("addedAt", "desc")
-        )
+        const q = query(collection(fireDB, "blogs"), orderBy("addedAt", "desc"));
+        const snapshot = await getDocs(q);
+        const items: BlogDataType[] = snapshot.docs.map(doc => {
+          const data = doc.data();
+          return { id: doc.id, title: data.title, text: data.text, image: data.image, author: data.author, addedAt: data.addedAt?.toDate().toDateString() || "" };
+        });
+        setBlogs(items);
+      } catch (err) { console.error("Error fetching blogs:", err); }
+    };
+    fetchBlogData();
+  }, []);
 
-        const querySnapshot = await getDocs(q)
-
-        const items: BlogDataType[] = querySnapshot.docs.map((doc) => {
-          const data = doc.data()
-          return {
-            id: doc.id,
-            title: data.title,
-            text: data.text,
-            image: data.image,
-            author: data.author,
-            addedAt: data.addedAt?.toDate().toDateString() || "",
-          }
-        })
-
-        setBlogs(items)
-      } catch (error) {
-        console.error("error fetching data:", error)
-      }
-    }
-
-    fetchBlogData()
-  }, [])
-
-
-
-
-  // function to fetch gallery images
+  // ---------------------- Fetch Gallery ----------------------
   useEffect(() => {
     const fetchGalleryImages = async () => {
       try {
-        const querySnapshot = await getDocs(collection(fireDB, "gallery"));
-        const items: galleryTypes[] = querySnapshot.docs.map((doc) => {
-          const data = doc.data()
+        const snapshot = await getDocs(collection(fireDB, "gallery"));
+        const items: galleryTypes[] = snapshot.docs.map(doc => ({ id: doc.id, image: doc.data().image, text: doc.data().title }));
+        setGalleryImages(items);
+      } catch (err) { console.error("Error fetching gallery images:", err); }
+    };
+    fetchGalleryImages();
+  }, []);
 
-          return {
-            id: doc.id,
-            image: data.image,
-            text: data.title
-          }
-        });
-        setGalleryImages(items)
-      }
-      catch (error) {
-        console.error("Error fetching images", error)
-      }
-    }
-    fetchGalleryImages()
-
-
-  }, [])
-
-
-
-
-  // function to fetch user data
+  // ---------------------- Fetch User Data ----------------------
   const fetchUserData = async (email: string) => {
-    if (email) {
-      try {
-        const userRef = doc(fireDB, "user_profile", email)
-        const docSnap = await getDoc(userRef)
-
-        if (docSnap.exists()) {
-          const fetchedData = docSnap.data() as ProfileDataType
-          setUserData({
-            fullName: fetchedData.fullName,
-            country: fetchedData.country,
-            email: fetchedData.email,
-            imageUrl: fetchedData.imageUrl
-          })
-        }
+    if (!email) return;
+    try {
+      const docSnap = await getDoc(doc(fireDB, "user_profile", email));
+      if (docSnap.exists()) {
+        const data = docSnap.data() as ProfileDataType;
+        setUserData(data);
       }
-      catch (error) {
-        console.error("Error fetching user Data", error)
-      }
-    }
+    } catch (err) { console.error("Error fetching user data:", err); }
+  };
+  useEffect(() => { if (email) fetchUserData(email); }, [email]);
 
-  }
-
-
-
-  // function to fetch user profile
+  // ---------------------- Geolocation ----------------------
   useEffect(() => {
-    if (email) {
-      fetchUserData(email)
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
+      const data = await res.json();
+      setLocationInWords(data.display_name);
+    });
+  }, []);
+
+  // ---------------------- Search / Directions ----------------------
+  const findDirection = async (e?: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+    setLoading(true);
+
+    try {
+      const q1 = query(collection(fireDB, "routes_resources"), where("from_keywords", "array-contains-any", [fromNormalized]));
+      const q2 = query(collection(fireDB, "routes_resources"), where("to_keywords", "array-contains-any", [toNormalized]));
+      const [snapshot1, snapshot2] = await Promise.all([getDocs(q1), getDocs(q2)]);
+
+      const data1 = snapshot1.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<LocationResourceDataType, "id">) }));
+      const data2 = snapshot2.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<LocationResourceDataType, "id">) }));
+
+      const mergedData = data1.filter(r => data2.some(x => x.id === r.id));
+      setResults(mergedData);
+      setCurrentTab("Videos");
+    } catch (err) {
+      console.error("Error finding direction:", err);
+    } finally {
+      setLoading(false);
+      setHasSearched(true)
+      router.push("/street-rhythm-2/#route")
     }
-  }, [email])
+  };
 
-
-
-
+  // ---------------------- Filter Results ----------------------
+  useEffect(() => {
+    if (!results) return;
+    setVideoResults(results.filter(r => r.type.toLowerCase() === "video"));
+    setTextResults(results.filter(r => r.type.toLowerCase() === "text"));
+    setImageResults(results.filter(r => r.type.toLowerCase() === "image"));
+    setSoundResults(results.filter(r => r.type.toLowerCase() === "sound"));
+    setAIResults(results.filter(r => r.type.toLowerCase() === "ai"));
+  }, [results]);
 
   return (
-    <AppContext.Provider
-      value={{
-        populationType,
-        setPopulationType,
-        populationAmount,
-        setPopulationAmount,
-        participantsCount,
-        setParticipantsCount,
-        selectedTheme,
-        setSelectedTheme,
-        blogs,
-        setBlogs,
-        users,
-        setUsers,
-        galleryImages,
-        setGalleryImages,
-        email,
-        userData,
-        setUserData,
-        fetchUserData,
-        price,
-        setPrice,
-        inpersonTourPackage,
-        setInpersonTourPackage,
-        selectedInpersonTheme,
-        setSelectedInpersonTheme
-      }}
-    >
+    <AppContext.Provider value={{
+      populationType, setPopulationType,
+      populationAmount, setPopulationAmount,
+      participantsCount, setParticipantsCount,
+      selectedTheme, setSelectedTheme,
+      blogs, setBlogs,
+      users, setUsers,
+      galleryImages, setGalleryImages,
+      userData, setUserData,
+      email,
+      fetchUserData,
+      price, setPrice,
+      inpersonTourPackage, setInpersonTourPackage,
+      selectedInpersonTheme, setSelectedInpersonTheme,
+      from, setFrom,
+      to, setTo,
+      results, videoResults, textResults, soundResults, imageResults, AIResults,
+      currentTab, setCurrentTab,
+      loading,
+      findDirection,
+      locationInWords,
+      hasSearched,
+      setHasSearched
+    }}>
       {children}
     </AppContext.Provider>
   );
 };
 
-
+// ====================== Hook ======================
 export const useAppContext = () => {
   const context = useContext(AppContext);
-  if (!context) {
-    throw new Error("useAppContext must be used within a LagosRhythmProvider");
-  }
+  if (!context) throw new Error("useAppContext must be used within a LagosRhythmProvider");
   return context;
 };
