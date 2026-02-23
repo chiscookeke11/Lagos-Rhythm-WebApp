@@ -17,6 +17,8 @@ import { PageData } from "@/Types/pageDataType";
 import { FaBlog } from "react-icons/fa";
 import { ThemeDataType } from "@/Types/ThemeDataType";
 import { ThemeJourneyType } from "@/Types/ThemeJourneyType";
+import { KnowledgeCard } from "@/Types/KnowledgeCardType";
+import { Feature } from "@/Types/FeatureTypes";
 
 
 
