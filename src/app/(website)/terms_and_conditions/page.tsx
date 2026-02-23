@@ -63,7 +63,7 @@ export default function Page() {
                 <ul className="list-disc pl-6 space-y-2">
                     <li>Free E-Rhythm bookings require no payment and can be canceled at any time.</li>
                     <li>Exclusive bookings can be canceled or rescheduled with at least 48 hours’ notice.</li>
-                    <li>
+                    <li>78
                         Refund requests should be sent to{" "}
                         <a href="mailto:bookings@lagosrhythm.com" className="text-[#EF8F57] underline">
                             bookings@lagosrhythm.com
