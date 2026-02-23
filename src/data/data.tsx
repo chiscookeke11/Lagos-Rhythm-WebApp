@@ -1074,3 +1074,137 @@ export const howDidYouHear = [
 ]
 
 
+export const knowledgeCards: KnowledgeCard[] = [
+  {
+    icon: '🚌',
+    title: 'Danfo Basics',
+    description: 'Master the fundamentals of Lagos public transport:',
+    tips: [
+      'Always ask the conductor for the fare before entering',
+      'You may bargain ₦100 to ₦200 depending on traffic and time',
+      'Conductors announce stops verbally as the bus moves',
+      'Say "Owa" or call the bus stop name when you want to alight',
+      'If unsure, tell the conductor you don\'t know the place',
+    ],
+  },
+  {
+    icon: '📍',
+    title: 'Finding Your Stop',
+    description: 'Never miss your destination:',
+    tips: [
+      'Look for bus stop names on most bus stop sheds',
+      'Listen carefully to the conductor\'s announcements',
+      'Use landmarks mentioned in your route video',
+      'If you miss your stop, alight at the next one and take a return bus',
+      'Speak confidently and clearly to conductors and drivers',
+    ],
+  },
+  {
+    icon: '💡',
+    title: 'First-Timer Confidence',
+    description: 'Stay calm and navigate like a pro:',
+    tips: [
+      'Do not panic if you miss your stop—it happens to everyone',
+      'Confusion is normal for first-time users',
+      'Asking questions at busy bus stops is perfectly acceptable',
+      'Most routes have predictable correction paths',
+      'Watch your route video multiple times before traveling',
+    ],
+  },
+  {
+    icon: '⏰',
+    title: 'Traffic & Timing',
+    description: 'Plan around Lagos traffic patterns:',
+    tips: [
+      'Traffic varies by morning, evening, and rush hour',
+      'Fares rise during rush hour (7-9 AM, 5-8 PM)',
+      'Road conditions can change quickly',
+      'Allow extra time for your first journey on any route',
+      'Check your route video for time-specific notes',
+    ],
+  },
+  {
+    icon: '🌙',
+    title: 'Night Travel Safety',
+    description: 'Stay safe when traveling after dark:',
+    tips: [
+      'Prefer crowded buses at night',
+      'Stay at well-lit bus stops',
+      'Avoid isolated corners or unfamiliar areas',
+      'Seek help in public spaces if needed',
+      'Travel with others when possible',
+    ],
+  },
+  {
+    icon: '💰',
+    title: 'Fare Negotiation',
+    description: 'Get fair prices for your journey:',
+    tips: [
+      'Ask other passengers what they paid if unsure',
+      'Rush hour fares are typically 30-50% higher',
+      'Have small change ready (₦50, ₦100, ₦200 notes)',
+      'Stand firm but polite during negotiation',
+      'Route-specific fares are shown in your search results',
+    ],
+  },
+]
+
+
+
+export const steps = [
+  {
+    number: 1,
+    title: 'Search Your Route',
+    description: 'Enter your starting point and destination. We\'ll find all available routes.',
+  },
+  {
+    number: 2,
+    title: 'Watch the Journey',
+    description: 'See real commuter videos showing every step—bus stops, landmarks, and transfer points.',
+  },
+  {
+    number: 3,
+    title: 'Get Route Details',
+    description: 'View fares, safety info, bus calls, and first-timer tips specific to your route.',
+  },
+  {
+    number: 4,
+    title: 'Travel Confidently',
+    description: 'Navigate like a local with offline access to your route video and all essential information.',
+  },
+]
+
+
+
+export const features: Feature[] = [
+  {
+    icon: '🎥',
+    title: 'Video-First Navigation',
+    description: 'See your journey before you take it. Real footage from actual commuters shows exactly how to move from point A to point B.',
+  },
+  {
+    icon: '🗺️',
+    title: 'Informal Route Coverage',
+    description: 'We document the routes Google Maps doesn\'t know—the danfo lines, bus calls, and local shortcuts that keep Lagos moving.',
+  },
+  {
+    icon: '👥',
+    title: 'Crowdsourced Intelligence',
+    description: 'Built by the community, for the community. Every video is contributed, validated, and updated by real Lagosians.',
+  },
+  {
+    icon: '📱',
+    title: 'Works Offline',
+    description: 'Download your route videos and access them anytime—no data required. Perfect for low-bandwidth areas.',
+  },
+  {
+    icon: '🧭',
+    title: 'Cultural Context',
+    description: 'More than directions—we preserve the oral knowledge of Lagos transport: conductor calls, local landmarks, and unwritten rules.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Safety-First Design',
+    description: 'Every route includes safety ratings, night travel guidelines, and real-time community feedback on current conditions.',
+  },
+]
