@@ -21,8 +21,8 @@ import { sendConfirmationEmail } from "@/lib/utils";
 
 export default function Page() {
     const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-    const minDate = new Date("2025-12-22");
-    const maxDate = new Date("2025-12-27");
+    const minDate = new Date("2026-03-08");
+    const maxDate = new Date("2026-03-08");
     const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
     const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
@@ -448,7 +448,12 @@ export default function Page() {
                                 </div>
                             )}
                             {formErrors.tourDate && <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.tourDate}</p>}
+
+                            <div className="mt-7 w-full bg-white border-l-2 pr-4 border-[#EF8F57] pl-5 py-4 flex items-start flex-col gap-3 text-sm " >
+                            The tour will stream from 12pm to 5pm WAT in 30-minute intervals. You can join any slot, e.g., 12pm to 12:30pm, 12:30pm to 1pm, or 4:30pm to 5pm.
                         </div>
+                        </div>
+
 
                         <CustomSelect
                             name="referralSource"
