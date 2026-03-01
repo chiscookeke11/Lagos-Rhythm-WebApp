@@ -85,9 +85,11 @@ export default function RouteDetails() {
                                         }
         `}
                                 >
-                                    {tab === "Text" ? "Text direction" :
+                                    {tab === "Text" ? "Overview" :
                                         tab === "image" ? "Landmarks" :
-                                            tab}
+                                            tab === "Sound recording" ? "Audio Guide" :
+                                                tab === "Videos" ? "Watch Route" :
+                                                    tab}
                                 </button>
                             )
                         })}
