@@ -2,7 +2,7 @@
 
 
 export const mock_tour_data = {
-    date: "2026-01-13T16:00:00+01:00",
+    date: "2026-03-05T18:45:00+01:00",
     videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1766395444/ajr3crcshmvr0qoj2sto.mp4",
     tourTitle: "A Randle December (Detty December Experience) ",
     tags: [
