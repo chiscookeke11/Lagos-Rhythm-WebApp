@@ -18,7 +18,7 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const TWENTY_MINUTES = 240 * 60 * 1000
+  const TWENTY_MINUTES = 6 * 60 * 60 * 1000; // 6 hours
   const isAllowed = Date.now()  > new Date(mock_tour_data.date).getTime() + TWENTY_MINUTES;
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
@@ -28,7 +28,7 @@ export default function Page() {
 
   // Countdown timer
   useEffect(() => {
-    const endTime = new Date(tourTime.getTime() + 2 * 60 * 60 * 1000) // 2 hours after start
+    const endTime = new Date(tourTime.getTime() + 6 * 60 * 60 * 1000) // 2 hours after start
 
     const interval = setInterval(() => {
       const now = new Date()
