@@ -2,7 +2,7 @@
 
 
 export const mock_tour_data = {
-    date: "2026-03-08T12:00:00+01:00",
+    date: "2026-03-08T12:30:00+01:00",
     videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1772726475/ehrwwdw7j4bwrzjmryc4.mp4",
     tourTitle: "Test ",
     tags: [
