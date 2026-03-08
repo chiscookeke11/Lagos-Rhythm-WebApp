@@ -3,7 +3,7 @@
 
 export const mock_tour_data = {
     date: "2026-03-08T12:30:00+01:00",
-    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1772969752/neehmb9b46e4ax6p3cus.mp4",
+    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1772970972/nogclpasces3wt93gqmr.mp4",
     tourTitle: "Born From This Ground begins shortly ",
     tags: [
         "Virtual tourism cuts travel costs by 80%.",
