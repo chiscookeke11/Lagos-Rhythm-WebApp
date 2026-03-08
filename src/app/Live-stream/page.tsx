@@ -28,7 +28,7 @@ export default function Page() {
 
   // Countdown timer
   useEffect(() => {
-    const endTime = new Date(tourTime.getTime() + 6 * 60 * 60 * 1000) // 2 hours after start
+    const endTime = new Date(tourTime.getTime() + 2 * 60 * 60 * 1000) // 2 hours after start
 
     const interval = setInterval(() => {
       const now = new Date()
