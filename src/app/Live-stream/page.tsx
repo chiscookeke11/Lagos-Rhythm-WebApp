@@ -115,7 +115,7 @@ export default function Page() {
   if (isAllowed) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">The Tour starts in 30 minutes <br />
+        <p className="font-medium text-2xl text-center">Thank you for joining <br />
           12:30pm </p>
       </div>
     )
