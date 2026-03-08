@@ -19,7 +19,7 @@ export default function Page() {
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
   const TOUR_START = new Date(mock_tour_data.date).getTime();
-const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
+  const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
   const [userCount, setUserCount] = useState(0)
@@ -115,18 +115,19 @@ const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour sta
   if (isAllowed) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">The tour hasn&apos;t started yet.</p>
+        <p className="font-medium text-2xl text-center">The Tour starts in 30 minutes <br />
+          12:30pm </p>
       </div>
     )
   }
 
   return (
     <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
-         <Link href={"/"} className="block md:hidden mx-auto my-4 "  ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+      <Link href={"/"} className="block md:hidden mx-auto my-4 "  ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
       {/* Header */}
       <header className="w-full bg-[#05073C] py-6 px-[4%] flex items-center justify-center md:justify-evenly gap-12 flex-wrap">
 
-     <Link href={"/"} className="hidden md:block " ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+        <Link href={"/"} className="hidden md:block " ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
 
 
         <span className="flex items-center gap-2 text-xs md:text-sm">
