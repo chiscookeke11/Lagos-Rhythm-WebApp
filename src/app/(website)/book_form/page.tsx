@@ -450,7 +450,7 @@ export default function Page() {
                             {formErrors.tourDate && <p className="text-red-500 text-xs md:text-sm ml-auto ">{formErrors.tourDate}</p>}
 
                             <div className="mt-7 w-full bg-white border-l-2 pr-4 border-[#EF8F57] pl-5 py-4 flex items-start flex-col gap-3 text-sm " >
-                            The tour will stream from 12pm to 5pm WAT in 30-minute intervals. You can join any slot, e.g., 12pm to 12:30pm, 12:30pm to 1pm, or 4:30pm to 5pm.
+                            The tour will stream from 6pm to 8pm WAT in 30-minute intervals. You can join any slot, e.g., 6:00pm to 6:30pm, 6:30 pm to 7:00pm, 7:00pm to 7:30pm, or 7:30pm to 8pm.
                         </div>
                         </div>
 
