@@ -21,8 +21,8 @@ import { sendConfirmationEmail } from "@/lib/utils";
 
 export default function Page() {
     const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-    const minDate = new Date("2026-03-08");
-    const maxDate = new Date("2026-03-08");
+    const minDate = new Date("2026-04-15");
+    const maxDate = new Date("2026-04-15");
     const [loading, setLoading] = useState(false);
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
     const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
