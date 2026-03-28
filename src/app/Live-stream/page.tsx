@@ -19,6 +19,10 @@ export default function Page() {
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
   const TOUR_START = new Date(mock_tour_data.date).getTime();
+const TOUR_END = TOUR_START + 2 * 60 * 60 * 1000; // assuming 2-hour tour
+const now = Date.now();
+
+const hasTourEnded = now > TOUR_END;
   const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
@@ -28,7 +32,7 @@ export default function Page() {
 
   // Countdown timer
   useEffect(() => {
-    const endTime = new Date(tourTime.getTime() + 2 * 60 * 60 * 1000) // 2 hours after start
+    const endTime = new Date(tourTime.getTime() + 1 * 60 * 60 * 1000) // 2 hours after start
 
     const interval = setInterval(() => {
       const now = new Date()
@@ -112,14 +116,24 @@ export default function Page() {
   }
 
 
-  if (isAllowed) {
-    return (
-      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">Thank you for joining <br />
-          12:30pm </p>
-      </div>
-    )
-  }
+  if (hasTourEnded) {
+  return (
+    <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+      <p className="font-medium text-2xl text-center">
+        Thank you for joining <br />
+      </p>
+    </div>
+  )
+}
+
+  // if (isAllowed) {
+  //   return (
+  //     <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+  //       <p className="font-medium text-2xl text-center">Thank you for joining <br />
+  //         12:30pm </p>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
