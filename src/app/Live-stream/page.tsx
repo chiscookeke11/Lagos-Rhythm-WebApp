@@ -23,7 +23,7 @@ const TOUR_END = TOUR_START + 2 * 60 * 60 * 1000; // assuming 2-hour tour
 const now = Date.now();
 
 const hasTourEnded = now > TOUR_END;
-  const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
+  // const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
   const [userCount, setUserCount] = useState(0)
