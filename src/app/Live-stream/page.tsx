@@ -20,7 +20,7 @@ export default function Page() {
   const [showEmojis, setShowEmojis] = useState(false)
   const tourTime = new Date(mock_tour_data.date)
   const tourEndTime = new Date(tourTime)
-  tourEndTime.setHours(21, 0, 0, 0) // keep tour open until 9:00 PM
+  tourEndTime.setHours(20, 0, 0, 0) // keep tour open until 8:00 PM
   const tourEndTimestamp = tourEndTime.getTime()
   const now = Date.now()
   const hasTourEnded = now > tourEndTimestamp
