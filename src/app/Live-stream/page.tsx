@@ -18,30 +18,27 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const TOUR_START = new Date(mock_tour_data.date).getTime();
-const TOUR_END = TOUR_START + 2 * 60 * 60 * 1000; // assuming 2-hour tour
-const now = Date.now();
-
-const hasTourEnded = now > TOUR_END;
+  const tourTime = new Date(mock_tour_data.date)
+  const tourEndTime = new Date(tourTime)
+  tourEndTime.setHours(21, 0, 0, 0) // keep tour open until 9:00 PM
+  const tourEndTimestamp = tourEndTime.getTime()
+  const now = Date.now()
+  const hasTourEnded = now > tourEndTimestamp
   // const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
   const [userCount, setUserCount] = useState(0)
 
-  const tourTime = new Date(mock_tour_data.date)
-
   // Countdown timer
   useEffect(() => {
-    const endTime = new Date(tourTime.getTime() + 1 * 60 * 60 * 1000) // 2 hours after start
-
     const interval = setInterval(() => {
-      const now = new Date()
-      const remaining = endTime.getTime() - now.getTime()
+      const currentTime = Date.now()
+      const remaining = tourEndTimestamp - currentTime
       setCountdown(remaining > 0 ? remaining : 0)
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [tourTime])
+  }, [tourEndTimestamp])
 
   // Socket connection for user count
   useEffect(() => {
