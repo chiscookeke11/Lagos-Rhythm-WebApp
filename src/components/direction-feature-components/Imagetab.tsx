@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { LocationResourceDataType } from "@/Types/LocationResourceDataType"
+import { X } from "lucide-react"
+import StreetRhythmCarousel from "../street-rhythm-2-components/StreetRhythmCarousel"
 
 interface ImageTabProps {
     data: LocationResourceDataType[] | null
@@ -18,56 +20,93 @@ export default function ImageTab({ data }: ImageTabProps) {
         )
     }
 
-    const sortedImages = [...data].sort(
-        (a, b) => (a.order ?? 0) - (b.order ?? 0)
-    )
+    const sortedImages = [...data].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+
+    const getLandmarkTitle = (image: LocationResourceDataType, index: number) => {
+        return image.landmark_title
+            ?? image.landmark_name
+            ?? image.title
+            ?? image.subtitle
+            ?? image.description
+            ?? `Landmark ${index + 1}`
+    }
 
     return (
         <>
-            {/* Image Grid */}
-            <section className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedImages.map((image, index) => (
+            <section className="w-full">
+                <StreetRhythmCarousel
+                    items={sortedImages}
+                    renderSlide={(image, index) => (
                     <div
                         key={image.id}
-                        className="w-full rounded-lg overflow-hidden shadow-md border border-gray-200 cursor-pointer"
+                        className="w-full h-full rounded-lg overflow-hidden shadow-md border border-gray-200 cursor-pointer bg-white"
                         onClick={() => setSelectedImage(image)}
                     >
-                        {/* Step Indicator */}
                         <div className="bg-[#05073C] text-white text-xs font-semibold px-3 py-2">
-                            Step {index + 1}
+                            {getLandmarkTitle(image, index)}
                         </div>
 
-                        {/* Image */}
                         <img
                             src={image.content_url}
-                            alt={`Step ${index + 1}`}
+                            alt={getLandmarkTitle(image, index)}
                             className="w-full h-[250px] object-cover"
                         />
+
+                        {(image.subtitle || image.description) && (
+                            <div className="p-4 bg-white">
+                                {image.subtitle && (
+                                    <p className="text-xs font-semibold uppercase tracking-wide text-[#D4422C] mb-1">
+                                        {image.subtitle}
+                                    </p>
+                                )}
+                                <p className="text-sm text-gray-700 line-clamp-3">
+                                    {image.description}
+                                </p>
+                            </div>
+                        )}
                     </div>
-                ))}
+                    )}
+                />
             </section>
 
-            {/* Modal */}
             {selectedImage && (
                 <div
-                    className="fixed   inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 py-10 px-5 "
+                    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 sm:p-6"
                     onClick={() => setSelectedImage(null)}
                 >
                     <div
-                        className="relative bg-white rounded-lg overflow-hidden max-w-3xl w-full h-full "
-                        onClick={(e) => e.stopPropagation()} // prevent closing when clicking image
+                        className="relative bg-white rounded-2xl overflow-hidden max-w-5xl w-full max-h-[90vh] flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <button
-                            className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70"
+                            className="absolute top-3 right-3 z-10 text-white bg-black/60 rounded-full p-2 hover:bg-black/80"
                             onClick={() => setSelectedImage(null)}
+                            aria-label="Close landmark preview"
                         >
-                            ✕
+                            <X size={18} />
                         </button>
-                        <img
-                            src={selectedImage.content_url}
-                            alt="Full size"
-                            className="w-full h-auto object-contain"
-                        />
+
+                        <div className="w-full overflow-y-auto">
+                            <img
+                                src={selectedImage.content_url}
+                                alt={selectedImage.landmark_title ?? selectedImage.landmark_name ?? selectedImage.title ?? "Landmark preview"}
+                                className="w-full max-h-[70vh] object-contain bg-black"
+                            />
+
+                            <div className="p-5 sm:p-6 space-y-2">
+                                <h4 className="text-xl font-black text-[#05073C]">
+                                    {selectedImage.landmark_title ?? selectedImage.landmark_name ?? selectedImage.title ?? "Landmark"}
+                                </h4>
+                                {selectedImage.subtitle && (
+                                    <p className="text-sm font-semibold uppercase tracking-wide text-[#D4422C]">
+                                        {selectedImage.subtitle}
+                                    </p>
+                                )}
+                                <p className="text-sm text-gray-700 whitespace-pre-line">
+                                    {selectedImage.description || "Landmark notes have not been added yet."}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

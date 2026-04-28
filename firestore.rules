@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function shortString(value, max) {
+      return value is string && value.size() > 0 && value.size() <= max;
+    }
+
+    function validRouteChatPayload() {
+      return request.resource.data.keys().hasOnly([
+          'routeKey',
+          'message',
+          'senderName',
+          'senderId',
+          'createdAt'
+        ])
+        && shortString(request.resource.data.routeKey, 80)
+        && shortString(request.resource.data.message, 280)
+        && shortString(request.resource.data.senderName, 50)
+        && shortString(request.resource.data.senderId, 128)
+        && request.resource.data.createdAt is timestamp;
+    }
+
+    function validRouteChatReportPayload() {
+      return request.resource.data.keys().hasOnly([
+          'routeKey',
+          'messageId',
+          'messagePreview',
+          'reason',
+          'reporterId',
+          'reportedSenderId',
+          'createdAt'
+        ])
+        && shortString(request.resource.data.routeKey, 80)
+        && shortString(request.resource.data.messageId, 200)
+        && shortString(request.resource.data.messagePreview, 180)
+        && shortString(request.resource.data.reason, 40)
+        && shortString(request.resource.data.reporterId, 128)
+        && (request.resource.data.reportedSenderId == null || shortString(request.resource.data.reportedSenderId, 128))
+        && request.resource.data.createdAt is timestamp;
+    }
+
+    match /street_rhythm_route_chat/{routeKey} {
+      allow read: if true;
+
+      match /messages/{messageId} {
+        allow read: if true;
+
+        // Signed-in users can create valid messages.
+        allow create: if signedIn()
+          && validRouteChatPayload()
+          && request.resource.data.routeKey == routeKey
+          && request.resource.data.senderId == request.auth.uid;
+
+        // No client-side update/delete to preserve integrity and auditability.
+        allow update, delete: if false;
+      }
+    }
+
+    match /street_rhythm_route_chat_reports/{reportId} {
+      // Reports are moderation data; keep client reads disabled.
+      allow read: if false;
+
+      allow create: if signedIn()
+        && validRouteChatReportPayload()
+        && request.resource.data.reporterId == request.auth.uid;
+
+      allow update, delete: if false;
+    }
+  }
+}

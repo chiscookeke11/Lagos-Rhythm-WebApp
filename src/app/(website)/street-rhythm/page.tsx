@@ -10,6 +10,7 @@ import WhyStreetRhythm from "@/components/street-rhythm-2-components/WhyStreetRh
 
 export default function Page() {
   const { results, hasSearched } = useAppContext()
+  const hasResults = Boolean(results?.length)
 
   return (
     <div className="font-merienda">
@@ -17,11 +18,11 @@ export default function Page() {
       <HeroSection />
 
       {/* If results exist */}
-      {results && <RouteDetails />}
+      {hasResults && <RouteDetails />}
 
       {/* If searched but no results */}
-      {hasSearched && !results && (
-        <section className="w-full py-24 px-[5%] max-w-[1380px] mx-auto flex flex-col items-center text-center">
+      {hasSearched && !hasResults && (
+        <section id="no-route-found" className="w-full py-24 px-[5%] max-w-[1380px] mx-auto flex flex-col items-center text-center scroll-mt-24">
           <div className="w-full max-w-3xl bg-gray-50 border border-gray-200 rounded-2xl p-12 shadow-sm">
             <div className="text-5xl mb-4">🚫</div>
             <h3 className="text-2xl font-bold mb-3">No Route Found</h3>

@@ -41,8 +41,6 @@ export default function Page() {
     });
 
 
-    console.log(formValues)
-
     const [currentStep, setCurrentStep] = useState<"StepOne" | "StepTwo" | "StepThree" | "StepFour">("StepOne");
 
 
@@ -95,7 +93,6 @@ export default function Page() {
         if (!saved) return;
 
         const parsed = JSON.parse(saved);
-        console.log("the parsed data:", parsed)
 
         // Restore all fields + fix Date type
         setFormValues({
@@ -108,15 +105,11 @@ export default function Page() {
     useEffect(() => {
         const selectedThemeTest = themeJourneys.find(t => t.title === selectedInpersonTheme);
 
-        console.log("In person package:", inpersonTourPackage)
-        console.log("selected Theme:", selectedInpersonTheme)
-
         if (!selectedThemeTest) return;
 
         const group = selectedThemeTest.minorPackages?.find(p => p.title === inpersonTourPackage) || selectedThemeTest.majorPackages?.find(p => p.title === inpersonTourPackage);
         const option = group?.options.find(o => o.duration === formValues.duration);
 
-        console.log("TEST PRICE:", option?.price);
         setFormValues({
             ...formValues,
             price: option?.price && formValues.paymentType === "Deposit (50%)" ? option?.price / 2 : option?.price ?? 0

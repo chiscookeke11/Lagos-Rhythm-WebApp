@@ -1,0 +1,22 @@
+Phased Plan
+
+Phase 1: Stabilize the existing Street Rhythm flow. Fix result rendering and empty states, enforce the required section order, rename labels consistently, and make Overview/Landmarks/Watch Route/Audio Guide render predictably from the current dataset. This is the lowest-risk UI correction phase.
+Phase 2: Upgrade the content model. Extend the route resource schema to support actual landmark names, fare info, safety info, downloadable overview content, language grouping, and explicit media ordering. This phase includes defining what Firestore documents must look like.
+Phase 3: Rebuild the tab UX. Convert text, audio, images, and videos into swipeable carousels grouped by language and ordered properly. Fix the mobile image modal so it truly supports full-size viewing and better touch behavior.
+Phase 4: Fill content gaps. Add the missing Pidgin audio asset, validate all route resources, and clean the current data so the frontend is not forced to guess labels or order.
+Phase 5: Add maps and live route intelligence. Introduce Google Maps embed, traffic layer, and live travel time estimates. This should be isolated behind a dedicated map component and API/config layer because it adds external API cost and env requirements.
+Phase 6: Add arrival notifications. Implement browser notification permission flow, GPS tracking, distance thresholds, and a client-only lifecycle that survives tab minimization but not tab closure.
+Phase 7: Add community chat per route. Build a route-scoped comment/update system, ideally under a separate Firestore or Realtime Database collection keyed by route_key, with basic moderation and timestamping.
+Phase 8: Add segmented route playback. Extend the route model with stop-by-stop timestamps, update the search logic to resolve stop pairs into a segment, and update the video player to seek and constrain playback to the selected section.
+Recommended Execution Order
+
+Start with Phases 1 and 2 together.
+Then do Phase 3 and Phase 4.
+Only after the data model is stable should we build Phases 5 through 8.
+Key Dependencies
+
+Google Maps JavaScript API and Directions API for traffic and travel time.
+Better Firestore schema for routes_resources.
+Route content audit from whoever owns the Street Rhythm media files.
+A decision on whether chat uses Firestore or Realtime Database.
+A decision on whether segmented playback is one document per asset or one route document with nested segment metadata.
