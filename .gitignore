@@ -48,3 +48,19 @@ public/hero-video.mp4
 
 # clerk configuration (can include secrets)
 /.clerk/
+
+# Firebase service account (contains private key - NEVER commit)
+/lagos-rhythm-19b8a-firebase-adminsdk-fbsvc-e6381d0620.json
+*-firebase-adminsdk-*.json
+
+# Firebase deployment debug logs
+firebase-debug.log
+firestore-deploy.log
+*.log
+
+# Local media folder (uses Firebase Storage in production)
+/media/
+
+# Firebase emulator
+.firebase/
+.firebaserc.local
