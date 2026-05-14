@@ -3,7 +3,7 @@ import { PopularThingsDataType } from "@/Types/PopularThingsDataType";
 import { customSelectTypes } from "@/Types/CustomSelectTypes";
 import { TestimonialDataType } from "@/Types/TestimonialDataTypes";
 import { WhyLagos } from "@/Types/WhyLagosType";
-import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Radio, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball } from "lucide-react";
+import { Combine, CreditCard, Headset, Heart, IdCard, Images, Landmark, MonitorPlay, Newspaper, PenSquare, Radio, Sailboat, Sparkles, Sunset, TicketPercent, TrainTrack, Trees, UsersRound, Volleyball, Beaker } from "lucide-react";
 import Lottie from "lottie-react";
 import live from "../app/animated-icons/live.json";
 import interaction from "../app/animated-icons/interaction.json";
@@ -522,6 +522,16 @@ export const faq = [
 
 
 export const sideNavLinks = [
+    {
+        label: "Street Rhythm Routes",
+        route: "/dashboard/street-rhythm-routes",
+        icons: <MonitorPlay size={18} />,
+    },
+    {
+        label: "Test Lab",
+        route: "/dashboard/test-lab",
+        icons: <Beaker size={18} />,
+    },
     {
         label: "Blogs",
         route: "/dashboard/blog-control",

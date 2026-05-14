@@ -1,0 +1,213 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    function isValidString(value, minLen, maxLen) {
+      return value is string && value.size() >= minLen && value.size() <= maxLen;
+    }
+
+    function isValidLooseString(value, maxLen) {
+      return value is string && value.size() <= maxLen;
+    }
+
+    function isValidEmail(email) {
+      return isValidString(email, 5, 254) && email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    }
+
+    function isValidTimestamp(value) {
+      return value is timestamp && value <= now;
+    }
+
+    function isStringList(value, maxItems) {
+      return value is list && value.size() <= maxItems;
+    }
+
+    match /routes_resources/{routeId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /street_rhythm_route_chat/{routeKey} {
+      allow read: if true;
+
+      match /messages/{messageId} {
+        allow read: if true;
+
+        allow create: if isSignedIn()
+          && request.resource.data.keys().hasOnly(['routeKey', 'message', 'senderName', 'senderId', 'createdAt'])
+          && isValidString(request.resource.data.routeKey, 1, 80)
+          && isValidString(request.resource.data.message, 1, 280)
+          && isValidString(request.resource.data.senderName, 1, 100)
+          && request.resource.data.senderId == request.auth.uid
+          && isValidTimestamp(request.resource.data.createdAt);
+
+        allow update, delete: if false;
+      }
+    }
+
+    match /street_rhythm_route_chat_reports/{reportId} {
+      allow read: if isAdmin();
+
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly([
+          'routeKey',
+          'messageId',
+          'messagePreview',
+          'reason',
+          'reporterId',
+          'reportedSenderId',
+          'createdAt'
+        ])
+        && isValidString(request.resource.data.routeKey, 1, 80)
+        && isValidString(request.resource.data.messageId, 1, 200)
+        && isValidLooseString(request.resource.data.messagePreview, 180)
+        && isValidString(request.resource.data.reason, 1, 40)
+        && request.resource.data.reporterId == request.auth.uid
+        && (request.resource.data.reportedSenderId == null || isValidLooseString(request.resource.data.reportedSenderId, 128))
+        && isValidTimestamp(request.resource.data.createdAt);
+
+      allow update, delete: if false;
+    }
+
+    match /booked_Free_Rhythm/{bookingId} {
+      allow create: if request.resource.data.keys().hasOnly([
+          'fullName',
+          'email',
+          'country',
+          'reasonForJoin',
+          'joiningAs',
+          'otherJoin',
+          'tour_date',
+          'agree_to_TC',
+          'referral',
+          'subscribedAt'
+        ])
+        && isValidString(request.resource.data.fullName, 2, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidString(request.resource.data.country, 2, 80)
+        && isStringList(request.resource.data.reasonForJoin, 10)
+        && isValidString(request.resource.data.joiningAs, 1, 50)
+        && isValidLooseString(request.resource.data.otherJoin, 80)
+        && isStringList(request.resource.data.tour_date, 10)
+        && request.resource.data.agree_to_TC is bool
+        && isValidString(request.resource.data.referral, 1, 80)
+        && isValidTimestamp(request.resource.data.subscribedAt);
+
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /exclusive_Tour_form/{bookingId} {
+      allow create: if request.resource.data.keys().hasOnly([
+          'tourist',
+          'country',
+          'reasonForJoin',
+          'OtherReason',
+          'joiningAs',
+          'otherJoin',
+          'tourDate',
+          'termsAgreement',
+          'referralSource',
+          'subscribedAt',
+          'time',
+          'discountCode',
+          'subscriptionType',
+          'paidPrice',
+          'populationSize',
+          'tourTheme',
+          'tourCompleted'
+        ])
+        && isStringList(request.resource.data.tourist, 20)
+        && isValidString(request.resource.data.country, 2, 80)
+        && isStringList(request.resource.data.reasonForJoin, 10)
+        && isValidLooseString(request.resource.data.OtherReason, 120)
+        && isValidString(request.resource.data.joiningAs, 1, 50)
+        && isValidLooseString(request.resource.data.otherJoin, 80)
+        && isStringList(request.resource.data.tourDate, 10)
+        && request.resource.data.termsAgreement is bool
+        && isValidString(request.resource.data.referralSource, 1, 80)
+        && isValidTimestamp(request.resource.data.subscribedAt)
+        && isValidLooseString(request.resource.data.time, 40)
+        && isValidLooseString(request.resource.data.discountCode, 40)
+        && isValidString(request.resource.data.subscriptionType, 1, 80)
+        && isValidString(request.resource.data.paidPrice, 1, 40)
+        && isValidString(request.resource.data.populationSize, 1, 40)
+        && isValidString(request.resource.data.tourTheme, 1, 80)
+        && request.resource.data.tourCompleted is bool;
+
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /Feedback/{feedbackId} {
+      allow create: if request.resource.data.keys().hasOnly([
+          'name',
+          'email',
+          'experience',
+          'experience_rating',
+          'joinReason',
+          'publishTestimonial',
+          'store_data',
+          'suggestions',
+          'testimonial_Text',
+          'timestamp'
+        ])
+        && isValidString(request.resource.data.name, 2, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidLooseString(request.resource.data.experience, 5000)
+        && request.resource.data.experience_rating is number
+        && isValidLooseString(request.resource.data.joinReason, 120)
+        && request.resource.data.publishTestimonial is bool
+        && request.resource.data.store_data is bool
+        && isValidLooseString(request.resource.data.suggestions, 5000)
+        && isValidLooseString(request.resource.data.testimonial_Text, 5000)
+        && isValidTimestamp(request.resource.data.timestamp);
+
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /subscribers/{subscriberId} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'subscribedAt'])
+        && isValidString(request.resource.data.name, 1, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidTimestamp(request.resource.data.subscribedAt);
+
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    match /livestream_details/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['messenger', 'message', 'messangerPic', 'createdAt'])
+        && isValidString(request.resource.data.messenger, 1, 100)
+        && isValidString(request.resource.data.message, 1, 500)
+        && isValidLooseString(request.resource.data.messangerPic, 500)
+        && isValidTimestamp(request.resource.data.createdAt);
+
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

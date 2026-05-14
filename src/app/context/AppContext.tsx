@@ -9,8 +9,10 @@ import { ClerkUser } from "@/Types/UserType";
 import { galleryTypes } from "@/Types/galleryType";
 import { ProfileDataType } from "@/Types/ProfileDataType";
 import { LocationResourceDataType } from "@/Types/LocationResourceDataType";
+import { StreetRhythmRouteBundle } from "@/Types/StreetRhythmRouteType";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { buildStreetRhythmRouteBundle } from "@/lib/street-rhythm";
 
 // ====================== Context Interface ======================
 interface AppContextProps {
@@ -56,6 +58,7 @@ interface AppContextProps {
   to: string;
   setTo: React.Dispatch<React.SetStateAction<string>>;
   results: LocationResourceDataType[] | null;
+  selectedRoute: StreetRhythmRouteBundle | null;
   videoResults: LocationResourceDataType[] | null;
   textResults: LocationResourceDataType[] | null;
   soundResults: LocationResourceDataType[] | null;
@@ -107,6 +110,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   const [to, setTo] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<LocationResourceDataType[] | null>(null);
+  const [selectedRoute, setSelectedRoute] = useState<StreetRhythmRouteBundle | null>(null);
   const [videoResults, setVideoResults] = useState<LocationResourceDataType[] | null>([]);
   const [textResults, setTextResults] = useState<LocationResourceDataType[] | null>([]);
   const [soundResults, setSoundResults] = useState<LocationResourceDataType[] | null>([]);
@@ -119,6 +123,15 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
   const normalizeText = (text: string) => text.toLowerCase().trim();
   const fromNormalized = normalizeText(from);
   const toNormalized = normalizeText(to);
+
+  const matchesSegmentStop = (resource: LocationResourceDataType, searchValue: string) => {
+    const normalizedSearch = normalizeText(searchValue);
+
+    return resource.segment_stops?.some((stop) => {
+      const stopName = normalizeText(stop.normalized_stop_name ?? stop.stop_name);
+      return stopName === normalizedSearch || stopName.includes(normalizedSearch);
+    }) ?? false;
+  };
 
   const router  = useRouter()
 
@@ -184,6 +197,8 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
     e?.preventDefault();
     setLoading(true);
 
+    let nextResults: LocationResourceDataType[] = [];
+
     try {
       const q1 = query(collection(fireDB, "routes_resources"), where("from_keywords", "array-contains-any", [fromNormalized]));
       const q2 = query(collection(fireDB, "routes_resources"), where("to_keywords", "array-contains-any", [toNormalized]));
@@ -193,25 +208,65 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
       const data2 = snapshot2.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<LocationResourceDataType, "id">) }));
 
       const mergedData = data1.filter(r => data2.some(x => x.id === r.id));
-      setResults(mergedData);
+
+      if (mergedData.length > 0) {
+        nextResults = mergedData;
+        setResults(nextResults);
+        setCurrentTab("Videos");
+        return;
+      }
+
+      const allSnapshot = await getDocs(collection(fireDB, "routes_resources"));
+      const allResources = allSnapshot.docs.map(doc => ({ id: doc.id, ...(doc.data() as Omit<LocationResourceDataType, "id">) }));
+
+      const matchedRouteKeys = new Set<string>();
+
+      for (const resource of allResources) {
+        if (!resource.segment_stops || resource.segment_stops.length < 1) continue;
+
+        const fromStopMatch = matchesSegmentStop(resource, fromNormalized);
+        const toStopMatch = matchesSegmentStop(resource, toNormalized);
+
+        if (fromStopMatch && toStopMatch) {
+          matchedRouteKeys.add(resource.route_key);
+        }
+      }
+
+      const fallbackResults = matchedRouteKeys.size > 0
+        ? allResources.filter((resource) => matchedRouteKeys.has(resource.route_key))
+        : [];
+
+      nextResults = fallbackResults;
+      setResults(nextResults);
       setCurrentTab("Videos");
     } catch (err) {
       console.error("Error finding direction:", err);
     } finally {
       setLoading(false);
       setHasSearched(true)
-      router.push("/street-rhythm/#route")
+      router.push(`/street-rhythm/${nextResults.length > 0 ? "#route" : "#no-route-found"}`)
     }
   };
 
   // ---------------------- Filter Results ----------------------
   useEffect(() => {
-    if (!results) return;
-    setVideoResults(results.filter(r => r.type.toLowerCase() === "video"));
-    setTextResults(results.filter(r => r.type.toLowerCase() === "text"));
-    setImageResults(results.filter(r => r.type.toLowerCase() === "image"));
-    setSoundResults(results.filter(r => r.type.toLowerCase() === "sound"));
-    setAIResults(results.filter(r => r.type.toLowerCase() === "ai"));
+    if (!results || results.length < 1) {
+      setSelectedRoute(null);
+      setVideoResults([]);
+      setTextResults([]);
+      setImageResults([]);
+      setSoundResults([]);
+      setAIResults([]);
+      return;
+    }
+
+    const routeBundle = buildStreetRhythmRouteBundle(results);
+    setSelectedRoute(routeBundle);
+    setVideoResults(routeBundle?.videos ?? []);
+    setTextResults(routeBundle?.overviews ?? []);
+    setImageResults(routeBundle?.landmarks ?? []);
+    setSoundResults(routeBundle?.audioGuides ?? []);
+    setAIResults(routeBundle?.aiDirections ?? []);
   }, [results]);
 
   return (
@@ -231,6 +286,7 @@ export const LagosRhythmProvider = ({ children }: { children: React.ReactNode })
       selectedInpersonTheme, setSelectedInpersonTheme,
       from, setFrom,
       to, setTo,
+      selectedRoute,
       results, videoResults, textResults, soundResults, imageResults, AIResults,
       currentTab, setCurrentTab,
       loading,

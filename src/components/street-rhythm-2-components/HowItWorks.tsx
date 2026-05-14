@@ -4,7 +4,7 @@ import { steps } from "@/data/data";
 
 export default function HowItWorks() {
     return (
-        <section className="w-full h-fit px-[8%] md:px-[4%] py-16 bg-[#0A0E14] text-white relative
+        <section id="how-it-works" className="w-full h-fit px-[8%] md:px-[4%] py-16 bg-[#0A0E14] text-white relative
             before:content-['']
     before:absolute before:inset-0
     before:pointer-events-none

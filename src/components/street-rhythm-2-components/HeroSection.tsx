@@ -1,7 +1,5 @@
 import SearchCard from "./SearchCard";
-
-
-
+import Link from "next/link";
 
 export default function HeroSection() {
     return (
@@ -17,11 +15,6 @@ export default function HeroSection() {
                 }}
                 className="absolute inset-0 w-full h-full opacity- pointer-events-none opacity-[0.03]   " />
 
-
-
-
-
-
             <div className="w-full md:basis-1/2 flex flex-col items-start gap-5 z-10 max-w-2xl" >
                 <h1 className=" text-[2rem] md:text-[2.5rem] font-black text-white " >Navigate Lagos Like a
                     <span className="text-[#F7B32B] block relative w-fit
@@ -31,31 +24,24 @@ export default function HeroSection() {
     after:animate-slideIn
                 " >Local</span></h1>
 
-
                 <p className="text-[1.05rem] text-[#CBD5E0] font-medium " >Video-guided journeys through Lagos&apos;s informal transport system. See your route before you take it—with real commuter footage and step-by-step navigation.</p>
 
-
                 <div className="w-fit flex items-center flex-col md:flex-row gap-4 md:gap-10  mt-4" >
-
-                    <button
+                    <a
+                        href="#search"
                         className="bg-[#A33323] py-3 md:py-5 px-7 md:px-10 text-white font-semibold text-sm md:text-xl rounded-lg cursor-pointer hover:-translate-y-2 transition-all duration-300 ease-in-out hover:shadow-2xl flex items-center justify-center gap-2"
-                    >Find your route</button>
+                    >Find your route</a>
 
-
-                    <button
+                    <Link
+                        href="#how-it-works"
                         className="bg-transparent py-3 md:py-5 px-7 md:px-10 text-white border border-white font-semibold text-sm md:text-xl rounded-lg cursor-pointer hover:-translate-y-2 transition-all duration-300 ease-in-out hover:shadow-2xl flex items-center justify-center gap-2"
-                    >How it works</button>
+                    >How it works</Link>
                 </div>
             </div>
 
-
-
-            <div className="w-full md:basis-1/2 flex items-center justify-center z-10 max-w-2xl ">
+            <div id="search" className="w-full md:basis-1/2 flex items-center justify-center z-10 max-w-2xl ">
               <SearchCard/>
             </div>
-
-
-
         </section>
     )
 }

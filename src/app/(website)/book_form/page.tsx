@@ -41,8 +41,6 @@ export default function Page() {
     });
 
 
-    console.log(userData)
-
     // date selection function
     const handleDateChange = (date: Date | null) => {
         if (!date) return;

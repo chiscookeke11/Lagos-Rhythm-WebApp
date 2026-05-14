@@ -74,7 +74,6 @@ export const metadata: Metadata = {
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
   robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: "./favicon.ico",
     shortcut: "./favicon.ico",
@@ -110,6 +109,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#ffffff",
   colorScheme: "light",
 };

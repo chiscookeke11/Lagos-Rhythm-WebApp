@@ -1,0 +1,110 @@
+[
+  {
+    "type": "text",
+    "route_key": "yaba-maryland",
+    "from_location": "Yaba",
+    "to_location": "Maryland",
+    "from_normalized": "yaba",
+    "to_normalized": "maryland",
+    "from_keywords": ["yaba", "sabo", "jibowu"],
+    "to_keywords": ["maryland", "anthony"],
+    "content_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Fpdf%2Fyaba-maryland-guide.pdf?alt=media",
+    "overview_download_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Fpdf%2Fyaba-maryland-guide.pdf?alt=media",
+    "download_label": "Download route guide",
+    "title": "Yaba to Maryland Route Overview",
+    "subtitle": "Mainland corridor guide",
+    "description": "Overview content for the Yaba to Maryland route.",
+    "content_text": "Board a bus at Yaba and stay alert for the Anthony and Maryland corridor landmarks.",
+    "fare_info": "Typical fare: N500 to N800 depending on time and traffic.",
+    "safety_info": "Avoid isolated bus stops at night and keep small cash ready.",
+    "language": "english",
+    "order": 1,
+    "tags": ["danfo", "mainland", "commuter"]
+  },
+  {
+    "type": "sound",
+    "route_key": "yaba-maryland",
+    "from_location": "Yaba",
+    "to_location": "Maryland",
+    "from_normalized": "yaba",
+    "to_normalized": "maryland",
+    "from_keywords": ["yaba", "sabo", "jibowu"],
+    "to_keywords": ["maryland", "anthony"],
+    "content_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Faudio%2Fenglish%2Fyaba-maryland-english.mp3?alt=media",
+    "title": "English Audio Guide",
+    "description": "Spoken route guidance for Yaba to Maryland.",
+    "language": "english",
+    "order": 1,
+    "tags": ["audio", "guide"]
+  },
+  {
+    "type": "sound",
+    "route_key": "yaba-maryland",
+    "from_location": "Yaba",
+    "to_location": "Maryland",
+    "from_normalized": "yaba",
+    "to_normalized": "maryland",
+    "from_keywords": ["yaba", "sabo", "jibowu"],
+    "to_keywords": ["maryland", "anthony"],
+    "content_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Faudio%2Fpidgin%2Fyaba-maryland-pidgin.mp3?alt=media",
+    "title": "Pidgin Audio Guide",
+    "description": "Pidgin route guidance for Yaba to Maryland.",
+    "language": "pidgin",
+    "order": 2,
+    "tags": ["audio", "guide", "pidgin"]
+  },
+  {
+    "type": "image",
+    "route_key": "yaba-maryland",
+    "from_location": "Yaba",
+    "to_location": "Maryland",
+    "from_normalized": "yaba",
+    "to_normalized": "maryland",
+    "from_keywords": ["yaba", "sabo", "jibowu"],
+    "to_keywords": ["maryland", "anthony"],
+    "content_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Fimages%2Froutes%2Fobjuelegba-bridge.jpg?alt=media",
+    "landmark_title": "Ojuelegba Bridge",
+    "description": "Stay on the right side after the bridge if you are continuing toward Anthony.",
+    "order": 1,
+    "tags": ["landmark", "bridge"]
+  },
+  {
+    "type": "video",
+    "route_key": "yaba-maryland",
+    "from_location": "Yaba",
+    "to_location": "Maryland",
+    "from_normalized": "yaba",
+    "to_normalized": "maryland",
+    "from_keywords": ["yaba", "sabo", "jibowu"],
+    "to_keywords": ["maryland", "anthony"],
+    "content_url": "https://firebasestorage.googleapis.com/v0/b/lagos-rhythm-19b8a.firebasestorage.app/o/media%2Fvideos%2Ftours%2Fyaba-maryland.mp4?alt=media",
+    "title": "Full Route Video",
+    "description": "Observe the major stops and transfer points on the corridor.",
+    "language": "english",
+    "order": 1,
+    "segment_stops": [
+      {
+        "stop_name": "Jibowu",
+        "normalized_stop_name": "jibowu",
+        "order": 1,
+        "video_start": 121,
+        "video_end": 240
+      },
+      {
+        "stop_name": "Anthony",
+        "normalized_stop_name": "anthony",
+        "order": 2,
+        "video_start": 241,
+        "video_end": 360
+      },
+      {
+        "stop_name": "Maryland",
+        "normalized_stop_name": "maryland",
+        "order": 3,
+        "video_start": 361,
+        "video_end": 480
+      }
+    ],
+    "tags": ["video", "route"]
+  }
+]
