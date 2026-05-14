@@ -6,7 +6,7 @@ import { fireDB } from "@/app/config/firebaseClient"
 import Button from "@/components/common/Button"
 import toast from "react-hot-toast"
 import Loader from "@/components/common/Loader"
-import { Trash2, Edit2, Plus, Eye, Download } from "lucide-react"
+import { Trash2, Edit2, Eye } from "lucide-react"
 import StreetRhythmRouteForm from "@/components/dashboard/StreetRhythmRouteForm"
 import StreetRhythmRoutePreview from "@/components/dashboard/StreetRhythmRoutePreview"
 
@@ -28,6 +28,22 @@ interface RouteData {
   description?: string
   media: RouteMediaItem[]
   createdAt?: Date
+}
+
+interface FirestoreRouteResource {
+  route_key?: string
+  from_location?: string
+  to_location?: string
+  title?: string
+  subtitle?: string
+  description?: string
+  type?: RouteMediaItem["type"]
+  language?: string
+  content_url?: string
+  order?: number
+  createdAt?: {
+    toDate?: () => Date
+  }
 }
 
 export default function StreetRhythmRoutesPage() {
@@ -52,7 +68,7 @@ export default function StreetRhythmRoutesPage() {
       const routeMap = new Map<string, RouteData>()
 
       querySnapshot.docs.forEach((doc) => {
-        const data = doc.data() as any
+        const data = doc.data() as FirestoreRouteResource
         const route_key = data.route_key || "unknown"
 
         if (!routeMap.has(route_key)) {

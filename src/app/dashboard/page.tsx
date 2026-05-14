@@ -334,17 +334,17 @@ export default function DashboardPage() {
         <h2 className="text-blue-900 font-bold text-lg mb-4">📚 Getting Started</h2>
         <ol className="text-blue-800 text-sm space-y-2 ml-4 list-decimal">
           <li>
-            <strong>Start with Street Rhythm Routes:</strong> Go to "Street Rhythm Routes"
+            <strong>Start with Street Rhythm Routes:</strong> Go to &quot;Street Rhythm Routes&quot;
             to view existing routes and add new ones
           </li>
           <li>
-            <strong>Use the Form:</strong> Click "Add New Route" to create a route with all required media
+            <strong>Use the Form:</strong> Click &quot;Add New Route&quot; to create a route with all required media
           </li>
           <li>
             <strong>Add Media:</strong> For each route, add text guides, audio in multiple languages, images, and videos
           </li>
           <li>
-            <strong>Test Before Publishing:</strong> Go to "Test Lab" to preview your routes before going live
+            <strong>Test Before Publishing:</strong> Go to &quot;Test Lab&quot; to preview your routes before going live
           </li>
           <li>
             <strong>Monitor the Site:</strong> Use other sections to manage blogs, feedback, and bookings

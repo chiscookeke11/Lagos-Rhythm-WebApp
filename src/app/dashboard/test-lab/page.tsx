@@ -52,7 +52,15 @@ export default function TestLabPage() {
         const routeMap = new Map<string, RouteMedia>()
 
         querySnapshot.docs.forEach((doc) => {
-          const data = doc.data() as any
+          const data = doc.data() as {
+            route_key?: string
+            from_location?: string
+            to_location?: string
+            type?: MediaItem["type"]
+            language?: string
+            title?: string
+            content_url?: string
+          }
           const route_key = data.route_key || "unknown"
 
           if (!routeMap.has(route_key)) {
@@ -250,7 +258,7 @@ export default function TestLabPage() {
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
                   {["video", "sound", "image", "text"].map((type) => {
-                    const count = route.media.filter((m) => m.type === type as any).length
+                    const count = route.media.filter((m) => m.type === type).length
                     return (
                       <div
                         key={type}
@@ -397,7 +405,7 @@ export default function TestLabPage() {
                 Firestore Collection
               </p>
               <code className="text-xs bg-[#05073C] text-[#EF8F57] p-2 rounded block mt-1">
-                db.collection("routes_resources")
+                db.collection(&quot;routes_resources&quot;)
               </code>
             </div>
 

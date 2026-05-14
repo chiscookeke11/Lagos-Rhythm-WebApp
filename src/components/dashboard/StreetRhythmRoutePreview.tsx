@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { X, Play, Download, Volume2, Image as ImageIcon } from "lucide-react"
+import { Play, Download, Volume2, Image as ImageIcon } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 interface RouteMediaItem {
