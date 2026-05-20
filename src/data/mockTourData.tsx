@@ -2,9 +2,9 @@
 
 
 export const mock_tour_data = {
-    date: "2026-04-15T18:00:00+01:00",
-    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1776275586/u9cvyqpavvjggew1kqy6.mp4",
-    tourTitle: "E.D.’s FIRE: Introducing his world",
+    date: "2026-05-20T18:00:00+01:00",
+    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1779251330/ngshdvfvznerayemd5mq.mp4",
+    tourTitle: "Born from this ground",
     tags: [
         "Virtual tourism cuts travel costs by 80%.",
         "Virtual tours make 70% of users feel more confident visiting later.",
