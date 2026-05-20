@@ -20,7 +20,7 @@ export default function Page() {
   const [showEmojis, setShowEmojis] = useState(false)
   const tourTime = new Date(mock_tour_data.date)
   const tourEndTime = new Date(tourTime)
-  tourEndTime.setHours(20, 0, 0, 0) // keep tour open until 8:00 PM
+  tourEndTime.setHours(24, 0, 0, 0) // keep tour open until 8:00 PM
   const tourEndTimestamp = tourEndTime.getTime()
   const now = Date.now()
   const hasTourEnded = now > tourEndTimestamp
@@ -114,14 +114,14 @@ export default function Page() {
 
 
   if (hasTourEnded) {
-  return (
-    <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-      <p className="font-medium text-2xl text-center">
-        Thank you for joining. We hope to see you again <br />
-      </p>
-    </div>
-  )
-}
+    return (
+      <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+        <p className="font-medium text-2xl text-center">
+          Thank you for joining. We hope to see you again <br />
+        </p>
+      </div>
+    )
+  }
 
   // if (isAllowed) {
   //   return (
