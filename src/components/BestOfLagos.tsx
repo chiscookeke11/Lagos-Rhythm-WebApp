@@ -2,12 +2,6 @@ import { BestLocationData } from "@/data/data";
 import BestLocationCard from "./common/BestLocationCard";
 import { easeInOut, motion } from "framer-motion";
 
-
-
-
-
-
-
 export default function BestOfLagos() {
 
     const containerVariants = {

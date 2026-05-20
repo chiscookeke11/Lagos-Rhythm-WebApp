@@ -66,7 +66,7 @@ export default function HeroSection({ setVideoLoaded, videoLoaded }: HeroSection
               transition={{ duration: 0.1, delay: 0.7 }}
               whileHover={{ scale: 1.3 }}
               whileTap={{ scale: 1.3 }}
-              type="button" label=" Detty December Tour" > </MotionButton></Link>
+              type="button" label=" Free Virtual Tour" > </MotionButton></Link>
         </div>
       </div>
       <ScrollingText />

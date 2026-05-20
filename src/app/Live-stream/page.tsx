@@ -18,26 +18,27 @@ export default function Page() {
   const [message, setMessage] = useState("")
   const [countdown, setCountdown] = useState<number>(0)
   const [showEmojis, setShowEmojis] = useState(false)
-  const TWENTY_MINUTES = 240 * 60 * 1000
-  const isAllowed = Date.now()  > new Date(mock_tour_data.date).getTime() + TWENTY_MINUTES;
+  const tourTime = new Date(mock_tour_data.date)
+  const tourEndTime = new Date(tourTime)
+  tourEndTime.setHours(24, 0, 0, 0) // keep tour open until 8:00 PM
+  const tourEndTimestamp = tourEndTime.getTime()
+  const now = Date.now()
+  const hasTourEnded = now > tourEndTimestamp
+  // const isAllowed = Date.now() < TOUR_START; // true if now is BEFORE the tour starts
   const [sentMessages, setSentMessages] = useState<Message[]>([])
   const { userData } = useAppContext()
   const [userCount, setUserCount] = useState(0)
 
-  const tourTime = new Date(mock_tour_data.date)
-
   // Countdown timer
   useEffect(() => {
-    const endTime = new Date(tourTime.getTime() + 2 * 60 * 60 * 1000) // 2 hours after start
-
     const interval = setInterval(() => {
-      const now = new Date()
-      const remaining = endTime.getTime() - now.getTime()
+      const currentTime = Date.now()
+      const remaining = tourEndTimestamp - currentTime
       setCountdown(remaining > 0 ? remaining : 0)
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [tourTime])
+  }, [tourEndTimestamp])
 
   // Socket connection for user count
   useEffect(() => {
@@ -112,21 +113,32 @@ export default function Page() {
   }
 
 
-  if (isAllowed) {
+  if (hasTourEnded) {
     return (
       <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
-        <p className="font-medium text-2xl text-center">The tour hasn&apos;t started yet.</p>
+        <p className="font-medium text-2xl text-center">
+          Thank you for joining. We hope to see you again <br />
+        </p>
       </div>
     )
   }
 
+  // if (isAllowed) {
+  //   return (
+  //     <div className="h-screen flex items-center justify-center w-full bg-[#05073C] font-playfair">
+  //       <p className="font-medium text-2xl text-center">Thank you for joining <br />
+  //         12:30pm </p>
+  //     </div>
+  //   )
+  // }
+
   return (
     <div className="w-full min-h-screen flex flex-col items-start bg-[#05073C] relative bg-no-repeat bg-center bg-cover font-merienda">
-         <Link href={"/"} className="block md:hidden mx-auto my-4 "  ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+      <Link href={"/"} className="block md:hidden mx-auto my-4 "  ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
       {/* Header */}
       <header className="w-full bg-[#05073C] py-6 px-[4%] flex items-center justify-center md:justify-evenly gap-12 flex-wrap">
 
-     <Link href={"/"} className="hidden md:block " ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
+        <Link href={"/"} className="hidden md:block " ><Image src={"/logos/logo.png"} height={100} width={100} alt="logo" className=" w-[50px] " /></Link>
 
 
         <span className="flex items-center gap-2 text-xs md:text-sm">

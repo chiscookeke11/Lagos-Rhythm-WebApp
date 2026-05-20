@@ -21,7 +21,7 @@ export default function TextTab({ data }: TextTabProps) {
     }
 
     return (
-        <section className=" w-full grid grid-cols-5 place-items-center justify-items-center gap-5 " >
+        <section className=" w-full grid grid-cols-2 lg:grid-cols-4 place-items-center justify-items-center gap-5 " >
 
             {
                 data?.map((text, index) => (

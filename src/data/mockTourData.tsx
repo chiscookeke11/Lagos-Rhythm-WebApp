@@ -2,9 +2,9 @@
 
 
 export const mock_tour_data = {
-    date: "2026-01-13T16:00:00+01:00",
-    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1766395444/ajr3crcshmvr0qoj2sto.mp4",
-    tourTitle: "A Randle December (Detty December Experience) ",
+    date: "2026-05-20T18:00:00+01:00",
+    videoUrl: "https://res.cloudinary.com/dwedz2laa/video/upload/v1779251330/ngshdvfvznerayemd5mq.mp4",
+    tourTitle: "Born from this ground",
     tags: [
         "Virtual tourism cuts travel costs by 80%.",
         "Virtual tours make 70% of users feel more confident visiting later.",
